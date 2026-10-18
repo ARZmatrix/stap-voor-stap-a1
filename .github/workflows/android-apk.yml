@@ -1,0 +1,67 @@
+name: Android APK (Stap voor Stap A1)
+
+on:
+  push:
+    branches: [nt2-a1-app]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nt2-a1-apk
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: gradle
+
+      - name: Install
+        run: npm ci
+
+      - name: Copy web app into Android project
+        run: npx cap sync android
+
+      - name: Build APK
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon assembleRelease
+
+      - name: Rename APK
+        run: |
+          mkdir -p out
+          cp android/app/build/outputs/apk/release/app-release.apk "out/StapVoorStap-A1-v1.0.${{ github.run_number }}.apk"
+          cp android/app/build/outputs/apk/release/app-release.apk "out/StapVoorStap-A1.apk"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: StapVoorStap-A1-apk
+          path: out/StapVoorStap-A1-v1.0.${{ github.run_number }}.apk
+
+      - name: Publish release (direct APK download on the phone)
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: nt2-a1-v1.0.${{ github.run_number }}
+          name: Stap voor Stap A1 v1.0.${{ github.run_number }}
+          target_commitish: ${{ github.sha }}
+          make_latest: false
+          body: |
+            Android-app Stap voor Stap A1 (Nederlands, NT2).
+            Download StapVoorStap-A1.apk op je Android-telefoon en installeer.
+            حمّل الملف StapVoorStap-A1.apk على هاتف أندرويد وثبّته.
+          files: out/StapVoorStap-A1.apk

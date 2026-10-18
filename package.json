@@ -1,0 +1,18 @@
+{
+  "name": "nt2-a1-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Stap voor Stap A1 - Nederlands leren (NT2), Android-app",
+  "scripts": {
+    "sync": "cap sync android"
+  },
+  "dependencies": {
+    "@capacitor-community/text-to-speech": "8.0.2",
+    "@capacitor/android": "8.5.3",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/core": "8.5.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.5.3"
+  }
+}

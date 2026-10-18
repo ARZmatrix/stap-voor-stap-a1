@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+</head><body>
+<title>Stap voor Stap A1</title>
+<style>
+@font-face{font-family:"Bricolage Grotesque";font-style:normal;font-weight:200 800;font-display:swap;src:url(fonts/bricolage-grotesque-latin-opsz-normal.woff2) format("woff2-variations"),url(fonts/bricolage-grotesque-latin-opsz-normal.woff2) format("woff2")}
+@font-face{font-family:"Atkinson Hyperlegible";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/atkinson-hyperlegible-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Atkinson Hyperlegible";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/atkinson-hyperlegible-latin-400-italic.woff2) format("woff2")}
+@font-face{font-family:"Atkinson Hyperlegible";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/atkinson-hyperlegible-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Sans Arabic";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
+@font-face{font-family:"IBM Plex Sans Arabic";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
+</style>
+<style>
+/* Layout: one column "lesson notebook" — a sticky day header, section tabs as a timetable strip, content cards set like worksheet pages. */
+:root{
+  --paper:#F5F7FB; --sheet:#FFFFFF; --ink:#16233F; --muted:#5A6684; --line:#D9DFEC;
+  --delft:#1F4BB8; --delft-soft:#E6ECFA; --tulip:#D9472B; --tulip-soft:#FBE7E2;
+  --leaf:#1E7F4F; --leaf-soft:#E2F3EA; --sun:#F2B33D; --sun-soft:#FCF1DA;
+  --stage1:#DCE6FB; --stage2:#F3F6FD; --skin1:#E9B98F; --skin2:#B8805A;
+  --f-display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --f-body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+  --f-ar:"IBM Plex Sans Arabic","Noto Naskh Arabic","Geeza Pro",Tahoma,sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0E1424; --sheet:#151D33; --ink:#E7ECF8; --muted:#9AA6C3; --line:#2A3552;
+  --delft:#7FA2FF; --delft-soft:#1D2A4F; --tulip:#FF8A70; --tulip-soft:#3A1F1B;
+  --leaf:#5FD39A; --leaf-soft:#173628; --sun:#F5C463; --sun-soft:#3A2F17;
+  --stage1:#1C2747; --stage2:#121A30; --skin1:#C99A73; --skin2:#9A6B4B; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --paper:#0E1424; --sheet:#151D33; --ink:#E7ECF8; --muted:#9AA6C3; --line:#2A3552;
+  --delft:#7FA2FF; --delft-soft:#1D2A4F; --tulip:#FF8A70; --tulip-soft:#3A1F1B;
+  --leaf:#5FD39A; --leaf-soft:#173628; --sun:#F5C463; --sun-soft:#3A2F17;
+  --stage1:#1C2747; --stage2:#121A30; --skin1:#C99A73; --skin2:#9A6B4B; color-scheme:dark }
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--sheet)}
+.wrap{max-width:820px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(28px,6vw,40px);font-weight:800;letter-spacing:-.01em}
+h2{font-size:24px;font-weight:700}
+h3{font-size:19px;font-weight:700}
+p{margin:0}
+.ar{font-family:var(--f-ar);direction:rtl;unicode-bidi:isolate;text-align:right;font-size:1.02em;line-height:1.7}
+.nlx{color:var(--ink)}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--delft);outline-offset:2px;border-radius:6px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:var(--sheet);border-radius:999px;padding:9px 16px;font-weight:700;font-size:15px;min-height:42px}
+.btn.primary{background:var(--delft);border-color:var(--delft);color:var(--sheet)}
+.btn.recording{background:#b3261e;border-color:#b3261e;color:#fff;animation:recp 1.2s ease-in-out infinite}@keyframes recp{50%{opacity:.75}}
+.btn.ghost{background:transparent}
+.btn:disabled{opacity:.5;cursor:default}
+.btn .ic{font-size:16px;line-height:1}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.stack{display:flex;flex-direction:column;gap:14px}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.label{font-size:12px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--sheet);border-bottom:1px solid var(--line)}
+.top .wrap{padding-block:10px;display:flex;align-items:center;gap:12px}
+.brand{font-family:var(--f-display);font-weight:800;font-size:19px;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;background:none;border:0;padding:0}
+.brand .mark{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:8px;background:var(--delft);color:var(--sheet);font-size:15px}
+.top .spacer{flex:1}
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:6px 10px;font-size:13px;font-weight:700;min-height:34px}
+.seg button[aria-pressed="true"]{background:var(--delft-soft);color:var(--delft)}
+
+/* home */
+.hero{padding-block:28px 8px;display:grid;gap:12px}
+.hero .lead{font-size:18px;max-width:60ch}
+.meter{height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.meter>i{display:block;height:100%;background:var(--leaf);border-radius:99px;transition:width .4s}
+.notice{border:1.5px solid var(--line);background:var(--sheet);border-radius:var(--r);padding:14px 16px;display:grid;gap:6px}
+.notice.warn{border-color:var(--sun);background:var(--sun-soft)}
+.weeks{display:grid;gap:26px;margin-top:22px}
+.week h2{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
+.week h2 small{font-family:var(--f-body);font-size:14px;color:var(--muted);font-weight:400}
+.days{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.day{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:start;text-align:left;border:1.5px solid var(--line);background:var(--sheet);border-radius:var(--r);padding:14px;min-height:96px}
+.day:hover{border-color:var(--delft)}
+.day .n{grid-row:span 3;font-family:var(--f-display);font-weight:800;font-size:28px;color:var(--delft);line-height:1;min-width:34px;font-variant-numeric:tabular-nums}
+.day .t{font-weight:700;line-height:1.25}
+.day .s{font-size:14px;color:var(--muted)}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--line);color:var(--ink);width:max-content}
+.chip.done{background:var(--leaf-soft);color:var(--leaf)}
+.chip.part{background:var(--sun-soft);color:var(--ink)}
+.cardlink{display:grid;gap:6px;text-align:left;border:1.5px solid var(--delft);background:var(--delft-soft);border-radius:var(--r);padding:16px}
+.road{display:grid;gap:0;border-left:3px solid var(--line);margin-left:8px}
+.road .st{position:relative;padding:0 0 18px 20px;display:grid;gap:4px}
+.road .st::before{content:"";position:absolute;left:-9px;top:4px;width:15px;height:15px;border-radius:50%;background:var(--sheet);border:3px solid var(--delft)}
+.road .st.now::before{background:var(--delft)}
+.lvl{font-family:var(--f-display);font-weight:800;color:var(--delft)}
+.src a{color:var(--delft);word-break:break-word}
+
+/* day view */
+.dayhead{padding-block:22px 10px;display:grid;gap:8px}
+.tabs{position:sticky;top:calc(env(safe-area-inset-top,0px) + 63px);z-index:8;background:var(--paper);padding-block:8px;margin-inline:-4px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs .in{display:flex;gap:6px;padding-inline:4px;width:max-content}
+.tab{border:1.5px solid var(--line);background:var(--sheet);border-radius:10px;padding:6px 11px;display:grid;text-align:left;min-width:86px}
+.tab b{font-size:14px}
+.tab span{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.tab[aria-selected="true"]{border-color:var(--delft);background:var(--delft-soft)}
+.tab.ok b::after{content:" ✓";color:var(--leaf)}
+.sheet{background:var(--sheet);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:grid;gap:16px;margin-top:8px}
+.instr{display:grid;gap:4px;padding:12px 14px;border-radius:10px;background:var(--delft-soft)}
+.instr .nl{font-weight:700}
+
+/* vocab */
+.vlist{display:grid;gap:0;border-top:1px solid var(--line)}
+.v{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;padding:10px 0;border-bottom:1px solid var(--line);align-items:center}
+.v .say{grid-row:span 3}
+.v .w{font-weight:700;font-size:18px}
+.say{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:var(--sheet);display:grid;place-items:center;font-size:16px;padding:0}
+.say:hover{border-color:var(--delft)}
+.flash{border:2px dashed var(--line);border-radius:var(--r);min-height:170px;display:grid;place-items:center;text-align:center;padding:20px;gap:8px}
+.flash .big{font-family:var(--f-display);font-size:30px;font-weight:700}
+
+/* tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--delft-soft);font-size:13px}
+tr:last-child td{border-bottom:0}
+td.ar{text-align:right}
+
+/* stage ("video") */
+.stage{position:relative;aspect-ratio:16/9;max-width:100%;border-radius:var(--r);overflow:hidden;background:linear-gradient(180deg,var(--stage1),var(--stage2));border:1px solid var(--line)}
+.stage .place{position:absolute;left:12px;top:10px;display:flex;align-items:center;gap:8px;background:var(--sheet);border-radius:99px;padding:4px 12px 4px 6px;font-size:13px;font-weight:700}
+.stage .place .e{font-size:20px}
+.stage .floor{position:absolute;left:0;right:0;bottom:0;height:22%;background:var(--line);opacity:.55}
+.stage .ppl{position:absolute;inset:auto 0 6% 0;display:flex;justify-content:space-around;align-items:flex-end;padding-inline:6%}
+.person{display:grid;justify-items:center;gap:4px;width:30%;max-width:150px;position:relative}
+.person svg{width:100%;height:auto;overflow:visible}
+.person .tag{font-size:12px;font-weight:700;background:var(--sheet);border-radius:99px;padding:2px 9px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.person .mouth{transform-box:fill-box;transform-origin:center}
+.person.talk svg{animation:bob .5s ease-in-out infinite alternate}
+.person.talk .mouth{animation:talk .18s ease-in-out infinite alternate}
+.person.talk .tag{background:var(--delft);color:var(--sheet)}
+.bubble{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:6px;background:var(--sheet);border:1.5px solid var(--delft);border-radius:12px;padding:6px 10px;font-size:13px;line-height:1.35;width:max-content;max-width:min(240px,62vw);box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.bubble.dots{font-size:18px;letter-spacing:2px;padding:2px 12px}
+.stage .bigicon{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);font-size:clamp(34px,9vw,64px);opacity:.9}
+.stage .pic{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(56px,16vw,120px)}
+@keyframes bob{from{transform:translateY(0)}to{transform:translateY(-3px)}}
+@keyframes talk{from{transform:scaleY(.35)}to{transform:scaleY(1.25)}}
+@media (prefers-reduced-motion:reduce){.person.talk svg,.person.talk .mouth{animation:none}}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.transcript{display:grid;gap:6px;border-left:3px solid var(--delft);padding:4px 0 4px 12px}
+.transcript .ln b{color:var(--delft)}
+
+/* questions */
+.q{display:grid;gap:8px;padding:12px 0;border-top:1px solid var(--line)}
+.q:first-child{border-top:0}
+.q .qt{font-weight:700}
+.opts{display:grid;gap:6px}
+.opt{display:flex;gap:10px;align-items:center;text-align:left;border:1.5px solid var(--line);background:var(--sheet);border-radius:10px;padding:9px 12px;min-height:44px}
+.opt .k{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line);font-size:13px;font-weight:700;flex:none}
+.opt[aria-pressed="true"]{border-color:var(--delft);background:var(--delft-soft)}
+.opt.right{border-color:var(--leaf);background:var(--leaf-soft)}
+.opt.wrong{border-color:var(--tulip);background:var(--tulip-soft)}
+.score{font-family:var(--f-display);font-weight:800;font-size:22px}
+.score.good{color:var(--leaf)} .score.bad{color:var(--tulip)}
+
+/* reading */
+.textcard{border:1px solid var(--line);border-radius:10px;padding:14px 16px;white-space:pre-line;background:var(--paper);font-size:17px}
+.textcard h4{margin:0 0 6px;font-family:var(--f-display);font-size:17px}
+
+/* writing */
+textarea,input[type=text]{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
+textarea{min-height:150px;resize:vertical}
+.formgrid{display:grid;gap:10px}
+.formgrid label{display:grid;gap:4px;font-size:14px;font-weight:700}
+.model{border:1.5px dashed var(--leaf);border-radius:10px;padding:12px 14px;white-space:pre-line;background:var(--leaf-soft)}
+.checks{display:grid;gap:6px}
+.checks label{display:flex;gap:10px;align-items:flex-start}
+.checks input{width:20px;height:20px;margin-top:3px;accent-color:var(--leaf)}
+.fb{border:1.5px solid var(--delft);border-radius:10px;padding:12px 14px;white-space:pre-wrap;background:var(--delft-soft)}
+
+/* speaking */
+.timer{font-family:var(--f-display);font-weight:800;font-size:34px;font-variant-numeric:tabular-nums}
+.timer.low{color:var(--tulip)}
+.rec{display:grid;gap:10px;border:1px solid var(--line);border-radius:10px;padding:14px}
+audio{width:100%}
+.selfscore{display:flex;gap:6px;flex-wrap:wrap}
+
+.pager{display:flex;justify-content:space-between;gap:10px;margin-top:14px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:99px;font-weight:700;font-size:14px;z-index:20;max-width:calc(100% - 32px)}
+@media (max-width:520px){
+  body{font-size:16px}
+  .top .wrap{gap:8px}
+  .brand .txt{display:none}
+  .sheet{padding:14px}
+  .tab{min-width:76px;padding:6px 9px}
+}
+</style>
+
+<header class="top"><div class="wrap">
+  <button class="brand" id="homeBtn" aria-label="Naar het overzicht"><span class="mark">A1</span><span class="txt">Stap voor Stap</span></button>
+  <span class="spacer"></span>
+  <span class="label" id="hlpLbl">Uitleg</span>
+  <div class="seg" role="group" aria-labelledby="hlpLbl">
+    <button data-help="ar" id="hAr">عربي</button><button data-help="nl" id="hNl">NL</button><button data-help="both" id="hBoth">2×</button>
+  </div>
+</div></header>
+
+<main class="wrap" id="app"></main>
+<div class="toast" id="toast" hidden></div>
+
+<script src="course.js"></script>
+<script>
+(function(){
+const C = window.COURSE;
+const $ = (s,el=document)=>el.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const app = $('#app');
+
+/* ---------- storage (per viewer, optional) ---------- */
+const KEY='svs-a1-v1';
+let S = {help:'both', done:{}, scores:{}, exam:{}};
+try{ const raw=localStorage.getItem(KEY); if(raw) S=Object.assign(S,JSON.parse(raw)); }catch(e){}
+if(S.help==='en') S.help='both';
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){} }
+
+/* ---------- help language ---------- */
+function setHelp(h){ S.help=h; save(); document.querySelectorAll('[data-help]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.help===h))); render(); }
+document.querySelectorAll('[data-help]').forEach(b=>b.addEventListener('click',()=>setHelp(b.dataset.help)));
+document.querySelectorAll('[data-help]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.help===S.help)));
+function help(nl,ar){ const out=[]; if(S.help!=='ar' && nl) out.push(`<p class="nlx">${esc(nl)}</p>`); if(S.help!=='nl' && ar) out.push(`<p class="ar">${esc(ar)}</p>`); return out.join(''); }
+
+/* ---------- toast ---------- */
+let tt; function toast(m){ const t=$('#toast'); t.textContent=m; t.hidden=false; clearTimeout(tt); tt=setTimeout(()=>t.hidden=true,2200); }
+
+/* ---------- deterministic option shuffle ---------- */
+function hash(s){ let h=2166136261; for(const c of s){ h^=c.charCodeAt(0); h=Math.imul(h,16777619);} return h>>>0; }
+function shuffled(q){ const idx=q[1].map((_,i)=>i); let h=hash(q[0]+q[1].join('|')); for(let i=idx.length-1;i>0;i--){ h=Math.imul(h^(h>>>15),2246822507)>>>0; const j=h%(i+1); [idx[i],idx[j]]=[idx[j],idx[i]]; } return idx; }
+
+/* ---------- speech ---------- */
+const NATIVE = !!(window.Capacitor && Capacitor.isNativePlatform && Capacitor.isNativePlatform());
+const NTTS = NATIVE && Capacitor.Plugins && Capacitor.Plugins.TextToSpeech;
+const CANREC = NATIVE && !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder);
+const HAS_TTS = !!NTTS || ('speechSynthesis' in window);
+const TTS = { voices:[], nl:[], ok:false };
+const QUAL=/(enhanced|premium|verbeterd|natural|neural|online|google)/i;
+function afterVoices(){ const n=$('#voiceNote'); if(n) n.hidden=TTS.ok; document.querySelectorAll('[data-vsel]').forEach(fillVoiceSelect); }
+function loadNativeVoices(){ return NTTS.getSupportedVoices().then(r=>{ const all=(r&&r.voices)||[];
+    TTS.voices=all.map((v,i)=>({name:v.voiceURI, lang:v.lang, idx:i, local:v.localService}));
+    TTS.nl=TTS.voices.filter(v=>/^nl([-_]|$)/i.test(v.lang)); const sc=v=>(/nl[-_]NL/i.test(v.lang)?2:0)+(v.local?1:0); TTS.nl.sort((a,b)=>sc(b)-sc(a)); TTS.ok=TTS.nl.length>0; afterVoices(); }).catch(()=>{}); }
+function loadVoices(){ if(NTTS) return; if(!('speechSynthesis' in window)) return; TTS.voices=speechSynthesis.getVoices(); TTS.nl=TTS.voices.filter(v=>/^nl([-_]|$)/i.test(v.lang));
+  const score=v=>(/nl[-_]NL/i.test(v.lang)?2:0)+(QUAL.test(v.name)?1:0); TTS.nl.sort((a,b)=>score(b)-score(a)); TTS.ok=TTS.nl.length>0;
+  const n=$('#voiceNote'); if(n) n.hidden=TTS.ok; document.querySelectorAll('[data-vsel]').forEach(fillVoiceSelect); }
+if(NTTS){ loadNativeVoices(); setTimeout(loadNativeVoices,1500); document.addEventListener('resume',loadNativeVoices); }
+try{ loadVoices(); if(!NTTS && 'speechSynthesis' in window){ speechSynthesis.onvoiceschanged=loadVoices; let tries=0; const iv=setInterval(()=>{ loadVoices(); if(TTS.ok||++tries>10) clearInterval(iv); },500); } }catch(e){}
+const FEM=/(claire|ellen|fenna|colette|lotte|sanne|laura|google nederlands|female|vrouw)/i, MAL=/(xander|maarten|frank|arnaud|ruben|male|\bman\b)/i;
+function voiceFor(g){ if(!TTS.nl.length) return null; const pick=S['voice'+g]; if(pick){ const v=TTS.nl.find(x=>x.name===pick); if(v) return v; }
+  const f=TTS.nl.filter(v=>FEM.test(v.name)), m=TTS.nl.filter(v=>MAL.test(v.name)&&!FEM.test(v.name)); if(g==='f'&&f.length) return f[0]; if(g==='m'&&m.length) return m[0]; if(NTTS&&g==='m'&&TTS.nl.length>1){ const lc=TTS.nl.filter(v=>v.local&&/nl[-_]NL/i.test(v.lang)); return (lc[1]||TTS.nl[1]); } return TTS.nl[0]; }
+let rate=1;
+function speak(text,g='f',onend){
+  if(NTTS){ const v=voiceFor(g); const same=v && voiceFor('f')===voiceFor('m'); let done=false; const fin=()=>{ if(!done){ done=true; onend&&onend(); } };
+    NTTS.speak({ text, lang:'nl-NL', rate:0.95*rate, pitch: same?(g==='m'?0.75:1.2):1, volume:1, voice: v? v.idx : -1, category:'playback' }).then(fin,fin); return; }
+  if(!('speechSynthesis' in window)){ toast('Deze browser kan niet voorlezen'); onend&&onend(); return; }
+  const u=new SpeechSynthesisUtterance(text); u.lang='nl-NL'; const v=voiceFor(g); if(v) u.voice=v;
+  const sameVoice = v && voiceFor('f')===voiceFor('m');
+  u.pitch = sameVoice ? (g==='m'?0.75:1.2) : 1; u.rate = 0.95*rate;
+  u.onend=()=>onend&&onend(); u.onerror=()=>onend&&onend(); speechSynthesis.speak(u); }
+function stopSpeech(){ try{ if(NTTS){ NTTS.stop().catch(()=>{}); } else speechSynthesis.cancel(); }catch(e){} }
+function fillVoiceSelect(sel){ const g=sel.dataset.vsel; const cur=(voiceFor(g)||{}).name;
+  sel.innerHTML = TTS.nl.length ? TTS.nl.map((v,k)=>`<option value="${esc(v.name)}" ${v.name===cur?'selected':''}>${NTTS ? `Stem ${k+1} · ${esc(v.lang)}${v.local?'':' (online)'}` : `${esc(v.name.replace(/\s*\(.*?\)\s*/g,' ').trim())} · ${esc(v.lang)}${QUAL.test(v.name)?' ★':''}`}</option>`).join('') : '<option>Geen Nederlandse stem</option>'; sel.disabled=!TTS.nl.length; }
+const PHONE_STEPS = `
+  <details class="small"><summary><b>iPhone / iPad</b></summary>
+    <ol class="stack" style="gap:4px;padding-left:20px;margin:8px 0">
+      <li>Instellingen → Toegankelijkheid → Gesproken materiaal → Stemmen → Nederlands.</li>
+      <li>Kies Claire (vrouw) of Xander (man) en download de versie “Verbeterd” of “Premium”.</li>
+      <li>Sluit deze pagina en open hem opnieuw. Kies de stem hieronder.</li>
+      <li>Hoort u niets? Zet de stille modus uit en zet het volume hoger.</li></ol>
+    <ol class="ar stack" style="gap:4px;padding-right:20px;margin:8px 0">
+      <li>الإعدادات ← تسهيلات الاستخدام ← المحتوى المنطوق ← الأصوات ← الهولندية (Nederlands).</li>
+      <li>اختر Claire (صوت امرأة) أو Xander (صوت رجل) وحمّل النسخة «المحسّنة» أو «Premium».</li>
+      <li>أغلق هذه الصفحة وافتحها من جديد، ثم اختر الصوت في الأسفل.</li>
+      <li>لا تسمع شيئًا؟ أوقف الوضع الصامت وارفع مستوى الصوت.</li></ol></details>
+  <details class="small"><summary><b>Android</b></summary>
+    <ol class="stack" style="gap:4px;padding-left:20px;margin:8px 0">
+      <li>Instellingen → zoek op “Tekst-naar-spraak”.</li>
+      <li>Kies “Spraakservices van Google” als engine → tandwiel → Spraakgegevens installeren → Nederlands (Nederland).</li>
+      <li>Sluit deze pagina en open hem opnieuw. Kies de stem hieronder.</li></ol>
+    <ol class="ar stack" style="gap:4px;padding-right:20px;margin:8px 0">
+      <li>الإعدادات ← ابحث عن «تحويل النص إلى كلام».</li>
+      <li>اختر «خدمات الكلام من Google» ← رمز الترس ← تثبيت بيانات الصوت ← الهولندية (هولندا).</li>
+      <li>أغلق هذه الصفحة وافتحها من جديد، ثم اختر الصوت في الأسفل.</li></ol></details>
+  <p class="small muted">${help('De namen in het menu kunnen per telefoon iets anders zijn. Werkt het geluid niet in de Claude-app? Open de link dan in Safari of Chrome.','قد تختلف أسماء القوائم قليلًا حسب الهاتف. إذا لم يعمل الصوت داخل تطبيق Claude، افتح الرابط في Safari أو Chrome.')}</p>`;
+const NATIVE_STEPS = `
+  <ol class="stack small" style="gap:4px;padding-left:20px;margin:8px 0">
+    <li>Tik op de knop hieronder. Android opent de spraakinstellingen.</li>
+    <li>Kies “Spraakservices van Google” → Spraakgegevens installeren → Nederlands (Nederland).</li>
+    <li>Kom terug naar de app en kies de stem hierboven.</li></ol>
+  <ol class="ar stack small" style="gap:4px;padding-right:20px;margin:8px 0">
+    <li>اضغط على الزر في الأسفل، سيفتح أندرويد إعدادات الكلام.</li>
+    <li>اختر «خدمات الكلام من Google» ← تثبيت بيانات الصوت ← الهولندية (هولندا).</li>
+    <li>ارجع إلى التطبيق واختر الصوت في الأعلى.</li></ol>
+  <button class="btn" data-vinstall>⚙️ Stem installeren · تثبيت الصوت</button>`;
+function stepsHTML(){ return NTTS ? NATIVE_STEPS : PHONE_STEPS; }
+function voicePanel(){ return `<div class="notice" id="voicePanel"><b>Stem · الصوت</b>
+  ${help('Kies de beste Nederlandse stem op uw telefoon. Een stem met ★ klinkt meestal natuurlijker.','اختر أفضل صوت هولندي على هاتفك. الصوت المعلَّم بـ ★ يكون عادةً أكثر طبيعية.')}
+  <label class="small" for="vselF"><b>Vrouwenstem · صوت امرأة</b></label><div class="row" style="flex-wrap:nowrap"><select id="vselF" data-vsel="f" style="flex:1;min-width:0;padding:8px;border-radius:10px;border:1.5px solid var(--line);background:var(--paper)"></select><button class="btn" data-vtest="f">▶</button></div>
+  <label class="small" for="vselM"><b>Mannenstem · صوت رجل</b></label><div class="row" style="flex-wrap:nowrap"><select id="vselM" data-vsel="m" style="flex:1;min-width:0;padding:8px;border-radius:10px;border:1.5px solid var(--line);background:var(--paper)"></select><button class="btn" data-vtest="m">▶</button></div>
+  <details class="small"><summary><b>Nederlandse stem installeren · تثبيت صوت هولندي</b></summary>${stepsHTML()}</details></div>`; }
+document.addEventListener('click',e=>{ const b=e.target.closest&&e.target.closest('[data-vinstall]'); if(b&&NTTS) NTTS.openInstall().catch(()=>toast('Open Instellingen → Tekst-naar-spraak')); });
+function wireVoicePanel(root){ root.querySelectorAll('[data-vsel]').forEach(sel=>{ fillVoiceSelect(sel); sel.onchange=()=>{ S['voice'+sel.dataset.vsel]=sel.value; save(); toast('Stem gekozen ✓'); }; });
+  root.querySelectorAll('[data-vtest]').forEach(b=>b.onclick=()=>{ stopSpeech(); speak(b.dataset.vtest==='f'?'Goedemorgen! Ik ben uw docent. Hoe gaat het met u?':'Goedemiddag. Ik woon in Veghel en ik leer Nederlands.', b.dataset.vtest); }); }
+function voiceNote(){ return `<div class="notice warn" id="voiceNote" ${TTS.ok?'hidden':''}><b>Geen Nederlandse stem gevonden · لا يوجد صوت هولندي</b>${help('Uw telefoon heeft nog geen Nederlandse stem. Daardoor klinkt het geluid niet goed. Volg deze stappen:','هاتفك لا يحتوي بعد على صوت هولندي، لذلك قد يكون النطق خاطئًا. اتبع هذه الخطوات:')}${stepsHTML()}</div>`; }
+
+/* ---------- people drawing ---------- */
+function personSVG(g,i){ const shirt = ['var(--delft)','var(--tulip)','var(--leaf)','var(--sun)'][i%4]; const skin = i%2? 'var(--skin2)':'var(--skin1)';
+  const hair = g==='f' ? `<path d="M22 34c0-16 10-24 18-24s18 8 18 24v20c-4-6-6-14-6-20-8 2-16 2-24 0 0 6-2 14-6 20z" fill="var(--ink)" opacity=".85"/>` : `<path d="M24 30c0-12 8-18 16-18s16 6 16 18c-6-4-10-6-16-6s-10 2-16 6z" fill="var(--ink)" opacity=".85"/>`;
+  return `<svg viewBox="0 0 80 120" aria-hidden="true"><path d="M8 120c0-26 14-44 32-44s32 18 32 44z" fill="${shirt}"/><rect x="34" y="62" width="12" height="16" fill="${skin}"/>${hair}<circle cx="40" cy="38" r="20" fill="${skin}"/>${g==='f'?'':''}<circle cx="33" cy="36" r="2.4" fill="var(--ink)"/><circle cx="47" cy="36" r="2.4" fill="var(--ink)"/><ellipse class="mouth" cx="40" cy="47" rx="5" ry="2.6" fill="var(--ink)"/></svg>`; }
+function stageHTML(sceneKey, who, id){ const sc=C.SCENES[sceneKey]||{icon:'💬',label:''}; const keys=Object.keys(who);
+  const people = keys.map((k,i)=>`<div class="person" data-k="${k}"><div class="bubble dots" hidden>…</div>${personSVG(who[k][1],i)}<span class="tag">${esc(who[k][0])}</span></div>`).join('');
+  const mid = (sceneKey==='phone' && keys.length>1) ? `<div class="bigicon" aria-hidden="true">📞</div>` : (keys.length===1 ? `<div class="bigicon" aria-hidden="true" style="left:78%">${sc.icon}</div>`:'');
+  return `<div class="stage" id="${id}" role="img" aria-label="Bewegende scène: ${esc(sc.label)}"><div class="floor"></div><div class="place"><span class="e">${sc.icon}</span>${esc(sc.label)}</div>${mid}<div class="ppl">${people}</div></div>`; }
+function playScene(stageId, lines, who, captions, done){ stopSpeech(); const st=document.getElementById(stageId); let i=0, alive=true;
+  const clear=()=>st.querySelectorAll('.person').forEach(p=>{p.classList.remove('talk'); const b=p.querySelector('.bubble'); b.hidden=true;});
+  function next(){ if(!alive) return; clear(); if(i>=lines.length){ done&&done(); return; } const [k,txt,tts]=lines[i++]; const p=st.querySelector(`.person[data-k="${k}"]`);
+    if(p){ p.classList.add('talk'); const b=p.querySelector('.bubble'); b.hidden=false; if(captions()){ b.textContent=txt; b.classList.remove('dots'); } else { b.textContent='…'; b.classList.add('dots'); } }
+    speak(tts||txt, (who[k]||['','f'])[1], ()=>setTimeout(next,380)); }
+  next(); return ()=>{ alive=false; stopSpeech(); clear(); }; }
+
+/* ---------- question blocks ---------- */
+function quizHTML(qs, id){ return `<div class="stack" id="${id}">${qs.map((q,qi)=>{ const ord=shuffled(q); return `<div class="q" data-qi="${qi}"><div class="qt">${qi+1}. ${esc(q[0])}</div><div class="opts">${ord.map((oi,pos)=>`<button class="opt" data-oi="${oi}" aria-pressed="false"><span class="k">${'ABCD'[pos]}</span><span>${esc(q[1][oi])}</span></button>`).join('')}</div></div>`; }).join('')}
+  <div class="row"><button class="btn primary" data-check="${id}">Nakijken</button><span class="score" data-score="${id}"></span></div></div>`; }
+function wireQuiz(id, qs, onScore){ const box=document.getElementById(id); if(!box) return;
+  box.addEventListener('click',e=>{ const o=e.target.closest('.opt'); if(o && !box.dataset.checked){ o.parentElement.querySelectorAll('.opt').forEach(x=>x.setAttribute('aria-pressed','false')); o.setAttribute('aria-pressed','true'); }
+    const c=e.target.closest('[data-check]'); if(c){ if(box.dataset.checked){ box.dataset.checked=''; box.querySelectorAll('.opt').forEach(x=>{x.classList.remove('right','wrong'); x.setAttribute('aria-pressed','false');}); c.textContent='Nakijken'; box.querySelector('[data-score]').textContent=''; return; }
+      let ok=0; box.querySelectorAll('.q').forEach(qel=>{ const q=qs[+qel.dataset.qi]; const sel=qel.querySelector('.opt[aria-pressed="true"]'); qel.querySelectorAll('.opt').forEach(x=>{ if(+x.dataset.oi===q[2]) x.classList.add('right'); }); if(sel){ if(+sel.dataset.oi===q[2]) ok++; else sel.classList.add('wrong'); } });
+      box.dataset.checked='1'; c.textContent='Opnieuw'; const sc=box.querySelector('[data-score]'); sc.textContent=`${ok} / ${qs.length}`; sc.className='score '+(ok/qs.length>=0.7?'good':'bad'); onScore&&onScore(ok,qs.length); } }); }
+
+/* ---------- routing ---------- */
+let view={name:'home'}; let stopFn=null;
+function go(v){ if(activeRec){ activeRec.click(); } if(stopFn){stopFn(); stopFn=null;} stopSpeech(); clearInterval(timerInt); view=v; render(); window.scrollTo({top:0}); }
+$('#homeBtn').addEventListener('click',()=>go({name:'home'}));
+if(NATIVE && Capacitor.Plugins.App){ Capacitor.Plugins.App.addListener('backButton',()=>{ if(view.name!=='home') go({name:'home'}); else Capacitor.Plugins.App.exitApp(); });
+  Capacitor.Plugins.App.addListener('pause',()=>{ stopSpeech(); if(activeRec) activeRec.click(); }); }
+function render(){ if(view.name==='home') renderHome(); else if(view.name==='day') renderDay(); else if(view.name==='exam') renderExam(); }
+
+/* ---------- HOME ---------- */
+const SECTIONS=[['woorden','Woorden',20],['grammatica','Grammatica',25],['luisteren','Luisteren',20],['lezen','Lezen',15],['schrijven','Schrijven',20],['spreken','Spreken',15],['toets','Toets',5]];
+function dayProgress(d){ const done=S.done[d.id]||{}; const total=d.review? 3 : SECTIONS.length; const n=Object.keys(done).length; return {n,total}; }
+function renderHome(){
+  const all=C.DAYS.reduce((a,d)=>{const p=dayProgress(d); return [a[0]+Math.min(p.n,p.total), a[1]+p.total];},[0,0]);
+  const pct=Math.round(100*all[0]/all[1]);
+  const weekNames={1:['Week 1','Basis'],2:['Week 2','Dagelijks leven'],3:['Week 3','In de stad'],4:['Week 4','Communiceren']};
+  app.innerHTML = `
+  <section class="hero">
+    <span class="label">Nederlands A1 · 20 lesdagen + proefexamen · 2 uur per dag</span>
+    <h1>Stap voor Stap A1</h1>
+    <div class="lead">${help('Uw eerste stap naar het inburgeringsexamen A2 en het Staatsexamen NT2 (B1). Elke dag oefent u de vier examenvaardigheden: luisteren, lezen, schrijven en spreken.','خطوتك الأولى نحو امتحان الاندماج A2 وامتحان الدولة B1. كل يوم يدرّب المهارات الأربع للامتحان: الاستماع والقراءة والكتابة والتحدث.')}</div>
+    <div class="stack" style="gap:6px"><div class="row" style="justify-content:space-between"><span class="small muted">Voortgang</span><span class="small" style="font-variant-numeric:tabular-nums">${pct}%</span></div><div class="meter" aria-label="Voortgang ${pct}%"><i style="width:${pct}%"></i></div></div>
+    ${voiceNote()}
+    ${voicePanel()}
+  </section>
+  <div class="weeks">
+  ${[1,2,3,4].map(w=>`<section class="week"><h2>${weekNames[w][0]} <small>${weekNames[w][1]}</small></h2><div class="days">
+    ${C.DAYS.filter(d=>d.week===w).map(d=>{ const p=dayProgress(d); const sc=S.scores[d.id]; const cls=p.n>=p.total?'done':(p.n?'part':'');
+      return `<button class="day" data-day="${d.id}"><span class="n">${d.id}</span><span class="t">${esc(d.nl)}</span><span class="s ar">${esc(d.ar)}</span><span class="chip ${cls}">${p.n>=p.total?'Klaar':(p.n?`${p.n}/${p.total} onderdelen`:'Nog niet begonnen')}${sc?` · toets ${sc[0]}/${sc[1]}`:''}</span></button>`; }).join('')}
+  </div></section>`).join('')}
+  <section class="week"><h2>Dag 21 <small>Proefexamen</small></h2>
+    <button class="cardlink" id="toExam"><h3>Proefexamen A1</h3>${help('Vier aparte onderdelen, zoals bij het A2-examen van DUO: Lezen, Luisteren, Schrijven en Spreken. Ongeveer 90 minuten.','أربعة أجزاء منفصلة مثل امتحان DUO A2: القراءة، الاستماع، الكتابة، التحدث. حوالي 90 دقيقة.')}
+    ${S.exam.lezen||S.exam.luisteren?`<span class="chip done">Laatste score: Lezen ${S.exam.lezen?S.exam.lezen.join('/'):'–'} · Luisteren ${S.exam.luisteren?S.exam.luisteren.join('/'):'–'}</span>`:''}</button>
+  </section>
+  <section class="week"><h2>Naar B1 in 6 maanden <small>Route</small></h2>
+    <div class="notice">${help('Deze A1-cursus is maand 1. Daarna oefent u met de officiële A2-oefenexamens en dan met het Staatsexamen NT2 Programma I (B1). Gebruik bij elke stap de officiële oefenexamens.','هذا المنهاج (A1) هو الشهر الأول. الهدف بعده: تمارين امتحان الاندماج A2 ثم امتحان الدولة NT2 البرنامج الأول (B1). استعمل التمارين الرسمية في كل مرحلة.')}</div>
+    <div class="road" style="margin-top:14px">${C.ROADMAP.map((r,i)=>`<div class="st ${i===0?'now':''}"><span class="label">${esc(r.phase)} · <span class="lvl">${esc(r.level)}</span></span><h3>${esc(r.title)}</h3>${help(r.focus,r.focusAr)}<p class="small muted">Controle: ${esc(r.check)}</p></div>`).join('')}</div>
+  </section>
+  <section class="week src"><h2>Bronnen <small>Officiële informatie</small></h2>
+    <ul class="small stack" style="gap:6px;padding-left:18px;margin:0">${C.SOURCES.map(s=>`<li><a href="${esc(s[1])}" target="_blank" rel="noopener">${esc(s[0])}</a></li>`).join('')}</ul>
+    <p class="small muted" style="margin-top:10px">${help('Alle teksten en gesprekken in deze cursus zijn geschreven om te oefenen. Namen, adressen en nummers zijn verzonnen.','جميع النصوص والحوارات في هذا المنهاج من تأليفنا، وأسماء الأشخاص والعناوين خيالية.')}</p>
+  </section></div>`;
+  app.querySelectorAll('[data-day]').forEach(b=>b.addEventListener('click',()=>go({name:'day',id:+b.dataset.day,sec:firstOpen(+b.dataset.day)})));
+  wireVoicePanel(app);
+  $('#toExam').addEventListener('click',()=>go({name:'exam',part:'lezen'}));
+}
+function firstOpen(id){ const d=C.DAYS.find(x=>x.id===id); if(d.review) return 'herhaling'; const done=S.done[id]||{}; const s=SECTIONS.find(s=>!done[s[0]]); return s?s[0]:'woorden'; }
+function markDone(id,sec){ S.done[id]=S.done[id]||{}; if(!S.done[id][sec]){ S.done[id][sec]=1; save(); const t=document.querySelector(`.tab[data-sec="${sec}"]`); if(t) t.classList.add('ok'); } }
+
+/* ---------- DAY ---------- */
+let timerInt=null;
+function renderDay(){
+  const d=C.DAYS.find(x=>x.id===view.id); const done=S.done[d.id]||{};
+  const secs = d.review ? [['herhaling','Toets',45],['schrijven','Schrijven',30],['spreken','Spreken',45]] : SECTIONS;
+  app.innerHTML = `
+  <section class="dayhead"><span class="label">Week ${d.week} · Dag ${d.id} · 2 uur</span><h1>${esc(d.nl)}</h1>
+   <p class="ar" style="font-weight:600">${esc(d.ar)}</p>${help(d.can,d.canAr)}</section>
+  <nav class="tabs" aria-label="Onderdelen"><div class="in" role="tablist">${secs.map(s=>`<button class="tab ${done[s[0]]?'ok':''}" role="tab" data-sec="${s[0]}" aria-selected="${view.sec===s[0]}"><b>${s[1]}</b><span>${s[2]} min</span></button>`).join('')}</div></nav>
+  <div id="secBody"></div>
+  <div class="pager"><button class="btn ghost" id="prevDay" ${d.id===1?'disabled':''}>← Dag ${d.id-1}</button><button class="btn ghost" id="nextSec">Volgende →</button></div>`;
+  app.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{ if(stopFn){stopFn();stopFn=null;} stopSpeech(); clearInterval(timerInt); view.sec=t.dataset.sec; app.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',String(x===t))); renderSection(d); t.scrollIntoView({inline:'nearest',block:'nearest'}); }));
+  $('#prevDay').addEventListener('click',()=>go({name:'day',id:d.id-1,sec:firstOpen(d.id-1)}));
+  $('#nextSec').addEventListener('click',()=>{ const i=secs.findIndex(s=>s[0]===view.sec); if(i<secs.length-1){ app.querySelector(`.tab[data-sec="${secs[i+1][0]}"]`).click(); window.scrollTo({top:0}); } else if(d.id<20) go({name:'day',id:d.id+1,sec:firstOpen(d.id+1)}); else go({name:'exam',part:'lezen'}); });
+  renderSection(d);
+}
+function instr(nl,en,ar){ return `<div class="instr"><span class="nl">${esc(nl)}</span>${help(en,ar)}</div>`; }
+function renderSection(d){
+  const body=$('#secBody'); const sec=view.sec; let h='';
+  if(sec==='woorden'){
+    h=`<div class="sheet">${instr('Luister en zeg het na.','Tik op de luidspreker, luister en zeg elk woord 3 keer hardop. Oefen daarna met de flitskaarten.','اضغط على السماعة واستمع وكرر كل كلمة بصوت عالٍ 3 مرات. ثم تدرّب بالبطاقات.')}${voiceNote()}
+     <div class="vlist">${d.vocab.map((v,i)=>`<div class="v"><button class="say" data-say="${i}" aria-label="Luister: ${esc(v[0])}">🔊</button><span class="w">${esc(v[0])}</span><span class="ar small">${esc(v[1])}</span></div>`).join('')}</div>
+     <h3>Flitskaarten</h3><div class="flash" id="flash"></div><div class="row"><button class="btn" id="fPrev">←</button><button class="btn primary" id="fFlip">Omdraaien</button><button class="btn" id="fNext">→</button><button class="btn ghost" id="fSay">🔊</button><span class="small muted" id="fPos"></span></div>
+     <div class="row"><button class="btn" data-done="woorden">Ik ken deze woorden ✓</button></div></div>`;
+    body.innerHTML=h;
+    body.querySelectorAll('[data-say]').forEach(b=>b.addEventListener('click',()=>{ stopSpeech(); speak(d.vocab[+b.dataset.say][0].replace(/\//g,',')); }));
+    let fi=0, flip=false; const order=d.vocab.map((_,i)=>i).sort(()=>Math.random()-.5);
+    const fr=()=>{ const v=d.vocab[order[fi]]; $('#flash').innerHTML = flip? `<div><div class="big">${esc(v[0])}</div></div>` : `<div class="stack" style="gap:6px"><div class="ar big" style="font-size:26px">${esc(v[1])}</div><div class="small muted">Wat is het in het Nederlands?</div></div>`; $('#fPos').textContent=`${fi+1} / ${order.length}`; };
+    fr(); $('#fFlip').onclick=()=>{flip=!flip;fr(); if(flip) speak(d.vocab[order[fi]][0].replace(/\//g,','));}; $('#fNext').onclick=()=>{fi=(fi+1)%order.length;flip=false;fr();}; $('#fPrev').onclick=()=>{fi=(fi-1+order.length)%order.length;flip=false;fr();}; $('#fSay').onclick=()=>speak(d.vocab[order[fi]][0].replace(/\//g,','));
+  }
+  else if(sec==='grammatica'){ const g=d.gram;
+    h=`<div class="sheet"><h2>${esc(g.t)}</h2>${help(g.nl,g.ar)}
+     <div class="tbl"><table><thead><tr>${g.head.map(x=>`<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>${g.rows.map(r=>`<tr>${r.map(c=>`<td class="${/[؀-ۿ]/.test(c)?'ar':''}">${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
+     <h3>Voorbeelden</h3><div class="stack" style="gap:8px">${g.ex.map((e,i)=>`<div class="row" style="flex-wrap:nowrap;align-items:flex-start"><button class="say" data-ex="${i}" aria-label="Luister">🔊</button><div style="min-width:0"><b>${esc(e[0])}</b><div class="${/[\u0600-\u06FF]/.test(e[1])?'ar':'muted'} small">${esc(e[1])}</div></div></div>`).join('')}</div>
+     <div class="row"><button class="btn" data-done="grammatica">Begrepen ✓</button></div></div>`;
+    body.innerHTML=h; body.querySelectorAll('[data-ex]').forEach(b=>b.addEventListener('click',()=>{stopSpeech(); speak(g.ex[+b.dataset.ex][0].replace(/–/g,','));}));
+  }
+  else if(sec==='luisteren'){ const L=d.listen; let caps=false;
+    h=`<div class="sheet">${instr('Lees eerst de vragen. Kijk en luister. Beantwoord dan de vragen.','Probeer te antwoorden na één keer luisteren. Luister daarna opnieuw als dat nodig is. De tekst blijft verborgen tot u nakijkt.','اقرأ الأسئلة أولًا، ثم شاهد واستمع. حاول الإجابة بعد الاستماع مرة واحدة ثم أعد إذا احتجت. يبقى النص مخفيًا حتى تصحح.')}${voiceNote()}
+     ${stageHTML(L.scene,L.who,'stg')}
+     <div class="ctrl"><button class="btn primary" id="play"><span class="ic">▶</span> Afspelen</button><button class="btn" id="stop">■ Stop</button>
+      <div class="seg" role="group" aria-label="Snelheid"><button data-rate="1" aria-pressed="${rate===1}">1×</button><button data-rate="0.75" aria-pressed="${rate===0.75}">0,75×</button></div>
+      <label class="row small" style="gap:6px"><input type="checkbox" id="caps"> Ondertitels</label></div>
+     ${quizHTML(L.qs,'lq')}
+     <details><summary class="small"><b>Tekst van het gesprek</b> (na het nakijken)</summary><div class="transcript" style="margin-top:8px">${L.lines.map(l=>`<div class="ln"><b>${esc(L.who[l[0]][0])}:</b> ${esc(l[1])}</div>`).join('')}</div></details></div>`;
+    body.innerHTML=h;
+    $('#caps').addEventListener('change',e=>caps=e.target.checked);
+    $('#play').onclick=()=>{ if(stopFn) stopFn(); stopFn=playScene('stg',L.lines,L.who,()=>caps); };
+    $('#stop').onclick=()=>{ if(stopFn){stopFn();stopFn=null;} };
+    body.querySelectorAll('[data-rate]').forEach(b=>b.onclick=()=>{ rate=+b.dataset.rate; body.querySelectorAll('[data-rate]').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); });
+    wireQuiz('lq',L.qs,(ok,n)=>{ markDone(d.id,'luisteren'); });
+  }
+  else if(sec==='lezen'){ const R=d.read;
+    h=`<div class="sheet">${instr('Lees de tekst en beantwoord de vragen.','Lees eerst de vraag en zoek dan het antwoord in de tekst. Zonder woordenboek, zoals bij het A2-examen.','اقرأ السؤال أولًا ثم ابحث عن الجواب في النص. بدون قاموس، مثل امتحان A2.')}
+     <div class="textcard"><h4>${esc(R.title)}</h4>${esc(R.text)}</div>${quizHTML(R.qs,'rq')}</div>`;
+    body.innerHTML=h; wireQuiz('rq',R.qs,()=>markDone(d.id,'lezen'));
+  }
+  else if(sec==='schrijven'){ body.innerHTML=writeHTML(d.write,'w'+d.id); wireWrite(d.write,'w'+d.id,()=>markDone(d.id,'schrijven')); }
+  else if(sec==='spreken'){ body.innerHTML=`<div class="sheet">${instr('Luister naar de vraag en antwoord hardop.','Net als bij het A2-examen Spreken hebt u ongeveer 1 minuut per antwoord. Neem uzelf op, luister terug en vergelijk met het voorbeeldantwoord.','مثل امتحان التحدث A2 لديك حوالي دقيقة لكل إجابة. سجّل صوتك بالهاتف واستمع إليه ثم قارنه بالإجابة النموذجية.')}${voiceNote()}${d.speak.map((s,i)=>speakHTML(s,i,d)).join('')}<div class="row"><button class="btn" data-done="spreken">Alles geoefend ✓</button></div></div>`; d.speak.forEach((s,i)=>wireSpeak(s,i)); }
+  else if(sec==='toets'){ body.innerHTML=`<div class="sheet">${instr('Toets van vandaag','5 of 6 goed? Ga door naar de volgende dag. Minder? Herhaal eerst de woorden en de grammatica.','إذا حصلت على 5 أو 6 من 6 انتقل لليوم التالي. أقل من ذلك؟ راجع الكلمات والقواعد أولًا.')}${quizHTML(d.quiz,'tq')}</div>`;
+    wireQuiz('tq',d.quiz,(ok,n)=>{ S.scores[d.id]=[ok,n]; markDone(d.id,'toets'); save(); }); }
+  else if(sec==='herhaling'){ const pool=[]; C.DAYS.forEach(x=>(x.quiz||[]).forEach(q=>pool.push(q))); const pick=pool.sort(()=>Math.random()-.5).slice(0,20);
+    body.innerHTML=`<div class="sheet">${instr('Gemengde toets: 20 vragen uit alle dagen','Elke keer een nieuwe mix. Minder dan 14 van 20? Herhaal de dagen met de laagste score.','مزيج جديد في كل مرة. أقل من 14/20؟ ارجع إلى الأيام ذات الدرجات الأقل.')}${quizHTML(pick,'hq')}</div>`;
+    wireQuiz('hq',pick,(ok,n)=>{ S.scores[d.id]=[ok,n]; markDone(d.id,'herhaling'); save(); }); }
+  body.querySelectorAll('[data-done]').forEach(b=>b.addEventListener('click',()=>{ markDone(d.id,b.dataset.done); toast('Opgeslagen ✓'); $('#nextSec').click(); }));
+}
+
+/* ---------- writing ---------- */
+function writeHTML(w,id){ return `<div class="sheet">${instr(w.nl,w.task,w.ar)}
+  ${w.form? `<div class="formgrid">${w.form.map((f,i)=>`<label>${esc(f)}<input type="text" id="${id}-f${i}" autocomplete="off"></label>`).join('')}</div>` : `<textarea id="${id}-t" placeholder="Schrijf hier in het Nederlands…" aria-label="Uw tekst"></textarea><div class="small muted" id="${id}-wc">0 woorden</div>`}
+  <h3>Controlelijst</h3><div class="checks">${w.check.map((c,i)=>`<label><input type="checkbox" id="${id}-c${i}"> <span>${esc(c)}</span></label>`).join('')}</div>
+  <div class="row"><button class="btn" id="${id}-show">Voorbeeld tonen</button><button class="btn primary" id="${id}-ai" hidden>Laat Claude nakijken</button><button class="btn" id="${id}-done">Klaar ✓</button></div>
+  <div class="model" id="${id}-model" hidden></div><div class="fb" id="${id}-fb" hidden aria-live="polite"></div></div>`; }
+function studentText(w,id){ if(w.form) return w.form.map((f,i)=>`${f}: ${($('#'+id+'-f'+i)||{}).value||''}`).join('\n'); return ($('#'+id+'-t')||{}).value||''; }
+function wireWrite(w,id,onDone){
+  const ta=$('#'+id+'-t'); if(ta) ta.addEventListener('input',()=>{ const n=(ta.value.trim().match(/\S+/g)||[]).length; $('#'+id+'-wc').textContent=n+' woorden'; });
+  $('#'+id+'-show').onclick=()=>{ const m=$('#'+id+'-model'); m.hidden=!m.hidden; m.textContent='Voorbeeld:\n'+w.model; };
+  $('#'+id+'-done').onclick=()=>{ onDone&&onDone(); toast('Opgeslagen ✓'); };
+  // optional feedback from Claude
+  if(window.claude && window.claude.use){ window.claude.use('sample').then(sample=>{ if(!sample) return; const b=$('#'+id+'-ai'); if(!b) return; b.hidden=false;
+    b.onclick=async()=>{ const txt=studentText(w,id).trim(); const fb=$('#'+id+'-fb'); if(txt.replace(/^.*?:\s*$/gm,'').trim().length<5){ toast('Schrijf eerst uw tekst'); return; }
+      fb.hidden=false; fb.textContent='Claude leest uw tekst…'; b.disabled=true;
+      const lang = S.help==='nl' ? 'very simple Dutch (CEFR A1)' : (S.help==='ar' ? 'simple Arabic' : 'simple Arabic, followed by the same feedback in very simple Dutch (CEFR A1)');
+      const prompt=`You are a kind, precise NT2 teacher. The learner is at CEFR A1 and is a native Arabic speaker. Check this Dutch writing task in the style of the DUO A2 writing exam: did the learner answer every point of the task?\n\nTASK (Dutch): ${w.task}\nREQUIRED POINTS: ${w.check.join('; ')}\nEXAMPLE ANSWER (for reference only): ${w.model}\n\nLEARNER TEXT:\n${txt}\n\nReply in ${lang}. Format:\n1) Points covered / missing (list each required point with ✓ or ✗).\n2) Up to 5 corrections: wrong → right, with a very short reason.\n3) The corrected Dutch text.\n4) One tip.\nKeep it short. Do not invent errors.`;
+      try{ await sample(prompt,{modelTier:'default',onText:({text})=>{ fb.textContent=text; }}); }catch(e){ fb.textContent = e&&e.code==='rate_limited' ? 'Even wachten en later opnieuw proberen.' : 'Nakijken lukt nu niet. Gebruik de controlelijst en het voorbeeld.'; }
+      b.disabled=false; }; }).catch(()=>{}); }
+}
+
+
+/* ---------- recording (Android app) ---------- */
+function recHTML(key, fileAttr){ return CANREC ? `<button class="btn primary" data-rec="${key}">⏺ Opnemen · سجّل</button>`
+  : `<label class="btn" style="width:max-content">🎙 Opname kiezen of maken<input type="file" accept="audio/*" capture ${fileAttr} hidden></label>`; }
+let activeRec=null;
+function wireRec(btn, audio){ if(!btn) return; let mr=null, chunks=[];
+  btn.onclick=async()=>{ if(mr && mr.state==='recording'){ mr.stop(); return; }
+    if(activeRec && activeRec!==btn){ toast('Stop eerst de andere opname · أوقف التسجيل الآخر أولًا'); return; }
+    stopSpeech();
+    try{ const st=await navigator.mediaDevices.getUserMedia({audio:true}); chunks=[]; mr=new MediaRecorder(st);
+      mr.ondataavailable=e=>{ if(e.data&&e.data.size) chunks.push(e.data); };
+      mr.onstop=()=>{ st.getTracks().forEach(t=>t.stop()); activeRec=null; const b=new Blob(chunks,{type:mr.mimeType||'audio/webm'}); audio.src=URL.createObjectURL(b); audio.hidden=false; btn.textContent='⏺ Opnieuw opnemen · أعد التسجيل'; btn.classList.remove('recording'); };
+      mr.start(); activeRec=btn; btn.textContent='⏹ Stop opname · أوقف التسجيل'; btn.classList.add('recording');
+      setTimeout(()=>{ if(mr&&mr.state==='recording') mr.stop(); },90000);
+    }catch(e){ activeRec=null; toast('Geen toegang tot de microfoon · لا يوجد إذن للميكروفون'); } }; }
+function wireFile(input, audio){ if(!input) return; input.onchange=e=>{ const f=e.target.files&&e.target.files[0]; if(!f) return; audio.src=URL.createObjectURL(f); audio.hidden=false; }; }
+
+/* ---------- speaking ---------- */
+function speakHTML(s,i){ return `<div class="rec" id="sp${i}"><span class="label">Opdracht ${i+1}</span><div class="row" style="flex-wrap:nowrap;align-items:flex-start"><button class="say" data-q="${i}" aria-label="Luister naar de vraag">🔊</button><div style="min-width:0"><b>${esc(s[0])}</b><div class="ar small">${esc(s[1])}</div></div></div>
+  <div class="row"><button class="btn primary" data-t="${i}">⏱ Start 1 minuut</button><span class="timer" id="tm${i}">1:00</span></div>
+  ${recHTML('s'+i, `data-f="${i}"`)}
+  <audio id="au${i}" controls hidden></audio>
+  <details><summary class="small"><b>Voorbeeldantwoord</b></summary><div class="row" style="margin-top:8px;flex-wrap:nowrap;align-items:flex-start"><button class="say" data-m="${i}" aria-label="Luister naar het voorbeeld">🔊</button><p>${esc(s[2])}</p></div></details></div>`; }
+let speakList=[];
+function wireSpeak(s,i){ speakList[i]=s; const root=$('#sp'+i);
+  root.querySelector('[data-q]').onclick=()=>{stopSpeech(); speak(s[0].replace(/\(.*?\)/g,''),'f');};
+  root.querySelector('[data-m]').onclick=()=>{stopSpeech(); speak(s[2].replace(/…/g,''),'m');};
+  root.querySelector('[data-t]').onclick=()=>{ clearInterval(timerInt); let t=60; const el=$('#tm'+i); el.classList.remove('low'); el.textContent='1:00'; timerInt=setInterval(()=>{ t--; el.textContent=`0:${String(t).padStart(2,'0')}`; if(t<=10) el.classList.add('low'); if(t<=0){ clearInterval(timerInt); el.textContent='Tijd!'; } },1000); };
+  wireFile(root.querySelector('[data-f]'), $('#au'+i)); wireRec(root.querySelector('[data-rec]'), $('#au'+i));
+}
+
+/* ---------- EXAM ---------- */
+function renderExam(){ const E=C.EXAM; const part=view.part;
+  const parts=[['lezen','Lezen',`${E.lezen.minutes} min`],['luisteren','Luisteren','± 20 min'],['schrijven','Schrijven',`${E.schrijven.minutes} min`],['spreken','Spreken','± 15 min']];
+  app.innerHTML=`<section class="dayhead"><span class="label">Dag 21 · Proefexamen A1</span><h1>Proefexamen</h1>${help(E.note,E.noteAr)}</section>
+   <nav class="tabs"><div class="in" role="tablist">${parts.map(p=>`<button class="tab ${S.exam[p[0]]?'ok':''}" role="tab" data-part="${p[0]}" aria-selected="${part===p[0]}"><b>${p[1]}</b><span>${p[2]}</span></button>`).join('')}</div></nav><div id="exBody"></div>`;
+  app.querySelectorAll('[data-part]').forEach(t=>t.onclick=()=>go({name:'exam',part:t.dataset.part}));
+  const body=$('#exBody');
+  if(part==='lezen'){ const all=[]; E.lezen.texts.forEach(t=>t.qs.forEach(q=>all.push(q)));
+    body.innerHTML=`<div class="sheet">${instr(`Lezen — ${all.length} vragen, ${E.lezen.minutes} minuten`,`Start de timer. Richtlijn: ${E.lezen.pass} van ${all.length} of meer goed = klaar voor A2.`,`شغّل المؤقت. الإرشاد: ${E.lezen.pass}/${all.length} أو أكثر = جاهز لمواد A2.`)}
+     <div class="row"><button class="btn primary" id="xt">⏱ Start ${E.lezen.minutes} min</button><span class="timer" id="xtm">${E.lezen.minutes}:00</span></div>
+     ${E.lezen.texts.map(t=>`<div class="textcard"><h4>${esc(t.title)}</h4>${esc(t.text)}</div>`).join('')}
+     ${quizHTML(all,'xl')}</div>`;
+    examTimer(E.lezen.minutes); wireQuiz('xl',all,(ok,n)=>{ S.exam.lezen=[ok,n]; save(); toast(ok>=E.lezen.pass?'Goed gedaan!':'Nog even oefenen'); });
+    // place each text above its questions
+    let qi=0; const box=$('#xl'); const cards=[...body.querySelectorAll('.textcard')]; E.lezen.texts.forEach((t,ti)=>{ const first=box.querySelector(`.q[data-qi="${qi}"]`); box.insertBefore(cards[ti],first); qi+=t.qs.length; });
+  }
+  if(part==='luisteren'){ const all=[]; E.luisteren.frags.forEach(f=>f.qs.forEach(q=>all.push(q)));
+    body.innerHTML=`<div class="sheet">${instr(`Luisteren — ${all.length} vragen`,`Lees eerst de vragen. Speel elk fragment één keer af. Richtlijn: ${E.luisteren.pass} van ${all.length} of meer goed.`,`اقرأ الأسئلة ثم شغّل كل مقطع مرة واحدة. الإرشاد: ${E.luisteren.pass}/${all.length} أو أكثر.`)}${voiceNote()}
+     ${E.luisteren.frags.map((f,fi)=>`<div class="stack"><span class="label">Fragment ${fi+1}</span>${stageHTML(f.scene,f.who,'xs'+fi)}<div class="ctrl"><button class="btn primary" data-xp="${fi}">▶ Afspelen</button><span class="small muted" id="xpc${fi}"></span></div></div>`).join('')}
+     ${quizHTML(all,'xq')}</div>`;
+    let qi=0; const box=$('#xq'); E.luisteren.frags.forEach((f,fi)=>{ const blk=$('#xs'+fi).parentElement; box.insertBefore(blk, box.querySelector(`.q[data-qi="${qi}"]`)); qi+=f.qs.length; });
+    const plays={}; body.querySelectorAll('[data-xp]').forEach(b=>b.onclick=()=>{ const fi=+b.dataset.xp, f=E.luisteren.frags[fi]; plays[fi]=(plays[fi]||0)+1; $('#xpc'+fi).textContent=`${plays[fi]}× afgespeeld`; if(stopFn) stopFn(); stopFn=playScene('xs'+fi,f.lines,f.who,()=>false); });
+    wireQuiz('xq',all,(ok,n)=>{ S.exam.luisteren=[ok,n]; save(); toast(ok>=E.luisteren.pass?'Goed gedaan!':'Nog even oefenen'); });
+  }
+  if(part==='schrijven'){
+    body.innerHTML=`<div class="stack">${instr(`Schrijven — 3 opdrachten, ${E.schrijven.minutes} minuten`,'Bij het echte A2-examen schrijft u op papier. Oefen ook op papier en vergelijk daarna met het voorbeeld. Geef antwoord op alle punten.','في امتحان A2 الحقيقي تكتب على الورق. تدرّب على الورق أيضًا ثم قارن بالنموذج. أجب عن كل نقطة.')}
+     <div class="row"><button class="btn primary" id="xt">⏱ Start ${E.schrijven.minutes} min</button><span class="timer" id="xtm">${E.schrijven.minutes}:00</span></div>
+     ${E.schrijven.tasks.map((t,i)=>writeHTML(t,'xw'+i)).join('')}</div>`;
+    examTimer(E.schrijven.minutes); E.schrijven.tasks.forEach((t,i)=>wireWrite(t,'xw'+i,()=>{ S.exam.schrijven=1; save(); }));
+  }
+  if(part==='spreken'){
+    body.innerHTML=`<div class="sheet">${instr('Spreken — 8 opdrachten','Bij elke opdracht: luister, denk 10 seconden na en antwoord maximaal 1 minuut. Geef uzelf punten: 2 = antwoord in hele zinnen, 1 = gedeeltelijk, 0 = geen antwoord. Richtlijn: 11 van 16 punten.','لكل مهمة: استمع، فكّر 10 ثوانٍ، أجب حتى دقيقة. قيّم نفسك: 2 = أجبت بجمل كاملة، 1 = جزئيًا، 0 = لا إجابة. الإرشاد: 11 من 16 نقطة.')}${voiceNote()}
+     ${E.spreken.tasks.map((t,i)=>`<div class="rec" id="xsp${i}"><span class="label">${esc(t.part)}</span>
+       ${t.scene? stageHTML(t.scene,{A:t.who},'xst'+i) : `<div class="stage"><div class="pic" aria-hidden="true">${esc(t.pic)}</div></div>`}
+       <div class="row" style="flex-wrap:nowrap;align-items:flex-start"><button class="say" data-xq="${i}" aria-label="Luister">🔊</button><div style="min-width:0"><b>${esc(t.q)}</b><div class="ar small">${esc(t.ar)}</div></div></div>
+       <div class="row"><button class="btn primary" data-xt="${i}">⏱ 1 minuut</button><span class="timer" id="xtm${i}">1:00</span></div>
+       ${recHTML('x'+i, `data-xf="${i}"`)}<audio id="xau${i}" controls hidden></audio>
+       <div class="row small">Mijn score: <span class="selfscore">${[0,1,2].map(v=>`<button class="btn ghost" data-ss="${i}:${v}" aria-pressed="${(S.exam.sp||{})[i]===v}">${v}</button>`).join('')}</span></div>
+       <details><summary class="small"><b>Voorbeeldantwoord</b></summary><p style="margin-top:6px">${esc(t.model)}</p></details></div>`).join('')}
+     <div class="row"><span class="score" id="sptot"></span></div></div>`;
+    const tot=()=>{ const sp=S.exam.sp||{}; const sum=Object.values(sp).reduce((a,b)=>a+b,0); const n=Object.keys(sp).length; $('#sptot').textContent = n? `${sum} / 16 punten (${n}/8 gescoord)`:''; $('#sptot').className='score '+(sum>=11?'good':''); if(n===8){S.exam.spreken=[sum,16]; save();} };
+    E.spreken.tasks.forEach((t,i)=>{
+      body.querySelector(`[data-xq="${i}"]`).onclick=()=>{ if(stopFn) stopFn(); if(t.scene){ stopFn=playScene('xst'+i,[['A',t.q]],{A:t.who},()=>true); } else { stopSpeech(); speak(t.q,'f'); } };
+      body.querySelector(`[data-xt="${i}"]`).onclick=()=>{ clearInterval(timerInt); let s=60; const el=$('#xtm'+i); el.classList.remove('low'); timerInt=setInterval(()=>{ s--; el.textContent=`0:${String(s).padStart(2,'0')}`; if(s<=10) el.classList.add('low'); if(s<=0){clearInterval(timerInt); el.textContent='Tijd!';} },1000); };
+      wireFile(body.querySelector(`[data-xf="${i}"]`), $('#xau'+i)); wireRec(body.querySelector(`[data-rec="x${i}"]`), $('#xau'+i));
+    });
+    body.querySelectorAll('[data-ss]').forEach(b=>b.onclick=()=>{ const [i,v]=b.dataset.ss.split(':').map(Number); S.exam.sp=S.exam.sp||{}; S.exam.sp[i]=v; save(); b.parentElement.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); tot(); });
+    tot();
+  }
+}
+function examTimer(min){ const b=$('#xt'); if(!b) return; b.onclick=()=>{ clearInterval(timerInt); let s=min*60; const el=$('#xtm'); timerInt=setInterval(()=>{ s--; el.textContent=`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`; if(s<=120) el.classList.add('low'); if(s<=0){ clearInterval(timerInt); el.textContent='Tijd is om!'; toast('De tijd is om'); } },1000); }; }
+
+const hash0=(location.hash||'').slice(1); if(/^dag\d+$/.test(hash0)){ const id=+hash0.slice(3); if(id>=1&&id<=20) view={name:'day',id,sec:firstOpen(id)}; } else if(hash0==='examen') view={name:'exam',part:'lezen'};
+render();
+})();
+</script>
+
+</body></html>

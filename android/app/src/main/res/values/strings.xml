@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Stap voor Stap A1</string>
+    <string name="title_activity_main">Stap voor Stap A1</string>
+    <string name="package_name">nl.arzmatrix.stapvoorstap</string>
+    <string name="custom_url_scheme">nl.arzmatrix.stapvoorstap</string>
+</resources>

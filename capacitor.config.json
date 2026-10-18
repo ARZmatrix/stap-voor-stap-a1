@@ -1,0 +1,6 @@
+{
+  "appId": "nl.arzmatrix.stapvoorstap",
+  "appName": "Stap voor Stap A1",
+  "webDir": "www",
+  "android": { "backgroundColor": "#F5F7FB" }
+}
