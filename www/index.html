@@ -2,7 +2,9 @@
 <html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Stap voor Stap A1</title>
 <style>
-@font-face{font-family:"Bricolage Grotesque";font-style:normal;font-weight:200 800;font-display:swap;src:url(fonts/bricolage-grotesque-latin-opsz-normal.woff2) format("woff2-variations"),url(fonts/bricolage-grotesque-latin-opsz-normal.woff2) format("woff2")}
+@font-face{font-family:"Baloo 2";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/baloo-2-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Baloo 2";font-style:normal;font-weight:800;font-display:swap;src:url(fonts/baloo-2-latin-800-normal.woff2) format("woff2")}
+@font-face{font-family:"Baloo Bhaijaan 2";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/baloo-bhaijaan-2-arabic-700-normal.woff2) format("woff2")}
 @font-face{font-family:"Atkinson Hyperlegible";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/atkinson-hyperlegible-latin-400-normal.woff2) format("woff2")}
 @font-face{font-family:"Atkinson Hyperlegible";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/atkinson-hyperlegible-latin-400-italic.woff2) format("woff2")}
 @font-face{font-family:"Atkinson Hyperlegible";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/atkinson-hyperlegible-latin-700-normal.woff2) format("woff2")}
@@ -10,281 +12,342 @@
 @font-face{font-family:"IBM Plex Sans Arabic";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
 </style>
 <style>
-/* Layout: one column "lesson notebook" — day header, section strip as a timetable, content set as worksheet pages. Tokens follow the Claude Design canvas. */
+/* Playful learning path (Claude Design canvas v2): chunky 3D buttons, a winding day path, Tulpje the mascot, stars, stickers. */
 :root{
-  --paper:#F5F7FB; --sheet:#FFFFFF; --ink:#16233F; --muted:#5A6684; --line:#D9DFEC;
-  --delft:#1F4BB8; --delft-soft:#E8EEFB; --tulip:#D9472B; --tulip-soft:#FCEAE5;
-  --leaf:#1E7F4F; --leaf-soft:#E3F3EA; --sun:#F2B33D; --sun-soft:#FDF2DA;
-  --on-delft:#FFFFFF; --on-tulip:#FFFFFF; --tulip-ink:#B3361C; --leaf-ink:#17663F; --sun-ink:#7A5300;
-  --stage1:#DCE6FB; --stage2:#F3F6FD; --skin1:#E9B98F; --skin2:#B8805A; --shadow:rgba(22,35,63,.07);
-  --f-display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --paper:#F5F7FB; --sheet:#FFFFFF; --ink:#16233F; --muted:#5A6684; --line:#D9DFEC; --line-deep:#C2CADC;
+  --delft:#1F4BB8; --delft-soft:#E8EEFB; --delft-deep:#163A8F; --tulip:#D9472B; --tulip-soft:#FCEAE5; --tulip-deep:#A8341D;
+  --leaf:#1E7F4F; --leaf-soft:#E3F3EA; --leaf-deep:#145C39; --sun:#F2B33D; --sun-soft:#FDF2DA; --sun-deep:#C98A1A;
+  --on-delft:#FFFFFF; --on-tulip:#FFFFFF; --on-leaf:#FFFFFF; --on-sun:#16233F; --tulip-ink:#B3361C; --leaf-ink:#17663F; --sun-ink:#7A5300;
+  --stage1:#DCE6FB; --stage2:#F3F6FD; --skin1:#E9B98F; --skin2:#B8805A; --ring:#FFFFFF;
+  --f-display:"Baloo 2","Avenir Next","Segoe UI",system-ui,sans-serif;
   --f-body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
   --f-ar:"IBM Plex Sans Arabic","Noto Naskh Arabic","Geeza Pro",Tahoma,sans-serif;
-  --r:14px; color-scheme:light;
+  --f-arh:"Baloo Bhaijaan 2","IBM Plex Sans Arabic",Tahoma,sans-serif;
+  color-scheme:light;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --paper:#0E1424; --sheet:#151D33; --ink:#E7ECF8; --muted:#A3AECB; --line:#2B3656;
-  --delft:#7FA2FF; --delft-soft:#1E2C57; --tulip:#FF8A70; --tulip-soft:#3D2128;
-  --leaf:#5FD39A; --leaf-soft:#133427; --sun:#F5C463; --sun-soft:#3B3122;
-  --on-delft:#0E1424; --on-tulip:#0E1424; --tulip-ink:#FF9C86; --leaf-ink:#5FD39A; --sun-ink:#F5C463;
-  --stage1:#1C2747; --stage2:#121A30; --skin1:#C99A73; --skin2:#9A6B4B; --shadow:rgba(0,0,0,.25); color-scheme:dark }}
+  --paper:#0E1424; --sheet:#151D33; --ink:#E7ECF8; --muted:#A3AECB; --line:#2B3656; --line-deep:#1C2338;
+  --delft:#7FA2FF; --delft-soft:#1E2C57; --delft-deep:#4A68C4; --tulip:#FF8A70; --tulip-soft:#3D2128; --tulip-deep:#C2604B;
+  --leaf:#5FD39A; --leaf-soft:#133427; --leaf-deep:#38946A; --sun:#F5C463; --sun-soft:#3B3122; --sun-deep:#BF9133;
+  --on-delft:#0E1424; --on-tulip:#0E1424; --on-leaf:#0E1424; --tulip-ink:#FF9C86; --leaf-ink:#5FD39A; --sun-ink:#F5C463;
+  --stage1:#1C2747; --stage2:#121A30; --skin1:#C99A73; --skin2:#9A6B4B; --ring:#2B3656; color-scheme:dark }}
 :root[data-theme="dark"]{
-  --paper:#0E1424; --sheet:#151D33; --ink:#E7ECF8; --muted:#A3AECB; --line:#2B3656;
-  --delft:#7FA2FF; --delft-soft:#1E2C57; --tulip:#FF8A70; --tulip-soft:#3D2128;
-  --leaf:#5FD39A; --leaf-soft:#133427; --sun:#F5C463; --sun-soft:#3B3122;
-  --on-delft:#0E1424; --on-tulip:#0E1424; --tulip-ink:#FF9C86; --leaf-ink:#5FD39A; --sun-ink:#F5C463;
-  --stage1:#1C2747; --stage2:#121A30; --skin1:#C99A73; --skin2:#9A6B4B; --shadow:rgba(0,0,0,.25); color-scheme:dark }
+  --paper:#0E1424; --sheet:#151D33; --ink:#E7ECF8; --muted:#A3AECB; --line:#2B3656; --line-deep:#1C2338;
+  --delft:#7FA2FF; --delft-soft:#1E2C57; --delft-deep:#4A68C4; --tulip:#FF8A70; --tulip-soft:#3D2128; --tulip-deep:#C2604B;
+  --leaf:#5FD39A; --leaf-soft:#133427; --leaf-deep:#38946A; --sun:#F5C463; --sun-soft:#3B3122; --sun-deep:#BF9133;
+  --on-delft:#0E1424; --on-tulip:#0E1424; --on-leaf:#0E1424; --tulip-ink:#FF9C86; --leaf-ink:#5FD39A; --sun-ink:#F5C463;
+  --stage1:#1C2747; --stage2:#121A30; --skin1:#C99A73; --skin2:#9A6B4B; --ring:#2B3656; color-scheme:dark }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.45}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--sheet)}
-.wrap{max-width:640px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-h1,h2,h3,.h{font-family:var(--f-display);font-weight:700;letter-spacing:-.01em;line-height:1.15;margin:0;text-wrap:balance}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--paper)}
+body.hasband::before{background:var(--delft)}
+body.hasband[data-v="exam"]::before{background:var(--sun)}
+.wrap{max-width:560px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,.h{font-family:var(--f-display);font-weight:800;line-height:1.1;margin:0;text-wrap:balance}
 p{margin:0}
 .ar{font-family:var(--f-ar);direction:rtl;unicode-bidi:isolate;text-align:right;font-size:1.1em;line-height:1.6}
+.arh{font-family:var(--f-arh);font-weight:700;direction:rtl;unicode-bidi:isolate;text-align:right;line-height:1.35}
 .mut{color:var(--muted)}
 .small{font-size:15px}
-.sec{font:700 14px/1.2 var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.kick{font:800 15px/1.1 var(--f-display);letter-spacing:.05em;text-transform:uppercase}
 button,input,textarea,select{font:inherit;color:inherit}
-button{cursor:pointer}
-:focus-visible{outline:3px solid var(--delft);outline-offset:2px}
-.ico{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:3px solid var(--delft);outline-offset:3px}
+.ico{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .ico.s{width:20px;height:20px}
 .ico.xs{width:15px;height:15px;stroke-width:3}
-.ico.xl{width:44px;height:44px}
+.ico.l{width:34px;height:34px}
+.ico.xl{width:50px;height:50px}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.row.nowrap{flex-wrap:nowrap;align-items:flex-start}
+.row.nowrap{flex-wrap:nowrap}
 .between{justify-content:space-between}
 .stack{display:flex;flex-direction:column;gap:14px}
 .g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.star-on{fill:var(--sun);stroke:var(--sun-deep);stroke-width:1.4;stroke-linejoin:round}
+.star-off{fill:var(--line)}
 
-/* buttons */
-.btn{min-height:52px;border-radius:var(--r);padding:0 18px;display:inline-flex;align-items:center;justify-content:center;gap:10px;font:700 17px/1.2 var(--f-body);border:0;text-decoration:none;text-align:center}
-.btn-p{background:var(--delft);color:var(--on-delft)}
-.btn-s{background:var(--sheet);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
-.btn-t{background:var(--delft-soft);color:var(--delft)}
-.btn-sm{min-height:48px;padding:0 14px;font-size:16px}
+/* chunky buttons */
+.btn{min-height:56px;border-radius:18px;padding:0 20px;display:inline-flex;align-items:center;justify-content:center;gap:10px;font:800 19px/1.1 var(--f-display);border:0;text-decoration:none;text-align:center;transition:transform .08s}
+.btn:active,.pc:active,.opt:active,.tile3:active{transform:translateY(3px)}
+.btn-p{background:var(--delft);color:var(--on-delft);box-shadow:0 5px 0 var(--delft-deep)}
+.btn-s{background:var(--sheet);color:var(--ink);box-shadow:inset 0 0 0 2px var(--line),0 4px 0 var(--line-deep)}
+.btn-t{background:var(--delft-soft);color:var(--delft);box-shadow:0 4px 0 var(--line-deep)}
+.btn-y{background:var(--sun);color:var(--on-sun);box-shadow:0 5px 0 var(--sun-deep)}
+.btn-g{background:var(--leaf);color:var(--on-leaf);box-shadow:0 5px 0 var(--leaf-deep)}
+.btn-r{background:var(--tulip);color:var(--on-tulip);box-shadow:0 5px 0 var(--tulip-deep)}
+.btn-sm{min-height:48px;padding:0 14px;font-size:17px;border-radius:16px}
 .btn-w{width:100%}
-.btn-2{flex-direction:column;gap:0;min-height:64px;width:100%;padding-block:8px}
+.btn-2{flex-direction:column;gap:0;min-height:68px;width:100%;padding-block:8px}
 .btn-2 .ln{display:flex;align-items:center;gap:10px}
-.btn-2 .ar{font-size:17px;line-height:1.4;font-weight:600;text-align:center}
+.btn-2 .arb{font:700 18px/1.3 var(--f-arh)}
 .btn:disabled{opacity:.45;cursor:default}
 .round{width:48px;min-height:48px;height:48px;padding:0;border-radius:999px;flex:none}
-.card{background:var(--sheet);border:1px solid var(--line);border-radius:var(--r)}
-.pill{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 12px;border-radius:999px;font-weight:700;font-size:15px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line)}
-.pill.sun{background:var(--sun-soft);color:var(--sun-ink);box-shadow:none}
-.pill.leaf{background:var(--leaf-soft);color:var(--leaf-ink);box-shadow:none}
-.bar{height:10px;border-radius:999px;background:var(--line);overflow:hidden}
-.bar>i{display:block;height:100%;background:var(--delft);border-radius:999px;transition:width .3s}
-.bar.thin{height:8px}
-.tip{background:var(--delft-soft);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
-.tip .nl{font-weight:700}
-.notice{border:2px solid var(--sun);background:var(--sun-soft);border-radius:var(--r);padding:14px 16px;display:flex;flex-direction:column;gap:8px}
-details.more{border-top:1px solid var(--line);padding-top:10px}
-details.more>summary{font-weight:700;min-height:44px;display:flex;align-items:center;cursor:pointer;color:var(--delft)}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:42px;padding:0 12px;border-radius:14px;background:var(--sheet);box-shadow:inset 0 0 0 2px var(--line),0 3px 0 var(--line-deep);font:800 18px/1 var(--f-display);color:var(--ink)}
+.card{background:var(--sheet);border-radius:22px;box-shadow:0 0 0 2px var(--line),0 4px 0 var(--line-deep)}
+.prog{height:16px;border-radius:999px;background:var(--line);overflow:hidden;flex:1}
+.prog i{display:block;height:100%;border-radius:999px;background:var(--sun);box-shadow:inset 0 4px 0 rgba(255,255,255,.28);transition:width .3s}
+.notice{border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;background:var(--sun-soft);box-shadow:inset 0 0 0 2px var(--sun)}
+details.more{border-top:2px dashed var(--line);padding-top:8px}
+details.more>summary{font:800 17px/1.2 var(--f-display);min-height:44px;display:flex;align-items:center;cursor:pointer;color:var(--delft)}
 details.more ol{margin:8px 0}
+.say{display:flex;gap:6px;align-items:flex-end}
+.bub2{flex:1;min-width:0;background:var(--sheet);border-radius:22px 22px 22px 6px;padding:12px 14px;box-shadow:0 0 0 2px var(--line);display:flex;flex-direction:column;gap:6px}
+.bub2.sun{background:var(--sun-soft);box-shadow:none}
+.mascot{flex:none;display:block}
+
+/* bottom bar + nav */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--sheet);box-shadow:0 -2px 0 var(--line);padding:8px 12px calc(10px + env(safe-area-inset-bottom,0px))}
+.dock .in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.tab{min-height:58px;border-radius:16px;border:0;background:transparent;color:var(--muted);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font:800 15px/1.1 var(--f-display)}
+.tab .a{font:700 15px/1.2 var(--f-arh)}
+.tab[aria-current="page"]{background:var(--delft-soft);color:var(--delft);box-shadow:inset 0 0 0 2px var(--delft)}
+.cta{position:fixed;left:0;right:0;z-index:19;bottom:calc(84px + env(safe-area-inset-bottom,0px));background:linear-gradient(to top,var(--paper) 70%,transparent);padding:16px 0 10px}
 
 /* home */
-.apphead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 14px) 0 14px}
-.brand{display:flex;align-items:center;gap:12px}
-.mark{width:44px;height:44px;border-radius:12px;background:var(--delft);color:var(--on-delft);display:flex;align-items:center;justify-content:center;flex:none}
-.home{display:flex;flex-direction:column;gap:16px;padding-bottom:40px}
-.wbars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
-.wbars span{font-size:14px;font-weight:700;color:var(--muted)}
-.today{box-shadow:0 0 0 2px var(--delft)}
-.badge{flex:none;width:60px;height:60px;border-radius:var(--r);background:var(--delft-soft);color:var(--delft);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
-.badge small{font:700 12px/1 var(--f-body);letter-spacing:.08em}
-.badge b{font:800 28px/1.05 var(--f-display)}
-.badge.sun{background:var(--sun-soft);color:var(--sun-ink)}
-.tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
-.tile{min-height:72px;border-radius:var(--r);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:700 24px/1 var(--f-display);border:0;padding:6px 0;background:var(--sheet);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
-.tile small{font:700 13px/1 var(--f-body)}
-.tile-done{background:var(--leaf-soft);box-shadow:none}
-.tile-done .ico{color:var(--leaf-ink)}
-.tile-part small{color:var(--sun-ink)}
-.tile-part{box-shadow:inset 0 0 0 2px var(--sun)}
-.tile-now{background:var(--delft);color:var(--on-delft);box-shadow:0 0 0 3px var(--paper),0 0 0 5px var(--delft)}
-.tile-next{color:var(--muted);box-shadow:none;border:1.5px dashed var(--line)}
-.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:15px;color:var(--muted)}
-.legend span{display:flex;align-items:center;gap:6px}
-.legend i{width:16px;height:16px;border-radius:5px;display:inline-block}
-.road{display:grid;border-left:3px solid var(--line);margin:10px 0 0 8px}
-.road .st{position:relative;padding:0 0 18px 20px;display:grid;gap:4px}
-.road .st::before{content:"";position:absolute;left:-9px;top:4px;width:15px;height:15px;border-radius:50%;background:var(--sheet);border:3px solid var(--delft)}
-.road .st.now::before{background:var(--delft)}
-.src a{color:var(--delft);word-break:break-word}
+.chips{display:flex;justify-content:space-between;gap:6px;padding:calc(env(safe-area-inset-top,0px) + 10px) 0 12px}
+.wk{border-radius:24px;padding:16px 16px 18px;display:flex;flex-direction:column;gap:2px}
+.wkbars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-top:10px}
+.wkbars span{height:8px;border-radius:999px;overflow:hidden;display:block}
+.wkbars i{display:block;height:100%;border-radius:999px}
+.path{display:flex;flex-direction:column;gap:18px;padding:16px 0 220px}
+.wlab{align-self:center;display:flex;flex-direction:column;align-items:center;gap:0;margin:18px 0 4px}
+.wlab .k{font:800 14px/1 var(--f-display);letter-spacing:.06em;color:var(--muted)}
+.wlab .n{font:800 20px/1.2 var(--f-display)}
+.pn{display:flex;flex-direction:column;align-items:center;gap:4px;position:relative}
+.pnw{display:flex;justify-content:center}
+.pc{width:72px;height:72px;border-radius:999px;border:0;display:flex;align-items:center;justify-content:center;padding:0;transition:transform .08s}
+.pn-done .pc{background:var(--leaf);color:var(--on-leaf);box-shadow:0 6px 0 var(--leaf-deep)}
+.pn-part .pc{background:var(--sun);color:var(--on-sun);box-shadow:0 6px 0 var(--sun-deep)}
+.pn-now{margin-top:44px}
+.pn-now .pc{width:84px;height:84px;background:var(--delft);color:var(--on-delft);box-shadow:0 6px 0 var(--delft-deep),0 0 0 8px var(--paper),0 0 0 13px var(--delft-soft)}
+.pn-next .pc{background:var(--line);color:var(--muted);box-shadow:0 6px 0 var(--line-deep)}
+.pn-exam .pc{width:96px;height:96px;background:var(--sun);color:var(--on-sun);box-shadow:0 7px 0 var(--sun-deep)}
+.pl{font:800 17px/1 var(--f-display);margin-top:10px}
+.pn-next .pl{color:var(--muted)}
+.go{position:absolute;top:-50px;background:var(--sheet);color:var(--delft);font:800 18px/1 var(--f-display);padding:9px 16px;border-radius:14px;box-shadow:0 0 0 2px var(--line),0 3px 0 var(--line-deep);white-space:nowrap}
+.go::after,.bub::after{content:'';position:absolute;left:50%;bottom:-6px;width:12px;height:12px;background:var(--sheet);transform:translateX(-50%) rotate(45deg);box-shadow:2px 2px 0 0 var(--line)}
+.stars{display:flex;gap:2px}
+.stars svg{width:18px;height:18px}
+.buddy{position:absolute;top:-18px;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none}
+.bub{position:relative;background:var(--sheet);border-radius:16px;padding:8px 12px;box-shadow:0 0 0 2px var(--line);font:800 16px/1.2 var(--f-display);max-width:130px;text-align:center}
 
 /* day */
-.dayhead{background:var(--sheet);border-bottom:1px solid var(--line);padding:calc(env(safe-area-inset-top,0px) + 12px) 0 14px}
-.dayhead .wrap{display:flex;flex-direction:column;gap:12px}
-.dtitle{display:flex;gap:12px;align-items:center}
-.stripbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:8;background:var(--sheet);padding:8px 0 12px;box-shadow:0 8px 18px var(--shadow)}
-.strip{display:flex;overflow-x:auto;scrollbar-width:none;border:1px solid var(--line);border-radius:var(--r);background:var(--paper);scroll-behavior:smooth}
-.strip::-webkit-scrollbar{display:none}
-.cell{flex:1 0 80px;min-height:84px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 2px;border:0;border-right:1px solid var(--line);background:transparent;color:var(--ink);font-family:inherit}
-.cell:last-child{border-right:0}
-.cell .n{font:700 13px/1 var(--f-body);color:var(--muted);display:flex;align-items:center;gap:3px;height:16px}
-.cell .l{font:700 15px/1.1 var(--f-body)}
-.cell .a{font:500 16px/1.2 var(--f-ar)}
-.cell-done .n{color:var(--leaf-ink)}
-.cell-now{background:var(--delft);color:var(--on-delft)}
-.cell-now .n{color:var(--on-delft)}
-.daymain{display:flex;flex-direction:column;gap:16px;padding-top:16px;padding-bottom:40px}
-.can{padding:14px 16px;display:flex;gap:12px;align-items:flex-start}
-.can .ib{flex:none;width:40px;height:40px;border-radius:12px;background:var(--leaf-soft);color:var(--leaf-ink);display:flex;align-items:center;justify-content:center}
-.ws{background:var(--sheet);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-.ws-top{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 16px;border-bottom:3px double var(--line)}
-.ws-top .wsn{font-weight:700;font-size:15px}
-.ws-body{padding:18px 16px 20px;display:flex;flex-direction:column;gap:16px}
-.ws-foot{padding:16px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.band{background:var(--delft);color:var(--on-delft);padding:calc(env(safe-area-inset-top,0px) + 12px) 0 20px;border-radius:0 0 28px 28px}
+.band .wrap{display:flex;flex-direction:column;gap:14px}
+.bb{min-height:48px;padding:0 14px;border-radius:16px;background:var(--sheet);color:var(--ink);box-shadow:0 4px 0 var(--delft-deep);font:800 17px/1 var(--f-display);display:inline-flex;align-items:center;gap:8px;border:0}
+.bb:disabled{opacity:.5}
+.scn{flex:none;width:58px;height:58px;border-radius:18px;background:var(--sheet);color:var(--delft);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 0 var(--delft-deep)}
+.sw{position:sticky;top:env(safe-area-inset-top,0px);z-index:8;background:var(--paper);padding:14px 0 6px}
+.nodes{display:flex;overflow-x:auto;scrollbar-width:none;padding:10px 4px 4px;scroll-behavior:smooth}
+.nodes::-webkit-scrollbar{display:none}
+.node{flex:1 0 76px;display:flex;flex-direction:column;align-items:center;gap:5px;background:none;border:0;font-family:inherit;color:var(--ink);padding:0 0 6px;position:relative}
+.node .c{width:52px;height:52px;border-radius:999px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1}
+.node .l{font:800 15px/1.05 var(--f-display);margin-top:4px}
+.node .a{font:700 15px/1.2 var(--f-arh)}
+.node::before{content:'';position:absolute;top:24px;right:50%;width:100%;height:5px;border-radius:3px;background:var(--line);z-index:0}
+.node:first-child::before{display:none}
+.n-done::before,.n-now::before{background:var(--leaf)}
+.n-done .c{background:var(--leaf);color:var(--on-leaf);box-shadow:0 4px 0 var(--leaf-deep)}
+.n-now .c{background:var(--delft);color:var(--on-delft);box-shadow:0 4px 0 var(--delft-deep),0 0 0 5px var(--paper),0 0 0 9px var(--delft-soft)}
+.n-next .c{background:var(--sheet);color:var(--muted);box-shadow:inset 0 0 0 2px var(--line),0 4px 0 var(--line-deep)}
+.n-next .l,.n-next .a{color:var(--muted)}
+.node .st{position:absolute;top:-8px;left:50%;margin-left:10px;z-index:2;width:24px;height:24px}
+.daymain{display:flex;flex-direction:column;gap:18px;padding-top:10px;padding-bottom:40px}
+.goal{display:flex;gap:12px;align-items:flex-start;background:var(--sheet);border-radius:22px;padding:14px 16px;box-shadow:0 0 0 2px var(--sun),0 4px 0 var(--sun-deep)}
+.goal .gi{flex:none;width:44px;height:44px;border-radius:14px;background:var(--sun);color:var(--on-sun);display:flex;align-items:center;justify-content:center}
+.lesson{background:var(--sheet);border-radius:28px;box-shadow:0 0 0 2px var(--line),0 5px 0 var(--line-deep);overflow:hidden}
+.lh{display:flex;align-items:center;gap:12px;padding:16px 16px 4px}
+.lic{width:48px;height:48px;border-radius:16px;display:flex;align-items:center;justify-content:center;flex:none}
+.step{margin-left:auto;font:800 15px/1 var(--f-display);color:var(--muted);background:var(--paper);border-radius:999px;padding:8px 12px;white-space:nowrap}
+.lb{padding:12px 16px 20px;display:flex;flex-direction:column;gap:16px}
+.lf{padding:0 16px 22px}
+.tip{background:var(--delft-soft);border-radius:18px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.tip .nl{font:800 18px/1.2 var(--f-display)}
 
-/* vocab */
-.fc{position:relative;width:100%;min-height:300px;border-radius:18px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);font-family:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px 18px;box-shadow:0 6px 0 -2px var(--paper),0 6px 0 0 var(--line),0 12px 0 -4px var(--paper),0 12px 0 -2px var(--line);margin-bottom:12px}
-.fc-back{background:var(--delft-soft);border-color:var(--delft)}
-.fc .word{font:700 40px/1.1 var(--f-body);text-align:center;overflow-wrap:anywhere}
-.fc .arw{font-size:40px;line-height:1.3;font-weight:600;text-align:center}
-.fc .hint{display:flex;align-items:center;gap:6px;font-size:15px;color:var(--muted);margin-top:6px}
-.art{display:inline-flex;align-items:center;min-height:30px;padding:0 12px;border-radius:999px;background:var(--delft-soft);color:var(--delft);font-weight:700;font-size:16px}
-.ctl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
-.ctl button{min-height:76px;border-radius:var(--r);border:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font:700 15px/1.1 var(--f-body);padding:6px 2px}
-.ctl .btn-s{background:var(--sheet);box-shadow:inset 0 0 0 1.5px var(--line)}
-.ctl .btn-t{background:var(--delft-soft);color:var(--delft)}
-.ctl .btn-p{background:var(--delft);color:var(--on-delft)}
-.ctl .a{font:500 15px/1.2 var(--f-ar)}
-.vlist{display:flex;flex-direction:column;border-top:1px solid var(--line)}
-.v{display:flex;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);min-height:64px}
+/* words */
+.deck{position:relative;padding:0 6px 14px}
+.deck .b1,.deck .b2{position:absolute;left:18px;right:18px;top:12px;bottom:0;border-radius:30px}
+.deck .b1{transform:rotate(-3deg);background:var(--sun)}
+.deck .b2{transform:rotate(2.5deg);background:var(--delft-soft);box-shadow:inset 0 0 0 2px var(--line)}
+.fc{position:relative;width:100%;min-height:300px;border-radius:30px;background:var(--sheet);box-shadow:0 0 0 2px var(--line),0 6px 0 var(--line-deep);border:0;color:var(--ink);font-family:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:28px 18px 24px}
+.fc-back{background:var(--delft-soft);box-shadow:0 0 0 3px var(--delft),0 6px 0 var(--delft-deep)}
+.fc .word{font:700 44px/1.1 var(--f-body);text-align:center;overflow-wrap:anywhere}
+.fc .arw{font-size:46px;line-height:1.3;font-weight:600;text-align:center}
+.fc .hint{display:flex;align-items:center;gap:6px;font:800 16px var(--f-display);color:var(--muted);margin-top:8px}
+.art{display:inline-flex;align-items:center;min-height:32px;padding:0 14px;border-radius:999px;background:var(--delft);color:var(--on-delft);font:800 18px/1 var(--f-display)}
+.spk{position:absolute;top:12px;right:12px;width:56px;height:56px;border-radius:999px;border:0;background:var(--delft);color:var(--on-delft);box-shadow:0 4px 0 var(--delft-deep);display:flex;align-items:center;justify-content:center;z-index:2}
+.ctl .btn{flex-direction:column;gap:2px;min-height:76px;padding:6px 4px;font-size:17px}
+.ctl .a{font:700 16px/1.2 var(--f-arh)}
+.vlist{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.v{display:flex;gap:12px;align-items:center;padding:8px 10px;border-radius:16px;background:var(--paper)}
 .v .w{font-weight:700;font-size:18px}
 
-/* tables */
-.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+/* grammar */
+.tbl{overflow-x:auto;border-radius:18px;box-shadow:inset 0 0 0 2px var(--line)}
 table{border-collapse:collapse;width:100%;font-size:17px}
-th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-th{font:700 14px var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--paper)}
+th,td{padding:10px 12px;border-bottom:2px solid var(--line);text-align:left;vertical-align:top}
+th{font:800 15px var(--f-display);color:var(--muted);background:var(--paper)}
 tr:last-child td{border-bottom:0}
 td.ar{text-align:right}
 .exl{display:flex;flex-direction:column;gap:10px}
 
-/* stage ("video") */
-.stage{position:relative;aspect-ratio:16/10;max-width:100%;border-radius:var(--r);overflow:hidden;background:linear-gradient(180deg,var(--stage1),var(--stage2));border:1px solid var(--line)}
-.stage .place{position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:8px;background:var(--sheet);border-radius:99px;padding:4px 12px 4px 6px;font-size:14px;font-weight:700}
+/* listening */
+.stage{position:relative;aspect-ratio:16/10;max-width:100%;border-radius:26px;overflow:hidden;background:linear-gradient(180deg,var(--stage1),var(--stage2));box-shadow:0 0 0 2px var(--line),0 5px 0 var(--line-deep)}
+.stage .place{position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:8px;background:var(--sheet);border-radius:99px;padding:4px 12px 4px 6px;font:800 15px var(--f-display)}
 .stage .place .e{font-size:20px}
 .stage .floor{position:absolute;left:0;right:0;bottom:0;height:22%;background:var(--line);opacity:.55}
 .stage .ppl{position:absolute;inset:auto 0 6% 0;display:flex;justify-content:space-around;align-items:flex-end;padding-inline:6%}
 .person{display:grid;justify-items:center;gap:4px;width:30%;max-width:150px;position:relative}
 .person svg{width:100%;height:auto;overflow:visible}
-.person .tag{font-size:13px;font-weight:700;background:var(--sheet);border-radius:99px;padding:2px 9px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.person .tag{font:800 14px var(--f-display);background:var(--sheet);border-radius:99px;padding:2px 9px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
 .person .mouth{transform-box:fill-box;transform-origin:center}
 .person.talk svg{animation:bob .5s ease-in-out infinite alternate}
 .person.talk .mouth{animation:talk .18s ease-in-out infinite alternate}
 .person.talk .tag{background:var(--delft);color:var(--on-delft)}
-.bubble{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:6px;background:var(--sheet);border:2px solid var(--delft);border-radius:12px;padding:6px 10px;font-size:14px;line-height:1.35;width:max-content;max-width:min(240px,62vw);box-shadow:0 4px 14px rgba(0,0,0,.08)}
-.bubble.dots{font-size:18px;letter-spacing:2px;padding:2px 12px;color:var(--delft)}
+.bubble{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:6px;background:var(--sheet);border:3px solid var(--sun);border-radius:14px;padding:6px 10px;font-size:14px;line-height:1.35;width:max-content;max-width:min(240px,62vw)}
+.bubble.dots{font-size:18px;letter-spacing:2px;padding:2px 12px;color:var(--sun-deep)}
 .stage .bigicon{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);font-size:clamp(34px,9vw,64px);opacity:.9}
 .stage .pic{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(56px,16vw,120px)}
 @keyframes bob{from{transform:translateY(0)}to{transform:translateY(-3px)}}
 @keyframes talk{from{transform:scaleY(.35)}to{transform:scaleY(1.25)}}
-.eq{display:inline-flex;gap:3px;align-items:flex-end;height:18px}
-.eq i{width:4px;height:8px;border-radius:2px;background:currentColor;animation:eq .7s ease-in-out infinite alternate}
+.play{width:80px;height:80px;border-radius:999px;border:0;background:var(--delft);color:var(--on-delft);box-shadow:0 6px 0 var(--delft-deep),0 0 0 7px var(--delft-soft);display:flex;align-items:center;justify-content:center;flex:none}
+.side{flex-direction:column;gap:2px;min-height:64px;width:92px;font-size:16px;padding:0 6px}
+.eq{display:inline-flex;gap:4px;align-items:flex-end;height:28px}
+.eq i{width:6px;height:10px;border-radius:3px;background:currentColor;animation:eq .7s ease-in-out infinite alternate}
 .eq i:nth-child(2){animation-delay:.15s}.eq i:nth-child(3){animation-delay:.3s}.eq i:nth-child(4){animation-delay:.45s}
-@keyframes eq{to{height:18px}}
-@media (prefers-reduced-motion:reduce){.person.talk svg,.person.talk .mouth,.eq i{animation:none}}
-.seg{display:flex;padding:4px;gap:4px;border-radius:var(--r);background:var(--paper);box-shadow:inset 0 0 0 1px var(--line)}
-.seg button{flex:1;min-height:48px;border:0;border-radius:11px;background:transparent;color:var(--ink);font:700 16px var(--f-body);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px 10px}
-.seg button[aria-pressed="true"],.seg button[aria-checked="true"]{background:var(--sheet);box-shadow:0 0 0 2px var(--delft);color:var(--delft)}
-.switch{display:flex;align-items:center;gap:10px;min-height:48px;font-weight:700}
-.switch input{width:24px;height:24px;accent-color:var(--delft)}
-.caps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
-.cline{display:flex;gap:10px;padding:10px 12px;border-radius:12px;align-items:flex-start}
-.cline .who{flex:none;width:34px;height:34px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px}
-.who-a{background:var(--delft-soft);color:var(--delft)}
-.who-b{background:var(--leaf-soft);color:var(--leaf-ink)}
-.cline.cl-now{background:var(--sun-soft);box-shadow:inset 0 0 0 2px var(--sun)}
-.cline.cl-now .nl{font-weight:700;font-size:19px}
-.cline.cl-past .nl{color:var(--muted)}
+@keyframes eq{to{height:28px}}
+@media (prefers-reduced-motion:reduce){.person.talk svg,.person.talk .mouth,.eq i,.rec-on{animation:none}}
+.switch{display:flex;align-items:center;gap:10px;min-height:48px;font:800 18px var(--f-display)}
+.switch input{width:26px;height:26px;accent-color:var(--delft)}
+.chat{display:flex;flex-direction:column;gap:10px}
+.msg{display:flex;gap:8px;align-items:flex-end;max-width:92%}
+.msg-b{align-self:flex-end;flex-direction:row-reverse}
+.av{width:38px;height:38px;border-radius:999px;font:800 17px/1 var(--f-display);display:flex;align-items:center;justify-content:center;flex:none}
+.msg-a .av{background:var(--delft);color:var(--on-delft)}
+.msg-b .av{background:var(--leaf);color:var(--on-leaf)}
+.bl{padding:10px 14px;border-radius:20px;display:flex;flex-direction:column;gap:2px;background:var(--sheet);box-shadow:inset 0 0 0 2px var(--line)}
+.msg-a .bl{border-bottom-left-radius:6px}
+.msg-b .bl{border-bottom-right-radius:6px}
+.msg.past.msg-a .bl{background:var(--delft-soft);box-shadow:none}
+.msg.past.msg-b .bl{background:var(--leaf-soft);box-shadow:none}
+.msg.now .bl{background:var(--sheet);box-shadow:0 0 0 3px var(--sun),0 4px 0 var(--sun-deep)}
+.msg.now .nl{font-weight:700;font-size:19px}
 
-/* questions */
-.quiz{display:flex;flex-direction:column;gap:16px}
-.q{display:flex;flex-direction:column;gap:10px;padding-top:16px;border-top:1px dashed var(--line)}
-.q:first-child{border-top:0;padding-top:0}
-.q .qt{font:700 20px/1.3 var(--f-display)}
-.opts{display:flex;flex-direction:column;gap:8px}
-.opt{display:flex;align-items:center;gap:12px;width:100%;min-height:58px;padding:10px 14px;border-radius:var(--r);background:var(--sheet);border:2px solid var(--line);color:var(--ink);font:700 18px/1.3 var(--f-body);text-align:left}
-.opt .k{flex:none;width:32px;height:32px;border-radius:10px;background:var(--paper);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--muted)}
+/* quiz (one question at a time) */
+.qhead{display:flex;align-items:center;gap:12px}
+.qhead .h{font-size:18px}
+.opts{display:flex;flex-direction:column;gap:12px}
+.opt{display:flex;align-items:center;gap:12px;width:100%;min-height:64px;padding:10px 16px;border-radius:18px;background:var(--sheet);border:0;box-shadow:inset 0 0 0 2px var(--line),0 4px 0 var(--line-deep);color:var(--ink);font:700 20px/1.3 var(--f-body);text-align:left;transition:transform .08s}
+.opt .k{flex:none;width:34px;height:34px;border-radius:11px;background:var(--paper);box-shadow:inset 0 0 0 2px var(--line);display:flex;align-items:center;justify-content:center;font:800 16px var(--f-display);color:var(--muted)}
 .opt .ot{flex:1;min-width:0}
-.opt .st{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:15px;white-space:nowrap}
-.opt[aria-pressed="true"]{background:var(--delft-soft);border-color:var(--delft)}
-.opt[aria-pressed="true"] .k{background:var(--delft);color:var(--on-delft)}
-.opt.ok{background:var(--leaf-soft);border-color:var(--leaf)}
-.opt.ok .k{background:var(--leaf);color:var(--sheet)}
+.opt .st{margin-left:auto;display:flex;align-items:center;gap:6px;font:800 16px var(--f-display);white-space:nowrap}
+.opt[aria-pressed="true"]{background:var(--delft-soft);box-shadow:inset 0 0 0 3px var(--delft),0 4px 0 var(--delft-deep)}
+.opt[aria-pressed="true"] .k{background:var(--delft);color:var(--on-delft);box-shadow:none}
+.opt.ok{background:var(--leaf-soft);box-shadow:inset 0 0 0 3px var(--leaf),0 4px 0 var(--leaf-deep)}
+.opt.ok .k{background:var(--leaf);color:var(--on-leaf);box-shadow:none}
 .opt.ok .st{color:var(--leaf-ink)}
-.opt.bad{background:var(--tulip-soft);border-color:var(--tulip)}
-.opt.bad .k{background:var(--tulip);color:var(--on-tulip)}
+.opt.bad{background:var(--tulip-soft);box-shadow:inset 0 0 0 3px var(--tulip),0 4px 0 var(--tulip-deep)}
+.opt.bad .k{background:var(--tulip);color:var(--on-tulip);box-shadow:none}
 .opt.bad .st{color:var(--tulip-ink)}
 .opt.off{color:var(--muted)}
-.result{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:12px 0 4px}
-.result .ar{text-align:center}
+.opt:disabled{cursor:default}
+.fbs{position:fixed;left:0;right:0;bottom:0;z-index:25;border-radius:30px 30px 0 0;padding:20px 0 calc(24px + env(safe-area-inset-bottom,0px));box-shadow:0 -6px 24px rgba(0,0,0,.15);animation:up .2s ease-out}
+.fbs .wrap{display:flex;flex-direction:column;gap:14px}
+.fbs.good{background:var(--leaf-soft)} .fbs.bad{background:var(--tulip-soft)}
+.fbi{width:44px;height:44px;border-radius:999px;display:flex;align-items:center;justify-content:center;flex:none}
+.good .fbi{background:var(--leaf);color:var(--on-leaf)} .bad .fbi{background:var(--tulip);color:var(--on-tulip)}
+.good .fbt{color:var(--leaf-ink)} .bad .fbt{color:var(--tulip-ink)}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+.result{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:6px 0}
+.result .ar,.result .arh{text-align:center}
 .ring-bg{fill:none;stroke:var(--line);stroke-width:14}
 .ring{fill:none;stroke:var(--leaf);stroke-width:14;stroke-linecap:round}
 .ring.low{stroke:var(--sun)}
-.ring-t{font:800 40px var(--f-display);fill:var(--ink)}
-.ring-s{font:700 15px var(--f-body);fill:var(--muted)}
+.ring-t{font:800 42px var(--f-display);fill:var(--ink)}
+.ring-s{font:800 16px var(--f-display);fill:var(--muted)}
+/* exam list quiz */
+.qall{display:flex;flex-direction:column;gap:18px}
+.q{display:flex;flex-direction:column;gap:10px;padding-top:16px;border-top:2px dashed var(--line)}
+.q:first-child{border-top:0;padding-top:0}
+.q .qt{font:800 21px/1.25 var(--f-display)}
 
 /* reading */
-.textcard{border:2px solid var(--ink);border-radius:var(--r);padding:16px;white-space:pre-line;background:var(--sheet);font-size:17px}
-.textcard h4{margin:0 0 6px;font-family:var(--f-display);font-size:20px}
+.sign{border-radius:20px;overflow:hidden;box-shadow:0 0 0 2px var(--line),0 4px 0 var(--line-deep);background:var(--sheet)}
+.sign .sh{background:var(--sun);color:var(--on-sun);padding:10px 16px;display:flex;align-items:center;gap:10px;font:800 20px/1.15 var(--f-display)}
+.sign .sbody{padding:12px 16px 14px;white-space:pre-line}
 
 /* writing */
-.field{width:100%;min-height:56px;padding:12px 14px;border-radius:var(--r);border:2px solid var(--line);background:var(--sheet);color:var(--ink);font:400 19px/1.4 var(--f-body)}
-.field:focus{outline:none;border-color:var(--delft);box-shadow:0 0 0 4px var(--delft-soft)}
+.field{width:100%;min-height:56px;padding:12px 14px;border-radius:18px;border:0;box-shadow:inset 0 0 0 2px var(--line);background:var(--sheet);color:var(--ink);font:400 19px/1.4 var(--f-body)}
+.field:focus{outline:none;box-shadow:inset 0 0 0 3px var(--delft),0 0 0 4px var(--delft-soft)}
 textarea.field{min-height:160px;resize:vertical}
 select.field{font-size:17px}
-.fl{display:flex;flex-direction:column;gap:6px;font-weight:700}
+.fl{display:flex;flex-direction:column;gap:6px;font:800 17px var(--f-display)}
 .formgrid{display:flex;flex-direction:column;gap:12px}
 .checks{display:flex;flex-direction:column;gap:4px}
 .checks label{display:flex;gap:12px;align-items:flex-start;min-height:44px;padding:6px 0}
-.checks input{width:24px;height:24px;margin-top:1px;accent-color:var(--leaf);flex:none}
-.model{border:2px dashed var(--leaf);border-radius:var(--r);padding:12px 14px;white-space:pre-line;background:var(--leaf-soft)}
-.fb{border:2px solid var(--delft);border-radius:var(--r);padding:12px 14px;white-space:pre-wrap;background:var(--delft-soft)}
-.wtask+.wtask{border-top:3px double var(--line);padding-top:18px}
+.checks input{width:26px;height:26px;margin-top:0;accent-color:var(--leaf);flex:none}
+.model{border-radius:18px;padding:12px 14px;white-space:pre-line;background:var(--leaf-soft);box-shadow:inset 0 0 0 2px var(--leaf)}
+.fb{border-radius:18px;padding:12px 14px;white-space:pre-wrap;background:var(--delft-soft);box-shadow:inset 0 0 0 2px var(--delft)}
+.wtask+.wtask{border-top:2px dashed var(--line);padding-top:18px}
 
 /* speaking */
 .task{display:flex;flex-direction:column;gap:14px}
-.task+.task{border-top:3px double var(--line);padding-top:18px}
-.prompt{background:var(--paper);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:10px}
-.prompt .pq{font-size:24px;font-weight:700;line-height:1.25}
-.timer{display:inline-flex;align-items:center;min-height:48px;padding:0 14px;border-radius:var(--r);background:var(--paper);font:800 24px/1 var(--f-display);font-variant-numeric:tabular-nums}
-.timer.low{color:var(--tulip-ink);background:var(--tulip-soft)}
+.task+.task{border-top:2px dashed var(--line);padding-top:18px}
+.pq{font-size:24px;font-weight:700;line-height:1.25}
+.timer{display:inline-flex;align-items:center;gap:8px;min-height:52px;padding:0 14px;border-radius:16px;background:var(--delft-soft);color:var(--delft);box-shadow:0 4px 0 var(--line-deep);font:800 24px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.timer.low{background:var(--sun);color:var(--on-sun);box-shadow:0 4px 0 var(--sun-deep)}
 .recwrap{display:flex;flex-direction:column;align-items:center;gap:14px;padding:8px 0}
-.recbtn{width:104px;height:104px;border-radius:999px;border:0;background:var(--tulip);color:var(--on-tulip);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 8px var(--tulip-soft)}
-.recbtn.rec-on{box-shadow:0 0 0 8px var(--tulip-soft),0 0 0 16px var(--sheet),0 0 0 18px var(--tulip);animation:recp 1.2s ease-in-out infinite}
-@keyframes recp{50%{opacity:.8}}
+.recbtn{width:120px;height:120px;border-radius:999px;border:0;background:var(--tulip);color:var(--on-tulip);display:flex;align-items:center;justify-content:center;box-shadow:0 7px 0 var(--tulip-deep)}
+.recbtn.rec-on{box-shadow:0 7px 0 var(--tulip-deep),0 0 0 12px var(--tulip-soft),0 0 0 22px var(--paper),0 0 0 25px var(--tulip);animation:recp 1.2s ease-in-out infinite}
+@keyframes recp{50%{opacity:.85}}
 .reclbl{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}
-.reclbl b{font-size:19px;display:flex;align-items:center;gap:8px}
+.reclbl b{font:800 21px var(--f-display);display:flex;align-items:center;gap:8px}
 .reclbl .ar{text-align:center}
-.dot{width:10px;height:10px;border-radius:999px;background:var(--tulip);display:inline-block}
+.dot{width:12px;height:12px;border-radius:999px;background:var(--tulip);display:inline-block}
 audio{width:100%}
 
 /* settings */
-.grp{display:flex;flex-direction:column;gap:8px}
+.page{padding-top:calc(env(safe-area-inset-top,0px) + 14px);padding-bottom:120px;display:flex;flex-direction:column;gap:22px}
+.grp{display:flex;flex-direction:column;gap:10px}
 .gh{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.gh h2{font-size:20px}
-.rad{display:flex;align-items:center;gap:12px;min-height:64px;padding:10px 14px;border-radius:var(--r);border:2px solid var(--line);background:var(--sheet);width:100%;text-align:left;font:700 18px/1.3 var(--f-body);color:var(--ink)}
-.rad .o{width:24px;height:24px;border-radius:999px;border:2px solid var(--muted);flex:none}
-.rad[aria-checked="true"]{border-color:var(--delft);background:var(--delft-soft)}
-.rad[aria-checked="true"] .o{border:7px solid var(--delft)}
-.rad .ex{display:block;font-weight:400;font-size:15px;color:var(--muted)}
-.vcard{padding:12px;display:flex;flex-direction:column;gap:10px;border:2px solid var(--line);border-radius:var(--r);background:var(--sheet)}
-.vcard.on{border-color:var(--delft);background:var(--delft-soft)}
-.vcard .rad{border:0;background:transparent;padding:0;min-height:48px}
-.score-tag{display:inline-flex;align-items:center;min-height:28px;padding:0 10px;border-radius:999px;font-weight:700;font-size:14px}
-.sk{display:flex;align-items:center;gap:10px;min-height:52px;border-bottom:1px solid var(--line)}
-.sk:last-child{border-bottom:0}
+.gh h2{font-size:21px}
+.rad{display:flex;align-items:center;gap:12px;min-height:64px;padding:10px 14px;border-radius:18px;border:0;background:var(--sheet);box-shadow:inset 0 0 0 2px var(--line),0 4px 0 var(--line-deep);width:100%;text-align:left;font:800 18px/1.2 var(--f-display);color:var(--ink)}
+.rad .o{width:26px;height:26px;border-radius:999px;box-shadow:inset 0 0 0 2.5px var(--muted);flex:none;display:flex;align-items:center;justify-content:center}
+.rad[aria-checked="true"]{background:var(--delft-soft);box-shadow:inset 0 0 0 3px var(--delft),0 4px 0 var(--delft-deep)}
+.rad[aria-checked="true"] .o{background:var(--delft);box-shadow:none;color:var(--on-delft)}
+.rad .ex{display:block;font:400 15px/1.3 var(--f-body);color:var(--muted);margin-top:2px}
+.lbadge{flex:none;min-width:48px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font:800 15px/1 var(--f-display);padding:0 6px}
+.sb{min-height:60px;border-radius:16px;border:0;background:var(--sheet);color:var(--ink);box-shadow:inset 0 0 0 2px var(--line),0 4px 0 var(--line-deep);font:800 16px/1.1 var(--f-display);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:4px}
+.sb[aria-checked="true"],.sb[aria-pressed="true"]{background:var(--delft-soft);color:var(--delft);box-shadow:inset 0 0 0 3px var(--delft),0 4px 0 var(--delft-deep)}
+.sb.row{flex-direction:row;gap:10px;min-height:64px}
+.face{width:34px;height:34px;border-radius:999px;display:flex;align-items:center;justify-content:center}
 
-.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;align-items:center;gap:10px;min-height:52px;padding:10px 18px 10px 12px;border-radius:var(--r);background:var(--ink);color:var(--paper);font-weight:700;box-shadow:0 10px 28px rgba(0,0,0,.22);z-index:20;max-width:calc(100% - 32px)}
-.toast .ti{width:30px;height:30px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:var(--leaf);color:var(--sheet);flex:none}
+/* stickers + celebrate */
+.sgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 10px}
+.scell{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;background:none;border:0;color:var(--ink);padding:4px 0}
+.stk{width:80px;height:80px;border-radius:999px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 5px var(--ring),0 6px 0 5px var(--line-deep);flex:none}
+.stk-off{background:var(--line);color:var(--muted);box-shadow:inset 0 0 0 2px var(--line-deep)}
+.nm{font:800 15px/1.15 var(--f-display)}
+.nm-off{color:var(--muted)}
+.cel{position:relative;min-height:100vh;padding-top:calc(env(safe-area-inset-top,0px) + 30px);padding-bottom:170px;overflow:hidden}
+.confetti{position:absolute;left:0;right:0;top:0;width:100%;height:330px;pointer-events:none}
+.stat{border-radius:20px;padding:10px 6px 12px;display:flex;flex-direction:column;align-items:center;gap:2px;background:var(--sheet)}
+.stat .k{font:800 13px/1 var(--f-display);letter-spacing:.05em;padding:5px 8px;border-radius:999px;width:100%;text-align:center}
+.stat .v{font:800 26px/1.1 var(--f-display);display:flex;align-items:center;gap:4px;margin-top:4px}
+.newstk{width:100%;display:flex;align-items:center;gap:16px;background:var(--sun-soft);border-radius:22px;padding:14px 16px 14px 20px;text-align:left;box-shadow:inset 0 0 0 2px var(--sun)}
+.foot{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:12px 0 calc(20px + env(safe-area-inset-bottom,0px));background:linear-gradient(to top,var(--paper) 80%,transparent)}
+.foot .wrap{display:flex;flex-direction:column;gap:14px}
+.sk{display:flex;align-items:center;gap:10px;min-height:52px;border-bottom:2px solid var(--line)}
+.sk:last-child{border-bottom:0}
+.score-tag{display:inline-flex;align-items:center;min-height:30px;padding:0 10px;border-radius:999px;font:800 14px var(--f-display)}
+
+.toast{position:fixed;left:50%;top:calc(12px + env(safe-area-inset-top,0px));transform:translateX(-50%);display:flex;align-items:center;gap:10px;min-height:52px;padding:10px 18px 10px 12px;border-radius:18px;background:var(--ink);color:var(--paper);font:800 18px var(--f-display);box-shadow:0 10px 28px rgba(0,0,0,.22);z-index:40;max-width:calc(100% - 32px)}
+.toast .ti{width:30px;height:30px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:var(--leaf);color:var(--on-leaf);flex:none}
 .toast .ar{font-size:17px;opacity:.9}
-@media (max-width:380px){ .ctl button{font-size:14px} .fc .word{font-size:34px} }
+@media (max-width:370px){ .chip{padding:0 8px;font-size:16px} .ctl .btn{font-size:15px} .fc .word{font-size:36px} }
 </style>
 </head><body>
 
@@ -304,50 +367,79 @@ const I={
   home:'<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
   back:'<path d="M11 5l-7 7 7 7M4 12h16"/>', next:'<path d="M5 12h14M13 6l6 6-6 6"/>',
   gear:'<path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/>',
+  path:'<path d="M5 20a2 2 0 100-.1M19 4a2 2 0 100 .1M5 18V14a4 4 0 014-4h6a4 4 0 004-4"/>',
+  sticker:'<path d="M4 4h16v10l-6 6H4zM14 20v-6h6"/>',
   speaker:'<path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 8.5a5 5 0 010 7"/>',
   speaker2:'<path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 8.5a5 5 0 010 7"/><path d="M19 6a8.5 8.5 0 010 12"/>',
   flip:'<path d="M4 12a8 8 0 0114-5.3L20 9M20 4v5h-5M20 12a8 8 0 01-14 5.3L4 15M4 20v-5h5"/>',
   chevL:'<path d="M15 5l-7 7 7 7"/>', chevR:'<path d="M9 5l7 7-7 7"/>',
   play:'<path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/>',
-  stop:'<rect x="6" y="6" width="12" height="12" rx="2"/>', stopF:'<rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/>',
+  stop:'<rect x="6" y="6" width="12" height="12" rx="2"/>', stopF:'<rect x="6" y="6" width="12" height="12" rx="3" fill="currentColor"/>',
   mic:'<path d="M9 6a3 3 0 016 0v5a3 3 0 01-6 0zM5 11a7 7 0 0014 0M12 18v3"/>',
   check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>', x:'<path d="M6 6l12 12M18 6L6 18"/>',
-  info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/>',
   trophy:'<path d="M7 4h10v5a5 5 0 01-10 0z"/><path d="M7 6H4a3 3 0 003 4M17 6h3a3 3 0 01-3 4M12 14v4M8 21h8"/>',
-  shield:'<path d="M12 3l8 4v5c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V7z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
-  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  clock:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/>',
   retry:'<path d="M4 12a8 8 0 1 0 2.3-5.7L4 8.5M4 4v4.5h4.5"/>',
-  user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/>',
   sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/>',
   moon:'<path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z"/>',
-  phone:'<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/>',
-  flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>', steps:'<path d="M4 19h5v-5h5V9h6"/><path d="M17 6l3 3-3 3"/>',
+  phone:'<path d="M7 3h10a1 1 0 011 1v16a1 1 0 01-1 1H7a1 1 0 01-1-1V4a1 1 0 011-1zM11 18h2"/>',
+  target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>',
   eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
-  pin:'<path d="M12 21s7-6.2 7-12a7 7 0 00-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/>',
+  lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>',
   cards:'<path d="M3 8a2 2 0 012-2h10a2 2 0 012 2v11a2 2 0 01-2 2H5a2 2 0 01-2-2zM7 3h12a2 2 0 012 2v12"/>',
   headphones:'<path d="M4 15v-3a8 8 0 0116 0v3M3 15.5A1.5 1.5 0 014.5 14H7v6H4.5A1.5 1.5 0 013 18.5zM21 15.5a1.5 1.5 0 00-1.5-1.5H17v6h2.5a1.5 1.5 0 001.5-1.5z"/>',
   grammar:'<path d="M4 4h6v7H4zM14 4h6v7h-6zM4 14h16v6H4z"/>',
   book:'<path d="M3 5h6a3 3 0 013 3v12a2 2 0 00-2-2H3zM21 5h-6a3 3 0 00-3 3v12a2 2 0 012-2h7z"/>',
   pencil:'<path d="M4 20l4-1L19 8l-3-3L5 16zM14 7l3 3"/>',
-  quiz:'<path d="M12 3a9 9 0 110 18 9 9 0 010-18zM9.5 9.5a2.5 2.5 0 114 2c-1 .6-1.5 1.2-1.5 2.5M12 17h.01"/>'
+  quiz:'<path d="M12 3a9 9 0 110 18 9 9 0 010-18zM9.5 9.5a2.5 2.5 0 114 2c-1 .6-1.5 1.2-1.5 2.5M12 17h.01"/>',
+  chat:'<path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8"/>', user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/>',
+  hash:'<path d="M5 9h14M5 15h14M10 4l-2 16M16 4l-2 16"/>',
+  family:'<circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0114 0"/><path d="M16 4.5a3.5 3.5 0 010 7M18 20a7 7 0 00-2-5"/>',
+  cart:'<path d="M3 4h2l2.5 11h11L21 8H7M8 19a1.5 1.5 0 103 0 1.5 1.5 0 00-3 0zM17 19a1.5 1.5 0 103 0 1.5 1.5 0 00-3 0z"/>',
+  shirt:'<path d="M8 3l-5 3 2 4 3-1v12h8V9l3 1 2-4-5-3c0 2-2 3-4 3S8 5 8 3z"/>',
+  sign:'<path d="M12 3v18M5 6h11l3 3-3 3H5zM8 21h8"/>', cross:'<path d="M10 4h4v6h6v4h-6v6h-4v-6H4v-4h6z"/>',
+  bolt:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>', work:'<path d="M4 8h16v11H4zM9 8V5h6v3M4 13h16"/>',
+  gov:'<path d="M3 21h18M5 21V10M19 21V10M9 21v-7M15 21v-7M2 10l10-6 10 6z"/>',
+  cloud:'<path d="M7 18a5 5 0 010-10 6 6 0 0111.5 2A4 4 0 0118 18z"/>', school:'<path d="M2 9l10-5 10 5-10 5zM6 11v5c3 2 9 2 12 0v-5"/>',
+  cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>'
 };
 const ic=(n,c='')=>`<svg class="ico ${c}" viewBox="0 0 24 24" aria-hidden="true">${I[n]}</svg>`;
+const STAR='M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z';
+const star=(on,s=18)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" aria-hidden="true"><path class="${on?'star-on':'star-off'}" d="${STAR}"/></svg>`;
+const FLAME=`<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c1 4 6 6 6 12a6 6 0 01-12 0c0-3 1.5-5 3-6 .3 2.4 1.2 3.4 2.4 4C11 9 10.6 5.6 12 2z" style="fill:var(--tulip)"/><path d="M12 12c.6 2 3 2.6 3 5a3 3 0 01-6 0c0-1.4.8-2.4 1.6-3 .2 1 .6 1.4 1.1 1.6-.2-1.3-.2-2.5.3-3.6z" style="fill:var(--sun)"/></svg>`;
+
+/* ---------- Tulpje, the mascot ---------- */
+function mascot(mood='happy',w=96){ const h=Math.round(w*140/120), cheer=mood==='cheer', think=mood==='think', wave=mood==='wave'; const ey=think?66:68, gy=think?63.5:65.5;
+  return `<svg class="mascot" width="${w}" height="${h}" viewBox="0 0 120 140" aria-hidden="true"><ellipse cx="60" cy="134" rx="26" ry="4.5" fill="#16233F" opacity=".12"/><path d="M60 90V131" stroke="#1E7F4F" stroke-width="7" stroke-linecap="round" fill="none"/>
+  ${cheer?'<path d="M58 106C42 96 33 78 34 58C48 68 56 86 58 106Z" fill="#2E9E62"/>':'<path d="M58 114C40 114 26 104 18 90C36 89 51 97 58 114Z" fill="#2E9E62"/>'}
+  ${mood==='happy'?'<path d="M62 110C80 110 94 100 102 86C84 85 69 93 62 110Z" fill="#2E9E62"/>':''}${cheer||wave?'<path d="M62 106C78 96 87 78 86 58C72 68 64 86 62 106Z" fill="#2E9E62"/>':''}${think?'<path d="M62 108C76 102 84 92 84 80C72 84 65 94 62 108Z" fill="#2E9E62"/>':''}
+  <path d="M22 34C22 74 37 95 60 95C83 95 98 74 98 34L84 47L72 21L60 40L48 21L36 47Z" fill="#E5533A"/><path d="M48 21L60 40L72 21C72 44 67 56 60 62C53 56 48 44 48 21Z" fill="#F27A5E"/><path d="M30 52C32 74 42 86 56 90C40 90 28 76 26 54Z" fill="#C93F28" opacity=".5"/>
+  <circle cx="40" cy="78" r="5.5" fill="#FFB4A2" opacity=".85"/><circle cx="80" cy="78" r="5.5" fill="#FFB4A2" opacity=".85"/>
+  ${cheer?'<path d="M42 69Q48 62 54 69M66 69Q72 62 78 69" stroke="#16233F" stroke-width="3.5" stroke-linecap="round" fill="none"/>':`<ellipse cx="48" cy="${ey}" rx="5" ry="6" fill="#16233F"/><ellipse cx="72" cy="${ey}" rx="5" ry="6" fill="#16233F"/><circle cx="49.8" cy="${gy}" r="1.9" fill="#fff"/><circle cx="73.8" cy="${gy}" r="1.9" fill="#fff"/>`}
+  ${cheer?'<path d="M50 77Q60 93 70 77Z" fill="#16233F"/><path d="M55 84Q60 89 65 84Q60 82 55 84Z" fill="#FF8A70"/>':(think?'<path d="M54 82Q58 79 62 82T70 81" stroke="#16233F" stroke-width="3.2" stroke-linecap="round" fill="none"/>':'<path d="M51 79Q60 87 69 79" stroke="#16233F" stroke-width="3.5" stroke-linecap="round" fill="none"/>')}</svg>`; }
 
 /* ---------- storage (per viewer, optional) ---------- */
 const KEY='svs-a1-v1';
-let S = {help:'both', done:{}, scores:{}, exam:{}, theme:'auto', gender:'f'};
+let S = {help:'both', done:{}, scores:{}, exam:{}, theme:'auto', gender:'f', goal:10, days:[], time:{}, cel:{}};
 try{ const raw=localStorage.getItem(KEY); if(raw) S=Object.assign(S,JSON.parse(raw)); }catch(e){}
 if(S.help==='en') S.help='both';
 function save(){ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){} }
 function applyTheme(){ const r=document.documentElement; if(S.theme==='light'||S.theme==='dark') r.dataset.theme=S.theme; else delete r.dataset.theme; }
 applyTheme();
+const dkey=(t=new Date())=>`${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;
+function practised(){ const k=dkey(); if(!S.days.includes(k)){ S.days.push(k); S.days=S.days.slice(-400); save(); } }
+function streak(){ const set=new Set(S.days); const t=new Date(); if(!set.has(dkey(t))) t.setDate(t.getDate()-1); let n=0; while(set.has(dkey(t))){ n++; t.setDate(t.getDate()-1); } return n; }
+const minsToday=()=>Math.floor((S.time[dkey()]||0)/60);
+// minutes of practice: counted while a lesson or the exam is open and the app is visible
+setInterval(()=>{ if(document.visibilityState==='visible' && (view.name==='day'||view.name==='exam')){ const k=dkey(); S.time[k]=(S.time[k]||0)+10; const ks=Object.keys(S.time); if(ks.length>60) delete S.time[ks.sort()[0]]; save(); } },10000);
 
 /* ---------- help language ---------- */
 const AR=()=>S.help!=='nl';
 function help(nl,ar){ const out=[]; if(S.help!=='ar' && nl) out.push(`<p>${esc(nl)}</p>`); if(S.help!=='nl' && ar) out.push(`<p class="ar" lang="ar">${esc(ar)}</p>`); return out.join(''); }
 const arP=(t,st='')=>AR()&&t?`<p class="ar" lang="ar"${st?` style="${st}"`:''}>${esc(t)}</p>`:'';
+const arH=(t,st='')=>AR()&&t?`<p class="arh" lang="ar"${st?` style="${st}"`:''}>${esc(t)}</p>`:'';
 const arS=t=>AR()?`<span class="a" dir="rtl" lang="ar">${esc(t)}</span>`:'';
-const arB=t=>AR()?`<span class="ar" lang="ar">${esc(t)}</span>`:'';
+const arB=t=>AR()?`<span class="arb" dir="rtl" lang="ar">${esc(t)}</span>`:'';
 const btn2=(nl,ar,icon='next')=>`<span class="ln">${esc(nl)}${icon?ic(icon):''}</span>${arB(ar)}`;
 
 /* ---------- toast ---------- */
@@ -421,7 +513,7 @@ function stepsHTML(){ return NTTS ? NATIVE_STEPS : PHONE_STEPS; }
 document.addEventListener('click',e=>{ const b=e.target.closest&&e.target.closest('[data-vinstall]'); if(b&&NTTS) NTTS.openInstall().catch(()=>toast('Open Instellingen → Tekst-naar-spraak')); });
 function wireVoices(root){ root.querySelectorAll('[data-vsel]').forEach(sel=>{ fillVoiceSelect(sel); sel.onchange=()=>{ S['voice'+sel.dataset.vsel]=sel.value; save(); toast('Stem gekozen','تم اختيار الصوت'); }; });
   root.querySelectorAll('[data-vtest]').forEach(b=>b.onclick=()=>{ stopSpeech(); speak(b.dataset.vtest==='f'?'Goedemorgen! Ik ben uw docent. Hoe gaat het met u?':'Goedemiddag. Ik woon in Veghel en ik leer Nederlands.', b.dataset.vtest); }); }
-function voiceNote(){ return `<div class="notice" data-vnote ${TTS.ok?'hidden':''}><b>Geen Nederlandse stem gevonden · لا يوجد صوت هولندي</b>${help('Uw telefoon heeft nog geen Nederlandse stem. Daardoor klinkt het geluid niet goed. Volg deze stappen:','هاتفك لا يحتوي بعد على صوت هولندي، لذلك قد يكون النطق خاطئًا. اتبع هذه الخطوات:')}${stepsHTML()}</div>`; }
+function voiceNote(){ return `<div class="notice" data-vnote ${TTS.ok?'hidden':''}><p class="h" style="font-size:18px;color:var(--sun-ink)">Geen Nederlandse stem gevonden · لا يوجد صوت هولندي</p>${help('Uw telefoon heeft nog geen Nederlandse stem. Daardoor klinkt het geluid niet goed. Volg deze stappen:','هاتفك لا يحتوي بعد على صوت هولندي، لذلك قد يكون النطق خاطئًا. اتبع هذه الخطوات:')}${stepsHTML()}</div>`; }
 
 /* ---------- people drawing ---------- */
 function personSVG(g,i){ const shirt = ['var(--delft)','var(--tulip)','var(--leaf)','var(--sun)'][i%4]; const skin = i%2? 'var(--skin2)':'var(--skin1)';
@@ -438,16 +530,42 @@ function playScene(stageId, lines, who, captions, done, onLine){ stopSpeech(); c
     speak(tts||txt, (who[k]||['','f'])[1], ()=>setTimeout(next,380)); }
   next(); return ()=>{ alive=false; stopSpeech(); clear(); onLine&&onLine(-1); }; }
 
-/* ---------- question blocks ---------- */
-function quizHTML(qs, id){ return `<div class="quiz" id="${id}">${qs.map((q,qi)=>{ const ord=shuffled(q); return `<section class="q" data-qi="${qi}"><h3 class="qt" dir="auto">${qi+1}. ${esc(q[0])}</h3><div class="opts">${ord.map((oi,pos)=>`<button class="opt" data-oi="${oi}" data-k="${'ABCD'[pos]}" aria-pressed="false"><span class="k">${'ABCD'[pos]}</span><span class="ot" dir="auto">${esc(q[1][oi])}</span><span class="st"></span></button>`).join('')}</div></section>`; }).join('')}
-  <button class="btn btn-p btn-w" data-check="${id}">${ic('check')}Nakijken</button><div class="result" data-score="${id}" hidden aria-live="polite"></div></div>`; }
+/* ---------- quizzes ---------- */
 function resultHTML(ok,n){ const r=64, L=2*Math.PI*r, f=n?ok/n:0, good=f>=0.7;
-  return `<svg width="150" height="150" viewBox="0 0 168 168" role="img" aria-label="${ok} van ${n} goed"><circle class="ring-bg" cx="84" cy="84" r="${r}"/><circle class="ring ${good?'':'low'}" cx="84" cy="84" r="${r}" stroke-dasharray="${(L*f).toFixed(1)} ${L.toFixed(1)}" transform="rotate(-90 84 84)"/><text x="84" y="92" text-anchor="middle" class="ring-t">${ok}/${n}</text><text x="84" y="118" text-anchor="middle" class="ring-s">goed</text></svg>
-   <h3 class="h" style="font-size:28px">${good?'Goed zo!':'Nog even oefenen'}</h3>${arP(good?'أحسنت!':'تدرّب قليلًا بعد')}<p>U hebt ${ok} van de ${n} vragen goed.</p>`; }
-function wireQuiz(id, qs, onScore){ const box=document.getElementById(id); if(!box) return;
+  return `${mascot(good?'cheer':'think',96)}<svg width="150" height="150" viewBox="0 0 168 168" role="img" aria-label="${ok} van ${n} goed"><circle class="ring-bg" cx="84" cy="84" r="${r}"/><circle class="ring ${good?'':'low'}" cx="84" cy="84" r="${r}" stroke-dasharray="${(L*f).toFixed(1)} ${L.toFixed(1)}" transform="rotate(-90 84 84)"/><text x="84" y="92" text-anchor="middle" class="ring-t">${ok}/${n}</text><text x="84" y="118" text-anchor="middle" class="ring-s">goed</text></svg>
+   <h3 class="h" style="font-size:30px">${good?'Goed zo!':'Nog even oefenen'}</h3>${arH(good?'أحسنت!':'تدرّب قليلًا بعد','font-size:21px')}<p>U hebt ${ok} van de ${n} vragen goed.</p>`; }
+// lessons: one question at a time with instant feedback
+function quizHTML(qs,id){ return `<div class="stack" id="${id}"></div>`; }
+function wireQuiz(id, qs, onScore){ const box=document.getElementById(id); if(!box) return; let i=0, ok=0, sheet=null; const ord=qs.map(shuffled);
+  const clearSheet=()=>{ if(sheet){ sheet.remove(); sheet=null; } };
+  function show(){ clearSheet(); const Q=qs[i];
+    box.innerHTML=`<div class="qhead"><div class="prog" role="progressbar" aria-label="Vraag ${i+1} van ${qs.length}" aria-valuemin="0" aria-valuemax="${qs.length}" aria-valuenow="${i}"><i style="width:${Math.round(100*i/qs.length)}%"></i></div><span class="h">${i+1}/${qs.length}</span></div>
+     <div class="say">${mascot('happy',68)}<div class="bub2"><p class="h" style="font-size:22px;line-height:1.25" dir="auto">${esc(Q[0])}</p></div></div>
+     <div class="opts" role="group" aria-label="Antwoorden">${ord[i].map((oi,pos)=>`<button class="opt" data-oi="${oi}"><span class="k">${'ABCD'[pos]}</span><span class="ot" dir="auto">${esc(Q[1][oi])}</span><span class="st"></span></button>`).join('')}</div>`;
+    box.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(b)); }
+  function answer(b){ if(sheet) return; const Q=qs[i], right=+b.dataset.oi===Q[2]; if(right) ok++;
+    box.querySelectorAll('.opt').forEach(x=>{ x.disabled=true; const r=+x.dataset.oi===Q[2];
+      if(r){ x.classList.add('ok'); x.querySelector('.k').innerHTML=ic('check','s'); x.querySelector('.st').innerHTML=`${ic('check','s')}${x===b?'Goed!':'Goed antwoord'}`; }
+      else if(x===b){ x.classList.add('bad'); x.querySelector('.k').innerHTML=ic('x','s'); x.querySelector('.st').innerHTML=`${ic('x','s')}Niet goed`; }
+      else x.classList.add('off'); });
+    const m=box.querySelector('.mascot'); if(m) m.outerHTML=mascot(right?'cheer':'think',68);
+    sheet=document.createElement('section'); sheet.className='fbs '+(right?'good':'bad'); sheet.setAttribute('role','status');
+    sheet.innerHTML=`<div class="wrap"><div class="row nowrap" style="gap:12px"><span class="fbi">${ic(right?'check':'x')}</span><div style="flex:1;min-width:0"><p class="h fbt" style="font-size:26px">${right?'Goed zo!':'Bijna! Niet goed.'}</p>${right?'':`<p style="font-size:18px">Goed antwoord: <b dir="auto">${esc(Q[1][Q[2]])}</b></p>`}</div>${right?`<span class="chip" style="background:var(--sun-soft);color:var(--sun-ink);box-shadow:inset 0 0 0 2px var(--sun)">${star(true)}+1</span>`:''}</div>
+      ${arP(right?'أحسنت! إجابة صحيحة.':'تقريبًا! انظر إلى الجواب الصحيح.')}<button class="btn ${right?'btn-g':'btn-r'} btn-2" data-go>${btn2(right?'Ga door':'Begrepen',right?'تابع':'فهمت','')}</button></div>`;
+    app.appendChild(sheet); sheet.querySelector('[data-go]').focus({preventScroll:true});
+    sheet.querySelector('[data-go]').onclick=()=>{ clearSheet(); i++; if(i<qs.length){ show(); box.scrollIntoView({block:'start',behavior:'smooth'}); } else finish(); }; }
+  function finish(){ box.innerHTML=`<div class="result">${resultHTML(ok,qs.length)}</div><div class="g2"><button class="btn btn-s" data-retry>${ic('retry')}Opnieuw</button><button class="btn btn-p" data-next>Ga door${ic('next')}</button></div>`;
+    box.querySelector('[data-retry]').onclick=()=>{ i=0; ok=0; show(); };
+    box.querySelector('[data-next]').onclick=()=>{ const n=$('#nextSec'); if(n) n.click(); };
+    box.scrollIntoView({block:'start',behavior:'smooth'}); onScore&&onScore(ok,qs.length); }
+  stopHooks.push(clearSheet); show(); }
+// exam: all questions on one page, checked together
+function quizAllHTML(qs, id){ return `<div class="qall" id="${id}">${qs.map((q,qi)=>{ const ord=shuffled(q); return `<section class="q" data-qi="${qi}"><h3 class="qt" dir="auto">${qi+1}. ${esc(q[0])}</h3><div class="opts">${ord.map((oi,pos)=>`<button class="opt" data-oi="${oi}" data-k="${'ABCD'[pos]}" aria-pressed="false"><span class="k">${'ABCD'[pos]}</span><span class="ot" dir="auto">${esc(q[1][oi])}</span><span class="st"></span></button>`).join('')}</div></section>`; }).join('')}
+  <button class="btn btn-p btn-w" data-check="${id}">${ic('check')}Nakijken</button><div class="result" data-score="${id}" hidden aria-live="polite"></div></div>`; }
+function wireQuizAll(id, qs, onScore){ const box=document.getElementById(id); if(!box) return;
   box.addEventListener('click',e=>{ const o=e.target.closest('.opt'); if(o && !box.dataset.checked){ o.parentElement.querySelectorAll('.opt').forEach(x=>x.setAttribute('aria-pressed','false')); o.setAttribute('aria-pressed','true'); }
     const c=e.target.closest('[data-check]'); if(!c) return; const res=box.querySelector('[data-score]');
-    if(box.dataset.checked){ box.dataset.checked=''; box.querySelectorAll('.opt').forEach(x=>{ x.classList.remove('ok','bad','off'); x.disabled=false; x.setAttribute('aria-pressed','false'); x.querySelector('.k').textContent=x.dataset.k; x.querySelector('.st').innerHTML=''; }); c.innerHTML=`${ic('check')}Nakijken`; res.hidden=true; res.innerHTML=''; return; }
+    if(box.dataset.checked){ box.dataset.checked=''; box.querySelectorAll('.opt').forEach(x=>{ x.classList.remove('ok','bad','off'); x.setAttribute('aria-pressed','false'); x.querySelector('.k').textContent=x.dataset.k; x.querySelector('.st').innerHTML=''; }); c.innerHTML=`${ic('check')}Nakijken`; res.hidden=true; res.innerHTML=''; return; }
     let ok=0; box.querySelectorAll('.q').forEach(qel=>{ const q=qs[+qel.dataset.qi]; const sel=qel.querySelector('.opt[aria-pressed="true"]');
       qel.querySelectorAll('.opt').forEach(x=>{ const right=+x.dataset.oi===q[2]; x.setAttribute('aria-pressed','false');
         if(right){ x.classList.add('ok'); x.querySelector('.k').innerHTML=ic('check','s'); x.querySelector('.st').innerHTML=`${ic('check','s')}${x===sel?'Goed!':'Goed antwoord'}`; }
@@ -456,147 +574,192 @@ function wireQuiz(id, qs, onScore){ const box=document.getElementById(id); if(!b
       if(sel && +sel.dataset.oi===q[2]) ok++; });
     box.dataset.checked='1'; c.innerHTML=`${ic('retry')}Opnieuw`; res.innerHTML=resultHTML(ok,qs.length); res.hidden=false; res.scrollIntoView({block:'center',behavior:'smooth'}); onScore&&onScore(ok,qs.length); }); }
 
+/* ---------- course structure ---------- */
+const SECTIONS=[['woorden','Woorden',20,'الكلمات','cards','sun'],['grammatica','Grammatica',25,'القواعد','grammar','leaf'],['luisteren','Luisteren',20,'الاستماع','headphones','delft'],['lezen','Lezen',15,'القراءة','book','delft'],['schrijven','Schrijven',20,'الكتابة','pencil','tulip'],['spreken','Spreken',15,'التحدّث','mic','tulip'],['toets','Quiz',5,'الاختبار','quiz','sun']];
+const REVIEW=[['herhaling','Toets',45,'الاختبار','quiz','sun'],['schrijven','Schrijven',30,'الكتابة','pencil','tulip'],['spreken','Spreken',45,'التحدّث','mic','tulip']];
+const secsOf=d=>d.review?REVIEW:SECTIONS;
+const WEEKS={1:['Basis','الأساسيات','leaf'],2:['Dagelijks leven','الحياة اليومية','delft'],3:['In de stad','في المدينة','tulip'],4:['Communiceren','التواصل','sun']};
+// one sticker per day: [nl, ar, icon]
+const STICKERS={1:['Hallo-held','بطل التحية','chat'],2:['Voorstel-ster','نجم التعارف','user'],3:['Getallen-genie','عبقري الأرقام','hash'],4:['Klok-kampioen','بطل الساعة','clock'],5:['Familie-vriend','صديق العائلة','family'],6:['Dag-doener','بطل اليوم','sun'],7:['Vragen-vinder','صائد الأسئلة','quiz'],8:['Supermarkt-held','بطل السوبرماركت','cart'],9:['Thuis-held','بطل البيت','home'],10:['Mode-meester','خبير الأزياء','shirt'],11:['Wegwijzer','دليل الطريق','sign'],12:['Dokter-durf','شجاع عند الطبيب','cross'],13:['Kan-alles','أستطيع كل شيء','bolt'],14:['Werk-wonder','أعجوبة العمل','work'],15:['Formulier-pro','محترف الاستمارات','gov'],16:['Weer-wijs','حكيم الطقس','cloud'],17:['Bel-baas','بطل الاتصال','phone'],18:['Klas-kampioen','بطل الصف','school'],19:['Plannen-maker','صانع الخطط','cal'],20:['A1-kampioen','بطل A1','trophy']};
+const TONES=[['--sun','--on-sun'],['--delft','--on-delft'],['--leaf','--on-leaf'],['--tulip','--on-tulip']];
+const tone=n=>TONES[(n-1)%4];
+function dayProgress(d){ const done=S.done[d.id]||{}; const total=secsOf(d).length; const n=secsOf(d).filter(s=>done[s[0]]).length; return {n,total}; }
+const dayDone=d=>{ const p=dayProgress(d); return p.n>=p.total; };
+function starsOf(d){ if(!dayDone(d)) return 0; const s=S.scores[d.id]; if(!s) return 1; const f=s[0]/s[1]; return f>=0.8?3:(f>=0.6?2:1); }
+const totalStars=()=>C.DAYS.reduce((a,d)=>a+starsOf(d),0);
+
 /* ---------- routing ---------- */
-let view={name:'home'}; let stopFn=null;
-function go(v){ if(activeRec){ activeRec.click(); } if(stopFn){stopFn(); stopFn=null;} stopSpeech(); clearInterval(timerInt); view=v; render(); window.scrollTo({top:0}); }
-app.addEventListener('click',e=>{ const h=e.target.closest('[data-home]'); if(h) go({name:'home'}); const s=e.target.closest('[data-settings]'); if(s) go({name:'settings'}); });
+let view={name:'home'}; let stopFn=null; let stopHooks=[];
+function go(v){ if(activeRec){ activeRec.click(); } if(stopFn){stopFn(); stopFn=null;} stopHooks.forEach(f=>f()); stopHooks=[]; stopSpeech(); clearInterval(timerInt); view=v; render(); window.scrollTo({top:0}); }
+app.addEventListener('click',e=>{ const t=e.target.closest('[data-nav]'); if(t) go({name:t.dataset.nav}); });
 if(NATIVE && Capacitor.Plugins.App){ Capacitor.Plugins.App.addListener('backButton',()=>{ if(view.name!=='home') go({name:'home'}); else Capacitor.Plugins.App.exitApp(); });
   Capacitor.Plugins.App.addListener('pause',()=>{ stopSpeech(); if(activeRec) activeRec.click(); }); }
-function render(){ if(view.name==='home') renderHome(); else if(view.name==='day') renderDay(); else if(view.name==='exam') renderExam(); else if(view.name==='settings') renderSettings(); }
+function render(){ document.body.classList.toggle('hasband', view.name==='day'||view.name==='exam'); document.body.dataset.v=view.name;
+  ({home:renderHome,day:renderDay,exam:renderExam,settings:renderSettings,stickers:renderStickers,celebrate:renderCelebrate}[view.name]||renderHome)(); }
+function dock(cur){ const t=(k,icon,nl,ar)=>`<button class="tab" data-nav="${k}" ${cur===k?'aria-current="page"':''}>${ic(icon)}${nl}${arS(ar)}</button>`;
+  return `<nav class="dock" aria-label="Hoofdmenu"><div class="in">${t('home','path','Leren','تعلّم')}${t('stickers','sticker','Stickers','الملصقات')}${t('settings','gear','Instellingen','الإعدادات')}</div></nav>`; }
 
-/* ---------- HOME ---------- */
-const SECTIONS=[['woorden','Woorden',20,'الكلمات','cards'],['grammatica','Grammatica',25,'القواعد','grammar'],['luisteren','Luisteren',20,'الاستماع','headphones'],['lezen','Lezen',15,'القراءة','book'],['schrijven','Schrijven',20,'الكتابة','pencil'],['spreken','Spreken',15,'التحدّث','mic'],['toets','Quiz',5,'الاختبار','quiz']];
-const REVIEW=[['herhaling','Toets',45,'الاختبار','quiz'],['schrijven','Schrijven',30,'الكتابة','pencil'],['spreken','Spreken',45,'التحدّث','mic']];
-const secsOf=d=>d.review?REVIEW:SECTIONS;
-const WEEKS={1:['Basis','الأساسيات'],2:['Dagelijks leven','الحياة اليومية'],3:['In de stad','في المدينة'],4:['Communiceren','التواصل']};
-function dayProgress(d){ const done=S.done[d.id]||{}; const total=secsOf(d).length; const n=secsOf(d).filter(s=>done[s[0]]).length; return {n,total}; }
+/* ---------- HOME: learning path ---------- */
+const ZIG=[0,-60,-80,-30,40,70,30];
 function renderHome(){
   const P=C.DAYS.map(d=>({d,...dayProgress(d)}));
-  const daysDone=P.filter(p=>p.n>=p.total).length;
   const cur=(P.find(p=>p.n<p.total)||{}).d;
-  const wk=w=>{ const ps=P.filter(p=>p.d.week===w); const a=ps.reduce((s,p)=>s+p.n,0), b=ps.reduce((s,p)=>s+p.total,0); return Math.round(100*a/b); };
-  const curWeek=cur?cur.week:4;
-  let today='';
-  if(cur){ const p=dayProgress(cur), nx=secsOf(cur)[(secsOf(cur).findIndex(s=>!(S.done[cur.id]||{})[s[0]]))]||secsOf(cur)[0]; const sc=cur.listen&&C.SCENES[cur.listen.scene];
-    today=`<section class="card today" style="padding:18px;display:flex;flex-direction:column;gap:14px">
-      <p class="sec">Vandaag</p>
-      <div class="dtitle"><div class="badge"><small>DAG</small><b>${cur.id}</b></div><div style="flex:1;min-width:0"><h2 class="h" style="font-size:24px">${esc(cur.nl)}</h2>${arP(cur.ar,'font-size:20px')}</div></div>
-      <div class="row" style="gap:8px">${sc?`<span class="pill">${ic('pin','s')}${esc(sc.label)}</span>`:''}<span class="pill">Volgende: ${esc(nx[1])}</span></div>
-      <div class="stack" style="gap:6px"><div class="bar"><i style="width:${Math.round(100*p.n/p.total)}%"></i></div><div class="row between" style="gap:8px"><span class="mut small">${p.n} van ${p.total} onderdelen klaar</span>${AR()?`<span class="ar mut small" lang="ar">أنهيت ${p.n} من ${p.total} أقسام</span>`:''}</div></div>
-      <button class="btn btn-p btn-2" data-day="${cur.id}">${p.n?btn2(`Ga verder met dag ${cur.id}`,`تابع اليوم ${cur.id}`):btn2(`Begin met dag ${cur.id}`,`ابدأ اليوم ${cur.id}`)}</button></section>`; }
-  else today=`<section class="card today" style="padding:18px;display:flex;flex-direction:column;gap:12px"><p class="sec">Klaar</p><h2 class="h" style="font-size:24px">Alle 20 dagen zijn klaar!</h2>${arP('أنهيت جميع الأيام العشرين!')}<button class="btn btn-p btn-2" data-exam>${btn2('Naar het proefexamen','إلى الامتحان التجريبي')}</button></section>`;
-  const X=S.exam;
-  app.innerHTML = `<div class="wrap home">
-  <header class="apphead"><div class="brand"><div class="mark">${ic('steps')}</div><div><p class="h" style="font-size:20px">Stap voor Stap</p><p class="mut small">Nederlands A1</p></div></div>
-    <button class="btn btn-s btn-sm" data-settings>${ic('gear')}Instellingen</button></header>
-  <section class="card" style="padding:18px;display:flex;flex-direction:column;gap:14px">
-    <h2 class="h" style="font-size:22px">Week ${curWeek} van 4</h2>
-    <div class="wbars">${[1,2,3,4].map(w=>`<div class="stack" style="gap:6px"><div class="bar" aria-hidden="true"><i style="width:${wk(w)}%"></i></div><span>Week ${w}</span></div>`).join('')}</div>
-    <div class="row between" style="gap:8px"><p>${daysDone} van 20 dagen klaar</p>${AR()?`<p class="ar" lang="ar">أنهيت ${daysDone} من 20 يومًا</p>`:''}</div>
+  const wk=cur?cur.week:4; const W=WEEKS[wk];
+  const wpct=w=>{ const ps=P.filter(p=>p.d.week===w); return Math.round(100*ps.reduce((s,p)=>s+p.n,0)/ps.reduce((s,p)=>s+p.total,0)); };
+  const m=minsToday(), goal=S.goal||10, gf=Math.min(1,m/goal), L=2*Math.PI*9;
+  let k=0;
+  const nodes=[1,2,3,4].map(w=>`<div class="wlab"><span class="k">WEEK ${w}</span><span class="n">${WEEKS[w][0]}</span>${arH(WEEKS[w][1],'font-size:17px;text-align:center')}</div>`+P.filter(p=>p.d.week===w).map(p=>{ const d=p.d, st=p.n>=p.total?'done':(cur&&d.id===cur.id?'now':(p.n?'part':'next')); const dx=ZIG[(k++)%ZIG.length]; const sk=STICKERS[d.id];
+      const lab={done:'klaar',now:'nu bezig',part:`${p.n} van ${p.total} klaar`,next:'nog niet begonnen'}[st];
+      return `<div class="pnw" style="transform:translateX(${dx}px)"><div class="pn pn-${st}" ${st==='now'?'id="curNode"':''}>${st==='now'?`<span class="go">${p.n?'Ga door!':'Begin!'}</span>`:''}
+        <button class="pc" data-day="${d.id}" aria-label="Dag ${d.id}, ${esc(d.nl)}, ${lab}">${ic(sk[2],'l')}</button><span class="pl">Dag ${d.id}</span>
+        ${st==='done'?`<span class="stars" aria-label="${starsOf(d)} van 3 sterren">${[1,2,3].map(i=>star(i<=starsOf(d))).join('')}</span>`:''}${st==='part'?`<span class="mut small" style="font-weight:700">${p.n}/${p.total}</span>`:''}
+        ${st==='now'?`<div class="buddy" style="${dx>0?'right:118px':'left:118px'}"><span class="bub">Jij kunt het!</span>${mascot('wave',84)}</div>`:''}</div></div>`; }).join('')).join('');
+  app.innerHTML = `<div class="wrap">
+  <header class="chips">
+    <span class="chip" aria-label="Cursus Nederlands A1"><svg width="24" height="18" viewBox="0 0 24 18" aria-hidden="true"><rect width="24" height="6" rx="2" fill="#C8102E"/><rect y="6" width="24" height="6" fill="#FFFFFF"/><rect y="12" width="24" height="6" rx="2" fill="#21468B"/><rect width="24" height="18" rx="3" fill="none" stroke="#D9DFEC"/></svg>A1</span>
+    <span class="chip" aria-label="${streak()} dagen op rij geoefend">${FLAME}${streak()}</span>
+    <span class="chip" aria-label="${totalStars()} sterren">${star(true,22)}${totalStars()}</span>
+    <span class="chip" aria-label="Dagdoel: ${m} van ${goal} minuten"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="var(--line)" stroke-width="4"/><circle cx="12" cy="12" r="9" fill="none" stroke="var(--leaf)" stroke-width="4" stroke-linecap="round" stroke-dasharray="${(L*gf).toFixed(1)} ${L.toFixed(1)}" transform="rotate(-90 12 12)"/></svg>${m}/${goal}</span>
+  </header>
+  <section class="wk" style="background:var(--${W[2]});color:var(--on-${W[2]});box-shadow:0 5px 0 var(--${W[2]}-deep)">
+    <p class="kick">Week ${wk} van 4</p><h2 class="h" style="font-size:28px">${W[0]}</h2>${arH(W[1],'font-size:20px')}
+    <div class="wkbars" role="img" aria-label="Voortgang per week: ${[1,2,3,4].map(w=>`week ${w} ${wpct(w)}%`).join(', ')}">${[1,2,3,4].map(w=>`<span style="background:var(--${W[2]}-deep)"><i style="width:${wpct(w)}%;background:var(--on-${W[2]})"></i></span>`).join('')}</div>
   </section>
-  ${today}
   ${voiceNote()}
-  ${[1,2,3,4].map(w=>`<section class="stack" style="gap:10px;padding-top:4px">
-    <div class="row between" style="gap:8px;align-items:baseline"><h2 class="h" style="font-size:19px">Week ${w} · ${WEEKS[w][0]}</h2>${AR()?`<p class="ar mut" lang="ar">${WEEKS[w][1]}</p>`:''}</div>
-    <div class="tiles">${P.filter(p=>p.d.week===w).map(p=>{ const st=p.n>=p.total?'done':(cur&&p.d.id===cur.id?'now':(p.n?'part':'next')); const lab={done:'klaar',now:'nu bezig',part:`${p.n} van ${p.total}`,next:'nog niet begonnen'}[st];
-      return `<button class="tile tile-${st}" data-day="${p.d.id}" aria-label="Dag ${p.d.id}, ${esc(p.d.nl)}, ${lab}">${p.d.id}${st==='done'?ic('check','s'):''}${st==='now'?'<small>Nu</small>':''}${st==='part'?`<small>${p.n}/${p.total}</small>`:''}</button>`; }).join('')}</div></section>`).join('')}
-  <div class="legend" aria-hidden="true"><span><i style="background:var(--leaf-soft)"></i>Klaar</span><span><i style="background:var(--delft)"></i>Nu</span><span><i style="box-shadow:inset 0 0 0 2px var(--sun)"></i>Bezig</span><span><i style="border:1.5px dashed var(--muted)"></i>Nog niet</span></div>
-  <section class="card" style="padding:18px;display:flex;flex-direction:column;gap:14px">
-    <div class="dtitle"><div class="badge sun">${ic('trophy')}</div><div style="flex:1;min-width:0"><h2 class="h" style="font-size:22px">Proefexamen</h2>${arP('الامتحان التجريبي')}</div></div>
-    ${help('Vier aparte onderdelen, zoals bij het A2-examen van DUO: Lezen, Luisteren, Schrijven en Spreken. Ongeveer 90 minuten.','أربعة أجزاء منفصلة مثل امتحان DUO A2: القراءة، الاستماع، الكتابة، التحدث. حوالي 90 دقيقة.')}
-    ${X.lezen||X.luisteren?`<span class="pill leaf">Laatste score: Lezen ${X.lezen?X.lezen.join('/'):'–'} · Luisteren ${X.luisteren?X.luisteren.join('/'):'–'}</span>`:''}
-    <button class="btn btn-s btn-w" data-exam>${ic('next')}Naar het proefexamen</button>
-  </section>
-  <section class="card" style="padding:4px 18px 14px">
-    <details class="more" style="border:0"><summary>Over deze cursus · عن هذا المنهاج</summary>
+  <div class="path">${nodes}
+    <div class="pnw" style="flex-direction:column;align-items:center;gap:6px;margin-top:12px"><div class="pn pn-exam"><button class="pc" data-exam aria-label="Proefexamen">${ic('trophy','xl')}</button></div>
+      <p class="h" style="font-size:24px;margin-top:10px;text-align:center">Proefexamen</p>${arH('الامتحان التجريبي','font-size:19px;text-align:center')}
+      <span class="chip" style="min-height:34px;font-size:15px;color:var(--muted)">4 onderdelen · ± 90 min</span>
+      ${S.exam.lezen||S.exam.luisteren?`<span class="chip" style="min-height:34px;font-size:15px;color:var(--leaf-ink)">Lezen ${S.exam.lezen?S.exam.lezen.join('/'):'–'} · Luisteren ${S.exam.luisteren?S.exam.luisteren.join('/'):'–'}</span>`:''}</div>
+    <details class="more" style="margin-top:28px"><summary>Over deze cursus · عن هذا المنهاج</summary>
       <div class="stack" style="padding-top:6px">
-        <p class="sec">Nederlands A1 · 20 lesdagen + proefexamen · 2 uur per dag</p>
+        <p class="kick mut">Nederlands A1 · 20 lesdagen + proefexamen · 2 uur per dag</p>
         ${help('Uw eerste stap naar het inburgeringsexamen A2 en het Staatsexamen NT2 (B1). Elke dag oefent u de vier examenvaardigheden: luisteren, lezen, schrijven en spreken.','خطوتك الأولى نحو امتحان الاندماج A2 وامتحان الدولة B1. كل يوم يدرّب المهارات الأربع للامتحان: الاستماع والقراءة والكتابة والتحدث.')}
-        <h3 class="h" style="font-size:19px">Naar B1 in 6 maanden</h3>
-        ${help('Deze A1-cursus is maand 1. Daarna oefent u met de officiële A2-oefenexamens en dan met het Staatsexamen NT2 Programma I (B1). Gebruik bij elke stap de officiële oefenexamens.','هذا المنهاج (A1) هو الشهر الأول. الهدف بعده: تمارين امتحان الاندماج A2 ثم امتحان الدولة NT2 البرنامج الأول (B1). استعمل التمارين الرسمية في كل مرحلة.')}
-        <div class="road">${C.ROADMAP.map((r,i)=>`<div class="st ${i===0?'now':''}"><span class="sec">${esc(r.phase)} · <span style="color:var(--delft)">${esc(r.level)}</span></span><h3 class="h" style="font-size:18px">${esc(r.title)}</h3>${help(r.focus,r.focusAr)}<p class="small mut">Controle: ${esc(r.check)}</p></div>`).join('')}</div>
-        <h3 class="h" style="font-size:19px">Bronnen</h3>
-        <ul class="small stack src" style="gap:6px;padding-left:18px;margin:0">${C.SOURCES.map(s=>`<li><a href="${esc(s[1])}" target="_blank" rel="noopener">${esc(s[0])}</a></li>`).join('')}</ul>
+        <h3 class="h" style="font-size:20px">Naar B1 in 6 maanden</h3>
+        ${help('Deze A1-cursus is maand 1. Daarna oefent u met de officiële A2-oefenexamens en dan met het Staatsexamen NT2 Programma I (B1).','هذا المنهاج (A1) هو الشهر الأول. الهدف بعده: تمارين امتحان الاندماج A2 ثم امتحان الدولة NT2 البرنامج الأول (B1).')}
+        ${C.ROADMAP.map((r,i)=>`<div class="card" style="padding:12px 14px;display:flex;flex-direction:column;gap:4px"><span class="kick" style="color:var(--delft)">${esc(r.phase)} · ${esc(r.level)}</span><h3 class="h" style="font-size:19px">${esc(r.title)}</h3>${help(r.focus,r.focusAr)}<p class="small mut">Controle: ${esc(r.check)}</p></div>`).join('')}
+        <h3 class="h" style="font-size:20px">Bronnen</h3>
+        <ul class="small stack" style="gap:6px;padding-left:18px;margin:0">${C.SOURCES.map(s=>`<li><a href="${esc(s[1])}" target="_blank" rel="noopener" style="color:var(--delft);word-break:break-word">${esc(s[0])}</a></li>`).join('')}</ul>
         <p class="small mut">${help('Alle teksten en gesprekken in deze cursus zijn geschreven om te oefenen. Namen, adressen en nummers zijn verzonnen.','جميع النصوص والحوارات في هذا المنهاج من تأليفنا، وأسماء الأشخاص والعناوين خيالية.')}</p>
       </div></details>
-  </section>
-  <div class="row nowrap" style="gap:10px;padding:4px">${ic('shield','mut')}<div class="stack" style="gap:2px;flex:1"><p class="mut small">Werkt zonder internet. Uw voortgang blijft op deze telefoon.</p>${arP('يعمل بدون إنترنت. يبقى تقدّمك على هذا الهاتف.','font-size:16px;color:var(--muted)')}</div></div>
-  </div>`;
+  </div></div>
+  <div class="cta"><div class="wrap">${cur?`<button class="btn btn-p btn-2" data-day="${cur.id}">${dayProgress(cur).n?btn2(`Ga verder met dag ${cur.id}`,`تابع اليوم ${cur.id}`):btn2(`Begin met dag ${cur.id}`,`ابدأ اليوم ${cur.id}`)}</button>`:`<button class="btn btn-y btn-2" data-exam>${btn2('Naar het proefexamen','إلى الامتحان التجريبي')}</button>`}</div></div>
+  ${dock('home')}`;
   app.querySelectorAll('[data-day]').forEach(b=>b.addEventListener('click',()=>go({name:'day',id:+b.dataset.day,sec:firstOpen(+b.dataset.day)})));
   app.querySelectorAll('[data-exam]').forEach(b=>b.addEventListener('click',()=>go({name:'exam',part:'lezen'})));
+  const cn=$('#curNode'); if(cn && cur && cur.id>2) setTimeout(()=>cn.scrollIntoView({block:'center'}),80);
 }
 function firstOpen(id){ const d=C.DAYS.find(x=>x.id===id); const done=S.done[id]||{}; const s=secsOf(d).find(s=>!done[s[0]]); return s?s[0]:secsOf(d)[0][0]; }
-function markDone(id,sec){ S.done[id]=S.done[id]||{}; if(!S.done[id][sec]){ S.done[id][sec]=1; save(); const d=C.DAYS.find(x=>x.id===id); if(view.name==='day'&&view.id===id) paintStrip(d); } }
+function markDone(id,sec){ practised(); S.done[id]=S.done[id]||{}; if(!S.done[id][sec]){ S.done[id][sec]=1; save(); const d=C.DAYS.find(x=>x.id===id); if(view.name==='day'&&view.id===id) paintNodes(d); } }
+
+/* ---------- STICKERS ---------- */
+function renderStickers(){ const got=C.DAYS.filter(dayDone).length;
+  app.innerHTML=`<div class="wrap page">
+    <header class="row nowrap" style="gap:12px"><div style="flex:1;min-width:0"><h1 class="h" style="font-size:32px">Stickerboek</h1>${arH('دفتر الملصقات','font-size:20px')}</div>
+      <div style="text-align:center;background:var(--sun-soft);border-radius:18px;padding:8px 14px;box-shadow:inset 0 0 0 2px var(--sun)"><p class="h" style="font-size:26px;color:var(--sun-ink)">${got}/20</p><p class="h" style="font-size:13px;color:var(--sun-ink)">VERZAMELD</p></div></header>
+    <div class="row nowrap card" style="gap:10px;padding:10px 14px">${mascot('happy',48)}<p style="font-weight:700;flex:1">Maak een dag af en krijg een nieuwe sticker!</p></div>
+    <div class="sgrid">${C.DAYS.map(d=>{ const s=STICKERS[d.id], on=dayDone(d), t=tone(d.id), r=[-8,6,-4,8,-6,4][d.id%6];
+      return on ? `<button class="scell" data-day="${d.id}" aria-label="Sticker ${esc(s[0])}, verdiend op dag ${d.id}"><span class="stk" style="background:var(${t[0]});color:var(${t[1]});transform:rotate(${r}deg)">${ic(s[2],'l')}</span><span class="nm">${esc(s[0])}</span>${AR()?`<span class="arh small" style="text-align:center">${esc(s[1])}</span>`:''}</button>`
+        : `<button class="scell" data-day="${d.id}" aria-label="Sticker van dag ${d.id}, nog niet verdiend"><span class="stk stk-off">${ic('lock')}</span><span class="nm nm-off">Dag ${d.id}</span></button>`; }).join('')}</div>
+  </div>${dock('stickers')}`;
+  app.querySelectorAll('[data-day]').forEach(b=>b.onclick=()=>go({name:'day',id:+b.dataset.day,sec:firstOpen(+b.dataset.day)}));
+}
+
+/* ---------- CELEBRATE ---------- */
+function renderCelebrate(){ const d=C.DAYS.find(x=>x.id===view.id), s=STICKERS[d.id], t=tone(d.id), sc=S.scores[d.id], n=starsOf(d);
+  const P=[[24,40],[62,92],[38,170],[90,24],[118,140],[70,230],[22,280],[150,60],[300,30],[340,90],[360,170],[318,210],[280,120],[250,40],[356,260],[300,290],[200,24],[176,110],[226,96],[110,300],[46,120],[332,140],[270,250],[96,190],[132,250],[260,180],[16,210],[372,40],[214,300],[150,190]], CC=['--sun','--tulip','--leaf','--delft'];
+  app.innerHTML=`<div class="cel"><svg class="confetti" viewBox="0 0 390 330" preserveAspectRatio="xMidYMin slice" aria-hidden="true">${P.map((p,i)=>`<rect x="${p[0]}" y="${p[1]}" width="${i%3?12:8}" height="${i%3?6:8}" rx="2" transform="rotate(${(i*37)%180} ${p[0]} ${p[1]})" fill="var(${CC[i%4]})"/>`).join('')}</svg>
+   <div class="wrap" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center">
+    ${mascot('cheer',140)}
+    <div class="row" style="align-items:flex-end;gap:4px;margin-top:-6px" role="img" aria-label="${n} van 3 sterren"><span style="transform:rotate(-12deg)">${star(n>=1,48)}</span>${star(n>=2,64)}<span style="transform:rotate(12deg)">${star(n>=3,48)}</span></div>
+    <div><h1 class="h" style="font-size:38px">Dag ${d.id} klaar!</h1>${arH(`أنهيت اليوم ${d.id}!`,'font-size:22px;text-align:center')}</div>
+    <div class="g3" style="width:100%">
+      <div class="stat" style="box-shadow:inset 0 0 0 2px var(--leaf),0 4px 0 var(--leaf-deep)"><span class="k" style="background:var(--leaf);color:var(--on-leaf)">QUIZ</span><span class="v">${sc?sc.join('/'):'–'}</span></div>
+      <div class="stat" style="box-shadow:inset 0 0 0 2px var(--tulip),0 4px 0 var(--tulip-deep)"><span class="k" style="background:var(--tulip);color:var(--on-tulip)">REEKS</span><span class="v">${FLAME}${streak()}</span></div>
+      <div class="stat" style="box-shadow:inset 0 0 0 2px var(--delft),0 4px 0 var(--delft-deep)"><span class="k" style="background:var(--delft);color:var(--on-delft)">WOORDEN</span><span class="v">+${(d.vocab||[]).length}</span></div>
+    </div>
+    <div class="newstk"><span class="stk" style="width:84px;height:84px;background:var(${t[0]});color:var(${t[1]});transform:rotate(-8deg)">${ic(s[2],'xl')}</span>
+      <div style="flex:1;min-width:0"><p class="kick" style="color:var(--sun-ink)">Nieuwe sticker!</p><p class="h" style="font-size:23px">${esc(s[0])}</p>${arH(s[1],'font-size:18px')}</div></div>
+   </div></div>
+   <div class="foot"><div class="wrap">${d.id<20?`<button class="btn btn-p btn-2" id="celNext">${btn2(`Ga door naar dag ${d.id+1}`,`تابع إلى اليوم ${d.id+1}`)}</button>`:`<button class="btn btn-y btn-2" id="celNext">${btn2('Naar het proefexamen','إلى الامتحان التجريبي')}</button>`}<button class="btn btn-s btn-w" data-nav="home">Naar Home</button></div></div>`;
+  $('#celNext').onclick=()=> d.id<20 ? go({name:'day',id:d.id+1,sec:firstOpen(d.id+1)}) : go({name:'exam',part:'lezen'});
+}
 
 /* ---------- SETTINGS ---------- */
 function renderSettings(){
-  const rad=(k,nl,ex,ar)=>`<button class="rad" role="radio" aria-checked="${S.help===k}" data-help="${k}"><span class="o"></span><span style="flex:1">${nl}<span class="ex">${ex}</span></span>${ar?`<span class="ar" lang="ar">${ar}</span>`:''}</button>`;
-  app.innerHTML=`<header class="dayhead"><div class="wrap"><div class="row nowrap" style="align-items:center;gap:12px"><button class="btn btn-s btn-sm" data-home>${ic('home')}Home</button><div style="flex:1;min-width:0"><h1 class="h" style="font-size:24px">Instellingen</h1><p class="ar mut" lang="ar" style="line-height:1.3">الإعدادات</p></div></div></div></header>
-  <div class="wrap daymain" style="gap:26px">
-   <section class="grp" role="radiogroup" aria-label="Taalhulp"><div class="gh"><h2 class="h">Taalhulp</h2><p class="ar mut" lang="ar">لغة المساعدة</p></div>
-     <p class="mut small">Welke uitleg wilt u zien bij het Nederlands?</p>
-     ${rad('nl','Alleen Nederlands','Uitleg in het Nederlands','')}
-     ${rad('ar','Alleen Arabisch','<span lang="ar" dir="rtl" style="font-family:var(--f-ar)">الشرح بالعربية فقط</span>','')}
-     ${rad('both','Allebei','Nederlands en Arabisch','كلاهما')}</section>
-   <section class="grp"><div class="gh"><h2 class="h">Stem</h2><p class="ar mut" lang="ar">الصوت</p></div>
-     <p class="mut small">Welke stem leest de woorden en zinnen voor?</p>
-     <div class="g2" role="radiogroup" aria-label="Stem">${[['f','Vrouw','امرأة'],['m','Man','رجل']].map(g=>`<div class="vcard ${S.gender===g[0]?'on':''}"><button class="rad" role="radio" aria-checked="${S.gender===g[0]}" data-gender="${g[0]}"><span class="o"></span><span style="flex:1">${g[1]}<span class="ex" lang="ar" style="font-family:var(--f-ar)">${g[2]}</span></span></button><button class="btn btn-s btn-sm" data-vtest="${g[0]}">${ic('speaker')}Luister</button></div>`).join('')}</div>
-     <label class="fl small">Vrouwenstem · صوت امرأة<select class="field" data-vsel="f" id="vselF"></select></label>
-     <label class="fl small">Mannenstem · صوت رجل<select class="field" data-vsel="m" id="vselM"></select></label>
+  const rad=(k,badge,bst,nl,ex)=>`<button class="rad" role="radio" aria-checked="${S.help===k}" data-help="${k}"><span class="lbadge" style="${bst}">${badge}</span><span style="flex:1">${nl}<span class="ex">${ex}</span></span><span class="o">${S.help===k?ic('check','xs'):''}</span></button>`;
+  const face=g=>g==='f'?`<span class="face" style="background:var(--tulip-soft)"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 11c0-6 3-8 6-8s6 2 6 8v6h-2.5c.5-2 .5-4 0-6H8.5c-.5 2-.5 4 0 6H6z" fill="#2A1E18"/><circle cx="12" cy="10" r="5" fill="#E3AE86"/></svg></span>`:`<span class="face" style="background:var(--leaf-soft)"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="10" r="5" fill="#9A6444"/><path d="M7 9c0-4 2-6 5-6s5 2 5 6c-1-2-3-3-5-3s-4 1-5 3z" fill="#2A1E18"/></svg></span>`;
+  app.innerHTML=`<div class="wrap page">
+   <header><h1 class="h" style="font-size:32px">Instellingen</h1><p class="arh mut" lang="ar" style="font-size:20px">الإعدادات</p></header>
+   <section class="grp" role="radiogroup" aria-label="Taalhulp"><div class="gh"><h2 class="h">Taalhulp</h2><p class="arh mut" lang="ar" style="font-size:18px">لغة المساعدة</p></div>
+     ${rad('nl','NL','background:var(--delft-soft);color:var(--delft)','Alleen Nederlands','Uitleg in het Nederlands')}
+     ${rad('ar','ع','background:var(--leaf-soft);color:var(--leaf-ink);font-family:var(--f-arh)','Alleen Arabisch','<span lang="ar" dir="rtl" style="font-family:var(--f-ar)">الشرح بالعربية فقط</span>')}
+     ${rad('both','NL+ع','background:var(--delft);color:var(--on-delft)','Allebei','Nederlands en <span lang="ar" style="font-family:var(--f-ar)">العربية</span>')}</section>
+   <section class="grp"><div class="gh"><h2 class="h">Stem</h2><p class="arh mut" lang="ar" style="font-size:18px">الصوت</p></div>
+     <div class="g2" role="radiogroup" aria-label="Stem">${[['f','Vrouw'],['m','Man']].map(g=>`<button class="sb row" role="radio" aria-checked="${S.gender===g[0]}" data-gender="${g[0]}">${face(g[0])}${g[1]}</button>`).join('')}</div>
+     <div class="g2"><button class="btn btn-s btn-sm" data-vtest="f">${ic('speaker')}Luister</button><button class="btn btn-s btn-sm" data-vtest="m">${ic('speaker')}Luister</button></div>
      ${voiceNote()}
-     <details class="more"><summary>Nederlandse stem installeren · تثبيت صوت هولندي</summary><div class="stack" style="gap:8px">${stepsHTML()}</div></details>
-     <p class="mut small">De stem van uw telefoon. Werkt ook zonder internet.</p></section>
-   <section class="grp"><div class="gh"><h2 class="h">Kleuren</h2><p class="ar mut" lang="ar">الألوان</p></div>
-     <div class="seg" role="radiogroup" aria-label="Kleuren">${[['light','Licht','sun'],['dark','Donker','moon'],['auto','Telefoon','phone']].map(t=>`<button role="radio" aria-checked="${(S.theme||'auto')===t[0]}" data-theme-set="${t[0]}">${ic(t[2],'s')}${t[1]}</button>`).join('')}</div></section>
-   <section class="card" style="padding:16px;display:flex;gap:12px;align-items:flex-start"><span style="color:var(--leaf-ink)">${ic('shield')}</span><div class="stack" style="gap:4px;flex:1"><p style="font-weight:700">Geen account nodig</p><p class="mut small">De app werkt zonder internet. Uw voortgang staat alleen op deze telefoon.</p><p class="ar mut" lang="ar">لا تحتاج إلى حساب. يعمل التطبيق بدون إنترنت، ويبقى تقدّمك على هذا الهاتف فقط.</p></div></section>
-  </div>`;
+     <details class="more"><summary>Welke Nederlandse stem? · أي صوت هولندي؟</summary><div class="stack" style="gap:10px;padding-top:6px">
+       <label class="fl">Vrouwenstem · صوت امرأة<select class="field" data-vsel="f"></select></label>
+       <label class="fl">Mannenstem · صوت رجل<select class="field" data-vsel="m"></select></label>
+       <p class="small mut">Nederlandse stem installeren · تثبيت صوت هولندي</p>${stepsHTML()}</div></details></section>
+   <section class="grp" role="radiogroup" aria-label="Dagdoel"><div class="gh"><h2 class="h">Dagdoel</h2><p class="arh mut" lang="ar" style="font-size:18px">الهدف اليومي</p></div>
+     <div class="g3">${[5,10,15].map(v=>`<button class="sb" role="radio" aria-checked="${(S.goal||10)===v}" data-goal="${v}"><span style="font-size:24px">${v}</span>min</button>`).join('')}</div>
+     <p class="small mut">Minuten per dag in de lessen. Vandaag: ${minsToday()} min.</p></section>
+   <section class="grp" role="radiogroup" aria-label="Kleuren"><div class="gh"><h2 class="h">Kleuren</h2><p class="arh mut" lang="ar" style="font-size:18px">الألوان</p></div>
+     <div class="g3">${[['light','Licht','sun'],['dark','Donker','moon'],['auto','Telefoon','phone']].map(t=>`<button class="sb" role="radio" aria-checked="${(S.theme||'auto')===t[0]}" data-theme-set="${t[0]}">${ic(t[2])}${t[1]}</button>`).join('')}</div></section>
+   <section class="row nowrap" style="gap:12px;background:var(--leaf-soft);border-radius:22px;padding:12px 14px">${mascot('happy',56)}<div class="stack" style="gap:2px;flex:1"><p class="h" style="font-size:19px;color:var(--leaf-ink)">Geen account nodig</p><p class="small">Werkt zonder internet. Alles blijft op deze telefoon.</p><p class="ar" lang="ar" style="font-size:17px">يعمل بدون إنترنت، وكل شيء يبقى على هذا الهاتف.</p></div></section>
+  </div>${dock('settings')}`;
   app.querySelectorAll('[data-help]').forEach(b=>b.onclick=()=>{ S.help=b.dataset.help; save(); renderSettings(); });
   app.querySelectorAll('[data-gender]').forEach(b=>b.onclick=()=>{ S.gender=b.dataset.gender; save(); renderSettings(); });
+  app.querySelectorAll('[data-goal]').forEach(b=>b.onclick=()=>{ S.goal=+b.dataset.goal; save(); renderSettings(); });
   app.querySelectorAll('[data-theme-set]').forEach(b=>b.onclick=()=>{ S.theme=b.dataset.themeSet; save(); applyTheme(); renderSettings(); });
   wireVoices(app);
 }
 
 /* ---------- DAY ---------- */
 let timerInt=null;
-function cellHTML(s,i,state){ return `<button class="cell ${state==='now'?'cell-now':(state==='done'?'cell-done':'')}" data-sec="${s[0]}" aria-current="${state==='now'?'step':'false'}" aria-label="${i+1}. ${s[1]}${state==='done'?', klaar':''}"><span class="n">${i+1}${state==='done'?ic('check','xs'):''}</span>${ic(s[4])}<span class="l">${s[1]}</span>${arS(s[3])}</button>`; }
-function paintStrip(d){ const done=S.done[d.id]||{}; const st=$('.strip'); if(!st) return;
-  st.innerHTML=secsOf(d).map((s,i)=>cellHTML(s,i,view.sec===s[0]?'now':(done[s[0]]?'done':''))).join('');
-  st.querySelectorAll('.cell').forEach(c=>c.onclick=()=>showSec(d,c.dataset.sec));
-  const now=st.querySelector('.cell-now'); if(now) st.scrollLeft=Math.max(0,now.offsetLeft-st.clientWidth/2+now.clientWidth/2); }
+function nodeHTML(s,i,state){ return `<button class="node n-${state}" data-sec="${s[0]}" aria-current="${state==='now'?'step':'false'}" aria-label="${i+1}. ${s[1]}${state==='done'?', klaar':''}"><span class="c">${ic(s[4])}</span>${state==='done'?`<svg class="st" viewBox="0 0 24 24" aria-hidden="true"><path class="star-on" d="${STAR}"/></svg>`:''}<span class="l">${s[1]}</span>${arS(s[3])}</button>`; }
+function paintNodes(d){ const done=S.done[d.id]||{}; const st=$('.nodes'); if(!st) return;
+  st.innerHTML=secsOf(d).map((s,i)=>nodeHTML(s,i,view.sec===s[0]?'now':(done[s[0]]?'done':'next'))).join('');
+  st.querySelectorAll('.node').forEach(c=>c.onclick=()=>showSec(d,c.dataset.sec));
+  const now=st.querySelector('.n-now'); if(now) st.scrollLeft=Math.max(0,now.offsetLeft-st.clientWidth/2+now.clientWidth/2); }
 function renderDay(){
-  const d=C.DAYS.find(x=>x.id===view.id);
+  const d=C.DAYS.find(x=>x.id===view.id); const sk=STICKERS[d.id];
   app.innerHTML = `
-  <header class="dayhead"><div class="wrap">
-    <div class="row between"><button class="btn btn-s btn-sm" data-home>${ic('home')}Home</button><button class="btn btn-s btn-sm" id="prevDay" ${d.id===1?'disabled':''}>${ic('back')}Vorige dag</button></div>
-    <div class="dtitle"><div class="badge"><small>DAG</small><b>${d.id}</b></div><div style="flex:1;min-width:0"><h1 class="h" style="font-size:24px">${esc(d.nl)}</h1>${arP(d.ar,'font-size:20px;line-height:1.4')}<p class="mut small">Week ${d.week} · ± 2 uur</p></div></div>
+  <header class="band"><div class="wrap">
+    <div class="row between"><button class="bb" data-nav="home">${ic('home')}Home</button><button class="bb" id="prevDay" ${d.id===1?'disabled':''}>${ic('back')}Vorige dag</button></div>
+    <div class="row nowrap" style="gap:14px"><div class="scn">${ic(sk[2],'l')}</div><div style="flex:1;min-width:0"><p class="kick">Dag ${d.id} · Week ${d.week}</p><h1 class="h" style="font-size:27px">${esc(d.nl)}</h1>${arH(d.ar,'font-size:21px')}</div></div>
   </div></header>
-  <nav class="stripbar" aria-label="Onderdelen van dag ${d.id}"><div class="wrap"><div class="strip"></div></div></nav>
+  <nav class="sw" aria-label="Onderdelen van dag ${d.id}"><div class="wrap"><div class="nodes"></div></div></nav>
   <div class="wrap daymain">
-    <section class="card can"><div class="ib">${ic('flag')}</div><div class="stack" style="gap:4px;flex:1"><p class="sec">Dit kunt u na vandaag</p>${S.help!=='ar'?`<p style="font-weight:700">${esc(d.can)}</p>`:''}${arP(d.canAr)}</div></section>
-    <article class="ws"><div class="ws-top"><span class="sec" id="wsName"></span><span class="mut wsn" id="wsPos"></span></div><div class="ws-body" id="secBody"></div><div class="ws-foot"><button class="btn btn-p btn-2" id="nextSec"></button></div></article>
+    <section class="goal"><div class="gi">${ic('target')}</div><div class="stack" style="gap:2px;flex:1"><p class="h" style="font-size:18px;color:var(--sun-ink)">Doel van vandaag</p>${S.help!=='ar'?`<p style="font-weight:700">${esc(d.can)}</p>`:''}${arP(d.canAr)}</div></section>
+    <article class="lesson"><div class="lh"><div class="lic" id="lIc"></div><div style="flex:1;min-width:0"><h2 class="h" style="font-size:25px" id="lName"></h2><div id="lAr"></div></div><span class="step" id="lPos"></span></div>
+      <div class="lb" id="secBody"></div><div class="lf"><button class="btn btn-p btn-2" id="nextSec"></button></div></article>
   </div>`;
   $('#prevDay').addEventListener('click',()=>go({name:'day',id:d.id-1,sec:firstOpen(d.id-1)}));
-  $('#nextSec').addEventListener('click',()=>{ const secs=secsOf(d); const i=secs.findIndex(s=>s[0]===view.sec); if(i<secs.length-1){ showSec(d,secs[i+1][0]); window.scrollTo({top:0}); } else if(d.id<20) go({name:'day',id:d.id+1,sec:firstOpen(d.id+1)}); else go({name:'exam',part:'lezen'}); });
+  $('#nextSec').addEventListener('click',()=>{ if(dayDone(d) && !S.cel[d.id]){ S.cel[d.id]=1; save(); go({name:'celebrate',id:d.id}); return; }
+    const secs=secsOf(d); const i=secs.findIndex(s=>s[0]===view.sec); if(i<secs.length-1){ showSec(d,secs[i+1][0]); window.scrollTo({top:0}); } else if(d.id<20) go({name:'day',id:d.id+1,sec:firstOpen(d.id+1)}); else go({name:'exam',part:'lezen'}); });
   showSec(d,view.sec);
 }
-function showSec(d,key){ if(activeRec) activeRec.click(); if(stopFn){stopFn();stopFn=null;} stopSpeech(); clearInterval(timerInt);
-  const secs=secsOf(d); if(!secs.some(s=>s[0]===key)) key=secs[0][0]; view.sec=key; const i=secs.findIndex(s=>s[0]===key);
-  paintStrip(d);
-  $('#wsName').textContent=`Werkblad ${i+1} · ${secs[i][1]}`; $('#wsPos').textContent=`${i+1} / ${secs.length}`;
+function showSec(d,key){ if(activeRec) activeRec.click(); if(stopFn){stopFn();stopFn=null;} stopHooks.forEach(f=>f()); stopHooks=[]; stopSpeech(); clearInterval(timerInt);
+  const secs=secsOf(d); if(!secs.some(s=>s[0]===key)) key=secs[0][0]; view.sec=key; const i=secs.findIndex(s=>s[0]===key), s=secs[i];
+  paintNodes(d);
+  const li=$('#lIc'); li.innerHTML=ic(s[4]); li.style.background=`var(--${s[5]}-soft)`; li.style.color=s[5]==='sun'?'var(--sun-ink)':`var(--${s[5]}${s[5]==='delft'?'':'-ink'})`;
+  $('#lName').textContent=s[1]; $('#lAr').innerHTML=arH(s[3],'font-size:19px'); $('#lPos').textContent=`${i+1} / ${secs.length}`;
   $('#nextSec').innerHTML = i<secs.length-1 ? btn2(`Volgende: ${secs[i+1][1]}`,`التالي: ${secs[i+1][3]}`) : (d.id<20 ? btn2(`Klaar · naar dag ${d.id+1}`,`انتهيت · إلى اليوم ${d.id+1}`) : btn2('Naar het proefexamen','إلى الامتحان التجريبي'));
   renderSection(d); }
 function instr(nl,en,ar){ return `<div class="tip"><span class="nl">${esc(nl)}</span>${help(en,ar)}</div>`; }
-const doneBtn=(k,nl,ar)=>`<button class="btn btn-s btn-2" data-done="${k}">${btn2(nl,ar,'check')}</button>`;
+const sayBox=(inner,mood='happy',size=68,cls='')=>`<div class="say">${mascot(mood,size)}<div class="bub2 ${cls}">${inner}</div></div>`;
+const doneBtn=(k,nl,ar)=>`<button class="btn btn-g btn-2" data-done="${k}">${btn2(nl,ar,'check')}</button>`;
 function renderSection(d){
   const body=$('#secBody'); const sec=view.sec; let h='';
   if(sec==='woorden'){
-    h=`${instr('Luister en zeg het na.','Tik op Luister en zeg elk woord 3 keer hardop. Draai de kaart om voor de betekenis.','اضغط على «استمع» وكرر كل كلمة بصوت عالٍ 3 مرات. اقلب البطاقة لترى المعنى.')}${voiceNote()}
-     <div class="row between"><span class="sec">Flitskaarten</span><span style="font-weight:700" id="fPos"></span></div>
-     <div class="bar thin" aria-hidden="true"><i id="fBar" style="background:var(--leaf)"></i></div>
-     <button class="fc" id="flash"></button>
-     <div class="ctl"><button class="btn-s" id="fPrev" aria-label="Vorige kaart">${ic('chevL')}Vorige${arS('السابق')}</button><button class="btn-t" id="fSay" aria-label="Luister naar het woord">${ic('speaker2')}Luister${arS('استمع')}</button><button class="btn-t" id="fFlip" aria-label="Draai de kaart om">${ic('flip')}Draai om${arS('اقلب')}</button><button class="btn-p" id="fNext" aria-label="Volgende kaart">${ic('chevR')}Volgende${arS('التالي')}</button></div>
-     <h3 class="h" style="font-size:20px;margin-top:6px">Alle woorden</h3>
-     <div class="vlist">${d.vocab.map((v,i)=>`<div class="v"><button class="btn btn-t round" data-say="${i}" aria-label="Luister: ${esc(v[0])}">${ic('speaker')}</button><div style="flex:1;min-width:0"><div class="w">${esc(v[0])}</div>${arP(v[1],'font-size:17px')}</div></div>`).join('')}</div>
+    h=`${sayBox(`<p style="font-weight:700">Luister en zeg het na. Tik op de kaart om hem om te draaien.</p>${arP('استمع وكرّر. اضغط على البطاقة لتقلبها.')}`)}${voiceNote()}
+     <div class="qhead"><div class="prog" aria-hidden="true"><i id="fBar"></i></div><span class="h" id="fPos"></span></div>
+     <div class="deck"><div class="b1" aria-hidden="true"></div><div class="b2" aria-hidden="true"></div><button class="fc" id="flash"></button><button class="spk" id="fSay" aria-label="Luister naar het woord">${ic('speaker2')}</button></div>
+     <div class="g3 ctl"><button class="btn btn-s" id="fPrev" aria-label="Vorige kaart">${ic('chevL')}Vorige${arS('السابق')}</button><button class="btn btn-y" id="fFlip" aria-label="Draai de kaart om">${ic('flip')}Draai om${arS('اقلب')}</button><button class="btn btn-p" id="fNext" aria-label="Volgende kaart">${ic('chevR')}Volgende${arS('التالي')}</button></div>
+     <details class="more"><summary>Alle woorden (${d.vocab.length}) · كل الكلمات</summary><div class="vlist">${d.vocab.map((v,i)=>`<div class="v"><button class="btn btn-t round" data-say="${i}" aria-label="Luister: ${esc(v[0])}">${ic('speaker')}</button><div style="flex:1;min-width:0"><div class="w">${esc(v[0])}</div>${arP(v[1],'font-size:17px')}</div></div>`).join('')}</div></details>
      ${doneBtn('woorden','Ik ken deze woorden','أعرف هذه الكلمات')}`;
     body.innerHTML=h;
     body.querySelectorAll('[data-say]').forEach(b=>b.addEventListener('click',()=>{ stopSpeech(); speak(d.vocab[+b.dataset.say][0].replace(/\//g,',')); }));
@@ -604,46 +767,47 @@ function renderSection(d){
     const sayCur=()=>{ stopSpeech(); speak(d.vocab[order[fi]][0].replace(/\//g,',')); };
     const fr=()=>{ const v=d.vocab[order[fi]]; const m=v[0].match(/^(de|het)\s+(.+)$/i); const fc=$('#flash');
       fc.className='fc'+(flip?' fc-back':'');
-      fc.setAttribute('aria-label', flip ? `${v[0]} betekent ${v[1]}. Tik om terug te draaien` : `${v[0]}. Tik om om te draaien`);
-      fc.innerHTML = flip ? `<span class="mut" style="font-size:18px;font-weight:700">${esc(v[0])}</span><p class="ar arw" lang="ar">${esc(v[1])}</p><span class="hint">${ic('flip','s')}Tik om terug te draaien</span>`
-        : `${m?`<span class="art">${esc(m[1].toLowerCase())}</span>`:''}<p class="word" lang="nl">${esc(m?m[2]:v[0])}</p><span class="hint">${ic('flip','s')}Tik om om te draaien</span>`;
-      $('#fPos').textContent=`${fi+1} / ${order.length}`; $('#fBar').style.width=`${Math.round(100*(fi+1)/order.length)}%`; };
+      fc.setAttribute('aria-label', flip ? `${v[0]} betekent ${v[1]}. Tik om terug te draaien` : `${v[0]}. Tik om te draaien`);
+      fc.innerHTML = flip ? `<span class="art">${esc(v[0])}</span><p class="ar arw" lang="ar">${esc(v[1])}</p><span class="hint">${ic('flip','s')}Tik om terug te draaien</span>`
+        : `${m?`<span class="art">${esc(m[1].toLowerCase())}</span>`:''}<p class="word" lang="nl">${esc(m?m[2]:v[0])}</p><span class="hint">${ic('flip','s')}Tik om te draaien</span>`;
+      $('#fPos').textContent=`${fi+1}/${order.length}`; $('#fBar').style.width=`${Math.round(100*(fi+1)/order.length)}%`; };
     fr(); const flipIt=()=>{flip=!flip;fr(); if(flip) sayCur();};
     $('#flash').onclick=flipIt; $('#fFlip').onclick=flipIt; $('#fNext').onclick=()=>{fi=(fi+1)%order.length;flip=false;fr();}; $('#fPrev').onclick=()=>{fi=(fi-1+order.length)%order.length;flip=false;fr();}; $('#fSay').onclick=sayCur;
   }
   else if(sec==='grammatica'){ const g=d.gram;
-    h=`<h2 class="h" style="font-size:26px">${esc(g.t)}</h2>${help(g.nl,g.ar)}
+    h=`<h3 class="h" style="font-size:26px">${esc(g.t)}</h3>${sayBox(help(g.nl,g.ar),'happy',68,'sun')}
      <div class="tbl"><table><thead><tr>${g.head.map(x=>`<th scope="col">${esc(x)}</th>`).join('')}</tr></thead><tbody>${g.rows.map(r=>`<tr>${r.map(c=>`<td class="${/[؀-ۿ]/.test(c)?'ar':''}">${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
-     <p class="sec">Voorbeelden</p><div class="exl">${g.ex.map((e,i)=>`<div class="row nowrap" style="align-items:center"><button class="btn btn-t round" data-ex="${i}" aria-label="Luister: ${esc(e[0])}">${ic('speaker')}</button><div style="min-width:0"><b>${esc(e[0])}</b>${/[؀-ۿ]/.test(e[1])?arP(e[1],'font-size:17px'):`<div class="mut small">${esc(e[1])}</div>`}</div></div>`).join('')}</div>
+     <p class="kick mut">Voorbeelden</p><div class="exl">${g.ex.map((e,i)=>`<div class="row nowrap" style="align-items:center"><button class="btn btn-t round" data-ex="${i}" aria-label="Luister: ${esc(e[0])}">${ic('speaker')}</button><div style="min-width:0"><b>${esc(e[0])}</b>${/[؀-ۿ]/.test(e[1])?arP(e[1],'font-size:17px'):`<div class="mut small">${esc(e[1])}</div>`}</div></div>`).join('')}</div>
      ${doneBtn('grammatica','Begrepen','فهمت')}`;
     body.innerHTML=h; body.querySelectorAll('[data-ex]').forEach(b=>b.addEventListener('click',()=>{stopSpeech(); speak(g.ex[+b.dataset.ex][0].replace(/–/g,','));}));
   }
   else if(sec==='luisteren'){ const L=d.listen; let caps=false; const keys=Object.keys(L.who);
-    h=`${instr('Lees eerst de vragen. Kijk en luister. Beantwoord dan de vragen.','Probeer te antwoorden na één keer luisteren. Luister daarna opnieuw als dat nodig is. Zet de ondertitels aan als het te moeilijk is.','اقرأ الأسئلة أولًا، ثم شاهد واستمع. حاول الإجابة بعد الاستماع مرة واحدة ثم أعد إذا احتجت. شغّل الترجمة إذا كان صعبًا.')}${voiceNote()}
+    const ini=k=>esc((L.who[k]||['?'])[0].replace(/^(Mevrouw|Meneer|De|Het)\s+/i,'').charAt(0));
+    h=`${instr('Lees eerst de vragen. Kijk en luister.','Probeer te antwoorden na één keer luisteren. Luister opnieuw als dat nodig is. Zet de ondertitels aan als het te moeilijk is.','حاول الإجابة بعد الاستماع مرة واحدة، ثم أعد إذا احتجت. شغّل الترجمة إذا كان صعبًا.')}${voiceNote()}
      ${stageHTML(L.scene,L.who,'stg')}
-     <div class="g2"><button class="btn btn-p" id="play"></button><button class="btn btn-s" id="stop">${ic('stop')}Stop</button></div>
-     <div class="row between"><div class="seg" role="group" aria-label="Snelheid" style="flex:0 1 200px"><button data-rate="1" aria-pressed="${rate===1}">1×</button><button data-rate="0.75" aria-pressed="${rate===0.75}">0,75×</button></div>
-       <label class="switch"><input type="checkbox" id="caps"> Ondertitels</label></div>
-     <ol class="caps" id="capList" hidden aria-label="Ondertitels">${L.lines.map(l=>`<li class="cline"><span class="who who-${keys.indexOf(l[0])%2?'b':'a'}" aria-hidden="true">${esc((L.who[l[0]]||['?'])[0].replace(/^(Mevrouw|Meneer|De|Het)\s+/i,'').charAt(0))}</span><span class="nl" style="flex:1">${esc(l[1])}</span></li>`).join('')}</ol>
-     <p class="sec" style="margin-top:4px">Vragen</p>
+     <div class="row nowrap" style="justify-content:center;gap:16px"><button class="btn btn-s side" id="stop">${ic('stop')}Stop</button><button class="play" id="play" aria-label="Afspelen"></button><button class="btn btn-s side" id="speed" aria-label="Snelheid">${ic('clock')}<span id="spv">${rate===1?'1×':'0,75×'}</span></button></div>
+     <label class="switch"><input type="checkbox" id="caps"> Ondertitels${arS('الترجمة')}</label>
+     <div class="chat" id="capList" hidden aria-label="Ondertitels">${L.lines.map(l=>`<div class="msg msg-${keys.indexOf(l[0])%2?'b':'a'}"><span class="av" aria-hidden="true">${ini(l[0])}</span><div class="bl"><span class="nl">${esc(l[1])}</span></div></div>`).join('')}</div>
+     <p class="kick mut" style="margin-top:6px">Vragen</p>
      ${quizHTML(L.qs,'lq')}
-     <details class="more"><summary>Tekst van het gesprek (na het nakijken)</summary><div class="stack" style="gap:6px;margin-top:8px">${L.lines.map(l=>`<p><b style="color:var(--delft)">${esc(L.who[l[0]][0])}:</b> ${esc(l[1])}</p>`).join('')}</div></details>`;
+     <details class="more"><summary>Tekst van het gesprek (na de vragen)</summary><div class="stack" style="gap:6px;margin-top:8px">${L.lines.map(l=>`<p><b style="color:var(--delft)">${esc(L.who[l[0]][0])}:</b> ${esc(l[1])}</p>`).join('')}</div></details>`;
     body.innerHTML=h;
-    const pb=$('#play'), idle=`${ic('play')}Afspelen`; pb.innerHTML=idle;
-    const hl=i=>{ body.querySelectorAll('.cline').forEach((x,k)=>{ x.classList.toggle('cl-now',k===i); x.classList.toggle('cl-past',i>=0&&k<i); x.setAttribute('aria-current',String(k===i)); }); if(i<0) pb.innerHTML=idle; else pb.innerHTML=`<span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Speelt af…`; };
+    const pb=$('#play'), idle=ic('play','l'); pb.innerHTML=idle;
+    const hl=i=>{ body.querySelectorAll('.msg').forEach((x,k)=>{ x.classList.toggle('now',k===i); x.classList.toggle('past',i>=0&&k<i); x.setAttribute('aria-current',String(k===i)); });
+      if(i<0){ pb.innerHTML=idle; pb.setAttribute('aria-label','Afspelen'); } else { pb.innerHTML=`<span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>`; pb.setAttribute('aria-label','Speelt af'); } };
     $('#caps').addEventListener('change',e=>{ caps=e.target.checked; $('#capList').hidden=!caps; });
     pb.onclick=()=>{ if(stopFn) stopFn(); stopFn=playScene('stg',L.lines,L.who,()=>caps,null,hl); };
     $('#stop').onclick=()=>{ if(stopFn){stopFn();stopFn=null;} };
-    body.querySelectorAll('[data-rate]').forEach(b=>b.onclick=()=>{ rate=+b.dataset.rate; body.querySelectorAll('[data-rate]').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); });
+    $('#speed').onclick=()=>{ rate=rate===1?0.75:1; $('#spv').textContent=rate===1?'1×':'0,75×'; };
     wireQuiz('lq',L.qs,()=>markDone(d.id,'luisteren'));
   }
   else if(sec==='lezen'){ const R=d.read;
     h=`${instr('Lees de tekst en beantwoord de vragen.','Lees eerst de vraag en zoek dan het antwoord in de tekst. Zonder woordenboek, zoals bij het A2-examen.','اقرأ السؤال أولًا ثم ابحث عن الجواب في النص. بدون قاموس، مثل امتحان A2.')}
-     <div class="textcard"><h4>${esc(R.title)}</h4>${esc(R.text)}</div>${quizHTML(R.qs,'rq')}`;
+     <div class="sign"><div class="sh">${ic('book')}${esc(R.title)}</div><div class="sbody">${esc(R.text)}</div></div>${quizHTML(R.qs,'rq')}`;
     body.innerHTML=h; wireQuiz('rq',R.qs,()=>markDone(d.id,'lezen'));
   }
   else if(sec==='schrijven'){ body.innerHTML=writeHTML(d.write,'w'+d.id); wireWrite(d.write,'w'+d.id,()=>markDone(d.id,'schrijven')); }
-  else if(sec==='spreken'){ body.innerHTML=`${instr('Luister naar de vraag en antwoord hardop.','Net als bij het A2-examen Spreken hebt u ongeveer 1 minuut per antwoord. Neem uzelf op, luister terug en vergelijk met het voorbeeldantwoord.','مثل امتحان التحدث A2 لديك حوالي دقيقة لكل إجابة. سجّل صوتك بالهاتف واستمع إليه ثم قارنه بالإجابة النموذجية.')}${voiceNote()}${d.speak.map((s,i)=>speakHTML(s,i)).join('')}${doneBtn('spreken','Alles geoefend','تدرّبت على كل شيء')}`; d.speak.forEach((s,i)=>wireSpeak(s,i)); }
+  else if(sec==='spreken'){ body.innerHTML=`${instr('Luister naar de vraag en antwoord hardop.','Net als bij het A2-examen Spreken hebt u ongeveer 1 minuut per antwoord. Neem uzelf op, luister terug en vergelijk met het voorbeeldantwoord.','مثل امتحان التحدث A2 لديك حوالي دقيقة لكل إجابة. سجّل صوتك واستمع إليه ثم قارنه بالإجابة النموذجية.')}${voiceNote()}${d.speak.map((s,i)=>speakHTML(s,i,d.speak.length)).join('')}${doneBtn('spreken','Alles geoefend','تدرّبت على كل شيء')}`; d.speak.forEach((s,i)=>wireSpeak(s,i)); }
   else if(sec==='toets'){ body.innerHTML=`${instr('Quiz van vandaag','5 of 6 goed? Ga door naar de volgende dag. Minder? Herhaal eerst de woorden en de grammatica.','إذا حصلت على 5 أو 6 من 6 انتقل لليوم التالي. أقل من ذلك؟ راجع الكلمات والقواعد أولًا.')}${quizHTML(d.quiz,'tq')}`;
     wireQuiz('tq',d.quiz,(ok,n)=>{ S.scores[d.id]=[ok,n]; save(); markDone(d.id,'toets'); toast('Opgeslagen','تم الحفظ'); }); }
   else if(sec==='herhaling'){ const pool=[]; C.DAYS.forEach(x=>(x.quiz||[]).forEach(q=>pool.push(q))); const pick=pool.sort(()=>Math.random()-.5).slice(0,20);
@@ -655,8 +819,8 @@ function renderSection(d){
 /* ---------- writing ---------- */
 function writeHTML(w,id){ return `<div class="stack wtask">${instr(w.nl,w.task,w.ar)}
   ${w.form? `<div class="formgrid">${w.form.map((f,i)=>`<label class="fl">${esc(f)}<input class="field" type="text" id="${id}-f${i}" autocomplete="off" lang="nl"></label>`).join('')}</div>` : `<label class="fl">Uw tekst<textarea class="field" id="${id}-t" placeholder="Schrijf hier in het Nederlands…" lang="nl"></textarea></label><div class="mut small" id="${id}-wc">0 woorden</div>`}
-  <p class="sec">Controlelijst</p><div class="checks">${w.check.map((c,i)=>`<label><input type="checkbox" id="${id}-c${i}"> <span>${esc(c)}</span></label>`).join('')}</div>
-  <div class="g2"><button class="btn btn-s" id="${id}-show">${ic('eye')}Voorbeeld</button><button class="btn btn-p" id="${id}-done">${ic('check')}Klaar</button></div>
+  <p class="kick mut">Controlelijst</p><div class="checks">${w.check.map((c,i)=>`<label><input type="checkbox" id="${id}-c${i}"> <span>${esc(c)}</span></label>`).join('')}</div>
+  <div class="g2"><button class="btn btn-s" id="${id}-show">${ic('eye')}Voorbeeld</button><button class="btn btn-g" id="${id}-done">${ic('check')}Klaar</button></div>
   <button class="btn btn-t btn-w" id="${id}-ai" hidden>Laat Claude nakijken</button>
   <div class="model" id="${id}-model" hidden></div><div class="fb" id="${id}-fb" hidden aria-live="polite"></div></div>`; }
 function studentText(w,id){ if(w.form) return w.form.map((f,i)=>`${f}: ${($('#'+id+'-f'+i)||{}).value||''}`).join('\n'); return ($('#'+id+'-t')||{}).value||''; }
@@ -675,7 +839,7 @@ function wireWrite(w,id,onDone){
 }
 
 /* ---------- recording (Android app) ---------- */
-const recIdle=()=>`<b>Neem op</b>${arB('سجّل صوتك')}`;
+const recIdle=()=>`<b>Tik en spreek</b>${arB('اضغط وتكلّم')}`;
 function recHTML(key, fileAttr){ return CANREC ? `<div class="recwrap"><button class="recbtn" data-rec="${key}" aria-label="Neem op">${ic('mic','xl')}</button><p class="reclbl" aria-live="polite">${recIdle()}</p></div>`
   : `<label class="btn btn-s" style="align-self:flex-start">${ic('mic')}Opname kiezen of maken<input type="file" accept="audio/*" capture ${fileAttr} hidden></label>`; }
 let activeRec=null;
@@ -686,16 +850,16 @@ function wireRec(btn, audio){ if(!btn) return; let mr=null, chunks=[]; const lbl
     try{ const st=await navigator.mediaDevices.getUserMedia({audio:true}); chunks=[]; mr=new MediaRecorder(st);
       mr.ondataavailable=e=>{ if(e.data&&e.data.size) chunks.push(e.data); };
       mr.onstop=()=>{ st.getTracks().forEach(t=>t.stop()); activeRec=null; const b=new Blob(chunks,{type:mr.mimeType||'audio/webm'}); audio.src=URL.createObjectURL(b); audio.hidden=false;
-        btn.classList.remove('rec-on'); btn.innerHTML=ic('mic','xl'); btn.setAttribute('aria-label','Opnieuw opnemen'); lbl.innerHTML=`<b>Opnieuw opnemen</b>${arB('أعد التسجيل')}<span class="mut small">Luister hieronder naar uw opname.</span>`; };
-      mr.start(); activeRec=btn; btn.classList.add('rec-on'); btn.innerHTML=ic('stopF','xl'); btn.setAttribute('aria-label','Stop opname');
+        btn.classList.remove('rec-on'); btn.innerHTML=ic('mic','xl'); btn.setAttribute('aria-label','Opnieuw opnemen'); lbl.innerHTML=`<b>Opnieuw opnemen</b>${arB('أعد التسجيل')}<span class="mut small">Luister hieronder naar uw opname.</span>`; practised(); };
+      mr.start(); activeRec=btn; btn.classList.add('rec-on'); btn.innerHTML=`<svg width="44" height="44" viewBox="0 0 24 24" aria-hidden="true">${I.stopF}</svg>`; btn.setAttribute('aria-label','Stop opname');
       lbl.innerHTML=`<b><span class="dot" aria-hidden="true"></span>Ik luister…</b><span class="mut">Tik op het vierkant om te stoppen.</span>${arB('أستمع إليك… اضغط على المربّع للإيقاف.')}`;
       setTimeout(()=>{ if(mr&&mr.state==='recording') mr.stop(); },90000);
     }catch(e){ activeRec=null; toast('Geen toegang tot de microfoon','لا يوجد إذن للميكروفون'); } }; }
 function wireFile(input, audio){ if(!input) return; input.onchange=e=>{ const f=e.target.files&&e.target.files[0]; if(!f) return; audio.src=URL.createObjectURL(f); audio.hidden=false; }; }
 
 /* ---------- speaking ---------- */
-function speakHTML(s,i){ return `<section class="task" id="sp${i}"><p class="sec">Opdracht ${i+1} van ${view.name==='day'?(C.DAYS.find(x=>x.id===view.id).speak.length):''}</p>
-  <div class="prompt"><p class="pq" lang="nl">${esc(s[0])}</p>${arP(s[1],'font-size:20px')}<button class="btn btn-t" data-q="${i}" style="align-self:flex-start">${ic('speaker2')}Luister naar de vraag</button></div>
+function speakHTML(s,i,n){ return `<section class="task" id="sp${i}"><p class="kick" style="color:var(--tulip-ink)">Opdracht ${i+1}${n?` van ${n}`:''}</p>
+  ${sayBox(`<div class="row nowrap" style="gap:10px"><p class="pq" lang="nl" style="flex:1">${esc(s[0])}</p><button class="btn btn-p round" data-q="${i}" aria-label="Luister naar de vraag" style="width:52px;height:52px">${ic('speaker2')}</button></div>${arP(s[1],'font-size:20px')}`,'happy',72)}
   <div class="row"><button class="btn btn-s btn-sm" data-t="${i}">${ic('clock')}Start 1 minuut</button><span class="timer" id="tm${i}">1:00</span></div>
   ${recHTML('s'+i, `data-f="${i}"`)}
   <audio id="au${i}" controls hidden></audio>
@@ -710,74 +874,75 @@ function wireSpeak(s,i){ const root=$('#sp'+i);
 }
 
 /* ---------- EXAM ---------- */
-const EXPARTS=[['lezen','Lezen','القراءة','book'],['luisteren','Luisteren','الاستماع','headphones'],['schrijven','Schrijven','الكتابة','pencil'],['spreken','Spreken','التحدّث','mic']];
+const EXPARTS=[['lezen','Lezen',0,'القراءة','book'],['luisteren','Luisteren',0,'الاستماع','headphones'],['schrijven','Schrijven',0,'الكتابة','pencil'],['spreken','Spreken',0,'التحدّث','mic']];
 function examResults(){ const E=C.EXAM, X=S.exam; if(!X.lezen&&!X.luisteren&&!X.schrijven&&!X.spreken) return '';
   const tag=(ok,txt)=>`<span class="score-tag" style="background:var(${ok?'--leaf-soft':'--sun-soft'});color:var(${ok?'--leaf-ink':'--sun-ink'})">${txt}</span>`;
-  const row=(nl,s,pass)=>`<div class="sk"><span style="flex:1;font-weight:700">${nl}</span>${s?tag(s[0]>=pass,s[0]>=pass?'Goed genoeg':'Nog oefenen'):'<span class="mut small">Nog niet gedaan</span>'}<span style="width:56px;text-align:right;font-weight:700;font-variant-numeric:tabular-nums">${s?s.join('/'):'–'}</span></div>`;
-  return `<section class="card" style="padding:14px 16px"><div class="gh" style="padding-bottom:6px"><h2 class="h" style="font-size:20px">Uw resultaten</h2>${arP('نتائجك')}</div>
+  const row=(nl,s,pass)=>`<div class="sk"><span class="h" style="flex:1;font-size:18px">${nl}</span>${s?tag(s[0]>=pass,s[0]>=pass?'Goed genoeg':'Nog oefenen'):'<span class="mut small">Nog niet gedaan</span>'}<span class="h" style="width:56px;text-align:right;font-size:18px;font-variant-numeric:tabular-nums">${s?s.join('/'):'–'}</span></div>`;
+  return `<section class="card" style="padding:14px 16px"><div class="gh" style="padding-bottom:6px"><h2 class="h" style="font-size:22px">Uw resultaten</h2>${arH('نتائجك','font-size:18px')}</div>
     ${row('Lezen',X.lezen,E.lezen.pass)}${row('Luisteren',X.luisteren,E.luisteren.pass)}
-    <div class="sk"><span style="flex:1;font-weight:700">Schrijven</span>${X.schrijven?tag(true,'Gedaan'):'<span class="mut small">Nog niet gedaan</span>'}<span style="width:56px"></span></div>
+    <div class="sk"><span class="h" style="flex:1;font-size:18px">Schrijven</span>${X.schrijven?tag(true,'Gedaan'):'<span class="mut small">Nog niet gedaan</span>'}<span style="width:56px"></span></div>
     ${row('Spreken',X.spreken,11)}
     <p class="mut small" style="padding-top:8px">Richtlijn: Lezen ${E.lezen.pass}, Luisteren ${E.luisteren.pass}, Spreken 11 van 16 punten.</p></section>`; }
 function renderExam(){ const E=C.EXAM; const part=view.part; const pi=EXPARTS.findIndex(p=>p[0]===part);
   const mins={lezen:`${E.lezen.minutes} min`,luisteren:'± 20 min',schrijven:`${E.schrijven.minutes} min`,spreken:'± 15 min'};
-  app.innerHTML=`<header class="dayhead"><div class="wrap">
-    <div class="row between"><button class="btn btn-s btn-sm" data-home>${ic('home')}Home</button></div>
-    <div class="dtitle"><div class="badge sun"><small>DAG</small><b>21</b></div><div style="flex:1;min-width:0"><h1 class="h" style="font-size:24px">Proefexamen</h1>${arP('الامتحان التجريبي','font-size:20px;line-height:1.4')}</div></div>
-    <div class="stack" style="gap:4px">${help(E.note,E.noteAr)}</div></div></header>
-   <nav class="stripbar" aria-label="Onderdelen van het examen"><div class="wrap"><div class="strip">${EXPARTS.map((p,i)=>cellHTML([p[0],p[1],0,p[2],p[3]],i,part===p[0]?'now':(S.exam[p[0]]?'done':''))).join('')}</div></div></nav>
-   <div class="wrap daymain"><article class="ws"><div class="ws-top"><span class="sec">Examen ${pi+1} · ${EXPARTS[pi][1]}</span><span class="mut wsn">${mins[part]}</span></div><div class="ws-body" id="exBody"></div>
-     ${pi<3?`<div class="ws-foot"><button class="btn btn-p btn-2" id="exNext">${btn2(`Volgende: ${EXPARTS[pi+1][1]}`,`التالي: ${EXPARTS[pi+1][2]}`)}</button></div>`:''}</article>${examResults()}</div>`;
-  app.querySelectorAll('.strip .cell').forEach(t=>t.onclick=()=>go({name:'exam',part:t.dataset.sec}));
+  app.innerHTML=`<header class="band" style="background:var(--sun);color:var(--on-sun)"><div class="wrap">
+    <div class="row between"><button class="bb" data-nav="home" style="box-shadow:0 4px 0 var(--sun-deep)">${ic('x')}Stoppen</button></div>
+    <div class="row nowrap" style="gap:14px"><div class="scn" style="color:var(--sun-ink);box-shadow:0 4px 0 var(--sun-deep)">${ic('trophy','l')}</div><div style="flex:1;min-width:0"><p class="kick">Dag 21</p><h1 class="h" style="font-size:28px">Proefexamen</h1>${arH('الامتحان التجريبي','font-size:21px')}</div></div>
+    <div class="stack" style="gap:4px;font-size:16px">${help(E.note,E.noteAr)}</div></div></header>
+   <nav class="sw" aria-label="Onderdelen van het examen"><div class="wrap"><div class="nodes">${EXPARTS.map((p,i)=>nodeHTML(p,i,part===p[0]?'now':(S.exam[p[0]]?'done':'next'))).join('')}</div></div></nav>
+   <div class="wrap daymain"><article class="lesson"><div class="lh"><div class="lic" style="background:var(--sun-soft);color:var(--sun-ink)">${ic(EXPARTS[pi][4])}</div><div style="flex:1;min-width:0"><p class="kick" style="color:var(--delft)">Proefexamen · ${EXPARTS[pi][1]}</p>${arH(EXPARTS[pi][3],'font-size:18px')}</div><span class="step">${mins[part]}</span></div>
+     <div class="lb" id="exBody"></div>
+     ${pi<3?`<div class="lf"><button class="btn btn-p btn-2" id="exNext">${btn2(`Volgende: ${EXPARTS[pi+1][1]}`,`التالي: ${EXPARTS[pi+1][3]}`)}</button></div>`:''}</article>${examResults()}</div>`;
+  app.querySelectorAll('.nodes .node').forEach(t=>t.onclick=()=>go({name:'exam',part:t.dataset.sec}));
   const nx=$('#exNext'); if(nx) nx.onclick=()=>go({name:'exam',part:EXPARTS[pi+1][0]});
   const body=$('#exBody');
-  const timerRow=min=>`<div class="row"><button class="btn btn-p" id="xt">${ic('clock')}Start ${min} min</button><span class="timer" id="xtm">${min}:00</span></div>`;
+  const timerRow=min=>`<div class="row"><button class="btn btn-p" id="xt">${ic('clock')}Start ${min} min</button><span class="timer" id="xtm" role="timer">${min}:00</span></div>`;
   if(part==='lezen'){ const all=[]; E.lezen.texts.forEach(t=>t.qs.forEach(q=>all.push(q)));
     body.innerHTML=`${instr(`Lezen — ${all.length} vragen, ${E.lezen.minutes} minuten`,`Start de timer. Richtlijn: ${E.lezen.pass} van ${all.length} of meer goed = klaar voor A2.`,`شغّل المؤقت. الإرشاد: ${E.lezen.pass}/${all.length} أو أكثر = جاهز لمواد A2.`)}
      ${timerRow(E.lezen.minutes)}
-     ${E.lezen.texts.map(t=>`<div class="textcard"><h4>${esc(t.title)}</h4>${esc(t.text)}</div>`).join('')}
-     ${quizHTML(all,'xl')}`;
-    examTimer(E.lezen.minutes); wireQuiz('xl',all,(ok,n)=>{ S.exam.lezen=[ok,n]; save(); toast(ok>=E.lezen.pass?'Goed gedaan!':'Nog even oefenen'); });
+     ${E.lezen.texts.map(t=>`<div class="sign"><div class="sh">${ic('book')}${esc(t.title)}</div><div class="sbody">${esc(t.text)}</div></div>`).join('')}
+     ${quizAllHTML(all,'xl')}`;
+    examTimer(E.lezen.minutes); wireQuizAll('xl',all,(ok,n)=>{ practised(); S.exam.lezen=[ok,n]; save(); toast(ok>=E.lezen.pass?'Goed gedaan!':'Nog even oefenen'); });
     // place each text above its questions
-    let qi=0; const box=$('#xl'); const cards=[...body.querySelectorAll('.textcard')]; E.lezen.texts.forEach((t,ti)=>{ const first=box.querySelector(`.q[data-qi="${qi}"]`); box.insertBefore(cards[ti],first); qi+=t.qs.length; });
+    let qi=0; const box=$('#xl'); const cards=[...body.querySelectorAll('.sign')]; E.lezen.texts.forEach((t,ti)=>{ const first=box.querySelector(`.q[data-qi="${qi}"]`); box.insertBefore(cards[ti],first); qi+=t.qs.length; });
   }
   if(part==='luisteren'){ const all=[]; E.luisteren.frags.forEach(f=>f.qs.forEach(q=>all.push(q)));
     body.innerHTML=`${instr(`Luisteren — ${all.length} vragen`,`Lees eerst de vragen. Speel elk fragment één keer af. Richtlijn: ${E.luisteren.pass} van ${all.length} of meer goed.`,`اقرأ الأسئلة ثم شغّل كل مقطع مرة واحدة. الإرشاد: ${E.luisteren.pass}/${all.length} أو أكثر.`)}${voiceNote()}
-     ${E.luisteren.frags.map((f,fi)=>`<div class="stack"><p class="sec">Fragment ${fi+1}</p>${stageHTML(f.scene,f.who,'xs'+fi)}<div class="row"><button class="btn btn-p" data-xp="${fi}">${ic('play')}Afspelen</button><span class="mut small" id="xpc${fi}"></span></div></div>`).join('')}
-     ${quizHTML(all,'xq')}`;
+     ${E.luisteren.frags.map((f,fi)=>`<div class="stack"><p class="kick mut">Fragment ${fi+1}</p>${stageHTML(f.scene,f.who,'xs'+fi)}<div class="row"><button class="btn btn-p" data-xp="${fi}">${ic('play')}Afspelen</button><span class="mut small" id="xpc${fi}"></span></div></div>`).join('')}
+     ${quizAllHTML(all,'xq')}`;
     let qi=0; const box=$('#xq'); E.luisteren.frags.forEach((f,fi)=>{ const blk=$('#xs'+fi).parentElement; box.insertBefore(blk, box.querySelector(`.q[data-qi="${qi}"]`)); qi+=f.qs.length; });
     const plays={}; body.querySelectorAll('[data-xp]').forEach(b=>b.onclick=()=>{ const fi=+b.dataset.xp, f=E.luisteren.frags[fi]; plays[fi]=(plays[fi]||0)+1; $('#xpc'+fi).textContent=`${plays[fi]}× afgespeeld`; if(stopFn) stopFn(); stopFn=playScene('xs'+fi,f.lines,f.who,()=>false); });
-    wireQuiz('xq',all,(ok,n)=>{ S.exam.luisteren=[ok,n]; save(); toast(ok>=E.luisteren.pass?'Goed gedaan!':'Nog even oefenen'); });
+    wireQuizAll('xq',all,(ok,n)=>{ practised(); S.exam.luisteren=[ok,n]; save(); toast(ok>=E.luisteren.pass?'Goed gedaan!':'Nog even oefenen'); });
   }
   if(part==='schrijven'){
     body.innerHTML=`${instr(`Schrijven — 3 opdrachten, ${E.schrijven.minutes} minuten`,'Bij het echte A2-examen schrijft u op papier. Oefen ook op papier en vergelijk daarna met het voorbeeld. Geef antwoord op alle punten.','في امتحان A2 الحقيقي تكتب على الورق. تدرّب على الورق أيضًا ثم قارن بالنموذج. أجب عن كل نقطة.')}
      ${timerRow(E.schrijven.minutes)}
      ${E.schrijven.tasks.map((t,i)=>writeHTML(t,'xw'+i)).join('')}`;
-    examTimer(E.schrijven.minutes); E.schrijven.tasks.forEach((t,i)=>wireWrite(t,'xw'+i,()=>{ S.exam.schrijven=1; save(); }));
+    examTimer(E.schrijven.minutes); E.schrijven.tasks.forEach((t,i)=>wireWrite(t,'xw'+i,()=>{ practised(); S.exam.schrijven=1; save(); }));
   }
   if(part==='spreken'){
     body.innerHTML=`${instr('Spreken — 8 opdrachten','Bij elke opdracht: luister, denk 10 seconden na en antwoord maximaal 1 minuut. Geef uzelf punten: 2 = antwoord in hele zinnen, 1 = gedeeltelijk, 0 = geen antwoord. Richtlijn: 11 van 16 punten.','لكل مهمة: استمع، فكّر 10 ثوانٍ، أجب حتى دقيقة. قيّم نفسك: 2 = أجبت بجمل كاملة، 1 = جزئيًا، 0 = لا إجابة. الإرشاد: 11 من 16 نقطة.')}${voiceNote()}
-     ${E.spreken.tasks.map((t,i)=>`<section class="task" id="xsp${i}"><p class="sec">${esc(t.part)}</p>
+     ${E.spreken.tasks.map((t,i)=>`<section class="task" id="xsp${i}"><p class="kick" style="color:var(--tulip-ink)">${esc(t.part)}</p>
        ${t.scene? stageHTML(t.scene,{A:t.who},'xst'+i) : `<div class="stage"><div class="pic" aria-hidden="true">${esc(t.pic)}</div></div>`}
-       <div class="prompt"><p class="pq" lang="nl" style="font-size:21px">${esc(t.q)}</p>${arP(t.ar,'font-size:19px')}<button class="btn btn-t" data-xq="${i}" style="align-self:flex-start">${ic('speaker2')}Luister</button></div>
+       <div class="bub2"><div class="row nowrap" style="gap:10px"><p class="pq" lang="nl" style="flex:1;font-size:21px">${esc(t.q)}</p><button class="btn btn-p round" data-xq="${i}" aria-label="Luister" style="width:52px;height:52px">${ic('speaker2')}</button></div>${arP(t.ar,'font-size:19px')}</div>
        <div class="row"><button class="btn btn-s btn-sm" data-xt="${i}">${ic('clock')}1 minuut</button><span class="timer" id="xtm${i}">1:00</span></div>
        ${recHTML('x'+i, `data-xf="${i}"`)}<audio id="xau${i}" controls hidden></audio>
-       <div class="stack" style="gap:6px"><span style="font-weight:700">Mijn score</span><div class="seg" role="group" aria-label="Mijn score">${[0,1,2].map(v=>`<button data-ss="${i}:${v}" aria-pressed="${(S.exam.sp||{})[i]===v}">${v}</button>`).join('')}</div></div>
+       <div class="stack" style="gap:6px"><span class="h" style="font-size:18px">Mijn score</span><div class="g3" role="group" aria-label="Mijn score">${[0,1,2].map(v=>`<button class="sb" data-ss="${i}:${v}" aria-pressed="${(S.exam.sp||{})[i]===v}"><span style="font-size:22px">${v}</span></button>`).join('')}</div></div>
        <details class="more"><summary>Voorbeeldantwoord</summary><p style="margin-top:6px">${esc(t.model)}</p></details></section>`).join('')}
-     <p class="h" style="font-size:22px" id="sptot"></p>`;
+     <p class="h" style="font-size:24px" id="sptot"></p>`;
     const tot=()=>{ const sp=S.exam.sp||{}; const sum=Object.values(sp).reduce((a,b)=>a+b,0); const n=Object.keys(sp).length; const el=$('#sptot'); el.textContent = n? `${sum} / 16 punten (${n}/8 gescoord)`:''; el.style.color=sum>=11?'var(--leaf-ink)':''; if(n===8){S.exam.spreken=[sum,16]; save();} };
     E.spreken.tasks.forEach((t,i)=>{
       body.querySelector(`[data-xq="${i}"]`).onclick=()=>{ if(stopFn) stopFn(); if(t.scene){ stopFn=playScene('xst'+i,[['A',t.q]],{A:t.who},()=>true); } else { stopSpeech(); speak(t.q,'f'); } };
       body.querySelector(`[data-xt="${i}"]`).onclick=()=>startTimer($('#xtm'+i),60,10,'Tijd!');
       wireFile(body.querySelector(`[data-xf="${i}"]`), $('#xau'+i)); wireRec(body.querySelector(`[data-rec="x${i}"]`), $('#xau'+i));
     });
-    body.querySelectorAll('[data-ss]').forEach(b=>b.onclick=()=>{ const [i,v]=b.dataset.ss.split(':').map(Number); S.exam.sp=S.exam.sp||{}; S.exam.sp[i]=v; save(); b.parentElement.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); tot(); });
+    body.querySelectorAll('[data-ss]').forEach(b=>b.onclick=()=>{ const [i,v]=b.dataset.ss.split(':').map(Number); practised(); S.exam.sp=S.exam.sp||{}; S.exam.sp[i]=v; save(); b.parentElement.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); tot(); });
     tot();
   }
 }
-function examTimer(min){ const b=$('#xt'); if(!b) return; b.onclick=()=>startTimer($('#xtm'),min*60,120,'Tijd is om!'); }
+function examTimer(min){ const b=$('#xt'); if(!b) return; b.onclick=()=>startTimer($('#xtm'),min*60,300,'Tijd is om!'); }
 
-const hash0=(location.hash||'').slice(1); if(/^dag\d+$/.test(hash0)){ const id=+hash0.slice(3); if(id>=1&&id<=20) view={name:'day',id,sec:firstOpen(id)}; } else if(hash0==='examen') view={name:'exam',part:'lezen'}; else if(hash0==='instellingen') view={name:'settings'};
+const hash0=(location.hash||'').slice(1); if(/^dag\d+$/.test(hash0)){ const id=+hash0.slice(3); if(id>=1&&id<=20) view={name:'day',id,sec:firstOpen(id)}; } else if(hash0==='examen') view={name:'exam',part:'lezen'}; else if(['instellingen','settings'].includes(hash0)) view={name:'settings'}; else if(hash0==='stickers') view={name:'stickers'};
 render();
 })();
 </script>
