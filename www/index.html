@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-</head><body>
 <title>Stap voor Stap A1</title>
 <style>
 @font-face{font-family:"Bricolage Grotesque";font-style:normal;font-weight:200 800;font-display:swap;src:url(fonts/bricolage-grotesque-latin-opsz-normal.woff2) format("woff2-variations"),url(fonts/bricolage-grotesque-latin-opsz-normal.woff2) format("woff2")}
@@ -11,204 +10,286 @@
 @font-face{font-family:"IBM Plex Sans Arabic";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
 </style>
 <style>
-/* Layout: one column "lesson notebook" — a sticky day header, section tabs as a timetable strip, content cards set like worksheet pages. */
+/* Layout: one column "lesson notebook" — day header, section strip as a timetable, content set as worksheet pages. Tokens follow the Claude Design canvas. */
 :root{
   --paper:#F5F7FB; --sheet:#FFFFFF; --ink:#16233F; --muted:#5A6684; --line:#D9DFEC;
-  --delft:#1F4BB8; --delft-soft:#E6ECFA; --tulip:#D9472B; --tulip-soft:#FBE7E2;
-  --leaf:#1E7F4F; --leaf-soft:#E2F3EA; --sun:#F2B33D; --sun-soft:#FCF1DA;
-  --stage1:#DCE6FB; --stage2:#F3F6FD; --skin1:#E9B98F; --skin2:#B8805A;
+  --delft:#1F4BB8; --delft-soft:#E8EEFB; --tulip:#D9472B; --tulip-soft:#FCEAE5;
+  --leaf:#1E7F4F; --leaf-soft:#E3F3EA; --sun:#F2B33D; --sun-soft:#FDF2DA;
+  --on-delft:#FFFFFF; --on-tulip:#FFFFFF; --tulip-ink:#B3361C; --leaf-ink:#17663F; --sun-ink:#7A5300;
+  --stage1:#DCE6FB; --stage2:#F3F6FD; --skin1:#E9B98F; --skin2:#B8805A; --shadow:rgba(22,35,63,.07);
   --f-display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
   --f-body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
   --f-ar:"IBM Plex Sans Arabic","Noto Naskh Arabic","Geeza Pro",Tahoma,sans-serif;
-  --r:14px;
+  --r:14px; color-scheme:light;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --paper:#0E1424; --sheet:#151D33; --ink:#E7ECF8; --muted:#9AA6C3; --line:#2A3552;
-  --delft:#7FA2FF; --delft-soft:#1D2A4F; --tulip:#FF8A70; --tulip-soft:#3A1F1B;
-  --leaf:#5FD39A; --leaf-soft:#173628; --sun:#F5C463; --sun-soft:#3A2F17;
-  --stage1:#1C2747; --stage2:#121A30; --skin1:#C99A73; --skin2:#9A6B4B; color-scheme:dark }}
+  --paper:#0E1424; --sheet:#151D33; --ink:#E7ECF8; --muted:#A3AECB; --line:#2B3656;
+  --delft:#7FA2FF; --delft-soft:#1E2C57; --tulip:#FF8A70; --tulip-soft:#3D2128;
+  --leaf:#5FD39A; --leaf-soft:#133427; --sun:#F5C463; --sun-soft:#3B3122;
+  --on-delft:#0E1424; --on-tulip:#0E1424; --tulip-ink:#FF9C86; --leaf-ink:#5FD39A; --sun-ink:#F5C463;
+  --stage1:#1C2747; --stage2:#121A30; --skin1:#C99A73; --skin2:#9A6B4B; --shadow:rgba(0,0,0,.25); color-scheme:dark }}
 :root[data-theme="dark"]{
-  --paper:#0E1424; --sheet:#151D33; --ink:#E7ECF8; --muted:#9AA6C3; --line:#2A3552;
-  --delft:#7FA2FF; --delft-soft:#1D2A4F; --tulip:#FF8A70; --tulip-soft:#3A1F1B;
-  --leaf:#5FD39A; --leaf-soft:#173628; --sun:#F5C463; --sun-soft:#3A2F17;
-  --stage1:#1C2747; --stage2:#121A30; --skin1:#C99A73; --skin2:#9A6B4B; color-scheme:dark }
+  --paper:#0E1424; --sheet:#151D33; --ink:#E7ECF8; --muted:#A3AECB; --line:#2B3656;
+  --delft:#7FA2FF; --delft-soft:#1E2C57; --tulip:#FF8A70; --tulip-soft:#3D2128;
+  --leaf:#5FD39A; --leaf-soft:#133427; --sun:#F5C463; --sun-soft:#3B3122;
+  --on-delft:#0E1424; --on-tulip:#0E1424; --tulip-ink:#FF9C86; --leaf-ink:#5FD39A; --sun-ink:#F5C463;
+  --stage1:#1C2747; --stage2:#121A30; --skin1:#C99A73; --skin2:#9A6B4B; --shadow:rgba(0,0,0,.25); color-scheme:dark }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{-webkit-text-size-adjust:100%}
-body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.45}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--sheet)}
-.wrap{max-width:820px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
-h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.15;margin:0}
-h1{font-size:clamp(28px,6vw,40px);font-weight:800;letter-spacing:-.01em}
-h2{font-size:24px;font-weight:700}
-h3{font-size:19px;font-weight:700}
+.wrap{max-width:640px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,.h{font-family:var(--f-display);font-weight:700;letter-spacing:-.01em;line-height:1.15;margin:0;text-wrap:balance}
 p{margin:0}
-.ar{font-family:var(--f-ar);direction:rtl;unicode-bidi:isolate;text-align:right;font-size:1.02em;line-height:1.7}
-.nlx{color:var(--ink)}
+.ar{font-family:var(--f-ar);direction:rtl;unicode-bidi:isolate;text-align:right;font-size:1.1em;line-height:1.6}
+.mut{color:var(--muted)}
+.small{font-size:15px}
+.sec{font:700 14px/1.2 var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
 button,input,textarea,select{font:inherit;color:inherit}
 button{cursor:pointer}
-:focus-visible{outline:3px solid var(--delft);outline-offset:2px;border-radius:6px}
-.btn{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:var(--sheet);border-radius:999px;padding:9px 16px;font-weight:700;font-size:15px;min-height:42px}
-.btn.primary{background:var(--delft);border-color:var(--delft);color:var(--sheet)}
-.btn.recording{background:#b3261e;border-color:#b3261e;color:#fff;animation:recp 1.2s ease-in-out infinite}@keyframes recp{50%{opacity:.75}}
-.btn.ghost{background:transparent}
-.btn:disabled{opacity:.5;cursor:default}
-.btn .ic{font-size:16px;line-height:1}
+:focus-visible{outline:3px solid var(--delft);outline-offset:2px}
+.ico{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ico.s{width:20px;height:20px}
+.ico.xs{width:15px;height:15px;stroke-width:3}
+.ico.xl{width:44px;height:44px}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.row.nowrap{flex-wrap:nowrap;align-items:flex-start}
+.between{justify-content:space-between}
 .stack{display:flex;flex-direction:column;gap:14px}
-.muted{color:var(--muted)}
-.small{font-size:14px}
-.label{font-size:12px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 
-/* top bar */
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--sheet);border-bottom:1px solid var(--line)}
-.top .wrap{padding-block:10px;display:flex;align-items:center;gap:12px}
-.brand{font-family:var(--f-display);font-weight:800;font-size:19px;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;background:none;border:0;padding:0}
-.brand .mark{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:8px;background:var(--delft);color:var(--sheet);font-size:15px}
-.top .spacer{flex:1}
-.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
-.seg button{border:0;background:transparent;padding:6px 10px;font-size:13px;font-weight:700;min-height:34px}
-.seg button[aria-pressed="true"]{background:var(--delft-soft);color:var(--delft)}
+/* buttons */
+.btn{min-height:52px;border-radius:var(--r);padding:0 18px;display:inline-flex;align-items:center;justify-content:center;gap:10px;font:700 17px/1.2 var(--f-body);border:0;text-decoration:none;text-align:center}
+.btn-p{background:var(--delft);color:var(--on-delft)}
+.btn-s{background:var(--sheet);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn-t{background:var(--delft-soft);color:var(--delft)}
+.btn-sm{min-height:48px;padding:0 14px;font-size:16px}
+.btn-w{width:100%}
+.btn-2{flex-direction:column;gap:0;min-height:64px;width:100%;padding-block:8px}
+.btn-2 .ln{display:flex;align-items:center;gap:10px}
+.btn-2 .ar{font-size:17px;line-height:1.4;font-weight:600;text-align:center}
+.btn:disabled{opacity:.45;cursor:default}
+.round{width:48px;min-height:48px;height:48px;padding:0;border-radius:999px;flex:none}
+.card{background:var(--sheet);border:1px solid var(--line);border-radius:var(--r)}
+.pill{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 12px;border-radius:999px;font-weight:700;font-size:15px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line)}
+.pill.sun{background:var(--sun-soft);color:var(--sun-ink);box-shadow:none}
+.pill.leaf{background:var(--leaf-soft);color:var(--leaf-ink);box-shadow:none}
+.bar{height:10px;border-radius:999px;background:var(--line);overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--delft);border-radius:999px;transition:width .3s}
+.bar.thin{height:8px}
+.tip{background:var(--delft-soft);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.tip .nl{font-weight:700}
+.notice{border:2px solid var(--sun);background:var(--sun-soft);border-radius:var(--r);padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+details.more{border-top:1px solid var(--line);padding-top:10px}
+details.more>summary{font-weight:700;min-height:44px;display:flex;align-items:center;cursor:pointer;color:var(--delft)}
+details.more ol{margin:8px 0}
 
 /* home */
-.hero{padding-block:28px 8px;display:grid;gap:12px}
-.hero .lead{font-size:18px;max-width:60ch}
-.meter{height:10px;border-radius:99px;background:var(--line);overflow:hidden}
-.meter>i{display:block;height:100%;background:var(--leaf);border-radius:99px;transition:width .4s}
-.notice{border:1.5px solid var(--line);background:var(--sheet);border-radius:var(--r);padding:14px 16px;display:grid;gap:6px}
-.notice.warn{border-color:var(--sun);background:var(--sun-soft)}
-.weeks{display:grid;gap:26px;margin-top:22px}
-.week h2{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
-.week h2 small{font-family:var(--f-body);font-size:14px;color:var(--muted);font-weight:400}
-.days{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
-.day{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:start;text-align:left;border:1.5px solid var(--line);background:var(--sheet);border-radius:var(--r);padding:14px;min-height:96px}
-.day:hover{border-color:var(--delft)}
-.day .n{grid-row:span 3;font-family:var(--f-display);font-weight:800;font-size:28px;color:var(--delft);line-height:1;min-width:34px;font-variant-numeric:tabular-nums}
-.day .t{font-weight:700;line-height:1.25}
-.day .s{font-size:14px;color:var(--muted)}
-.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--line);color:var(--ink);width:max-content}
-.chip.done{background:var(--leaf-soft);color:var(--leaf)}
-.chip.part{background:var(--sun-soft);color:var(--ink)}
-.cardlink{display:grid;gap:6px;text-align:left;border:1.5px solid var(--delft);background:var(--delft-soft);border-radius:var(--r);padding:16px}
-.road{display:grid;gap:0;border-left:3px solid var(--line);margin-left:8px}
+.apphead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 14px) 0 14px}
+.brand{display:flex;align-items:center;gap:12px}
+.mark{width:44px;height:44px;border-radius:12px;background:var(--delft);color:var(--on-delft);display:flex;align-items:center;justify-content:center;flex:none}
+.home{display:flex;flex-direction:column;gap:16px;padding-bottom:40px}
+.wbars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.wbars span{font-size:14px;font-weight:700;color:var(--muted)}
+.today{box-shadow:0 0 0 2px var(--delft)}
+.badge{flex:none;width:60px;height:60px;border-radius:var(--r);background:var(--delft-soft);color:var(--delft);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.badge small{font:700 12px/1 var(--f-body);letter-spacing:.08em}
+.badge b{font:800 28px/1.05 var(--f-display)}
+.badge.sun{background:var(--sun-soft);color:var(--sun-ink)}
+.tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.tile{min-height:72px;border-radius:var(--r);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:700 24px/1 var(--f-display);border:0;padding:6px 0;background:var(--sheet);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.tile small{font:700 13px/1 var(--f-body)}
+.tile-done{background:var(--leaf-soft);box-shadow:none}
+.tile-done .ico{color:var(--leaf-ink)}
+.tile-part small{color:var(--sun-ink)}
+.tile-part{box-shadow:inset 0 0 0 2px var(--sun)}
+.tile-now{background:var(--delft);color:var(--on-delft);box-shadow:0 0 0 3px var(--paper),0 0 0 5px var(--delft)}
+.tile-next{color:var(--muted);box-shadow:none;border:1.5px dashed var(--line)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:15px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:16px;height:16px;border-radius:5px;display:inline-block}
+.road{display:grid;border-left:3px solid var(--line);margin:10px 0 0 8px}
 .road .st{position:relative;padding:0 0 18px 20px;display:grid;gap:4px}
 .road .st::before{content:"";position:absolute;left:-9px;top:4px;width:15px;height:15px;border-radius:50%;background:var(--sheet);border:3px solid var(--delft)}
 .road .st.now::before{background:var(--delft)}
-.lvl{font-family:var(--f-display);font-weight:800;color:var(--delft)}
 .src a{color:var(--delft);word-break:break-word}
 
-/* day view */
-.dayhead{padding-block:22px 10px;display:grid;gap:8px}
-.tabs{position:sticky;top:calc(env(safe-area-inset-top,0px) + 63px);z-index:8;background:var(--paper);padding-block:8px;margin-inline:-4px;overflow-x:auto;scrollbar-width:none}
-.tabs::-webkit-scrollbar{display:none}
-.tabs .in{display:flex;gap:6px;padding-inline:4px;width:max-content}
-.tab{border:1.5px solid var(--line);background:var(--sheet);border-radius:10px;padding:6px 11px;display:grid;text-align:left;min-width:86px}
-.tab b{font-size:14px}
-.tab span{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
-.tab[aria-selected="true"]{border-color:var(--delft);background:var(--delft-soft)}
-.tab.ok b::after{content:" ✓";color:var(--leaf)}
-.sheet{background:var(--sheet);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:grid;gap:16px;margin-top:8px}
-.instr{display:grid;gap:4px;padding:12px 14px;border-radius:10px;background:var(--delft-soft)}
-.instr .nl{font-weight:700}
+/* day */
+.dayhead{background:var(--sheet);border-bottom:1px solid var(--line);padding:calc(env(safe-area-inset-top,0px) + 12px) 0 14px}
+.dayhead .wrap{display:flex;flex-direction:column;gap:12px}
+.dtitle{display:flex;gap:12px;align-items:center}
+.stripbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:8;background:var(--sheet);padding:8px 0 12px;box-shadow:0 8px 18px var(--shadow)}
+.strip{display:flex;overflow-x:auto;scrollbar-width:none;border:1px solid var(--line);border-radius:var(--r);background:var(--paper);scroll-behavior:smooth}
+.strip::-webkit-scrollbar{display:none}
+.cell{flex:1 0 80px;min-height:84px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 2px;border:0;border-right:1px solid var(--line);background:transparent;color:var(--ink);font-family:inherit}
+.cell:last-child{border-right:0}
+.cell .n{font:700 13px/1 var(--f-body);color:var(--muted);display:flex;align-items:center;gap:3px;height:16px}
+.cell .l{font:700 15px/1.1 var(--f-body)}
+.cell .a{font:500 16px/1.2 var(--f-ar)}
+.cell-done .n{color:var(--leaf-ink)}
+.cell-now{background:var(--delft);color:var(--on-delft)}
+.cell-now .n{color:var(--on-delft)}
+.daymain{display:flex;flex-direction:column;gap:16px;padding-top:16px;padding-bottom:40px}
+.can{padding:14px 16px;display:flex;gap:12px;align-items:flex-start}
+.can .ib{flex:none;width:40px;height:40px;border-radius:12px;background:var(--leaf-soft);color:var(--leaf-ink);display:flex;align-items:center;justify-content:center}
+.ws{background:var(--sheet);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.ws-top{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 16px;border-bottom:3px double var(--line)}
+.ws-top .wsn{font-weight:700;font-size:15px}
+.ws-body{padding:18px 16px 20px;display:flex;flex-direction:column;gap:16px}
+.ws-foot{padding:16px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
 
 /* vocab */
-.vlist{display:grid;gap:0;border-top:1px solid var(--line)}
-.v{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;padding:10px 0;border-bottom:1px solid var(--line);align-items:center}
-.v .say{grid-row:span 3}
+.fc{position:relative;width:100%;min-height:300px;border-radius:18px;border:2px solid var(--line);background:var(--sheet);color:var(--ink);font-family:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px 18px;box-shadow:0 6px 0 -2px var(--paper),0 6px 0 0 var(--line),0 12px 0 -4px var(--paper),0 12px 0 -2px var(--line);margin-bottom:12px}
+.fc-back{background:var(--delft-soft);border-color:var(--delft)}
+.fc .word{font:700 40px/1.1 var(--f-body);text-align:center;overflow-wrap:anywhere}
+.fc .arw{font-size:40px;line-height:1.3;font-weight:600;text-align:center}
+.fc .hint{display:flex;align-items:center;gap:6px;font-size:15px;color:var(--muted);margin-top:6px}
+.art{display:inline-flex;align-items:center;min-height:30px;padding:0 12px;border-radius:999px;background:var(--delft-soft);color:var(--delft);font-weight:700;font-size:16px}
+.ctl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.ctl button{min-height:76px;border-radius:var(--r);border:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font:700 15px/1.1 var(--f-body);padding:6px 2px}
+.ctl .btn-s{background:var(--sheet);box-shadow:inset 0 0 0 1.5px var(--line)}
+.ctl .btn-t{background:var(--delft-soft);color:var(--delft)}
+.ctl .btn-p{background:var(--delft);color:var(--on-delft)}
+.ctl .a{font:500 15px/1.2 var(--f-ar)}
+.vlist{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.v{display:flex;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);min-height:64px}
 .v .w{font-weight:700;font-size:18px}
-.say{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);background:var(--sheet);display:grid;place-items:center;font-size:16px;padding:0}
-.say:hover{border-color:var(--delft)}
-.flash{border:2px dashed var(--line);border-radius:var(--r);min-height:170px;display:grid;place-items:center;text-align:center;padding:20px;gap:8px}
-.flash .big{font-family:var(--f-display);font-size:30px;font-weight:700}
 
 /* tables */
-.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
-table{border-collapse:collapse;width:100%;font-size:15px}
-th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-th{background:var(--delft-soft);font-size:13px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:17px}
+th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font:700 14px var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--paper)}
 tr:last-child td{border-bottom:0}
 td.ar{text-align:right}
+.exl{display:flex;flex-direction:column;gap:10px}
 
 /* stage ("video") */
-.stage{position:relative;aspect-ratio:16/9;max-width:100%;border-radius:var(--r);overflow:hidden;background:linear-gradient(180deg,var(--stage1),var(--stage2));border:1px solid var(--line)}
-.stage .place{position:absolute;left:12px;top:10px;display:flex;align-items:center;gap:8px;background:var(--sheet);border-radius:99px;padding:4px 12px 4px 6px;font-size:13px;font-weight:700}
+.stage{position:relative;aspect-ratio:16/10;max-width:100%;border-radius:var(--r);overflow:hidden;background:linear-gradient(180deg,var(--stage1),var(--stage2));border:1px solid var(--line)}
+.stage .place{position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:8px;background:var(--sheet);border-radius:99px;padding:4px 12px 4px 6px;font-size:14px;font-weight:700}
 .stage .place .e{font-size:20px}
 .stage .floor{position:absolute;left:0;right:0;bottom:0;height:22%;background:var(--line);opacity:.55}
 .stage .ppl{position:absolute;inset:auto 0 6% 0;display:flex;justify-content:space-around;align-items:flex-end;padding-inline:6%}
 .person{display:grid;justify-items:center;gap:4px;width:30%;max-width:150px;position:relative}
 .person svg{width:100%;height:auto;overflow:visible}
-.person .tag{font-size:12px;font-weight:700;background:var(--sheet);border-radius:99px;padding:2px 9px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.person .tag{font-size:13px;font-weight:700;background:var(--sheet);border-radius:99px;padding:2px 9px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
 .person .mouth{transform-box:fill-box;transform-origin:center}
 .person.talk svg{animation:bob .5s ease-in-out infinite alternate}
 .person.talk .mouth{animation:talk .18s ease-in-out infinite alternate}
-.person.talk .tag{background:var(--delft);color:var(--sheet)}
-.bubble{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:6px;background:var(--sheet);border:1.5px solid var(--delft);border-radius:12px;padding:6px 10px;font-size:13px;line-height:1.35;width:max-content;max-width:min(240px,62vw);box-shadow:0 4px 14px rgba(0,0,0,.08)}
-.bubble.dots{font-size:18px;letter-spacing:2px;padding:2px 12px}
+.person.talk .tag{background:var(--delft);color:var(--on-delft)}
+.bubble{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);margin-bottom:6px;background:var(--sheet);border:2px solid var(--delft);border-radius:12px;padding:6px 10px;font-size:14px;line-height:1.35;width:max-content;max-width:min(240px,62vw);box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.bubble.dots{font-size:18px;letter-spacing:2px;padding:2px 12px;color:var(--delft)}
 .stage .bigicon{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);font-size:clamp(34px,9vw,64px);opacity:.9}
 .stage .pic{position:absolute;inset:0;display:grid;place-items:center;font-size:clamp(56px,16vw,120px)}
 @keyframes bob{from{transform:translateY(0)}to{transform:translateY(-3px)}}
 @keyframes talk{from{transform:scaleY(.35)}to{transform:scaleY(1.25)}}
-@media (prefers-reduced-motion:reduce){.person.talk svg,.person.talk .mouth{animation:none}}
-.ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.transcript{display:grid;gap:6px;border-left:3px solid var(--delft);padding:4px 0 4px 12px}
-.transcript .ln b{color:var(--delft)}
+.eq{display:inline-flex;gap:3px;align-items:flex-end;height:18px}
+.eq i{width:4px;height:8px;border-radius:2px;background:currentColor;animation:eq .7s ease-in-out infinite alternate}
+.eq i:nth-child(2){animation-delay:.15s}.eq i:nth-child(3){animation-delay:.3s}.eq i:nth-child(4){animation-delay:.45s}
+@keyframes eq{to{height:18px}}
+@media (prefers-reduced-motion:reduce){.person.talk svg,.person.talk .mouth,.eq i{animation:none}}
+.seg{display:flex;padding:4px;gap:4px;border-radius:var(--r);background:var(--paper);box-shadow:inset 0 0 0 1px var(--line)}
+.seg button{flex:1;min-height:48px;border:0;border-radius:11px;background:transparent;color:var(--ink);font:700 16px var(--f-body);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px 10px}
+.seg button[aria-pressed="true"],.seg button[aria-checked="true"]{background:var(--sheet);box-shadow:0 0 0 2px var(--delft);color:var(--delft)}
+.switch{display:flex;align-items:center;gap:10px;min-height:48px;font-weight:700}
+.switch input{width:24px;height:24px;accent-color:var(--delft)}
+.caps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.cline{display:flex;gap:10px;padding:10px 12px;border-radius:12px;align-items:flex-start}
+.cline .who{flex:none;width:34px;height:34px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px}
+.who-a{background:var(--delft-soft);color:var(--delft)}
+.who-b{background:var(--leaf-soft);color:var(--leaf-ink)}
+.cline.cl-now{background:var(--sun-soft);box-shadow:inset 0 0 0 2px var(--sun)}
+.cline.cl-now .nl{font-weight:700;font-size:19px}
+.cline.cl-past .nl{color:var(--muted)}
 
 /* questions */
-.q{display:grid;gap:8px;padding:12px 0;border-top:1px solid var(--line)}
-.q:first-child{border-top:0}
-.q .qt{font-weight:700}
-.opts{display:grid;gap:6px}
-.opt{display:flex;gap:10px;align-items:center;text-align:left;border:1.5px solid var(--line);background:var(--sheet);border-radius:10px;padding:9px 12px;min-height:44px}
-.opt .k{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line);font-size:13px;font-weight:700;flex:none}
-.opt[aria-pressed="true"]{border-color:var(--delft);background:var(--delft-soft)}
-.opt.right{border-color:var(--leaf);background:var(--leaf-soft)}
-.opt.wrong{border-color:var(--tulip);background:var(--tulip-soft)}
-.score{font-family:var(--f-display);font-weight:800;font-size:22px}
-.score.good{color:var(--leaf)} .score.bad{color:var(--tulip)}
+.quiz{display:flex;flex-direction:column;gap:16px}
+.q{display:flex;flex-direction:column;gap:10px;padding-top:16px;border-top:1px dashed var(--line)}
+.q:first-child{border-top:0;padding-top:0}
+.q .qt{font:700 20px/1.3 var(--f-display)}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:center;gap:12px;width:100%;min-height:58px;padding:10px 14px;border-radius:var(--r);background:var(--sheet);border:2px solid var(--line);color:var(--ink);font:700 18px/1.3 var(--f-body);text-align:left}
+.opt .k{flex:none;width:32px;height:32px;border-radius:10px;background:var(--paper);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--muted)}
+.opt .ot{flex:1;min-width:0}
+.opt .st{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:15px;white-space:nowrap}
+.opt[aria-pressed="true"]{background:var(--delft-soft);border-color:var(--delft)}
+.opt[aria-pressed="true"] .k{background:var(--delft);color:var(--on-delft)}
+.opt.ok{background:var(--leaf-soft);border-color:var(--leaf)}
+.opt.ok .k{background:var(--leaf);color:var(--sheet)}
+.opt.ok .st{color:var(--leaf-ink)}
+.opt.bad{background:var(--tulip-soft);border-color:var(--tulip)}
+.opt.bad .k{background:var(--tulip);color:var(--on-tulip)}
+.opt.bad .st{color:var(--tulip-ink)}
+.opt.off{color:var(--muted)}
+.result{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:12px 0 4px}
+.result .ar{text-align:center}
+.ring-bg{fill:none;stroke:var(--line);stroke-width:14}
+.ring{fill:none;stroke:var(--leaf);stroke-width:14;stroke-linecap:round}
+.ring.low{stroke:var(--sun)}
+.ring-t{font:800 40px var(--f-display);fill:var(--ink)}
+.ring-s{font:700 15px var(--f-body);fill:var(--muted)}
 
 /* reading */
-.textcard{border:1px solid var(--line);border-radius:10px;padding:14px 16px;white-space:pre-line;background:var(--paper);font-size:17px}
-.textcard h4{margin:0 0 6px;font-family:var(--f-display);font-size:17px}
+.textcard{border:2px solid var(--ink);border-radius:var(--r);padding:16px;white-space:pre-line;background:var(--sheet);font-size:17px}
+.textcard h4{margin:0 0 6px;font-family:var(--f-display);font-size:20px}
 
 /* writing */
-textarea,input[type=text]{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--paper)}
-textarea{min-height:150px;resize:vertical}
-.formgrid{display:grid;gap:10px}
-.formgrid label{display:grid;gap:4px;font-size:14px;font-weight:700}
-.model{border:1.5px dashed var(--leaf);border-radius:10px;padding:12px 14px;white-space:pre-line;background:var(--leaf-soft)}
-.checks{display:grid;gap:6px}
-.checks label{display:flex;gap:10px;align-items:flex-start}
-.checks input{width:20px;height:20px;margin-top:3px;accent-color:var(--leaf)}
-.fb{border:1.5px solid var(--delft);border-radius:10px;padding:12px 14px;white-space:pre-wrap;background:var(--delft-soft)}
+.field{width:100%;min-height:56px;padding:12px 14px;border-radius:var(--r);border:2px solid var(--line);background:var(--sheet);color:var(--ink);font:400 19px/1.4 var(--f-body)}
+.field:focus{outline:none;border-color:var(--delft);box-shadow:0 0 0 4px var(--delft-soft)}
+textarea.field{min-height:160px;resize:vertical}
+select.field{font-size:17px}
+.fl{display:flex;flex-direction:column;gap:6px;font-weight:700}
+.formgrid{display:flex;flex-direction:column;gap:12px}
+.checks{display:flex;flex-direction:column;gap:4px}
+.checks label{display:flex;gap:12px;align-items:flex-start;min-height:44px;padding:6px 0}
+.checks input{width:24px;height:24px;margin-top:1px;accent-color:var(--leaf);flex:none}
+.model{border:2px dashed var(--leaf);border-radius:var(--r);padding:12px 14px;white-space:pre-line;background:var(--leaf-soft)}
+.fb{border:2px solid var(--delft);border-radius:var(--r);padding:12px 14px;white-space:pre-wrap;background:var(--delft-soft)}
+.wtask+.wtask{border-top:3px double var(--line);padding-top:18px}
 
 /* speaking */
-.timer{font-family:var(--f-display);font-weight:800;font-size:34px;font-variant-numeric:tabular-nums}
-.timer.low{color:var(--tulip)}
-.rec{display:grid;gap:10px;border:1px solid var(--line);border-radius:10px;padding:14px}
+.task{display:flex;flex-direction:column;gap:14px}
+.task+.task{border-top:3px double var(--line);padding-top:18px}
+.prompt{background:var(--paper);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:10px}
+.prompt .pq{font-size:24px;font-weight:700;line-height:1.25}
+.timer{display:inline-flex;align-items:center;min-height:48px;padding:0 14px;border-radius:var(--r);background:var(--paper);font:800 24px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.timer.low{color:var(--tulip-ink);background:var(--tulip-soft)}
+.recwrap{display:flex;flex-direction:column;align-items:center;gap:14px;padding:8px 0}
+.recbtn{width:104px;height:104px;border-radius:999px;border:0;background:var(--tulip);color:var(--on-tulip);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 8px var(--tulip-soft)}
+.recbtn.rec-on{box-shadow:0 0 0 8px var(--tulip-soft),0 0 0 16px var(--sheet),0 0 0 18px var(--tulip);animation:recp 1.2s ease-in-out infinite}
+@keyframes recp{50%{opacity:.8}}
+.reclbl{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}
+.reclbl b{font-size:19px;display:flex;align-items:center;gap:8px}
+.reclbl .ar{text-align:center}
+.dot{width:10px;height:10px;border-radius:999px;background:var(--tulip);display:inline-block}
 audio{width:100%}
-.selfscore{display:flex;gap:6px;flex-wrap:wrap}
 
-.pager{display:flex;justify-content:space-between;gap:10px;margin-top:14px;flex-wrap:wrap}
-.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:99px;font-weight:700;font-size:14px;z-index:20;max-width:calc(100% - 32px)}
-@media (max-width:520px){
-  body{font-size:16px}
-  .top .wrap{gap:8px}
-  .brand .txt{display:none}
-  .sheet{padding:14px}
-  .tab{min-width:76px;padding:6px 9px}
-}
+/* settings */
+.grp{display:flex;flex-direction:column;gap:8px}
+.gh{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.gh h2{font-size:20px}
+.rad{display:flex;align-items:center;gap:12px;min-height:64px;padding:10px 14px;border-radius:var(--r);border:2px solid var(--line);background:var(--sheet);width:100%;text-align:left;font:700 18px/1.3 var(--f-body);color:var(--ink)}
+.rad .o{width:24px;height:24px;border-radius:999px;border:2px solid var(--muted);flex:none}
+.rad[aria-checked="true"]{border-color:var(--delft);background:var(--delft-soft)}
+.rad[aria-checked="true"] .o{border:7px solid var(--delft)}
+.rad .ex{display:block;font-weight:400;font-size:15px;color:var(--muted)}
+.vcard{padding:12px;display:flex;flex-direction:column;gap:10px;border:2px solid var(--line);border-radius:var(--r);background:var(--sheet)}
+.vcard.on{border-color:var(--delft);background:var(--delft-soft)}
+.vcard .rad{border:0;background:transparent;padding:0;min-height:48px}
+.score-tag{display:inline-flex;align-items:center;min-height:28px;padding:0 10px;border-radius:999px;font-weight:700;font-size:14px}
+.sk{display:flex;align-items:center;gap:10px;min-height:52px;border-bottom:1px solid var(--line)}
+.sk:last-child{border-bottom:0}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;align-items:center;gap:10px;min-height:52px;padding:10px 18px 10px 12px;border-radius:var(--r);background:var(--ink);color:var(--paper);font-weight:700;box-shadow:0 10px 28px rgba(0,0,0,.22);z-index:20;max-width:calc(100% - 32px)}
+.toast .ti{width:30px;height:30px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:var(--leaf);color:var(--sheet);flex:none}
+.toast .ar{font-size:17px;opacity:.9}
+@media (max-width:380px){ .ctl button{font-size:14px} .fc .word{font-size:34px} }
 </style>
+</head><body>
 
-<header class="top"><div class="wrap">
-  <button class="brand" id="homeBtn" aria-label="Naar het overzicht"><span class="mark">A1</span><span class="txt">Stap voor Stap</span></button>
-  <span class="spacer"></span>
-  <span class="label" id="hlpLbl">Uitleg</span>
-  <div class="seg" role="group" aria-labelledby="hlpLbl">
-    <button data-help="ar" id="hAr">عربي</button><button data-help="nl" id="hNl">NL</button><button data-help="both" id="hBoth">2×</button>
-  </div>
-</div></header>
-
-<main class="wrap" id="app"></main>
-<div class="toast" id="toast" hidden></div>
+<main id="app"></main>
+<div class="toast" id="toast" role="status" hidden></div>
 
 <script src="course.js"></script>
 <script>
@@ -218,21 +299,59 @@ const $ = (s,el=document)=>el.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const app = $('#app');
 
+/* ---------- icons (stroke SVG) ---------- */
+const I={
+  home:'<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
+  back:'<path d="M11 5l-7 7 7 7M4 12h16"/>', next:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  gear:'<path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/>',
+  speaker:'<path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 8.5a5 5 0 010 7"/>',
+  speaker2:'<path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 8.5a5 5 0 010 7"/><path d="M19 6a8.5 8.5 0 010 12"/>',
+  flip:'<path d="M4 12a8 8 0 0114-5.3L20 9M20 4v5h-5M20 12a8 8 0 01-14 5.3L4 15M4 20v-5h5"/>',
+  chevL:'<path d="M15 5l-7 7 7 7"/>', chevR:'<path d="M9 5l7 7-7 7"/>',
+  play:'<path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/>',
+  stop:'<rect x="6" y="6" width="12" height="12" rx="2"/>', stopF:'<rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/>',
+  mic:'<path d="M9 6a3 3 0 016 0v5a3 3 0 01-6 0zM5 11a7 7 0 0014 0M12 18v3"/>',
+  check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>', x:'<path d="M6 6l12 12M18 6L6 18"/>',
+  info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01"/>',
+  trophy:'<path d="M7 4h10v5a5 5 0 01-10 0z"/><path d="M7 6H4a3 3 0 003 4M17 6h3a3 3 0 01-3 4M12 14v4M8 21h8"/>',
+  shield:'<path d="M12 3l8 4v5c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V7z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  retry:'<path d="M4 12a8 8 0 1 0 2.3-5.7L4 8.5M4 4v4.5h4.5"/>',
+  user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/>',
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/>',
+  moon:'<path d="M20 14.5A8 8 0 019.5 4 8 8 0 1020 14.5z"/>',
+  phone:'<rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/>',
+  flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>', steps:'<path d="M4 19h5v-5h5V9h6"/><path d="M17 6l3 3-3 3"/>',
+  eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  pin:'<path d="M12 21s7-6.2 7-12a7 7 0 00-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/>',
+  cards:'<path d="M3 8a2 2 0 012-2h10a2 2 0 012 2v11a2 2 0 01-2 2H5a2 2 0 01-2-2zM7 3h12a2 2 0 012 2v12"/>',
+  headphones:'<path d="M4 15v-3a8 8 0 0116 0v3M3 15.5A1.5 1.5 0 014.5 14H7v6H4.5A1.5 1.5 0 013 18.5zM21 15.5a1.5 1.5 0 00-1.5-1.5H17v6h2.5a1.5 1.5 0 001.5-1.5z"/>',
+  grammar:'<path d="M4 4h6v7H4zM14 4h6v7h-6zM4 14h16v6H4z"/>',
+  book:'<path d="M3 5h6a3 3 0 013 3v12a2 2 0 00-2-2H3zM21 5h-6a3 3 0 00-3 3v12a2 2 0 012-2h7z"/>',
+  pencil:'<path d="M4 20l4-1L19 8l-3-3L5 16zM14 7l3 3"/>',
+  quiz:'<path d="M12 3a9 9 0 110 18 9 9 0 010-18zM9.5 9.5a2.5 2.5 0 114 2c-1 .6-1.5 1.2-1.5 2.5M12 17h.01"/>'
+};
+const ic=(n,c='')=>`<svg class="ico ${c}" viewBox="0 0 24 24" aria-hidden="true">${I[n]}</svg>`;
+
 /* ---------- storage (per viewer, optional) ---------- */
 const KEY='svs-a1-v1';
-let S = {help:'both', done:{}, scores:{}, exam:{}};
+let S = {help:'both', done:{}, scores:{}, exam:{}, theme:'auto', gender:'f'};
 try{ const raw=localStorage.getItem(KEY); if(raw) S=Object.assign(S,JSON.parse(raw)); }catch(e){}
 if(S.help==='en') S.help='both';
 function save(){ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){} }
+function applyTheme(){ const r=document.documentElement; if(S.theme==='light'||S.theme==='dark') r.dataset.theme=S.theme; else delete r.dataset.theme; }
+applyTheme();
 
 /* ---------- help language ---------- */
-function setHelp(h){ S.help=h; save(); document.querySelectorAll('[data-help]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.help===h))); render(); }
-document.querySelectorAll('[data-help]').forEach(b=>b.addEventListener('click',()=>setHelp(b.dataset.help)));
-document.querySelectorAll('[data-help]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.help===S.help)));
-function help(nl,ar){ const out=[]; if(S.help!=='ar' && nl) out.push(`<p class="nlx">${esc(nl)}</p>`); if(S.help!=='nl' && ar) out.push(`<p class="ar">${esc(ar)}</p>`); return out.join(''); }
+const AR=()=>S.help!=='nl';
+function help(nl,ar){ const out=[]; if(S.help!=='ar' && nl) out.push(`<p>${esc(nl)}</p>`); if(S.help!=='nl' && ar) out.push(`<p class="ar" lang="ar">${esc(ar)}</p>`); return out.join(''); }
+const arP=(t,st='')=>AR()&&t?`<p class="ar" lang="ar"${st?` style="${st}"`:''}>${esc(t)}</p>`:'';
+const arS=t=>AR()?`<span class="a" dir="rtl" lang="ar">${esc(t)}</span>`:'';
+const arB=t=>AR()?`<span class="ar" lang="ar">${esc(t)}</span>`:'';
+const btn2=(nl,ar,icon='next')=>`<span class="ln">${esc(nl)}${icon?ic(icon):''}</span>${arB(ar)}`;
 
 /* ---------- toast ---------- */
-let tt; function toast(m){ const t=$('#toast'); t.textContent=m; t.hidden=false; clearTimeout(tt); tt=setTimeout(()=>t.hidden=true,2200); }
+let tt; function toast(m,ar){ const t=$('#toast'); t.innerHTML=`<span class="ti">${ic('check','s')}</span><span>${esc(String(m).replace(/\s*✓\s*/g,''))}</span>${ar&&AR()?`<span class="ar" lang="ar">· ${esc(ar)}</span>`:''}`; t.hidden=false; clearTimeout(tt); tt=setTimeout(()=>t.hidden=true,2200); }
 
 /* ---------- deterministic option shuffle ---------- */
 function hash(s){ let h=2166136261; for(const c of s){ h^=c.charCodeAt(0); h=Math.imul(h,16777619);} return h>>>0; }
@@ -242,23 +361,21 @@ function shuffled(q){ const idx=q[1].map((_,i)=>i); let h=hash(q[0]+q[1].join('|
 const NATIVE = !!(window.Capacitor && Capacitor.isNativePlatform && Capacitor.isNativePlatform());
 const NTTS = NATIVE && Capacitor.Plugins && Capacitor.Plugins.TextToSpeech;
 const CANREC = NATIVE && !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder);
-const HAS_TTS = !!NTTS || ('speechSynthesis' in window);
 const TTS = { voices:[], nl:[], ok:false };
 const QUAL=/(enhanced|premium|verbeterd|natural|neural|online|google)/i;
-function afterVoices(){ const n=$('#voiceNote'); if(n) n.hidden=TTS.ok; document.querySelectorAll('[data-vsel]').forEach(fillVoiceSelect); }
+function afterVoices(){ document.querySelectorAll('[data-vnote]').forEach(n=>n.hidden=TTS.ok); document.querySelectorAll('[data-vsel]').forEach(fillVoiceSelect); }
 function loadNativeVoices(){ return NTTS.getSupportedVoices().then(r=>{ const all=(r&&r.voices)||[];
     TTS.voices=all.map((v,i)=>({name:v.voiceURI, lang:v.lang, idx:i, local:v.localService}));
     TTS.nl=TTS.voices.filter(v=>/^nl([-_]|$)/i.test(v.lang)); const sc=v=>(/nl[-_]NL/i.test(v.lang)?2:0)+(v.local?1:0); TTS.nl.sort((a,b)=>sc(b)-sc(a)); TTS.ok=TTS.nl.length>0; afterVoices(); }).catch(()=>{}); }
 function loadVoices(){ if(NTTS) return; if(!('speechSynthesis' in window)) return; TTS.voices=speechSynthesis.getVoices(); TTS.nl=TTS.voices.filter(v=>/^nl([-_]|$)/i.test(v.lang));
-  const score=v=>(/nl[-_]NL/i.test(v.lang)?2:0)+(QUAL.test(v.name)?1:0); TTS.nl.sort((a,b)=>score(b)-score(a)); TTS.ok=TTS.nl.length>0;
-  const n=$('#voiceNote'); if(n) n.hidden=TTS.ok; document.querySelectorAll('[data-vsel]').forEach(fillVoiceSelect); }
+  const score=v=>(/nl[-_]NL/i.test(v.lang)?2:0)+(QUAL.test(v.name)?1:0); TTS.nl.sort((a,b)=>score(b)-score(a)); TTS.ok=TTS.nl.length>0; afterVoices(); }
 if(NTTS){ loadNativeVoices(); setTimeout(loadNativeVoices,1500); document.addEventListener('resume',loadNativeVoices); }
 try{ loadVoices(); if(!NTTS && 'speechSynthesis' in window){ speechSynthesis.onvoiceschanged=loadVoices; let tries=0; const iv=setInterval(()=>{ loadVoices(); if(TTS.ok||++tries>10) clearInterval(iv); },500); } }catch(e){}
 const FEM=/(claire|ellen|fenna|colette|lotte|sanne|laura|google nederlands|female|vrouw)/i, MAL=/(xander|maarten|frank|arnaud|ruben|male|\bman\b)/i;
 function voiceFor(g){ if(!TTS.nl.length) return null; const pick=S['voice'+g]; if(pick){ const v=TTS.nl.find(x=>x.name===pick); if(v) return v; }
   const f=TTS.nl.filter(v=>FEM.test(v.name)), m=TTS.nl.filter(v=>MAL.test(v.name)&&!FEM.test(v.name)); if(g==='f'&&f.length) return f[0]; if(g==='m'&&m.length) return m[0]; if(NTTS&&g==='m'&&TTS.nl.length>1){ const lc=TTS.nl.filter(v=>v.local&&/nl[-_]NL/i.test(v.lang)); return (lc[1]||TTS.nl[1]); } return TTS.nl[0]; }
 let rate=1;
-function speak(text,g='f',onend){
+function speak(text,g,onend){ g=g||S.gender||'f';
   if(NTTS){ const v=voiceFor(g); const same=v && voiceFor('f')===voiceFor('m'); let done=false; const fin=()=>{ if(!done){ done=true; onend&&onend(); } };
     NTTS.speak({ text, lang:'nl-NL', rate:0.95*rate, pitch: same?(g==='m'?0.75:1.2):1, volume:1, voice: v? v.idx : -1, category:'playback' }).then(fin,fin); return; }
   if(!('speechSynthesis' in window)){ toast('Deze browser kan niet voorlezen'); onend&&onend(); return; }
@@ -270,198 +387,283 @@ function stopSpeech(){ try{ if(NTTS){ NTTS.stop().catch(()=>{}); } else speechSy
 function fillVoiceSelect(sel){ const g=sel.dataset.vsel; const cur=(voiceFor(g)||{}).name;
   sel.innerHTML = TTS.nl.length ? TTS.nl.map((v,k)=>`<option value="${esc(v.name)}" ${v.name===cur?'selected':''}>${NTTS ? `Stem ${k+1} · ${esc(v.lang)}${v.local?'':' (online)'}` : `${esc(v.name.replace(/\s*\(.*?\)\s*/g,' ').trim())} · ${esc(v.lang)}${QUAL.test(v.name)?' ★':''}`}</option>`).join('') : '<option>Geen Nederlandse stem</option>'; sel.disabled=!TTS.nl.length; }
 const PHONE_STEPS = `
-  <details class="small"><summary><b>iPhone / iPad</b></summary>
-    <ol class="stack" style="gap:4px;padding-left:20px;margin:8px 0">
+  <details class="more"><summary>iPhone / iPad</summary>
+    <ol class="stack small" style="gap:4px;padding-left:20px">
       <li>Instellingen → Toegankelijkheid → Gesproken materiaal → Stemmen → Nederlands.</li>
       <li>Kies Claire (vrouw) of Xander (man) en download de versie “Verbeterd” of “Premium”.</li>
-      <li>Sluit deze pagina en open hem opnieuw. Kies de stem hieronder.</li>
+      <li>Sluit deze pagina en open hem opnieuw. Kies de stem in Instellingen.</li>
       <li>Hoort u niets? Zet de stille modus uit en zet het volume hoger.</li></ol>
-    <ol class="ar stack" style="gap:4px;padding-right:20px;margin:8px 0">
+    <ol class="ar stack small" style="gap:4px;padding-right:20px">
       <li>الإعدادات ← تسهيلات الاستخدام ← المحتوى المنطوق ← الأصوات ← الهولندية (Nederlands).</li>
       <li>اختر Claire (صوت امرأة) أو Xander (صوت رجل) وحمّل النسخة «المحسّنة» أو «Premium».</li>
-      <li>أغلق هذه الصفحة وافتحها من جديد، ثم اختر الصوت في الأسفل.</li>
+      <li>أغلق هذه الصفحة وافتحها من جديد، ثم اختر الصوت في الإعدادات.</li>
       <li>لا تسمع شيئًا؟ أوقف الوضع الصامت وارفع مستوى الصوت.</li></ol></details>
-  <details class="small"><summary><b>Android</b></summary>
-    <ol class="stack" style="gap:4px;padding-left:20px;margin:8px 0">
+  <details class="more"><summary>Android</summary>
+    <ol class="stack small" style="gap:4px;padding-left:20px">
       <li>Instellingen → zoek op “Tekst-naar-spraak”.</li>
       <li>Kies “Spraakservices van Google” als engine → tandwiel → Spraakgegevens installeren → Nederlands (Nederland).</li>
-      <li>Sluit deze pagina en open hem opnieuw. Kies de stem hieronder.</li></ol>
-    <ol class="ar stack" style="gap:4px;padding-right:20px;margin:8px 0">
+      <li>Sluit deze pagina en open hem opnieuw. Kies de stem in Instellingen.</li></ol>
+    <ol class="ar stack small" style="gap:4px;padding-right:20px">
       <li>الإعدادات ← ابحث عن «تحويل النص إلى كلام».</li>
       <li>اختر «خدمات الكلام من Google» ← رمز الترس ← تثبيت بيانات الصوت ← الهولندية (هولندا).</li>
-      <li>أغلق هذه الصفحة وافتحها من جديد، ثم اختر الصوت في الأسفل.</li></ol></details>
-  <p class="small muted">${help('De namen in het menu kunnen per telefoon iets anders zijn. Werkt het geluid niet in de Claude-app? Open de link dan in Safari of Chrome.','قد تختلف أسماء القوائم قليلًا حسب الهاتف. إذا لم يعمل الصوت داخل تطبيق Claude، افتح الرابط في Safari أو Chrome.')}</p>`;
+      <li>أغلق هذه الصفحة وافتحها من جديد، ثم اختر الصوت في الإعدادات.</li></ol></details>`;
 const NATIVE_STEPS = `
-  <ol class="stack small" style="gap:4px;padding-left:20px;margin:8px 0">
+  <ol class="stack small" style="gap:4px;padding-left:20px;margin:0">
     <li>Tik op de knop hieronder. Android opent de spraakinstellingen.</li>
     <li>Kies “Spraakservices van Google” → Spraakgegevens installeren → Nederlands (Nederland).</li>
-    <li>Kom terug naar de app en kies de stem hierboven.</li></ol>
-  <ol class="ar stack small" style="gap:4px;padding-right:20px;margin:8px 0">
+    <li>Kom terug naar de app en kies de stem in Instellingen.</li></ol>
+  <ol class="ar stack small" style="gap:4px;padding-right:20px;margin:0">
     <li>اضغط على الزر في الأسفل، سيفتح أندرويد إعدادات الكلام.</li>
     <li>اختر «خدمات الكلام من Google» ← تثبيت بيانات الصوت ← الهولندية (هولندا).</li>
-    <li>ارجع إلى التطبيق واختر الصوت في الأعلى.</li></ol>
-  <button class="btn" data-vinstall>⚙️ Stem installeren · تثبيت الصوت</button>`;
+    <li>ارجع إلى التطبيق واختر الصوت في الإعدادات.</li></ol>
+  <button class="btn btn-s btn-w" data-vinstall>${ic('gear')}Stem installeren · تثبيت الصوت</button>`;
 function stepsHTML(){ return NTTS ? NATIVE_STEPS : PHONE_STEPS; }
-function voicePanel(){ return `<div class="notice" id="voicePanel"><b>Stem · الصوت</b>
-  ${help('Kies de beste Nederlandse stem op uw telefoon. Een stem met ★ klinkt meestal natuurlijker.','اختر أفضل صوت هولندي على هاتفك. الصوت المعلَّم بـ ★ يكون عادةً أكثر طبيعية.')}
-  <label class="small" for="vselF"><b>Vrouwenstem · صوت امرأة</b></label><div class="row" style="flex-wrap:nowrap"><select id="vselF" data-vsel="f" style="flex:1;min-width:0;padding:8px;border-radius:10px;border:1.5px solid var(--line);background:var(--paper)"></select><button class="btn" data-vtest="f">▶</button></div>
-  <label class="small" for="vselM"><b>Mannenstem · صوت رجل</b></label><div class="row" style="flex-wrap:nowrap"><select id="vselM" data-vsel="m" style="flex:1;min-width:0;padding:8px;border-radius:10px;border:1.5px solid var(--line);background:var(--paper)"></select><button class="btn" data-vtest="m">▶</button></div>
-  <details class="small"><summary><b>Nederlandse stem installeren · تثبيت صوت هولندي</b></summary>${stepsHTML()}</details></div>`; }
 document.addEventListener('click',e=>{ const b=e.target.closest&&e.target.closest('[data-vinstall]'); if(b&&NTTS) NTTS.openInstall().catch(()=>toast('Open Instellingen → Tekst-naar-spraak')); });
-function wireVoicePanel(root){ root.querySelectorAll('[data-vsel]').forEach(sel=>{ fillVoiceSelect(sel); sel.onchange=()=>{ S['voice'+sel.dataset.vsel]=sel.value; save(); toast('Stem gekozen ✓'); }; });
+function wireVoices(root){ root.querySelectorAll('[data-vsel]').forEach(sel=>{ fillVoiceSelect(sel); sel.onchange=()=>{ S['voice'+sel.dataset.vsel]=sel.value; save(); toast('Stem gekozen','تم اختيار الصوت'); }; });
   root.querySelectorAll('[data-vtest]').forEach(b=>b.onclick=()=>{ stopSpeech(); speak(b.dataset.vtest==='f'?'Goedemorgen! Ik ben uw docent. Hoe gaat het met u?':'Goedemiddag. Ik woon in Veghel en ik leer Nederlands.', b.dataset.vtest); }); }
-function voiceNote(){ return `<div class="notice warn" id="voiceNote" ${TTS.ok?'hidden':''}><b>Geen Nederlandse stem gevonden · لا يوجد صوت هولندي</b>${help('Uw telefoon heeft nog geen Nederlandse stem. Daardoor klinkt het geluid niet goed. Volg deze stappen:','هاتفك لا يحتوي بعد على صوت هولندي، لذلك قد يكون النطق خاطئًا. اتبع هذه الخطوات:')}${stepsHTML()}</div>`; }
+function voiceNote(){ return `<div class="notice" data-vnote ${TTS.ok?'hidden':''}><b>Geen Nederlandse stem gevonden · لا يوجد صوت هولندي</b>${help('Uw telefoon heeft nog geen Nederlandse stem. Daardoor klinkt het geluid niet goed. Volg deze stappen:','هاتفك لا يحتوي بعد على صوت هولندي، لذلك قد يكون النطق خاطئًا. اتبع هذه الخطوات:')}${stepsHTML()}</div>`; }
 
 /* ---------- people drawing ---------- */
 function personSVG(g,i){ const shirt = ['var(--delft)','var(--tulip)','var(--leaf)','var(--sun)'][i%4]; const skin = i%2? 'var(--skin2)':'var(--skin1)';
   const hair = g==='f' ? `<path d="M22 34c0-16 10-24 18-24s18 8 18 24v20c-4-6-6-14-6-20-8 2-16 2-24 0 0 6-2 14-6 20z" fill="var(--ink)" opacity=".85"/>` : `<path d="M24 30c0-12 8-18 16-18s16 6 16 18c-6-4-10-6-16-6s-10 2-16 6z" fill="var(--ink)" opacity=".85"/>`;
-  return `<svg viewBox="0 0 80 120" aria-hidden="true"><path d="M8 120c0-26 14-44 32-44s32 18 32 44z" fill="${shirt}"/><rect x="34" y="62" width="12" height="16" fill="${skin}"/>${hair}<circle cx="40" cy="38" r="20" fill="${skin}"/>${g==='f'?'':''}<circle cx="33" cy="36" r="2.4" fill="var(--ink)"/><circle cx="47" cy="36" r="2.4" fill="var(--ink)"/><ellipse class="mouth" cx="40" cy="47" rx="5" ry="2.6" fill="var(--ink)"/></svg>`; }
+  return `<svg viewBox="0 0 80 120" aria-hidden="true"><path d="M8 120c0-26 14-44 32-44s32 18 32 44z" fill="${shirt}"/><rect x="34" y="62" width="12" height="16" fill="${skin}"/>${hair}<circle cx="40" cy="38" r="20" fill="${skin}"/><circle cx="33" cy="36" r="2.4" fill="var(--ink)"/><circle cx="47" cy="36" r="2.4" fill="var(--ink)"/><ellipse class="mouth" cx="40" cy="47" rx="5" ry="2.6" fill="var(--ink)"/></svg>`; }
 function stageHTML(sceneKey, who, id){ const sc=C.SCENES[sceneKey]||{icon:'💬',label:''}; const keys=Object.keys(who);
   const people = keys.map((k,i)=>`<div class="person" data-k="${k}"><div class="bubble dots" hidden>…</div>${personSVG(who[k][1],i)}<span class="tag">${esc(who[k][0])}</span></div>`).join('');
   const mid = (sceneKey==='phone' && keys.length>1) ? `<div class="bigicon" aria-hidden="true">📞</div>` : (keys.length===1 ? `<div class="bigicon" aria-hidden="true" style="left:78%">${sc.icon}</div>`:'');
-  return `<div class="stage" id="${id}" role="img" aria-label="Bewegende scène: ${esc(sc.label)}"><div class="floor"></div><div class="place"><span class="e">${sc.icon}</span>${esc(sc.label)}</div>${mid}<div class="ppl">${people}</div></div>`; }
-function playScene(stageId, lines, who, captions, done){ stopSpeech(); const st=document.getElementById(stageId); let i=0, alive=true;
+  return `<div class="stage" id="${id}" role="img" aria-label="Bewegende scène: ${esc(sc.label)}"><div class="floor"></div><div class="place"><span class="e" aria-hidden="true">${sc.icon}</span>${esc(sc.label)}</div>${mid}<div class="ppl">${people}</div></div>`; }
+function playScene(stageId, lines, who, captions, done, onLine){ stopSpeech(); const st=document.getElementById(stageId); let i=0, alive=true;
   const clear=()=>st.querySelectorAll('.person').forEach(p=>{p.classList.remove('talk'); const b=p.querySelector('.bubble'); b.hidden=true;});
-  function next(){ if(!alive) return; clear(); if(i>=lines.length){ done&&done(); return; } const [k,txt,tts]=lines[i++]; const p=st.querySelector(`.person[data-k="${k}"]`);
+  function next(){ if(!alive) return; clear(); if(i>=lines.length){ onLine&&onLine(-1); done&&done(); return; } onLine&&onLine(i); const [k,txt,tts]=lines[i++]; const p=st.querySelector(`.person[data-k="${k}"]`);
     if(p){ p.classList.add('talk'); const b=p.querySelector('.bubble'); b.hidden=false; if(captions()){ b.textContent=txt; b.classList.remove('dots'); } else { b.textContent='…'; b.classList.add('dots'); } }
     speak(tts||txt, (who[k]||['','f'])[1], ()=>setTimeout(next,380)); }
-  next(); return ()=>{ alive=false; stopSpeech(); clear(); }; }
+  next(); return ()=>{ alive=false; stopSpeech(); clear(); onLine&&onLine(-1); }; }
 
 /* ---------- question blocks ---------- */
-function quizHTML(qs, id){ return `<div class="stack" id="${id}">${qs.map((q,qi)=>{ const ord=shuffled(q); return `<div class="q" data-qi="${qi}"><div class="qt">${qi+1}. ${esc(q[0])}</div><div class="opts">${ord.map((oi,pos)=>`<button class="opt" data-oi="${oi}" aria-pressed="false"><span class="k">${'ABCD'[pos]}</span><span>${esc(q[1][oi])}</span></button>`).join('')}</div></div>`; }).join('')}
-  <div class="row"><button class="btn primary" data-check="${id}">Nakijken</button><span class="score" data-score="${id}"></span></div></div>`; }
+function quizHTML(qs, id){ return `<div class="quiz" id="${id}">${qs.map((q,qi)=>{ const ord=shuffled(q); return `<section class="q" data-qi="${qi}"><h3 class="qt" dir="auto">${qi+1}. ${esc(q[0])}</h3><div class="opts">${ord.map((oi,pos)=>`<button class="opt" data-oi="${oi}" data-k="${'ABCD'[pos]}" aria-pressed="false"><span class="k">${'ABCD'[pos]}</span><span class="ot" dir="auto">${esc(q[1][oi])}</span><span class="st"></span></button>`).join('')}</div></section>`; }).join('')}
+  <button class="btn btn-p btn-w" data-check="${id}">${ic('check')}Nakijken</button><div class="result" data-score="${id}" hidden aria-live="polite"></div></div>`; }
+function resultHTML(ok,n){ const r=64, L=2*Math.PI*r, f=n?ok/n:0, good=f>=0.7;
+  return `<svg width="150" height="150" viewBox="0 0 168 168" role="img" aria-label="${ok} van ${n} goed"><circle class="ring-bg" cx="84" cy="84" r="${r}"/><circle class="ring ${good?'':'low'}" cx="84" cy="84" r="${r}" stroke-dasharray="${(L*f).toFixed(1)} ${L.toFixed(1)}" transform="rotate(-90 84 84)"/><text x="84" y="92" text-anchor="middle" class="ring-t">${ok}/${n}</text><text x="84" y="118" text-anchor="middle" class="ring-s">goed</text></svg>
+   <h3 class="h" style="font-size:28px">${good?'Goed zo!':'Nog even oefenen'}</h3>${arP(good?'أحسنت!':'تدرّب قليلًا بعد')}<p>U hebt ${ok} van de ${n} vragen goed.</p>`; }
 function wireQuiz(id, qs, onScore){ const box=document.getElementById(id); if(!box) return;
   box.addEventListener('click',e=>{ const o=e.target.closest('.opt'); if(o && !box.dataset.checked){ o.parentElement.querySelectorAll('.opt').forEach(x=>x.setAttribute('aria-pressed','false')); o.setAttribute('aria-pressed','true'); }
-    const c=e.target.closest('[data-check]'); if(c){ if(box.dataset.checked){ box.dataset.checked=''; box.querySelectorAll('.opt').forEach(x=>{x.classList.remove('right','wrong'); x.setAttribute('aria-pressed','false');}); c.textContent='Nakijken'; box.querySelector('[data-score]').textContent=''; return; }
-      let ok=0; box.querySelectorAll('.q').forEach(qel=>{ const q=qs[+qel.dataset.qi]; const sel=qel.querySelector('.opt[aria-pressed="true"]'); qel.querySelectorAll('.opt').forEach(x=>{ if(+x.dataset.oi===q[2]) x.classList.add('right'); }); if(sel){ if(+sel.dataset.oi===q[2]) ok++; else sel.classList.add('wrong'); } });
-      box.dataset.checked='1'; c.textContent='Opnieuw'; const sc=box.querySelector('[data-score]'); sc.textContent=`${ok} / ${qs.length}`; sc.className='score '+(ok/qs.length>=0.7?'good':'bad'); onScore&&onScore(ok,qs.length); } }); }
+    const c=e.target.closest('[data-check]'); if(!c) return; const res=box.querySelector('[data-score]');
+    if(box.dataset.checked){ box.dataset.checked=''; box.querySelectorAll('.opt').forEach(x=>{ x.classList.remove('ok','bad','off'); x.disabled=false; x.setAttribute('aria-pressed','false'); x.querySelector('.k').textContent=x.dataset.k; x.querySelector('.st').innerHTML=''; }); c.innerHTML=`${ic('check')}Nakijken`; res.hidden=true; res.innerHTML=''; return; }
+    let ok=0; box.querySelectorAll('.q').forEach(qel=>{ const q=qs[+qel.dataset.qi]; const sel=qel.querySelector('.opt[aria-pressed="true"]');
+      qel.querySelectorAll('.opt').forEach(x=>{ const right=+x.dataset.oi===q[2]; x.setAttribute('aria-pressed','false');
+        if(right){ x.classList.add('ok'); x.querySelector('.k').innerHTML=ic('check','s'); x.querySelector('.st').innerHTML=`${ic('check','s')}${x===sel?'Goed!':'Goed antwoord'}`; }
+        else if(x===sel){ x.classList.add('bad'); x.querySelector('.k').innerHTML=ic('x','s'); x.querySelector('.st').innerHTML=`${ic('x','s')}Niet goed`; }
+        else x.classList.add('off'); });
+      if(sel && +sel.dataset.oi===q[2]) ok++; });
+    box.dataset.checked='1'; c.innerHTML=`${ic('retry')}Opnieuw`; res.innerHTML=resultHTML(ok,qs.length); res.hidden=false; res.scrollIntoView({block:'center',behavior:'smooth'}); onScore&&onScore(ok,qs.length); }); }
 
 /* ---------- routing ---------- */
 let view={name:'home'}; let stopFn=null;
 function go(v){ if(activeRec){ activeRec.click(); } if(stopFn){stopFn(); stopFn=null;} stopSpeech(); clearInterval(timerInt); view=v; render(); window.scrollTo({top:0}); }
-$('#homeBtn').addEventListener('click',()=>go({name:'home'}));
+app.addEventListener('click',e=>{ const h=e.target.closest('[data-home]'); if(h) go({name:'home'}); const s=e.target.closest('[data-settings]'); if(s) go({name:'settings'}); });
 if(NATIVE && Capacitor.Plugins.App){ Capacitor.Plugins.App.addListener('backButton',()=>{ if(view.name!=='home') go({name:'home'}); else Capacitor.Plugins.App.exitApp(); });
   Capacitor.Plugins.App.addListener('pause',()=>{ stopSpeech(); if(activeRec) activeRec.click(); }); }
-function render(){ if(view.name==='home') renderHome(); else if(view.name==='day') renderDay(); else if(view.name==='exam') renderExam(); }
+function render(){ if(view.name==='home') renderHome(); else if(view.name==='day') renderDay(); else if(view.name==='exam') renderExam(); else if(view.name==='settings') renderSettings(); }
 
 /* ---------- HOME ---------- */
-const SECTIONS=[['woorden','Woorden',20],['grammatica','Grammatica',25],['luisteren','Luisteren',20],['lezen','Lezen',15],['schrijven','Schrijven',20],['spreken','Spreken',15],['toets','Toets',5]];
-function dayProgress(d){ const done=S.done[d.id]||{}; const total=d.review? 3 : SECTIONS.length; const n=Object.keys(done).length; return {n,total}; }
+const SECTIONS=[['woorden','Woorden',20,'الكلمات','cards'],['grammatica','Grammatica',25,'القواعد','grammar'],['luisteren','Luisteren',20,'الاستماع','headphones'],['lezen','Lezen',15,'القراءة','book'],['schrijven','Schrijven',20,'الكتابة','pencil'],['spreken','Spreken',15,'التحدّث','mic'],['toets','Quiz',5,'الاختبار','quiz']];
+const REVIEW=[['herhaling','Toets',45,'الاختبار','quiz'],['schrijven','Schrijven',30,'الكتابة','pencil'],['spreken','Spreken',45,'التحدّث','mic']];
+const secsOf=d=>d.review?REVIEW:SECTIONS;
+const WEEKS={1:['Basis','الأساسيات'],2:['Dagelijks leven','الحياة اليومية'],3:['In de stad','في المدينة'],4:['Communiceren','التواصل']};
+function dayProgress(d){ const done=S.done[d.id]||{}; const total=secsOf(d).length; const n=secsOf(d).filter(s=>done[s[0]]).length; return {n,total}; }
 function renderHome(){
-  const all=C.DAYS.reduce((a,d)=>{const p=dayProgress(d); return [a[0]+Math.min(p.n,p.total), a[1]+p.total];},[0,0]);
-  const pct=Math.round(100*all[0]/all[1]);
-  const weekNames={1:['Week 1','Basis'],2:['Week 2','Dagelijks leven'],3:['Week 3','In de stad'],4:['Week 4','Communiceren']};
-  app.innerHTML = `
-  <section class="hero">
-    <span class="label">Nederlands A1 · 20 lesdagen + proefexamen · 2 uur per dag</span>
-    <h1>Stap voor Stap A1</h1>
-    <div class="lead">${help('Uw eerste stap naar het inburgeringsexamen A2 en het Staatsexamen NT2 (B1). Elke dag oefent u de vier examenvaardigheden: luisteren, lezen, schrijven en spreken.','خطوتك الأولى نحو امتحان الاندماج A2 وامتحان الدولة B1. كل يوم يدرّب المهارات الأربع للامتحان: الاستماع والقراءة والكتابة والتحدث.')}</div>
-    <div class="stack" style="gap:6px"><div class="row" style="justify-content:space-between"><span class="small muted">Voortgang</span><span class="small" style="font-variant-numeric:tabular-nums">${pct}%</span></div><div class="meter" aria-label="Voortgang ${pct}%"><i style="width:${pct}%"></i></div></div>
-    ${voiceNote()}
-    ${voicePanel()}
+  const P=C.DAYS.map(d=>({d,...dayProgress(d)}));
+  const daysDone=P.filter(p=>p.n>=p.total).length;
+  const cur=(P.find(p=>p.n<p.total)||{}).d;
+  const wk=w=>{ const ps=P.filter(p=>p.d.week===w); const a=ps.reduce((s,p)=>s+p.n,0), b=ps.reduce((s,p)=>s+p.total,0); return Math.round(100*a/b); };
+  const curWeek=cur?cur.week:4;
+  let today='';
+  if(cur){ const p=dayProgress(cur), nx=secsOf(cur)[(secsOf(cur).findIndex(s=>!(S.done[cur.id]||{})[s[0]]))]||secsOf(cur)[0]; const sc=cur.listen&&C.SCENES[cur.listen.scene];
+    today=`<section class="card today" style="padding:18px;display:flex;flex-direction:column;gap:14px">
+      <p class="sec">Vandaag</p>
+      <div class="dtitle"><div class="badge"><small>DAG</small><b>${cur.id}</b></div><div style="flex:1;min-width:0"><h2 class="h" style="font-size:24px">${esc(cur.nl)}</h2>${arP(cur.ar,'font-size:20px')}</div></div>
+      <div class="row" style="gap:8px">${sc?`<span class="pill">${ic('pin','s')}${esc(sc.label)}</span>`:''}<span class="pill">Volgende: ${esc(nx[1])}</span></div>
+      <div class="stack" style="gap:6px"><div class="bar"><i style="width:${Math.round(100*p.n/p.total)}%"></i></div><div class="row between" style="gap:8px"><span class="mut small">${p.n} van ${p.total} onderdelen klaar</span>${AR()?`<span class="ar mut small" lang="ar">أنهيت ${p.n} من ${p.total} أقسام</span>`:''}</div></div>
+      <button class="btn btn-p btn-2" data-day="${cur.id}">${p.n?btn2(`Ga verder met dag ${cur.id}`,`تابع اليوم ${cur.id}`):btn2(`Begin met dag ${cur.id}`,`ابدأ اليوم ${cur.id}`)}</button></section>`; }
+  else today=`<section class="card today" style="padding:18px;display:flex;flex-direction:column;gap:12px"><p class="sec">Klaar</p><h2 class="h" style="font-size:24px">Alle 20 dagen zijn klaar!</h2>${arP('أنهيت جميع الأيام العشرين!')}<button class="btn btn-p btn-2" data-exam>${btn2('Naar het proefexamen','إلى الامتحان التجريبي')}</button></section>`;
+  const X=S.exam;
+  app.innerHTML = `<div class="wrap home">
+  <header class="apphead"><div class="brand"><div class="mark">${ic('steps')}</div><div><p class="h" style="font-size:20px">Stap voor Stap</p><p class="mut small">Nederlands A1</p></div></div>
+    <button class="btn btn-s btn-sm" data-settings>${ic('gear')}Instellingen</button></header>
+  <section class="card" style="padding:18px;display:flex;flex-direction:column;gap:14px">
+    <h2 class="h" style="font-size:22px">Week ${curWeek} van 4</h2>
+    <div class="wbars">${[1,2,3,4].map(w=>`<div class="stack" style="gap:6px"><div class="bar" aria-hidden="true"><i style="width:${wk(w)}%"></i></div><span>Week ${w}</span></div>`).join('')}</div>
+    <div class="row between" style="gap:8px"><p>${daysDone} van 20 dagen klaar</p>${AR()?`<p class="ar" lang="ar">أنهيت ${daysDone} من 20 يومًا</p>`:''}</div>
   </section>
-  <div class="weeks">
-  ${[1,2,3,4].map(w=>`<section class="week"><h2>${weekNames[w][0]} <small>${weekNames[w][1]}</small></h2><div class="days">
-    ${C.DAYS.filter(d=>d.week===w).map(d=>{ const p=dayProgress(d); const sc=S.scores[d.id]; const cls=p.n>=p.total?'done':(p.n?'part':'');
-      return `<button class="day" data-day="${d.id}"><span class="n">${d.id}</span><span class="t">${esc(d.nl)}</span><span class="s ar">${esc(d.ar)}</span><span class="chip ${cls}">${p.n>=p.total?'Klaar':(p.n?`${p.n}/${p.total} onderdelen`:'Nog niet begonnen')}${sc?` · toets ${sc[0]}/${sc[1]}`:''}</span></button>`; }).join('')}
-  </div></section>`).join('')}
-  <section class="week"><h2>Dag 21 <small>Proefexamen</small></h2>
-    <button class="cardlink" id="toExam"><h3>Proefexamen A1</h3>${help('Vier aparte onderdelen, zoals bij het A2-examen van DUO: Lezen, Luisteren, Schrijven en Spreken. Ongeveer 90 minuten.','أربعة أجزاء منفصلة مثل امتحان DUO A2: القراءة، الاستماع، الكتابة، التحدث. حوالي 90 دقيقة.')}
-    ${S.exam.lezen||S.exam.luisteren?`<span class="chip done">Laatste score: Lezen ${S.exam.lezen?S.exam.lezen.join('/'):'–'} · Luisteren ${S.exam.luisteren?S.exam.luisteren.join('/'):'–'}</span>`:''}</button>
+  ${today}
+  ${voiceNote()}
+  ${[1,2,3,4].map(w=>`<section class="stack" style="gap:10px;padding-top:4px">
+    <div class="row between" style="gap:8px;align-items:baseline"><h2 class="h" style="font-size:19px">Week ${w} · ${WEEKS[w][0]}</h2>${AR()?`<p class="ar mut" lang="ar">${WEEKS[w][1]}</p>`:''}</div>
+    <div class="tiles">${P.filter(p=>p.d.week===w).map(p=>{ const st=p.n>=p.total?'done':(cur&&p.d.id===cur.id?'now':(p.n?'part':'next')); const lab={done:'klaar',now:'nu bezig',part:`${p.n} van ${p.total}`,next:'nog niet begonnen'}[st];
+      return `<button class="tile tile-${st}" data-day="${p.d.id}" aria-label="Dag ${p.d.id}, ${esc(p.d.nl)}, ${lab}">${p.d.id}${st==='done'?ic('check','s'):''}${st==='now'?'<small>Nu</small>':''}${st==='part'?`<small>${p.n}/${p.total}</small>`:''}</button>`; }).join('')}</div></section>`).join('')}
+  <div class="legend" aria-hidden="true"><span><i style="background:var(--leaf-soft)"></i>Klaar</span><span><i style="background:var(--delft)"></i>Nu</span><span><i style="box-shadow:inset 0 0 0 2px var(--sun)"></i>Bezig</span><span><i style="border:1.5px dashed var(--muted)"></i>Nog niet</span></div>
+  <section class="card" style="padding:18px;display:flex;flex-direction:column;gap:14px">
+    <div class="dtitle"><div class="badge sun">${ic('trophy')}</div><div style="flex:1;min-width:0"><h2 class="h" style="font-size:22px">Proefexamen</h2>${arP('الامتحان التجريبي')}</div></div>
+    ${help('Vier aparte onderdelen, zoals bij het A2-examen van DUO: Lezen, Luisteren, Schrijven en Spreken. Ongeveer 90 minuten.','أربعة أجزاء منفصلة مثل امتحان DUO A2: القراءة، الاستماع، الكتابة، التحدث. حوالي 90 دقيقة.')}
+    ${X.lezen||X.luisteren?`<span class="pill leaf">Laatste score: Lezen ${X.lezen?X.lezen.join('/'):'–'} · Luisteren ${X.luisteren?X.luisteren.join('/'):'–'}</span>`:''}
+    <button class="btn btn-s btn-w" data-exam>${ic('next')}Naar het proefexamen</button>
   </section>
-  <section class="week"><h2>Naar B1 in 6 maanden <small>Route</small></h2>
-    <div class="notice">${help('Deze A1-cursus is maand 1. Daarna oefent u met de officiële A2-oefenexamens en dan met het Staatsexamen NT2 Programma I (B1). Gebruik bij elke stap de officiële oefenexamens.','هذا المنهاج (A1) هو الشهر الأول. الهدف بعده: تمارين امتحان الاندماج A2 ثم امتحان الدولة NT2 البرنامج الأول (B1). استعمل التمارين الرسمية في كل مرحلة.')}</div>
-    <div class="road" style="margin-top:14px">${C.ROADMAP.map((r,i)=>`<div class="st ${i===0?'now':''}"><span class="label">${esc(r.phase)} · <span class="lvl">${esc(r.level)}</span></span><h3>${esc(r.title)}</h3>${help(r.focus,r.focusAr)}<p class="small muted">Controle: ${esc(r.check)}</p></div>`).join('')}</div>
+  <section class="card" style="padding:4px 18px 14px">
+    <details class="more" style="border:0"><summary>Over deze cursus · عن هذا المنهاج</summary>
+      <div class="stack" style="padding-top:6px">
+        <p class="sec">Nederlands A1 · 20 lesdagen + proefexamen · 2 uur per dag</p>
+        ${help('Uw eerste stap naar het inburgeringsexamen A2 en het Staatsexamen NT2 (B1). Elke dag oefent u de vier examenvaardigheden: luisteren, lezen, schrijven en spreken.','خطوتك الأولى نحو امتحان الاندماج A2 وامتحان الدولة B1. كل يوم يدرّب المهارات الأربع للامتحان: الاستماع والقراءة والكتابة والتحدث.')}
+        <h3 class="h" style="font-size:19px">Naar B1 in 6 maanden</h3>
+        ${help('Deze A1-cursus is maand 1. Daarna oefent u met de officiële A2-oefenexamens en dan met het Staatsexamen NT2 Programma I (B1). Gebruik bij elke stap de officiële oefenexamens.','هذا المنهاج (A1) هو الشهر الأول. الهدف بعده: تمارين امتحان الاندماج A2 ثم امتحان الدولة NT2 البرنامج الأول (B1). استعمل التمارين الرسمية في كل مرحلة.')}
+        <div class="road">${C.ROADMAP.map((r,i)=>`<div class="st ${i===0?'now':''}"><span class="sec">${esc(r.phase)} · <span style="color:var(--delft)">${esc(r.level)}</span></span><h3 class="h" style="font-size:18px">${esc(r.title)}</h3>${help(r.focus,r.focusAr)}<p class="small mut">Controle: ${esc(r.check)}</p></div>`).join('')}</div>
+        <h3 class="h" style="font-size:19px">Bronnen</h3>
+        <ul class="small stack src" style="gap:6px;padding-left:18px;margin:0">${C.SOURCES.map(s=>`<li><a href="${esc(s[1])}" target="_blank" rel="noopener">${esc(s[0])}</a></li>`).join('')}</ul>
+        <p class="small mut">${help('Alle teksten en gesprekken in deze cursus zijn geschreven om te oefenen. Namen, adressen en nummers zijn verzonnen.','جميع النصوص والحوارات في هذا المنهاج من تأليفنا، وأسماء الأشخاص والعناوين خيالية.')}</p>
+      </div></details>
   </section>
-  <section class="week src"><h2>Bronnen <small>Officiële informatie</small></h2>
-    <ul class="small stack" style="gap:6px;padding-left:18px;margin:0">${C.SOURCES.map(s=>`<li><a href="${esc(s[1])}" target="_blank" rel="noopener">${esc(s[0])}</a></li>`).join('')}</ul>
-    <p class="small muted" style="margin-top:10px">${help('Alle teksten en gesprekken in deze cursus zijn geschreven om te oefenen. Namen, adressen en nummers zijn verzonnen.','جميع النصوص والحوارات في هذا المنهاج من تأليفنا، وأسماء الأشخاص والعناوين خيالية.')}</p>
-  </section></div>`;
+  <div class="row nowrap" style="gap:10px;padding:4px">${ic('shield','mut')}<div class="stack" style="gap:2px;flex:1"><p class="mut small">Werkt zonder internet. Uw voortgang blijft op deze telefoon.</p>${arP('يعمل بدون إنترنت. يبقى تقدّمك على هذا الهاتف.','font-size:16px;color:var(--muted)')}</div></div>
+  </div>`;
   app.querySelectorAll('[data-day]').forEach(b=>b.addEventListener('click',()=>go({name:'day',id:+b.dataset.day,sec:firstOpen(+b.dataset.day)})));
-  wireVoicePanel(app);
-  $('#toExam').addEventListener('click',()=>go({name:'exam',part:'lezen'}));
+  app.querySelectorAll('[data-exam]').forEach(b=>b.addEventListener('click',()=>go({name:'exam',part:'lezen'})));
 }
-function firstOpen(id){ const d=C.DAYS.find(x=>x.id===id); if(d.review) return 'herhaling'; const done=S.done[id]||{}; const s=SECTIONS.find(s=>!done[s[0]]); return s?s[0]:'woorden'; }
-function markDone(id,sec){ S.done[id]=S.done[id]||{}; if(!S.done[id][sec]){ S.done[id][sec]=1; save(); const t=document.querySelector(`.tab[data-sec="${sec}"]`); if(t) t.classList.add('ok'); } }
+function firstOpen(id){ const d=C.DAYS.find(x=>x.id===id); const done=S.done[id]||{}; const s=secsOf(d).find(s=>!done[s[0]]); return s?s[0]:secsOf(d)[0][0]; }
+function markDone(id,sec){ S.done[id]=S.done[id]||{}; if(!S.done[id][sec]){ S.done[id][sec]=1; save(); const d=C.DAYS.find(x=>x.id===id); if(view.name==='day'&&view.id===id) paintStrip(d); } }
+
+/* ---------- SETTINGS ---------- */
+function renderSettings(){
+  const rad=(k,nl,ex,ar)=>`<button class="rad" role="radio" aria-checked="${S.help===k}" data-help="${k}"><span class="o"></span><span style="flex:1">${nl}<span class="ex">${ex}</span></span>${ar?`<span class="ar" lang="ar">${ar}</span>`:''}</button>`;
+  app.innerHTML=`<header class="dayhead"><div class="wrap"><div class="row nowrap" style="align-items:center;gap:12px"><button class="btn btn-s btn-sm" data-home>${ic('home')}Home</button><div style="flex:1;min-width:0"><h1 class="h" style="font-size:24px">Instellingen</h1><p class="ar mut" lang="ar" style="line-height:1.3">الإعدادات</p></div></div></div></header>
+  <div class="wrap daymain" style="gap:26px">
+   <section class="grp" role="radiogroup" aria-label="Taalhulp"><div class="gh"><h2 class="h">Taalhulp</h2><p class="ar mut" lang="ar">لغة المساعدة</p></div>
+     <p class="mut small">Welke uitleg wilt u zien bij het Nederlands?</p>
+     ${rad('nl','Alleen Nederlands','Uitleg in het Nederlands','')}
+     ${rad('ar','Alleen Arabisch','<span lang="ar" dir="rtl" style="font-family:var(--f-ar)">الشرح بالعربية فقط</span>','')}
+     ${rad('both','Allebei','Nederlands en Arabisch','كلاهما')}</section>
+   <section class="grp"><div class="gh"><h2 class="h">Stem</h2><p class="ar mut" lang="ar">الصوت</p></div>
+     <p class="mut small">Welke stem leest de woorden en zinnen voor?</p>
+     <div class="g2" role="radiogroup" aria-label="Stem">${[['f','Vrouw','امرأة'],['m','Man','رجل']].map(g=>`<div class="vcard ${S.gender===g[0]?'on':''}"><button class="rad" role="radio" aria-checked="${S.gender===g[0]}" data-gender="${g[0]}"><span class="o"></span><span style="flex:1">${g[1]}<span class="ex" lang="ar" style="font-family:var(--f-ar)">${g[2]}</span></span></button><button class="btn btn-s btn-sm" data-vtest="${g[0]}">${ic('speaker')}Luister</button></div>`).join('')}</div>
+     <label class="fl small">Vrouwenstem · صوت امرأة<select class="field" data-vsel="f" id="vselF"></select></label>
+     <label class="fl small">Mannenstem · صوت رجل<select class="field" data-vsel="m" id="vselM"></select></label>
+     ${voiceNote()}
+     <details class="more"><summary>Nederlandse stem installeren · تثبيت صوت هولندي</summary><div class="stack" style="gap:8px">${stepsHTML()}</div></details>
+     <p class="mut small">De stem van uw telefoon. Werkt ook zonder internet.</p></section>
+   <section class="grp"><div class="gh"><h2 class="h">Kleuren</h2><p class="ar mut" lang="ar">الألوان</p></div>
+     <div class="seg" role="radiogroup" aria-label="Kleuren">${[['light','Licht','sun'],['dark','Donker','moon'],['auto','Telefoon','phone']].map(t=>`<button role="radio" aria-checked="${(S.theme||'auto')===t[0]}" data-theme-set="${t[0]}">${ic(t[2],'s')}${t[1]}</button>`).join('')}</div></section>
+   <section class="card" style="padding:16px;display:flex;gap:12px;align-items:flex-start"><span style="color:var(--leaf-ink)">${ic('shield')}</span><div class="stack" style="gap:4px;flex:1"><p style="font-weight:700">Geen account nodig</p><p class="mut small">De app werkt zonder internet. Uw voortgang staat alleen op deze telefoon.</p><p class="ar mut" lang="ar">لا تحتاج إلى حساب. يعمل التطبيق بدون إنترنت، ويبقى تقدّمك على هذا الهاتف فقط.</p></div></section>
+  </div>`;
+  app.querySelectorAll('[data-help]').forEach(b=>b.onclick=()=>{ S.help=b.dataset.help; save(); renderSettings(); });
+  app.querySelectorAll('[data-gender]').forEach(b=>b.onclick=()=>{ S.gender=b.dataset.gender; save(); renderSettings(); });
+  app.querySelectorAll('[data-theme-set]').forEach(b=>b.onclick=()=>{ S.theme=b.dataset.themeSet; save(); applyTheme(); renderSettings(); });
+  wireVoices(app);
+}
 
 /* ---------- DAY ---------- */
 let timerInt=null;
+function cellHTML(s,i,state){ return `<button class="cell ${state==='now'?'cell-now':(state==='done'?'cell-done':'')}" data-sec="${s[0]}" aria-current="${state==='now'?'step':'false'}" aria-label="${i+1}. ${s[1]}${state==='done'?', klaar':''}"><span class="n">${i+1}${state==='done'?ic('check','xs'):''}</span>${ic(s[4])}<span class="l">${s[1]}</span>${arS(s[3])}</button>`; }
+function paintStrip(d){ const done=S.done[d.id]||{}; const st=$('.strip'); if(!st) return;
+  st.innerHTML=secsOf(d).map((s,i)=>cellHTML(s,i,view.sec===s[0]?'now':(done[s[0]]?'done':''))).join('');
+  st.querySelectorAll('.cell').forEach(c=>c.onclick=()=>showSec(d,c.dataset.sec));
+  const now=st.querySelector('.cell-now'); if(now) st.scrollLeft=Math.max(0,now.offsetLeft-st.clientWidth/2+now.clientWidth/2); }
 function renderDay(){
-  const d=C.DAYS.find(x=>x.id===view.id); const done=S.done[d.id]||{};
-  const secs = d.review ? [['herhaling','Toets',45],['schrijven','Schrijven',30],['spreken','Spreken',45]] : SECTIONS;
+  const d=C.DAYS.find(x=>x.id===view.id);
   app.innerHTML = `
-  <section class="dayhead"><span class="label">Week ${d.week} · Dag ${d.id} · 2 uur</span><h1>${esc(d.nl)}</h1>
-   <p class="ar" style="font-weight:600">${esc(d.ar)}</p>${help(d.can,d.canAr)}</section>
-  <nav class="tabs" aria-label="Onderdelen"><div class="in" role="tablist">${secs.map(s=>`<button class="tab ${done[s[0]]?'ok':''}" role="tab" data-sec="${s[0]}" aria-selected="${view.sec===s[0]}"><b>${s[1]}</b><span>${s[2]} min</span></button>`).join('')}</div></nav>
-  <div id="secBody"></div>
-  <div class="pager"><button class="btn ghost" id="prevDay" ${d.id===1?'disabled':''}>← Dag ${d.id-1}</button><button class="btn ghost" id="nextSec">Volgende →</button></div>`;
-  app.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{ if(stopFn){stopFn();stopFn=null;} stopSpeech(); clearInterval(timerInt); view.sec=t.dataset.sec; app.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',String(x===t))); renderSection(d); t.scrollIntoView({inline:'nearest',block:'nearest'}); }));
+  <header class="dayhead"><div class="wrap">
+    <div class="row between"><button class="btn btn-s btn-sm" data-home>${ic('home')}Home</button><button class="btn btn-s btn-sm" id="prevDay" ${d.id===1?'disabled':''}>${ic('back')}Vorige dag</button></div>
+    <div class="dtitle"><div class="badge"><small>DAG</small><b>${d.id}</b></div><div style="flex:1;min-width:0"><h1 class="h" style="font-size:24px">${esc(d.nl)}</h1>${arP(d.ar,'font-size:20px;line-height:1.4')}<p class="mut small">Week ${d.week} · ± 2 uur</p></div></div>
+  </div></header>
+  <nav class="stripbar" aria-label="Onderdelen van dag ${d.id}"><div class="wrap"><div class="strip"></div></div></nav>
+  <div class="wrap daymain">
+    <section class="card can"><div class="ib">${ic('flag')}</div><div class="stack" style="gap:4px;flex:1"><p class="sec">Dit kunt u na vandaag</p>${S.help!=='ar'?`<p style="font-weight:700">${esc(d.can)}</p>`:''}${arP(d.canAr)}</div></section>
+    <article class="ws"><div class="ws-top"><span class="sec" id="wsName"></span><span class="mut wsn" id="wsPos"></span></div><div class="ws-body" id="secBody"></div><div class="ws-foot"><button class="btn btn-p btn-2" id="nextSec"></button></div></article>
+  </div>`;
   $('#prevDay').addEventListener('click',()=>go({name:'day',id:d.id-1,sec:firstOpen(d.id-1)}));
-  $('#nextSec').addEventListener('click',()=>{ const i=secs.findIndex(s=>s[0]===view.sec); if(i<secs.length-1){ app.querySelector(`.tab[data-sec="${secs[i+1][0]}"]`).click(); window.scrollTo({top:0}); } else if(d.id<20) go({name:'day',id:d.id+1,sec:firstOpen(d.id+1)}); else go({name:'exam',part:'lezen'}); });
-  renderSection(d);
+  $('#nextSec').addEventListener('click',()=>{ const secs=secsOf(d); const i=secs.findIndex(s=>s[0]===view.sec); if(i<secs.length-1){ showSec(d,secs[i+1][0]); window.scrollTo({top:0}); } else if(d.id<20) go({name:'day',id:d.id+1,sec:firstOpen(d.id+1)}); else go({name:'exam',part:'lezen'}); });
+  showSec(d,view.sec);
 }
-function instr(nl,en,ar){ return `<div class="instr"><span class="nl">${esc(nl)}</span>${help(en,ar)}</div>`; }
+function showSec(d,key){ if(activeRec) activeRec.click(); if(stopFn){stopFn();stopFn=null;} stopSpeech(); clearInterval(timerInt);
+  const secs=secsOf(d); if(!secs.some(s=>s[0]===key)) key=secs[0][0]; view.sec=key; const i=secs.findIndex(s=>s[0]===key);
+  paintStrip(d);
+  $('#wsName').textContent=`Werkblad ${i+1} · ${secs[i][1]}`; $('#wsPos').textContent=`${i+1} / ${secs.length}`;
+  $('#nextSec').innerHTML = i<secs.length-1 ? btn2(`Volgende: ${secs[i+1][1]}`,`التالي: ${secs[i+1][3]}`) : (d.id<20 ? btn2(`Klaar · naar dag ${d.id+1}`,`انتهيت · إلى اليوم ${d.id+1}`) : btn2('Naar het proefexamen','إلى الامتحان التجريبي'));
+  renderSection(d); }
+function instr(nl,en,ar){ return `<div class="tip"><span class="nl">${esc(nl)}</span>${help(en,ar)}</div>`; }
+const doneBtn=(k,nl,ar)=>`<button class="btn btn-s btn-2" data-done="${k}">${btn2(nl,ar,'check')}</button>`;
 function renderSection(d){
   const body=$('#secBody'); const sec=view.sec; let h='';
   if(sec==='woorden'){
-    h=`<div class="sheet">${instr('Luister en zeg het na.','Tik op de luidspreker, luister en zeg elk woord 3 keer hardop. Oefen daarna met de flitskaarten.','اضغط على السماعة واستمع وكرر كل كلمة بصوت عالٍ 3 مرات. ثم تدرّب بالبطاقات.')}${voiceNote()}
-     <div class="vlist">${d.vocab.map((v,i)=>`<div class="v"><button class="say" data-say="${i}" aria-label="Luister: ${esc(v[0])}">🔊</button><span class="w">${esc(v[0])}</span><span class="ar small">${esc(v[1])}</span></div>`).join('')}</div>
-     <h3>Flitskaarten</h3><div class="flash" id="flash"></div><div class="row"><button class="btn" id="fPrev">←</button><button class="btn primary" id="fFlip">Omdraaien</button><button class="btn" id="fNext">→</button><button class="btn ghost" id="fSay">🔊</button><span class="small muted" id="fPos"></span></div>
-     <div class="row"><button class="btn" data-done="woorden">Ik ken deze woorden ✓</button></div></div>`;
+    h=`${instr('Luister en zeg het na.','Tik op Luister en zeg elk woord 3 keer hardop. Draai de kaart om voor de betekenis.','اضغط على «استمع» وكرر كل كلمة بصوت عالٍ 3 مرات. اقلب البطاقة لترى المعنى.')}${voiceNote()}
+     <div class="row between"><span class="sec">Flitskaarten</span><span style="font-weight:700" id="fPos"></span></div>
+     <div class="bar thin" aria-hidden="true"><i id="fBar" style="background:var(--leaf)"></i></div>
+     <button class="fc" id="flash"></button>
+     <div class="ctl"><button class="btn-s" id="fPrev" aria-label="Vorige kaart">${ic('chevL')}Vorige${arS('السابق')}</button><button class="btn-t" id="fSay" aria-label="Luister naar het woord">${ic('speaker2')}Luister${arS('استمع')}</button><button class="btn-t" id="fFlip" aria-label="Draai de kaart om">${ic('flip')}Draai om${arS('اقلب')}</button><button class="btn-p" id="fNext" aria-label="Volgende kaart">${ic('chevR')}Volgende${arS('التالي')}</button></div>
+     <h3 class="h" style="font-size:20px;margin-top:6px">Alle woorden</h3>
+     <div class="vlist">${d.vocab.map((v,i)=>`<div class="v"><button class="btn btn-t round" data-say="${i}" aria-label="Luister: ${esc(v[0])}">${ic('speaker')}</button><div style="flex:1;min-width:0"><div class="w">${esc(v[0])}</div>${arP(v[1],'font-size:17px')}</div></div>`).join('')}</div>
+     ${doneBtn('woorden','Ik ken deze woorden','أعرف هذه الكلمات')}`;
     body.innerHTML=h;
     body.querySelectorAll('[data-say]').forEach(b=>b.addEventListener('click',()=>{ stopSpeech(); speak(d.vocab[+b.dataset.say][0].replace(/\//g,',')); }));
     let fi=0, flip=false; const order=d.vocab.map((_,i)=>i).sort(()=>Math.random()-.5);
-    const fr=()=>{ const v=d.vocab[order[fi]]; $('#flash').innerHTML = flip? `<div><div class="big">${esc(v[0])}</div></div>` : `<div class="stack" style="gap:6px"><div class="ar big" style="font-size:26px">${esc(v[1])}</div><div class="small muted">Wat is het in het Nederlands?</div></div>`; $('#fPos').textContent=`${fi+1} / ${order.length}`; };
-    fr(); $('#fFlip').onclick=()=>{flip=!flip;fr(); if(flip) speak(d.vocab[order[fi]][0].replace(/\//g,','));}; $('#fNext').onclick=()=>{fi=(fi+1)%order.length;flip=false;fr();}; $('#fPrev').onclick=()=>{fi=(fi-1+order.length)%order.length;flip=false;fr();}; $('#fSay').onclick=()=>speak(d.vocab[order[fi]][0].replace(/\//g,','));
+    const sayCur=()=>{ stopSpeech(); speak(d.vocab[order[fi]][0].replace(/\//g,',')); };
+    const fr=()=>{ const v=d.vocab[order[fi]]; const m=v[0].match(/^(de|het)\s+(.+)$/i); const fc=$('#flash');
+      fc.className='fc'+(flip?' fc-back':'');
+      fc.setAttribute('aria-label', flip ? `${v[0]} betekent ${v[1]}. Tik om terug te draaien` : `${v[0]}. Tik om om te draaien`);
+      fc.innerHTML = flip ? `<span class="mut" style="font-size:18px;font-weight:700">${esc(v[0])}</span><p class="ar arw" lang="ar">${esc(v[1])}</p><span class="hint">${ic('flip','s')}Tik om terug te draaien</span>`
+        : `${m?`<span class="art">${esc(m[1].toLowerCase())}</span>`:''}<p class="word" lang="nl">${esc(m?m[2]:v[0])}</p><span class="hint">${ic('flip','s')}Tik om om te draaien</span>`;
+      $('#fPos').textContent=`${fi+1} / ${order.length}`; $('#fBar').style.width=`${Math.round(100*(fi+1)/order.length)}%`; };
+    fr(); const flipIt=()=>{flip=!flip;fr(); if(flip) sayCur();};
+    $('#flash').onclick=flipIt; $('#fFlip').onclick=flipIt; $('#fNext').onclick=()=>{fi=(fi+1)%order.length;flip=false;fr();}; $('#fPrev').onclick=()=>{fi=(fi-1+order.length)%order.length;flip=false;fr();}; $('#fSay').onclick=sayCur;
   }
   else if(sec==='grammatica'){ const g=d.gram;
-    h=`<div class="sheet"><h2>${esc(g.t)}</h2>${help(g.nl,g.ar)}
-     <div class="tbl"><table><thead><tr>${g.head.map(x=>`<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>${g.rows.map(r=>`<tr>${r.map(c=>`<td class="${/[؀-ۿ]/.test(c)?'ar':''}">${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
-     <h3>Voorbeelden</h3><div class="stack" style="gap:8px">${g.ex.map((e,i)=>`<div class="row" style="flex-wrap:nowrap;align-items:flex-start"><button class="say" data-ex="${i}" aria-label="Luister">🔊</button><div style="min-width:0"><b>${esc(e[0])}</b><div class="${/[\u0600-\u06FF]/.test(e[1])?'ar':'muted'} small">${esc(e[1])}</div></div></div>`).join('')}</div>
-     <div class="row"><button class="btn" data-done="grammatica">Begrepen ✓</button></div></div>`;
+    h=`<h2 class="h" style="font-size:26px">${esc(g.t)}</h2>${help(g.nl,g.ar)}
+     <div class="tbl"><table><thead><tr>${g.head.map(x=>`<th scope="col">${esc(x)}</th>`).join('')}</tr></thead><tbody>${g.rows.map(r=>`<tr>${r.map(c=>`<td class="${/[؀-ۿ]/.test(c)?'ar':''}">${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
+     <p class="sec">Voorbeelden</p><div class="exl">${g.ex.map((e,i)=>`<div class="row nowrap" style="align-items:center"><button class="btn btn-t round" data-ex="${i}" aria-label="Luister: ${esc(e[0])}">${ic('speaker')}</button><div style="min-width:0"><b>${esc(e[0])}</b>${/[؀-ۿ]/.test(e[1])?arP(e[1],'font-size:17px'):`<div class="mut small">${esc(e[1])}</div>`}</div></div>`).join('')}</div>
+     ${doneBtn('grammatica','Begrepen','فهمت')}`;
     body.innerHTML=h; body.querySelectorAll('[data-ex]').forEach(b=>b.addEventListener('click',()=>{stopSpeech(); speak(g.ex[+b.dataset.ex][0].replace(/–/g,','));}));
   }
-  else if(sec==='luisteren'){ const L=d.listen; let caps=false;
-    h=`<div class="sheet">${instr('Lees eerst de vragen. Kijk en luister. Beantwoord dan de vragen.','Probeer te antwoorden na één keer luisteren. Luister daarna opnieuw als dat nodig is. De tekst blijft verborgen tot u nakijkt.','اقرأ الأسئلة أولًا، ثم شاهد واستمع. حاول الإجابة بعد الاستماع مرة واحدة ثم أعد إذا احتجت. يبقى النص مخفيًا حتى تصحح.')}${voiceNote()}
+  else if(sec==='luisteren'){ const L=d.listen; let caps=false; const keys=Object.keys(L.who);
+    h=`${instr('Lees eerst de vragen. Kijk en luister. Beantwoord dan de vragen.','Probeer te antwoorden na één keer luisteren. Luister daarna opnieuw als dat nodig is. Zet de ondertitels aan als het te moeilijk is.','اقرأ الأسئلة أولًا، ثم شاهد واستمع. حاول الإجابة بعد الاستماع مرة واحدة ثم أعد إذا احتجت. شغّل الترجمة إذا كان صعبًا.')}${voiceNote()}
      ${stageHTML(L.scene,L.who,'stg')}
-     <div class="ctrl"><button class="btn primary" id="play"><span class="ic">▶</span> Afspelen</button><button class="btn" id="stop">■ Stop</button>
-      <div class="seg" role="group" aria-label="Snelheid"><button data-rate="1" aria-pressed="${rate===1}">1×</button><button data-rate="0.75" aria-pressed="${rate===0.75}">0,75×</button></div>
-      <label class="row small" style="gap:6px"><input type="checkbox" id="caps"> Ondertitels</label></div>
+     <div class="g2"><button class="btn btn-p" id="play"></button><button class="btn btn-s" id="stop">${ic('stop')}Stop</button></div>
+     <div class="row between"><div class="seg" role="group" aria-label="Snelheid" style="flex:0 1 200px"><button data-rate="1" aria-pressed="${rate===1}">1×</button><button data-rate="0.75" aria-pressed="${rate===0.75}">0,75×</button></div>
+       <label class="switch"><input type="checkbox" id="caps"> Ondertitels</label></div>
+     <ol class="caps" id="capList" hidden aria-label="Ondertitels">${L.lines.map(l=>`<li class="cline"><span class="who who-${keys.indexOf(l[0])%2?'b':'a'}" aria-hidden="true">${esc((L.who[l[0]]||['?'])[0].replace(/^(Mevrouw|Meneer|De|Het)\s+/i,'').charAt(0))}</span><span class="nl" style="flex:1">${esc(l[1])}</span></li>`).join('')}</ol>
+     <p class="sec" style="margin-top:4px">Vragen</p>
      ${quizHTML(L.qs,'lq')}
-     <details><summary class="small"><b>Tekst van het gesprek</b> (na het nakijken)</summary><div class="transcript" style="margin-top:8px">${L.lines.map(l=>`<div class="ln"><b>${esc(L.who[l[0]][0])}:</b> ${esc(l[1])}</div>`).join('')}</div></details></div>`;
+     <details class="more"><summary>Tekst van het gesprek (na het nakijken)</summary><div class="stack" style="gap:6px;margin-top:8px">${L.lines.map(l=>`<p><b style="color:var(--delft)">${esc(L.who[l[0]][0])}:</b> ${esc(l[1])}</p>`).join('')}</div></details>`;
     body.innerHTML=h;
-    $('#caps').addEventListener('change',e=>caps=e.target.checked);
-    $('#play').onclick=()=>{ if(stopFn) stopFn(); stopFn=playScene('stg',L.lines,L.who,()=>caps); };
+    const pb=$('#play'), idle=`${ic('play')}Afspelen`; pb.innerHTML=idle;
+    const hl=i=>{ body.querySelectorAll('.cline').forEach((x,k)=>{ x.classList.toggle('cl-now',k===i); x.classList.toggle('cl-past',i>=0&&k<i); x.setAttribute('aria-current',String(k===i)); }); if(i<0) pb.innerHTML=idle; else pb.innerHTML=`<span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Speelt af…`; };
+    $('#caps').addEventListener('change',e=>{ caps=e.target.checked; $('#capList').hidden=!caps; });
+    pb.onclick=()=>{ if(stopFn) stopFn(); stopFn=playScene('stg',L.lines,L.who,()=>caps,null,hl); };
     $('#stop').onclick=()=>{ if(stopFn){stopFn();stopFn=null;} };
     body.querySelectorAll('[data-rate]').forEach(b=>b.onclick=()=>{ rate=+b.dataset.rate; body.querySelectorAll('[data-rate]').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); });
-    wireQuiz('lq',L.qs,(ok,n)=>{ markDone(d.id,'luisteren'); });
+    wireQuiz('lq',L.qs,()=>markDone(d.id,'luisteren'));
   }
   else if(sec==='lezen'){ const R=d.read;
-    h=`<div class="sheet">${instr('Lees de tekst en beantwoord de vragen.','Lees eerst de vraag en zoek dan het antwoord in de tekst. Zonder woordenboek, zoals bij het A2-examen.','اقرأ السؤال أولًا ثم ابحث عن الجواب في النص. بدون قاموس، مثل امتحان A2.')}
-     <div class="textcard"><h4>${esc(R.title)}</h4>${esc(R.text)}</div>${quizHTML(R.qs,'rq')}</div>`;
+    h=`${instr('Lees de tekst en beantwoord de vragen.','Lees eerst de vraag en zoek dan het antwoord in de tekst. Zonder woordenboek, zoals bij het A2-examen.','اقرأ السؤال أولًا ثم ابحث عن الجواب في النص. بدون قاموس، مثل امتحان A2.')}
+     <div class="textcard"><h4>${esc(R.title)}</h4>${esc(R.text)}</div>${quizHTML(R.qs,'rq')}`;
     body.innerHTML=h; wireQuiz('rq',R.qs,()=>markDone(d.id,'lezen'));
   }
   else if(sec==='schrijven'){ body.innerHTML=writeHTML(d.write,'w'+d.id); wireWrite(d.write,'w'+d.id,()=>markDone(d.id,'schrijven')); }
-  else if(sec==='spreken'){ body.innerHTML=`<div class="sheet">${instr('Luister naar de vraag en antwoord hardop.','Net als bij het A2-examen Spreken hebt u ongeveer 1 minuut per antwoord. Neem uzelf op, luister terug en vergelijk met het voorbeeldantwoord.','مثل امتحان التحدث A2 لديك حوالي دقيقة لكل إجابة. سجّل صوتك بالهاتف واستمع إليه ثم قارنه بالإجابة النموذجية.')}${voiceNote()}${d.speak.map((s,i)=>speakHTML(s,i,d)).join('')}<div class="row"><button class="btn" data-done="spreken">Alles geoefend ✓</button></div></div>`; d.speak.forEach((s,i)=>wireSpeak(s,i)); }
-  else if(sec==='toets'){ body.innerHTML=`<div class="sheet">${instr('Toets van vandaag','5 of 6 goed? Ga door naar de volgende dag. Minder? Herhaal eerst de woorden en de grammatica.','إذا حصلت على 5 أو 6 من 6 انتقل لليوم التالي. أقل من ذلك؟ راجع الكلمات والقواعد أولًا.')}${quizHTML(d.quiz,'tq')}</div>`;
-    wireQuiz('tq',d.quiz,(ok,n)=>{ S.scores[d.id]=[ok,n]; markDone(d.id,'toets'); save(); }); }
+  else if(sec==='spreken'){ body.innerHTML=`${instr('Luister naar de vraag en antwoord hardop.','Net als bij het A2-examen Spreken hebt u ongeveer 1 minuut per antwoord. Neem uzelf op, luister terug en vergelijk met het voorbeeldantwoord.','مثل امتحان التحدث A2 لديك حوالي دقيقة لكل إجابة. سجّل صوتك بالهاتف واستمع إليه ثم قارنه بالإجابة النموذجية.')}${voiceNote()}${d.speak.map((s,i)=>speakHTML(s,i)).join('')}${doneBtn('spreken','Alles geoefend','تدرّبت على كل شيء')}`; d.speak.forEach((s,i)=>wireSpeak(s,i)); }
+  else if(sec==='toets'){ body.innerHTML=`${instr('Quiz van vandaag','5 of 6 goed? Ga door naar de volgende dag. Minder? Herhaal eerst de woorden en de grammatica.','إذا حصلت على 5 أو 6 من 6 انتقل لليوم التالي. أقل من ذلك؟ راجع الكلمات والقواعد أولًا.')}${quizHTML(d.quiz,'tq')}`;
+    wireQuiz('tq',d.quiz,(ok,n)=>{ S.scores[d.id]=[ok,n]; save(); markDone(d.id,'toets'); toast('Opgeslagen','تم الحفظ'); }); }
   else if(sec==='herhaling'){ const pool=[]; C.DAYS.forEach(x=>(x.quiz||[]).forEach(q=>pool.push(q))); const pick=pool.sort(()=>Math.random()-.5).slice(0,20);
-    body.innerHTML=`<div class="sheet">${instr('Gemengde toets: 20 vragen uit alle dagen','Elke keer een nieuwe mix. Minder dan 14 van 20? Herhaal de dagen met de laagste score.','مزيج جديد في كل مرة. أقل من 14/20؟ ارجع إلى الأيام ذات الدرجات الأقل.')}${quizHTML(pick,'hq')}</div>`;
-    wireQuiz('hq',pick,(ok,n)=>{ S.scores[d.id]=[ok,n]; markDone(d.id,'herhaling'); save(); }); }
-  body.querySelectorAll('[data-done]').forEach(b=>b.addEventListener('click',()=>{ markDone(d.id,b.dataset.done); toast('Opgeslagen ✓'); $('#nextSec').click(); }));
+    body.innerHTML=`${instr('Gemengde toets: 20 vragen uit alle dagen','Elke keer een nieuwe mix. Minder dan 14 van 20? Herhaal de dagen met de laagste score.','مزيج جديد في كل مرة. أقل من 14/20؟ ارجع إلى الأيام ذات الدرجات الأقل.')}${quizHTML(pick,'hq')}`;
+    wireQuiz('hq',pick,(ok,n)=>{ S.scores[d.id]=[ok,n]; save(); markDone(d.id,'herhaling'); toast('Opgeslagen','تم الحفظ'); }); }
+  body.querySelectorAll('[data-done]').forEach(b=>b.addEventListener('click',()=>{ markDone(d.id,b.dataset.done); toast('Opgeslagen','تم الحفظ'); $('#nextSec').click(); }));
 }
 
 /* ---------- writing ---------- */
-function writeHTML(w,id){ return `<div class="sheet">${instr(w.nl,w.task,w.ar)}
-  ${w.form? `<div class="formgrid">${w.form.map((f,i)=>`<label>${esc(f)}<input type="text" id="${id}-f${i}" autocomplete="off"></label>`).join('')}</div>` : `<textarea id="${id}-t" placeholder="Schrijf hier in het Nederlands…" aria-label="Uw tekst"></textarea><div class="small muted" id="${id}-wc">0 woorden</div>`}
-  <h3>Controlelijst</h3><div class="checks">${w.check.map((c,i)=>`<label><input type="checkbox" id="${id}-c${i}"> <span>${esc(c)}</span></label>`).join('')}</div>
-  <div class="row"><button class="btn" id="${id}-show">Voorbeeld tonen</button><button class="btn primary" id="${id}-ai" hidden>Laat Claude nakijken</button><button class="btn" id="${id}-done">Klaar ✓</button></div>
+function writeHTML(w,id){ return `<div class="stack wtask">${instr(w.nl,w.task,w.ar)}
+  ${w.form? `<div class="formgrid">${w.form.map((f,i)=>`<label class="fl">${esc(f)}<input class="field" type="text" id="${id}-f${i}" autocomplete="off" lang="nl"></label>`).join('')}</div>` : `<label class="fl">Uw tekst<textarea class="field" id="${id}-t" placeholder="Schrijf hier in het Nederlands…" lang="nl"></textarea></label><div class="mut small" id="${id}-wc">0 woorden</div>`}
+  <p class="sec">Controlelijst</p><div class="checks">${w.check.map((c,i)=>`<label><input type="checkbox" id="${id}-c${i}"> <span>${esc(c)}</span></label>`).join('')}</div>
+  <div class="g2"><button class="btn btn-s" id="${id}-show">${ic('eye')}Voorbeeld</button><button class="btn btn-p" id="${id}-done">${ic('check')}Klaar</button></div>
+  <button class="btn btn-t btn-w" id="${id}-ai" hidden>Laat Claude nakijken</button>
   <div class="model" id="${id}-model" hidden></div><div class="fb" id="${id}-fb" hidden aria-live="polite"></div></div>`; }
 function studentText(w,id){ if(w.form) return w.form.map((f,i)=>`${f}: ${($('#'+id+'-f'+i)||{}).value||''}`).join('\n'); return ($('#'+id+'-t')||{}).value||''; }
 function wireWrite(w,id,onDone){
   const ta=$('#'+id+'-t'); if(ta) ta.addEventListener('input',()=>{ const n=(ta.value.trim().match(/\S+/g)||[]).length; $('#'+id+'-wc').textContent=n+' woorden'; });
   $('#'+id+'-show').onclick=()=>{ const m=$('#'+id+'-model'); m.hidden=!m.hidden; m.textContent='Voorbeeld:\n'+w.model; };
-  $('#'+id+'-done').onclick=()=>{ onDone&&onDone(); toast('Opgeslagen ✓'); };
+  $('#'+id+'-done').onclick=()=>{ onDone&&onDone(); toast('Opgeslagen','تم الحفظ'); };
   // optional feedback from Claude
   if(window.claude && window.claude.use){ window.claude.use('sample').then(sample=>{ if(!sample) return; const b=$('#'+id+'-ai'); if(!b) return; b.hidden=false;
     b.onclick=async()=>{ const txt=studentText(w,id).trim(); const fb=$('#'+id+'-fb'); if(txt.replace(/^.*?:\s*$/gm,'').trim().length<5){ toast('Schrijf eerst uw tekst'); return; }
@@ -472,90 +674,110 @@ function wireWrite(w,id,onDone){
       b.disabled=false; }; }).catch(()=>{}); }
 }
 
-
 /* ---------- recording (Android app) ---------- */
-function recHTML(key, fileAttr){ return CANREC ? `<button class="btn primary" data-rec="${key}">⏺ Opnemen · سجّل</button>`
-  : `<label class="btn" style="width:max-content">🎙 Opname kiezen of maken<input type="file" accept="audio/*" capture ${fileAttr} hidden></label>`; }
+const recIdle=()=>`<b>Neem op</b>${arB('سجّل صوتك')}`;
+function recHTML(key, fileAttr){ return CANREC ? `<div class="recwrap"><button class="recbtn" data-rec="${key}" aria-label="Neem op">${ic('mic','xl')}</button><p class="reclbl" aria-live="polite">${recIdle()}</p></div>`
+  : `<label class="btn btn-s" style="align-self:flex-start">${ic('mic')}Opname kiezen of maken<input type="file" accept="audio/*" capture ${fileAttr} hidden></label>`; }
 let activeRec=null;
-function wireRec(btn, audio){ if(!btn) return; let mr=null, chunks=[];
+function wireRec(btn, audio){ if(!btn) return; let mr=null, chunks=[]; const lbl=btn.parentElement.querySelector('.reclbl');
   btn.onclick=async()=>{ if(mr && mr.state==='recording'){ mr.stop(); return; }
-    if(activeRec && activeRec!==btn){ toast('Stop eerst de andere opname · أوقف التسجيل الآخر أولًا'); return; }
+    if(activeRec && activeRec!==btn){ toast('Stop eerst de andere opname','أوقف التسجيل الآخر أولًا'); return; }
     stopSpeech();
     try{ const st=await navigator.mediaDevices.getUserMedia({audio:true}); chunks=[]; mr=new MediaRecorder(st);
       mr.ondataavailable=e=>{ if(e.data&&e.data.size) chunks.push(e.data); };
-      mr.onstop=()=>{ st.getTracks().forEach(t=>t.stop()); activeRec=null; const b=new Blob(chunks,{type:mr.mimeType||'audio/webm'}); audio.src=URL.createObjectURL(b); audio.hidden=false; btn.textContent='⏺ Opnieuw opnemen · أعد التسجيل'; btn.classList.remove('recording'); };
-      mr.start(); activeRec=btn; btn.textContent='⏹ Stop opname · أوقف التسجيل'; btn.classList.add('recording');
+      mr.onstop=()=>{ st.getTracks().forEach(t=>t.stop()); activeRec=null; const b=new Blob(chunks,{type:mr.mimeType||'audio/webm'}); audio.src=URL.createObjectURL(b); audio.hidden=false;
+        btn.classList.remove('rec-on'); btn.innerHTML=ic('mic','xl'); btn.setAttribute('aria-label','Opnieuw opnemen'); lbl.innerHTML=`<b>Opnieuw opnemen</b>${arB('أعد التسجيل')}<span class="mut small">Luister hieronder naar uw opname.</span>`; };
+      mr.start(); activeRec=btn; btn.classList.add('rec-on'); btn.innerHTML=ic('stopF','xl'); btn.setAttribute('aria-label','Stop opname');
+      lbl.innerHTML=`<b><span class="dot" aria-hidden="true"></span>Ik luister…</b><span class="mut">Tik op het vierkant om te stoppen.</span>${arB('أستمع إليك… اضغط على المربّع للإيقاف.')}`;
       setTimeout(()=>{ if(mr&&mr.state==='recording') mr.stop(); },90000);
-    }catch(e){ activeRec=null; toast('Geen toegang tot de microfoon · لا يوجد إذن للميكروفون'); } }; }
+    }catch(e){ activeRec=null; toast('Geen toegang tot de microfoon','لا يوجد إذن للميكروفون'); } }; }
 function wireFile(input, audio){ if(!input) return; input.onchange=e=>{ const f=e.target.files&&e.target.files[0]; if(!f) return; audio.src=URL.createObjectURL(f); audio.hidden=false; }; }
 
 /* ---------- speaking ---------- */
-function speakHTML(s,i){ return `<div class="rec" id="sp${i}"><span class="label">Opdracht ${i+1}</span><div class="row" style="flex-wrap:nowrap;align-items:flex-start"><button class="say" data-q="${i}" aria-label="Luister naar de vraag">🔊</button><div style="min-width:0"><b>${esc(s[0])}</b><div class="ar small">${esc(s[1])}</div></div></div>
-  <div class="row"><button class="btn primary" data-t="${i}">⏱ Start 1 minuut</button><span class="timer" id="tm${i}">1:00</span></div>
+function speakHTML(s,i){ return `<section class="task" id="sp${i}"><p class="sec">Opdracht ${i+1} van ${view.name==='day'?(C.DAYS.find(x=>x.id===view.id).speak.length):''}</p>
+  <div class="prompt"><p class="pq" lang="nl">${esc(s[0])}</p>${arP(s[1],'font-size:20px')}<button class="btn btn-t" data-q="${i}" style="align-self:flex-start">${ic('speaker2')}Luister naar de vraag</button></div>
+  <div class="row"><button class="btn btn-s btn-sm" data-t="${i}">${ic('clock')}Start 1 minuut</button><span class="timer" id="tm${i}">1:00</span></div>
   ${recHTML('s'+i, `data-f="${i}"`)}
   <audio id="au${i}" controls hidden></audio>
-  <details><summary class="small"><b>Voorbeeldantwoord</b></summary><div class="row" style="margin-top:8px;flex-wrap:nowrap;align-items:flex-start"><button class="say" data-m="${i}" aria-label="Luister naar het voorbeeld">🔊</button><p>${esc(s[2])}</p></div></details></div>`; }
-let speakList=[];
-function wireSpeak(s,i){ speakList[i]=s; const root=$('#sp'+i);
+  <details class="more"><summary>Voorbeeldantwoord</summary><div class="row nowrap" style="margin-top:8px;align-items:center"><button class="btn btn-t round" data-m="${i}" aria-label="Luister naar het voorbeeld">${ic('speaker')}</button><p>${esc(s[2])}</p></div></details></section>`; }
+function startTimer(el,secs,lowAt,end){ clearInterval(timerInt); let t=secs; el.classList.remove('low'); const show=()=>el.textContent=`${Math.floor(t/60)}:${String(t%60).padStart(2,'0')}`; show();
+  timerInt=setInterval(()=>{ t--; show(); if(t<=lowAt) el.classList.add('low'); if(t<=0){ clearInterval(timerInt); el.textContent=end; } },1000); }
+function wireSpeak(s,i){ const root=$('#sp'+i);
   root.querySelector('[data-q]').onclick=()=>{stopSpeech(); speak(s[0].replace(/\(.*?\)/g,''),'f');};
   root.querySelector('[data-m]').onclick=()=>{stopSpeech(); speak(s[2].replace(/…/g,''),'m');};
-  root.querySelector('[data-t]').onclick=()=>{ clearInterval(timerInt); let t=60; const el=$('#tm'+i); el.classList.remove('low'); el.textContent='1:00'; timerInt=setInterval(()=>{ t--; el.textContent=`0:${String(t).padStart(2,'0')}`; if(t<=10) el.classList.add('low'); if(t<=0){ clearInterval(timerInt); el.textContent='Tijd!'; } },1000); };
+  root.querySelector('[data-t]').onclick=()=>startTimer($('#tm'+i),60,10,'Tijd!');
   wireFile(root.querySelector('[data-f]'), $('#au'+i)); wireRec(root.querySelector('[data-rec]'), $('#au'+i));
 }
 
 /* ---------- EXAM ---------- */
-function renderExam(){ const E=C.EXAM; const part=view.part;
-  const parts=[['lezen','Lezen',`${E.lezen.minutes} min`],['luisteren','Luisteren','± 20 min'],['schrijven','Schrijven',`${E.schrijven.minutes} min`],['spreken','Spreken','± 15 min']];
-  app.innerHTML=`<section class="dayhead"><span class="label">Dag 21 · Proefexamen A1</span><h1>Proefexamen</h1>${help(E.note,E.noteAr)}</section>
-   <nav class="tabs"><div class="in" role="tablist">${parts.map(p=>`<button class="tab ${S.exam[p[0]]?'ok':''}" role="tab" data-part="${p[0]}" aria-selected="${part===p[0]}"><b>${p[1]}</b><span>${p[2]}</span></button>`).join('')}</div></nav><div id="exBody"></div>`;
-  app.querySelectorAll('[data-part]').forEach(t=>t.onclick=()=>go({name:'exam',part:t.dataset.part}));
+const EXPARTS=[['lezen','Lezen','القراءة','book'],['luisteren','Luisteren','الاستماع','headphones'],['schrijven','Schrijven','الكتابة','pencil'],['spreken','Spreken','التحدّث','mic']];
+function examResults(){ const E=C.EXAM, X=S.exam; if(!X.lezen&&!X.luisteren&&!X.schrijven&&!X.spreken) return '';
+  const tag=(ok,txt)=>`<span class="score-tag" style="background:var(${ok?'--leaf-soft':'--sun-soft'});color:var(${ok?'--leaf-ink':'--sun-ink'})">${txt}</span>`;
+  const row=(nl,s,pass)=>`<div class="sk"><span style="flex:1;font-weight:700">${nl}</span>${s?tag(s[0]>=pass,s[0]>=pass?'Goed genoeg':'Nog oefenen'):'<span class="mut small">Nog niet gedaan</span>'}<span style="width:56px;text-align:right;font-weight:700;font-variant-numeric:tabular-nums">${s?s.join('/'):'–'}</span></div>`;
+  return `<section class="card" style="padding:14px 16px"><div class="gh" style="padding-bottom:6px"><h2 class="h" style="font-size:20px">Uw resultaten</h2>${arP('نتائجك')}</div>
+    ${row('Lezen',X.lezen,E.lezen.pass)}${row('Luisteren',X.luisteren,E.luisteren.pass)}
+    <div class="sk"><span style="flex:1;font-weight:700">Schrijven</span>${X.schrijven?tag(true,'Gedaan'):'<span class="mut small">Nog niet gedaan</span>'}<span style="width:56px"></span></div>
+    ${row('Spreken',X.spreken,11)}
+    <p class="mut small" style="padding-top:8px">Richtlijn: Lezen ${E.lezen.pass}, Luisteren ${E.luisteren.pass}, Spreken 11 van 16 punten.</p></section>`; }
+function renderExam(){ const E=C.EXAM; const part=view.part; const pi=EXPARTS.findIndex(p=>p[0]===part);
+  const mins={lezen:`${E.lezen.minutes} min`,luisteren:'± 20 min',schrijven:`${E.schrijven.minutes} min`,spreken:'± 15 min'};
+  app.innerHTML=`<header class="dayhead"><div class="wrap">
+    <div class="row between"><button class="btn btn-s btn-sm" data-home>${ic('home')}Home</button></div>
+    <div class="dtitle"><div class="badge sun"><small>DAG</small><b>21</b></div><div style="flex:1;min-width:0"><h1 class="h" style="font-size:24px">Proefexamen</h1>${arP('الامتحان التجريبي','font-size:20px;line-height:1.4')}</div></div>
+    <div class="stack" style="gap:4px">${help(E.note,E.noteAr)}</div></div></header>
+   <nav class="stripbar" aria-label="Onderdelen van het examen"><div class="wrap"><div class="strip">${EXPARTS.map((p,i)=>cellHTML([p[0],p[1],0,p[2],p[3]],i,part===p[0]?'now':(S.exam[p[0]]?'done':''))).join('')}</div></div></nav>
+   <div class="wrap daymain"><article class="ws"><div class="ws-top"><span class="sec">Examen ${pi+1} · ${EXPARTS[pi][1]}</span><span class="mut wsn">${mins[part]}</span></div><div class="ws-body" id="exBody"></div>
+     ${pi<3?`<div class="ws-foot"><button class="btn btn-p btn-2" id="exNext">${btn2(`Volgende: ${EXPARTS[pi+1][1]}`,`التالي: ${EXPARTS[pi+1][2]}`)}</button></div>`:''}</article>${examResults()}</div>`;
+  app.querySelectorAll('.strip .cell').forEach(t=>t.onclick=()=>go({name:'exam',part:t.dataset.sec}));
+  const nx=$('#exNext'); if(nx) nx.onclick=()=>go({name:'exam',part:EXPARTS[pi+1][0]});
   const body=$('#exBody');
+  const timerRow=min=>`<div class="row"><button class="btn btn-p" id="xt">${ic('clock')}Start ${min} min</button><span class="timer" id="xtm">${min}:00</span></div>`;
   if(part==='lezen'){ const all=[]; E.lezen.texts.forEach(t=>t.qs.forEach(q=>all.push(q)));
-    body.innerHTML=`<div class="sheet">${instr(`Lezen — ${all.length} vragen, ${E.lezen.minutes} minuten`,`Start de timer. Richtlijn: ${E.lezen.pass} van ${all.length} of meer goed = klaar voor A2.`,`شغّل المؤقت. الإرشاد: ${E.lezen.pass}/${all.length} أو أكثر = جاهز لمواد A2.`)}
-     <div class="row"><button class="btn primary" id="xt">⏱ Start ${E.lezen.minutes} min</button><span class="timer" id="xtm">${E.lezen.minutes}:00</span></div>
+    body.innerHTML=`${instr(`Lezen — ${all.length} vragen, ${E.lezen.minutes} minuten`,`Start de timer. Richtlijn: ${E.lezen.pass} van ${all.length} of meer goed = klaar voor A2.`,`شغّل المؤقت. الإرشاد: ${E.lezen.pass}/${all.length} أو أكثر = جاهز لمواد A2.`)}
+     ${timerRow(E.lezen.minutes)}
      ${E.lezen.texts.map(t=>`<div class="textcard"><h4>${esc(t.title)}</h4>${esc(t.text)}</div>`).join('')}
-     ${quizHTML(all,'xl')}</div>`;
+     ${quizHTML(all,'xl')}`;
     examTimer(E.lezen.minutes); wireQuiz('xl',all,(ok,n)=>{ S.exam.lezen=[ok,n]; save(); toast(ok>=E.lezen.pass?'Goed gedaan!':'Nog even oefenen'); });
     // place each text above its questions
     let qi=0; const box=$('#xl'); const cards=[...body.querySelectorAll('.textcard')]; E.lezen.texts.forEach((t,ti)=>{ const first=box.querySelector(`.q[data-qi="${qi}"]`); box.insertBefore(cards[ti],first); qi+=t.qs.length; });
   }
   if(part==='luisteren'){ const all=[]; E.luisteren.frags.forEach(f=>f.qs.forEach(q=>all.push(q)));
-    body.innerHTML=`<div class="sheet">${instr(`Luisteren — ${all.length} vragen`,`Lees eerst de vragen. Speel elk fragment één keer af. Richtlijn: ${E.luisteren.pass} van ${all.length} of meer goed.`,`اقرأ الأسئلة ثم شغّل كل مقطع مرة واحدة. الإرشاد: ${E.luisteren.pass}/${all.length} أو أكثر.`)}${voiceNote()}
-     ${E.luisteren.frags.map((f,fi)=>`<div class="stack"><span class="label">Fragment ${fi+1}</span>${stageHTML(f.scene,f.who,'xs'+fi)}<div class="ctrl"><button class="btn primary" data-xp="${fi}">▶ Afspelen</button><span class="small muted" id="xpc${fi}"></span></div></div>`).join('')}
-     ${quizHTML(all,'xq')}</div>`;
+    body.innerHTML=`${instr(`Luisteren — ${all.length} vragen`,`Lees eerst de vragen. Speel elk fragment één keer af. Richtlijn: ${E.luisteren.pass} van ${all.length} of meer goed.`,`اقرأ الأسئلة ثم شغّل كل مقطع مرة واحدة. الإرشاد: ${E.luisteren.pass}/${all.length} أو أكثر.`)}${voiceNote()}
+     ${E.luisteren.frags.map((f,fi)=>`<div class="stack"><p class="sec">Fragment ${fi+1}</p>${stageHTML(f.scene,f.who,'xs'+fi)}<div class="row"><button class="btn btn-p" data-xp="${fi}">${ic('play')}Afspelen</button><span class="mut small" id="xpc${fi}"></span></div></div>`).join('')}
+     ${quizHTML(all,'xq')}`;
     let qi=0; const box=$('#xq'); E.luisteren.frags.forEach((f,fi)=>{ const blk=$('#xs'+fi).parentElement; box.insertBefore(blk, box.querySelector(`.q[data-qi="${qi}"]`)); qi+=f.qs.length; });
     const plays={}; body.querySelectorAll('[data-xp]').forEach(b=>b.onclick=()=>{ const fi=+b.dataset.xp, f=E.luisteren.frags[fi]; plays[fi]=(plays[fi]||0)+1; $('#xpc'+fi).textContent=`${plays[fi]}× afgespeeld`; if(stopFn) stopFn(); stopFn=playScene('xs'+fi,f.lines,f.who,()=>false); });
     wireQuiz('xq',all,(ok,n)=>{ S.exam.luisteren=[ok,n]; save(); toast(ok>=E.luisteren.pass?'Goed gedaan!':'Nog even oefenen'); });
   }
   if(part==='schrijven'){
-    body.innerHTML=`<div class="stack">${instr(`Schrijven — 3 opdrachten, ${E.schrijven.minutes} minuten`,'Bij het echte A2-examen schrijft u op papier. Oefen ook op papier en vergelijk daarna met het voorbeeld. Geef antwoord op alle punten.','في امتحان A2 الحقيقي تكتب على الورق. تدرّب على الورق أيضًا ثم قارن بالنموذج. أجب عن كل نقطة.')}
-     <div class="row"><button class="btn primary" id="xt">⏱ Start ${E.schrijven.minutes} min</button><span class="timer" id="xtm">${E.schrijven.minutes}:00</span></div>
-     ${E.schrijven.tasks.map((t,i)=>writeHTML(t,'xw'+i)).join('')}</div>`;
+    body.innerHTML=`${instr(`Schrijven — 3 opdrachten, ${E.schrijven.minutes} minuten`,'Bij het echte A2-examen schrijft u op papier. Oefen ook op papier en vergelijk daarna met het voorbeeld. Geef antwoord op alle punten.','في امتحان A2 الحقيقي تكتب على الورق. تدرّب على الورق أيضًا ثم قارن بالنموذج. أجب عن كل نقطة.')}
+     ${timerRow(E.schrijven.minutes)}
+     ${E.schrijven.tasks.map((t,i)=>writeHTML(t,'xw'+i)).join('')}`;
     examTimer(E.schrijven.minutes); E.schrijven.tasks.forEach((t,i)=>wireWrite(t,'xw'+i,()=>{ S.exam.schrijven=1; save(); }));
   }
   if(part==='spreken'){
-    body.innerHTML=`<div class="sheet">${instr('Spreken — 8 opdrachten','Bij elke opdracht: luister, denk 10 seconden na en antwoord maximaal 1 minuut. Geef uzelf punten: 2 = antwoord in hele zinnen, 1 = gedeeltelijk, 0 = geen antwoord. Richtlijn: 11 van 16 punten.','لكل مهمة: استمع، فكّر 10 ثوانٍ، أجب حتى دقيقة. قيّم نفسك: 2 = أجبت بجمل كاملة، 1 = جزئيًا، 0 = لا إجابة. الإرشاد: 11 من 16 نقطة.')}${voiceNote()}
-     ${E.spreken.tasks.map((t,i)=>`<div class="rec" id="xsp${i}"><span class="label">${esc(t.part)}</span>
+    body.innerHTML=`${instr('Spreken — 8 opdrachten','Bij elke opdracht: luister, denk 10 seconden na en antwoord maximaal 1 minuut. Geef uzelf punten: 2 = antwoord in hele zinnen, 1 = gedeeltelijk, 0 = geen antwoord. Richtlijn: 11 van 16 punten.','لكل مهمة: استمع، فكّر 10 ثوانٍ، أجب حتى دقيقة. قيّم نفسك: 2 = أجبت بجمل كاملة، 1 = جزئيًا، 0 = لا إجابة. الإرشاد: 11 من 16 نقطة.')}${voiceNote()}
+     ${E.spreken.tasks.map((t,i)=>`<section class="task" id="xsp${i}"><p class="sec">${esc(t.part)}</p>
        ${t.scene? stageHTML(t.scene,{A:t.who},'xst'+i) : `<div class="stage"><div class="pic" aria-hidden="true">${esc(t.pic)}</div></div>`}
-       <div class="row" style="flex-wrap:nowrap;align-items:flex-start"><button class="say" data-xq="${i}" aria-label="Luister">🔊</button><div style="min-width:0"><b>${esc(t.q)}</b><div class="ar small">${esc(t.ar)}</div></div></div>
-       <div class="row"><button class="btn primary" data-xt="${i}">⏱ 1 minuut</button><span class="timer" id="xtm${i}">1:00</span></div>
+       <div class="prompt"><p class="pq" lang="nl" style="font-size:21px">${esc(t.q)}</p>${arP(t.ar,'font-size:19px')}<button class="btn btn-t" data-xq="${i}" style="align-self:flex-start">${ic('speaker2')}Luister</button></div>
+       <div class="row"><button class="btn btn-s btn-sm" data-xt="${i}">${ic('clock')}1 minuut</button><span class="timer" id="xtm${i}">1:00</span></div>
        ${recHTML('x'+i, `data-xf="${i}"`)}<audio id="xau${i}" controls hidden></audio>
-       <div class="row small">Mijn score: <span class="selfscore">${[0,1,2].map(v=>`<button class="btn ghost" data-ss="${i}:${v}" aria-pressed="${(S.exam.sp||{})[i]===v}">${v}</button>`).join('')}</span></div>
-       <details><summary class="small"><b>Voorbeeldantwoord</b></summary><p style="margin-top:6px">${esc(t.model)}</p></details></div>`).join('')}
-     <div class="row"><span class="score" id="sptot"></span></div></div>`;
-    const tot=()=>{ const sp=S.exam.sp||{}; const sum=Object.values(sp).reduce((a,b)=>a+b,0); const n=Object.keys(sp).length; $('#sptot').textContent = n? `${sum} / 16 punten (${n}/8 gescoord)`:''; $('#sptot').className='score '+(sum>=11?'good':''); if(n===8){S.exam.spreken=[sum,16]; save();} };
+       <div class="stack" style="gap:6px"><span style="font-weight:700">Mijn score</span><div class="seg" role="group" aria-label="Mijn score">${[0,1,2].map(v=>`<button data-ss="${i}:${v}" aria-pressed="${(S.exam.sp||{})[i]===v}">${v}</button>`).join('')}</div></div>
+       <details class="more"><summary>Voorbeeldantwoord</summary><p style="margin-top:6px">${esc(t.model)}</p></details></section>`).join('')}
+     <p class="h" style="font-size:22px" id="sptot"></p>`;
+    const tot=()=>{ const sp=S.exam.sp||{}; const sum=Object.values(sp).reduce((a,b)=>a+b,0); const n=Object.keys(sp).length; const el=$('#sptot'); el.textContent = n? `${sum} / 16 punten (${n}/8 gescoord)`:''; el.style.color=sum>=11?'var(--leaf-ink)':''; if(n===8){S.exam.spreken=[sum,16]; save();} };
     E.spreken.tasks.forEach((t,i)=>{
       body.querySelector(`[data-xq="${i}"]`).onclick=()=>{ if(stopFn) stopFn(); if(t.scene){ stopFn=playScene('xst'+i,[['A',t.q]],{A:t.who},()=>true); } else { stopSpeech(); speak(t.q,'f'); } };
-      body.querySelector(`[data-xt="${i}"]`).onclick=()=>{ clearInterval(timerInt); let s=60; const el=$('#xtm'+i); el.classList.remove('low'); timerInt=setInterval(()=>{ s--; el.textContent=`0:${String(s).padStart(2,'0')}`; if(s<=10) el.classList.add('low'); if(s<=0){clearInterval(timerInt); el.textContent='Tijd!';} },1000); };
+      body.querySelector(`[data-xt="${i}"]`).onclick=()=>startTimer($('#xtm'+i),60,10,'Tijd!');
       wireFile(body.querySelector(`[data-xf="${i}"]`), $('#xau'+i)); wireRec(body.querySelector(`[data-rec="x${i}"]`), $('#xau'+i));
     });
     body.querySelectorAll('[data-ss]').forEach(b=>b.onclick=()=>{ const [i,v]=b.dataset.ss.split(':').map(Number); S.exam.sp=S.exam.sp||{}; S.exam.sp[i]=v; save(); b.parentElement.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); tot(); });
     tot();
   }
 }
-function examTimer(min){ const b=$('#xt'); if(!b) return; b.onclick=()=>{ clearInterval(timerInt); let s=min*60; const el=$('#xtm'); timerInt=setInterval(()=>{ s--; el.textContent=`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`; if(s<=120) el.classList.add('low'); if(s<=0){ clearInterval(timerInt); el.textContent='Tijd is om!'; toast('De tijd is om'); } },1000); }; }
+function examTimer(min){ const b=$('#xt'); if(!b) return; b.onclick=()=>startTimer($('#xtm'),min*60,120,'Tijd is om!'); }
 
-const hash0=(location.hash||'').slice(1); if(/^dag\d+$/.test(hash0)){ const id=+hash0.slice(3); if(id>=1&&id<=20) view={name:'day',id,sec:firstOpen(id)}; } else if(hash0==='examen') view={name:'exam',part:'lezen'};
+const hash0=(location.hash||'').slice(1); if(/^dag\d+$/.test(hash0)){ const id=+hash0.slice(3); if(id>=1&&id<=20) view={name:'day',id,sec:firstOpen(id)}; } else if(hash0==='examen') view={name:'exam',part:'lezen'}; else if(hash0==='instellingen') view={name:'settings'};
 render();
 })();
 </script>
