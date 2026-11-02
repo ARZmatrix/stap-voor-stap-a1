@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Stap voor Stap A1</title>
+<title>Stap voor Stap</title>
 <style>
 @font-face{font-family:"Baloo 2";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/baloo-2-latin-700-normal.woff2) format("woff2")}
 @font-face{font-family:"Baloo 2";font-style:normal;font-weight:800;font-display:swap;src:url(fonts/baloo-2-latin-800-normal.woff2) format("woff2")}
@@ -332,7 +332,7 @@ audio{width:100%}
 .stk-off{background:var(--line);color:var(--muted);box-shadow:inset 0 0 0 2px var(--line-deep)}
 .nm{font:800 15px/1.15 var(--f-display)}
 .nm-off{color:var(--muted)}
-.cel{position:relative;min-height:100vh;padding-top:calc(env(safe-area-inset-top,0px) + 30px);padding-bottom:170px;overflow:hidden}
+.cel{position:relative;min-height:100vh;padding-top:calc(env(safe-area-inset-top,0px) + 30px);padding-bottom:220px;overflow:hidden}
 .confetti{position:absolute;left:0;right:0;top:0;width:100%;height:330px;pointer-events:none}
 .stat{border-radius:20px;padding:10px 6px 12px;display:flex;flex-direction:column;align-items:center;gap:2px;background:var(--sheet)}
 .stat .k{font:800 13px/1 var(--f-display);letter-spacing:.05em;padding:5px 8px;border-radius:999px;width:100%;text-align:center}
@@ -347,6 +347,35 @@ audio{width:100%}
 .toast{position:fixed;left:50%;top:calc(12px + env(safe-area-inset-top,0px));transform:translateX(-50%);display:flex;align-items:center;gap:10px;min-height:52px;padding:10px 18px 10px 12px;border-radius:18px;background:var(--ink);color:var(--paper);font:800 18px var(--f-display);box-shadow:0 10px 28px rgba(0,0,0,.22);z-index:40;max-width:calc(100% - 32px)}
 .toast .ti{width:30px;height:30px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:var(--leaf);color:var(--on-leaf);flex:none}
 .toast .ar{font-size:17px;opacity:.9}
+/* A2: level switch, dossier, missions, speaking check */
+.lvl{display:inline-flex;min-height:42px;padding:3px;gap:2px;border-radius:14px;background:var(--sheet);box-shadow:inset 0 0 0 2px var(--line),0 3px 0 var(--line-deep)}
+.lvl button{border:0;background:transparent;border-radius:11px;padding:0 9px;font:800 16px/1 var(--f-display);color:var(--muted);min-width:36px}
+.lvl button[aria-pressed="true"]{background:var(--delft);color:var(--on-delft)}
+.clue{background:var(--sheet);border-radius:18px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;width:100%;text-align:left;box-shadow:inset 0 0 0 2px var(--leaf),0 3px 0 var(--leaf-deep)}
+.spkw{display:flex;flex-direction:column;gap:12px}
+.reclbl .arb{font:700 18px/1.3 var(--f-arh)}
+.pts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.pts li{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:14px}
+.pts li.ok{background:var(--leaf-soft)}
+.pts li.no{background:var(--tulip-soft)}
+.pts .pi{width:30px;height:30px;border-radius:999px;display:flex;align-items:center;justify-content:center;flex:none}
+.pts .ok .pi{background:var(--leaf);color:var(--on-leaf)}
+.pts .no .pi{background:var(--tulip);color:var(--on-tulip)}
+.wline{min-height:68px;padding:10px;border-radius:18px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--paper);box-shadow:inset 0 0 0 2px var(--line)}
+.wline.good{box-shadow:inset 0 0 0 3px var(--leaf)}
+.wline.bad{box-shadow:inset 0 0 0 3px var(--tulip)}
+.wpool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;min-height:52px}
+.wc{min-height:48px;padding:0 14px;border:0;border-radius:14px;background:var(--sheet);color:var(--ink);font:700 19px/1 var(--f-body);box-shadow:inset 0 0 0 2px var(--line),0 3px 0 var(--line-deep)}
+.wc.on{background:var(--delft-soft);color:var(--delft);box-shadow:inset 0 0 0 2px var(--delft)}
+.fbline{display:flex;gap:12px;align-items:flex-start;border-radius:18px;padding:12px 14px}
+.fbline.good{background:var(--leaf-soft)} .fbline.bad{background:var(--tulip-soft)}
+.fbline.good .fbi{background:var(--leaf);color:var(--on-leaf);width:34px;height:34px} .fbline.bad .fbi{background:var(--tulip);color:var(--on-tulip);width:34px;height:34px}
+.fouttext{white-space:pre-wrap;line-height:1.9;font-size:19px;background:var(--paper);border-radius:18px;padding:14px}
+.tk{border:0;background:transparent;padding:2px 2px;margin:0;border-radius:6px;color:var(--ink);font:inherit;min-height:32px}
+.tk.miss{background:var(--sun-soft)}
+.tk.hit{background:var(--leaf-soft)}
+.tk.hit s{color:var(--tulip-ink)}
+.tk.hit b{color:var(--leaf-ink)}
 @media (max-width:370px){ .chip{padding:0 8px;font-size:16px} .ctl .btn{font-size:15px} .fc .word{font-size:36px} }
 </style>
 </head><body>
@@ -355,9 +384,18 @@ audio{width:100%}
 <div class="toast" id="toast" role="status" hidden></div>
 
 <script src="course.js"></script>
+<script src="course-a2-1.js"></script>
+<script src="course-a2-2.js"></script>
+<script src="course-a2-3.js"></script>
+<script src="course-a2-4.js"></script>
+<script src="course-a2-exam.js"></script>
 <script>
 (function(){
-const C = window.COURSE;
+const A1C = window.COURSE;
+const A2C = {SCENES:A1C.SCENES,DAYS:window.A2_DAYS||[],EXAM:window.A2_EXAM,ROADMAP:A1C.ROADMAP,SOURCES:A1C.SOURCES};
+let C = A1C;
+const dn=d=>d.id>100?d.id-100:d.id;
+const lastId=()=>C.DAYS[C.DAYS.length-1].id;
 const $ = (s,el=document)=>el.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const app = $('#app');
@@ -420,12 +458,14 @@ function mascot(mood='happy',w=96){ const h=Math.round(w*140/120), cheer=mood===
 
 /* ---------- storage (per viewer, optional) ---------- */
 const KEY='svs-a1-v1';
-let S = {help:'both', done:{}, scores:{}, exam:{}, theme:'auto', gender:'f', goal:10, days:[], time:{}, cel:{}};
+let S = {level:'a1', help:'both', done:{}, scores:{}, exam:{}, examA2:{}, theme:'auto', gender:'f', goal:10, days:[], time:{}, cel:{}};
 try{ const raw=localStorage.getItem(KEY); if(raw) S=Object.assign(S,JSON.parse(raw)); }catch(e){}
 if(S.help==='en') S.help='both';
 function save(){ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){} }
 function applyTheme(){ const r=document.documentElement; if(S.theme==='light'||S.theme==='dark') r.dataset.theme=S.theme; else delete r.dataset.theme; }
 applyTheme();
+if(S.level==='a2') C=A2C;
+const XS=()=>S.level==='a2'?S.examA2:S.exam;
 const dkey=(t=new Date())=>`${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;
 function practised(){ const k=dkey(); if(!S.days.includes(k)){ S.days.push(k); S.days=S.days.slice(-400); save(); } }
 function streak(){ const set=new Set(S.days); const t=new Date(); if(!set.has(dkey(t))) t.setDate(t.getDate()-1); let n=0; while(set.has(dkey(t))){ n++; t.setDate(t.getDate()-1); } return n; }
@@ -577,7 +617,10 @@ function wireQuizAll(id, qs, onScore){ const box=document.getElementById(id); if
 /* ---------- course structure ---------- */
 const SECTIONS=[['woorden','Woorden',20,'الكلمات','cards','sun'],['grammatica','Grammatica',25,'القواعد','grammar','leaf'],['luisteren','Luisteren',20,'الاستماع','headphones','delft'],['lezen','Lezen',15,'القراءة','book','delft'],['schrijven','Schrijven',20,'الكتابة','pencil','tulip'],['spreken','Spreken',15,'التحدّث','mic','tulip'],['toets','Quiz',5,'الاختبار','quiz','sun']];
 const REVIEW=[['herhaling','Toets',45,'الاختبار','quiz','sun'],['schrijven','Schrijven',30,'الكتابة','pencil','tulip'],['spreken','Spreken',45,'التحدّث','mic','tulip']];
-const secsOf=d=>d.review?REVIEW:SECTIONS;
+const A2SECS=[SECTIONS[0],SECTIONS[1],SECTIONS[2],SECTIONS[3],['missie','Missie',20,'المهمة','target','sun'],SECTIONS[4],SECTIONS[5],SECTIONS[6]];
+const secsOf=d=>d.review?REVIEW:(d.id>100?A2SECS:SECTIONS);
+const WEEKS_A2={1:['Een nieuw begin','بداية جديدة','leaf'],2:['Werk en geld','العمل والمال','delft'],3:['School, stad en buurt','المدرسة والمدينة والحي','tulip'],4:['Klaar voor het examen','جاهز للامتحان','sun']};
+const WK=()=>S.level==='a2'?WEEKS_A2:WEEKS;
 const WEEKS={1:['Basis','الأساسيات','leaf'],2:['Dagelijks leven','الحياة اليومية','delft'],3:['In de stad','في المدينة','tulip'],4:['Communiceren','التواصل','sun']};
 // one sticker per day: [nl, ar, icon]
 const STICKERS={1:['Hallo-held','بطل التحية','chat'],2:['Voorstel-ster','نجم التعارف','user'],3:['Getallen-genie','عبقري الأرقام','hash'],4:['Klok-kampioen','بطل الساعة','clock'],5:['Familie-vriend','صديق العائلة','family'],6:['Dag-doener','بطل اليوم','sun'],7:['Vragen-vinder','صائد الأسئلة','quiz'],8:['Supermarkt-held','بطل السوبرماركت','cart'],9:['Thuis-held','بطل البيت','home'],10:['Mode-meester','خبير الأزياء','shirt'],11:['Wegwijzer','دليل الطريق','sign'],12:['Dokter-durf','شجاع عند الطبيب','cross'],13:['Kan-alles','أستطيع كل شيء','bolt'],14:['Werk-wonder','أعجوبة العمل','work'],15:['Formulier-pro','محترف الاستمارات','gov'],16:['Weer-wijs','حكيم الطقس','cloud'],17:['Bel-baas','بطل الاتصال','phone'],18:['Klas-kampioen','بطل الصف','school'],19:['Plannen-maker','صانع الخطط','cal'],20:['A1-kampioen','بطل A1','trophy']};
@@ -604,19 +647,19 @@ const ZIG=[0,-60,-80,-30,40,70,30];
 function renderHome(){
   const P=C.DAYS.map(d=>({d,...dayProgress(d)}));
   const cur=(P.find(p=>p.n<p.total)||{}).d;
-  const wk=cur?cur.week:4; const W=WEEKS[wk];
+  const wk=cur?cur.week:4; const W=WK()[wk];
   const wpct=w=>{ const ps=P.filter(p=>p.d.week===w); return Math.round(100*ps.reduce((s,p)=>s+p.n,0)/ps.reduce((s,p)=>s+p.total,0)); };
   const m=minsToday(), goal=S.goal||10, gf=Math.min(1,m/goal), L=2*Math.PI*9;
   let k=0;
-  const nodes=[1,2,3,4].map(w=>`<div class="wlab"><span class="k">WEEK ${w}</span><span class="n">${WEEKS[w][0]}</span>${arH(WEEKS[w][1],'font-size:17px;text-align:center')}</div>`+P.filter(p=>p.d.week===w).map(p=>{ const d=p.d, st=p.n>=p.total?'done':(cur&&d.id===cur.id?'now':(p.n?'part':'next')); const dx=ZIG[(k++)%ZIG.length]; const sk=STICKERS[d.id];
+  const nodes=[1,2,3,4].map(w=>`<div class="wlab"><span class="k">WEEK ${w}</span><span class="n">${WK()[w][0]}</span>${arH(WK()[w][1],'font-size:17px;text-align:center')}</div>`+P.filter(p=>p.d.week===w).map(p=>{ const d=p.d, st=p.n>=p.total?'done':(cur&&d.id===cur.id?'now':(p.n?'part':'next')); const dx=ZIG[(k++)%ZIG.length]; const sk=STICKERS[d.id];
       const lab={done:'klaar',now:'nu bezig',part:`${p.n} van ${p.total} klaar`,next:'nog niet begonnen'}[st];
       return `<div class="pnw" style="transform:translateX(${dx}px)"><div class="pn pn-${st}" ${st==='now'?'id="curNode"':''}>${st==='now'?`<span class="go">${p.n?'Ga door!':'Begin!'}</span>`:''}
-        <button class="pc" data-day="${d.id}" aria-label="Dag ${d.id}, ${esc(d.nl)}, ${lab}">${ic(sk[2],'l')}</button><span class="pl">Dag ${d.id}</span>
+        <button class="pc" data-day="${d.id}" aria-label="Dag ${dn(d)}, ${esc(d.nl)}, ${lab}">${ic(sk[2],'l')}</button><span class="pl">Dag ${dn(d)}</span>
         ${st==='done'?`<span class="stars" aria-label="${starsOf(d)} van 3 sterren">${[1,2,3].map(i=>star(i<=starsOf(d))).join('')}</span>`:''}${st==='part'?`<span class="mut small" style="font-weight:700">${p.n}/${p.total}</span>`:''}
         ${st==='now'?`<div class="buddy" style="${dx>0?'right:118px':'left:118px'}"><span class="bub">Jij kunt het!</span>${mascot('wave',84)}</div>`:''}</div></div>`; }).join('')).join('');
   app.innerHTML = `<div class="wrap">
   <header class="chips">
-    <span class="chip" aria-label="Cursus Nederlands A1"><svg width="24" height="18" viewBox="0 0 24 18" aria-hidden="true"><rect width="24" height="6" rx="2" fill="#C8102E"/><rect y="6" width="24" height="6" fill="#FFFFFF"/><rect y="12" width="24" height="6" rx="2" fill="#21468B"/><rect width="24" height="18" rx="3" fill="none" stroke="#D9DFEC"/></svg>A1</span>
+    ${levelChip()}
     <span class="chip" aria-label="${streak()} dagen op rij geoefend">${FLAME}${streak()}</span>
     <span class="chip" aria-label="${totalStars()} sterren">${star(true,22)}${totalStars()}</span>
     <span class="chip" aria-label="Dagdoel: ${m} van ${goal} minuten"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="var(--line)" stroke-width="4"/><circle cx="12" cy="12" r="9" fill="none" stroke="var(--leaf)" stroke-width="4" stroke-linecap="round" stroke-dasharray="${(L*gf).toFixed(1)} ${L.toFixed(1)}" transform="rotate(-90 12 12)"/></svg>${m}/${goal}</span>
@@ -626,24 +669,25 @@ function renderHome(){
     <div class="wkbars" role="img" aria-label="Voortgang per week: ${[1,2,3,4].map(w=>`week ${w} ${wpct(w)}%`).join(', ')}">${[1,2,3,4].map(w=>`<span style="background:var(--${W[2]}-deep)"><i style="width:${wpct(w)}%;background:var(--on-${W[2]})"></i></span>`).join('')}</div>
   </section>
   ${voiceNote()}
+  ${a2Card()}
   <div class="path">${nodes}
     <div class="pnw" style="flex-direction:column;align-items:center;gap:6px;margin-top:12px"><div class="pn pn-exam"><button class="pc" data-exam aria-label="Proefexamen">${ic('trophy','xl')}</button></div>
       <p class="h" style="font-size:24px;margin-top:10px;text-align:center">Proefexamen</p>${arH('الامتحان التجريبي','font-size:19px;text-align:center')}
-      <span class="chip" style="min-height:34px;font-size:15px;color:var(--muted)">4 onderdelen · ± 90 min</span>
-      ${S.exam.lezen||S.exam.luisteren?`<span class="chip" style="min-height:34px;font-size:15px;color:var(--leaf-ink)">Lezen ${S.exam.lezen?S.exam.lezen.join('/'):'–'} · Luisteren ${S.exam.luisteren?S.exam.luisteren.join('/'):'–'}</span>`:''}</div>
+      <span class="chip" style="min-height:34px;font-size:15px;color:var(--muted)">${S.level==='a2'?'4 onderdelen · 185 min':'4 onderdelen · ± 90 min'}</span>
+      ${XS().lezen||XS().luisteren?`<span class="chip" style="min-height:34px;font-size:15px;color:var(--leaf-ink)">Lezen ${XS().lezen?XS().lezen.join('/'):'–'} · Luisteren ${XS().luisteren?XS().luisteren.join('/'):'–'}</span>`:''}</div>
     <details class="more" style="margin-top:28px"><summary>Over deze cursus · عن هذا المنهاج</summary>
       <div class="stack" style="padding-top:6px">
-        <p class="kick mut">Nederlands A1 · 20 lesdagen + proefexamen · 2 uur per dag</p>
+        <p class="kick mut">Nederlands ${S.level==='a2'?'A2':'A1'} · 20 lesdagen + proefexamen · 2 uur per dag</p>
         ${help('Uw eerste stap naar het inburgeringsexamen A2 en het Staatsexamen NT2 (B1). Elke dag oefent u de vier examenvaardigheden: luisteren, lezen, schrijven en spreken.','خطوتك الأولى نحو امتحان الاندماج A2 وامتحان الدولة B1. كل يوم يدرّب المهارات الأربع للامتحان: الاستماع والقراءة والكتابة والتحدث.')}
         <h3 class="h" style="font-size:20px">Naar B1 in 6 maanden</h3>
-        ${help('Deze A1-cursus is maand 1. Daarna oefent u met de officiële A2-oefenexamens en dan met het Staatsexamen NT2 Programma I (B1).','هذا المنهاج (A1) هو الشهر الأول. الهدف بعده: تمارين امتحان الاندماج A2 ثم امتحان الدولة NT2 البرنامج الأول (B1).')}
+        ${S.level==='a2'?help('Na deze A2-cursus doet u de officiële A2-oefenexamens op inburgeren.nl en daarna het echte examen. Wilt u verder? Oefen dan voor het Staatsexamen NT2 Programma I (B1).','بعد منهاج A2 هذا، أجرِ امتحانات A2 الرسمية التدريبية في موقع inburgeren.nl ثم الامتحان الحقيقي. وإذا أردت المتابعة فتدرّب على امتحان الدولة NT2 البرنامج الأول (B1).'):''}${S.level==='a2'?'':help('Deze A1-cursus is maand 1. Daarna oefent u met de officiële A2-oefenexamens en dan met het Staatsexamen NT2 Programma I (B1).','هذا المنهاج (A1) هو الشهر الأول. الهدف بعده: تمارين امتحان الاندماج A2 ثم امتحان الدولة NT2 البرنامج الأول (B1).')}
         ${C.ROADMAP.map((r,i)=>`<div class="card" style="padding:12px 14px;display:flex;flex-direction:column;gap:4px"><span class="kick" style="color:var(--delft)">${esc(r.phase)} · ${esc(r.level)}</span><h3 class="h" style="font-size:19px">${esc(r.title)}</h3>${help(r.focus,r.focusAr)}<p class="small mut">Controle: ${esc(r.check)}</p></div>`).join('')}
         <h3 class="h" style="font-size:20px">Bronnen</h3>
         <ul class="small stack" style="gap:6px;padding-left:18px;margin:0">${C.SOURCES.map(s=>`<li><a href="${esc(s[1])}" target="_blank" rel="noopener" style="color:var(--delft);word-break:break-word">${esc(s[0])}</a></li>`).join('')}</ul>
         <p class="small mut">${help('Alle teksten en gesprekken in deze cursus zijn geschreven om te oefenen. Namen, adressen en nummers zijn verzonnen.','جميع النصوص والحوارات في هذا المنهاج من تأليفنا، وأسماء الأشخاص والعناوين خيالية.')}</p>
       </div></details>
   </div></div>
-  <div class="cta"><div class="wrap">${cur?`<button class="btn btn-p btn-2" data-day="${cur.id}">${dayProgress(cur).n?btn2(`Ga verder met dag ${cur.id}`,`تابع اليوم ${cur.id}`):btn2(`Begin met dag ${cur.id}`,`ابدأ اليوم ${cur.id}`)}</button>`:`<button class="btn btn-y btn-2" data-exam>${btn2('Naar het proefexamen','إلى الامتحان التجريبي')}</button>`}</div></div>
+  <div class="cta"><div class="wrap">${cur?`<button class="btn btn-p btn-2" data-day="${cur.id}">${dayProgress(cur).n?btn2(`Ga verder met dag ${dn(cur)}`,`تابع اليوم ${dn(cur)}`):btn2(`Begin met dag ${dn(cur)}`,`ابدأ اليوم ${dn(cur)}`)}</button>`:`<button class="btn btn-y btn-2" data-exam>${btn2('Naar het proefexamen','إلى الامتحان التجريبي')}</button>`}</div></div>
   ${dock('home')}`;
   app.querySelectorAll('[data-day]').forEach(b=>b.addEventListener('click',()=>go({name:'day',id:+b.dataset.day,sec:firstOpen(+b.dataset.day)})));
   app.querySelectorAll('[data-exam]').forEach(b=>b.addEventListener('click',()=>go({name:'exam',part:'lezen'})));
@@ -658,9 +702,9 @@ function renderStickers(){ const got=C.DAYS.filter(dayDone).length;
     <header class="row nowrap" style="gap:12px"><div style="flex:1;min-width:0"><h1 class="h" style="font-size:32px">Stickerboek</h1>${arH('دفتر الملصقات','font-size:20px')}</div>
       <div style="text-align:center;background:var(--sun-soft);border-radius:18px;padding:8px 14px;box-shadow:inset 0 0 0 2px var(--sun)"><p class="h" style="font-size:26px;color:var(--sun-ink)">${got}/20</p><p class="h" style="font-size:13px;color:var(--sun-ink)">VERZAMELD</p></div></header>
     <div class="row nowrap card" style="gap:10px;padding:10px 14px">${mascot('happy',48)}<p style="font-weight:700;flex:1">Maak een dag af en krijg een nieuwe sticker!</p></div>
-    <div class="sgrid">${C.DAYS.map(d=>{ const s=STICKERS[d.id], on=dayDone(d), t=tone(d.id), r=[-8,6,-4,8,-6,4][d.id%6];
-      return on ? `<button class="scell" data-day="${d.id}" aria-label="Sticker ${esc(s[0])}, verdiend op dag ${d.id}"><span class="stk" style="background:var(${t[0]});color:var(${t[1]});transform:rotate(${r}deg)">${ic(s[2],'l')}</span><span class="nm">${esc(s[0])}</span>${AR()?`<span class="arh small" style="text-align:center">${esc(s[1])}</span>`:''}</button>`
-        : `<button class="scell" data-day="${d.id}" aria-label="Sticker van dag ${d.id}, nog niet verdiend"><span class="stk stk-off">${ic('lock')}</span><span class="nm nm-off">Dag ${d.id}</span></button>`; }).join('')}</div>
+    ${dossierHTML()}<div class="sgrid">${C.DAYS.map(d=>{ const s=STICKERS[d.id], on=dayDone(d), t=tone(d.id), r=[-8,6,-4,8,-6,4][d.id%6];
+      return on ? `<button class="scell" data-day="${d.id}" aria-label="Sticker ${esc(s[0])}, verdiend op dag ${dn(d)}"><span class="stk" style="background:var(${t[0]});color:var(${t[1]});transform:rotate(${r}deg)">${ic(s[2],'l')}</span><span class="nm">${esc(s[0])}</span>${AR()?`<span class="arh small" style="text-align:center">${esc(s[1])}</span>`:''}</button>`
+        : `<button class="scell" data-day="${d.id}" aria-label="Sticker van dag ${dn(d)}, nog niet verdiend"><span class="stk stk-off">${ic('lock')}</span><span class="nm nm-off">Dag ${dn(d)}</span></button>`; }).join('')}</div>
   </div>${dock('stickers')}`;
   app.querySelectorAll('[data-day]').forEach(b=>b.onclick=()=>go({name:'day',id:+b.dataset.day,sec:firstOpen(+b.dataset.day)}));
 }
@@ -672,17 +716,17 @@ function renderCelebrate(){ const d=C.DAYS.find(x=>x.id===view.id), s=STICKERS[d
    <div class="wrap" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center">
     ${mascot('cheer',140)}
     <div class="row" style="align-items:flex-end;gap:4px;margin-top:-6px" role="img" aria-label="${n} van 3 sterren"><span style="transform:rotate(-12deg)">${star(n>=1,48)}</span>${star(n>=2,64)}<span style="transform:rotate(12deg)">${star(n>=3,48)}</span></div>
-    <div><h1 class="h" style="font-size:38px">Dag ${d.id} klaar!</h1>${arH(`أنهيت اليوم ${d.id}!`,'font-size:22px;text-align:center')}</div>
+    <div><h1 class="h" style="font-size:38px">Dag ${dn(d)} klaar!</h1>${arH(`أنهيت اليوم ${dn(d)}!`,'font-size:22px;text-align:center')}</div>
     <div class="g3" style="width:100%">
       <div class="stat" style="box-shadow:inset 0 0 0 2px var(--leaf),0 4px 0 var(--leaf-deep)"><span class="k" style="background:var(--leaf);color:var(--on-leaf)">QUIZ</span><span class="v">${sc?sc.join('/'):'–'}</span></div>
       <div class="stat" style="box-shadow:inset 0 0 0 2px var(--tulip),0 4px 0 var(--tulip-deep)"><span class="k" style="background:var(--tulip);color:var(--on-tulip)">REEKS</span><span class="v">${FLAME}${streak()}</span></div>
       <div class="stat" style="box-shadow:inset 0 0 0 2px var(--delft),0 4px 0 var(--delft-deep)"><span class="k" style="background:var(--delft);color:var(--on-delft)">WOORDEN</span><span class="v">+${(d.vocab||[]).length}</span></div>
     </div>
     <div class="newstk"><span class="stk" style="width:84px;height:84px;background:var(${t[0]});color:var(${t[1]});transform:rotate(-8deg)">${ic(s[2],'xl')}</span>
-      <div style="flex:1;min-width:0"><p class="kick" style="color:var(--sun-ink)">Nieuwe sticker!</p><p class="h" style="font-size:23px">${esc(s[0])}</p>${arH(s[1],'font-size:18px')}</div></div>
+      <div style="flex:1;min-width:0"><p class="kick" style="color:var(--sun-ink)">Nieuwe sticker!</p><p class="h" style="font-size:23px">${esc(s[0])}</p>${arH(s[1],'font-size:18px')}</div></div>${d.clue?clueCard(d):''}
    </div></div>
-   <div class="foot"><div class="wrap">${d.id<20?`<button class="btn btn-p btn-2" id="celNext">${btn2(`Ga door naar dag ${d.id+1}`,`تابع إلى اليوم ${d.id+1}`)}</button>`:`<button class="btn btn-y btn-2" id="celNext">${btn2('Naar het proefexamen','إلى الامتحان التجريبي')}</button>`}<button class="btn btn-s btn-w" data-nav="home">Naar Home</button></div></div>`;
-  $('#celNext').onclick=()=> d.id<20 ? go({name:'day',id:d.id+1,sec:firstOpen(d.id+1)}) : go({name:'exam',part:'lezen'});
+   <div class="foot"><div class="wrap">${d.id<lastId()?`<button class="btn btn-p btn-2" id="celNext">${btn2(`Ga door naar dag ${dn(d)+1}`,`تابع إلى اليوم ${dn(d)+1}`)}</button>`:`<button class="btn btn-y btn-2" id="celNext">${btn2('Naar het proefexamen','إلى الامتحان التجريبي')}</button>`}<button class="btn btn-s btn-w" data-nav="home">Naar Home</button></div></div>`;
+  $('#celNext').onclick=()=> d.id<lastId() ? go({name:'day',id:d.id+1,sec:firstOpen(d.id+1)}) : go({name:'exam',part:'lezen'});
 }
 
 /* ---------- SETTINGS ---------- */
@@ -729,9 +773,9 @@ function renderDay(){
   app.innerHTML = `
   <header class="band"><div class="wrap">
     <div class="row between"><button class="bb" data-nav="home">${ic('home')}Home</button><button class="bb" id="prevDay" ${d.id===1?'disabled':''}>${ic('back')}Vorige dag</button></div>
-    <div class="row nowrap" style="gap:14px"><div class="scn">${ic(sk[2],'l')}</div><div style="flex:1;min-width:0"><p class="kick">Dag ${d.id} · Week ${d.week}</p><h1 class="h" style="font-size:27px">${esc(d.nl)}</h1>${arH(d.ar,'font-size:21px')}</div></div>
+    <div class="row nowrap" style="gap:14px"><div class="scn">${ic(sk[2],'l')}</div><div style="flex:1;min-width:0"><p class="kick">Dag ${dn(d)} · Week ${d.week}</p><h1 class="h" style="font-size:27px">${esc(d.nl)}</h1>${arH(d.ar,'font-size:21px')}</div></div>
   </div></header>
-  <nav class="sw" aria-label="Onderdelen van dag ${d.id}"><div class="wrap"><div class="nodes"></div></div></nav>
+  <nav class="sw" aria-label="Onderdelen van dag ${dn(d)}"><div class="wrap"><div class="nodes"></div></div></nav>
   <div class="wrap daymain">
     <section class="goal"><div class="gi">${ic('target')}</div><div class="stack" style="gap:2px;flex:1"><p class="h" style="font-size:18px;color:var(--sun-ink)">Doel van vandaag</p>${S.help!=='ar'?`<p style="font-weight:700">${esc(d.can)}</p>`:''}${arP(d.canAr)}</div></section>
     <article class="lesson"><div class="lh"><div class="lic" id="lIc"></div><div style="flex:1;min-width:0"><h2 class="h" style="font-size:25px" id="lName"></h2><div id="lAr"></div></div><span class="step" id="lPos"></span></div>
@@ -739,7 +783,7 @@ function renderDay(){
   </div>`;
   $('#prevDay').addEventListener('click',()=>go({name:'day',id:d.id-1,sec:firstOpen(d.id-1)}));
   $('#nextSec').addEventListener('click',()=>{ if(dayDone(d) && !S.cel[d.id]){ S.cel[d.id]=1; save(); go({name:'celebrate',id:d.id}); return; }
-    const secs=secsOf(d); const i=secs.findIndex(s=>s[0]===view.sec); if(i<secs.length-1){ showSec(d,secs[i+1][0]); window.scrollTo({top:0}); } else if(d.id<20) go({name:'day',id:d.id+1,sec:firstOpen(d.id+1)}); else go({name:'exam',part:'lezen'}); });
+    const secs=secsOf(d); const i=secs.findIndex(s=>s[0]===view.sec); if(i<secs.length-1){ showSec(d,secs[i+1][0]); window.scrollTo({top:0}); } else if(d.id<lastId()) go({name:'day',id:d.id+1,sec:firstOpen(d.id+1)}); else go({name:'exam',part:'lezen'}); });
   showSec(d,view.sec);
 }
 function showSec(d,key){ if(activeRec) activeRec.click(); if(stopFn){stopFn();stopFn=null;} stopHooks.forEach(f=>f()); stopHooks=[]; stopSpeech(); clearInterval(timerInt);
@@ -747,7 +791,7 @@ function showSec(d,key){ if(activeRec) activeRec.click(); if(stopFn){stopFn();st
   paintNodes(d);
   const li=$('#lIc'); li.innerHTML=ic(s[4]); li.style.background=`var(--${s[5]}-soft)`; li.style.color=s[5]==='sun'?'var(--sun-ink)':`var(--${s[5]}${s[5]==='delft'?'':'-ink'})`;
   $('#lName').textContent=s[1]; $('#lAr').innerHTML=arH(s[3],'font-size:19px'); $('#lPos').textContent=`${i+1} / ${secs.length}`;
-  $('#nextSec').innerHTML = i<secs.length-1 ? btn2(`Volgende: ${secs[i+1][1]}`,`التالي: ${secs[i+1][3]}`) : (d.id<20 ? btn2(`Klaar · naar dag ${d.id+1}`,`انتهيت · إلى اليوم ${d.id+1}`) : btn2('Naar het proefexamen','إلى الامتحان التجريبي'));
+  $('#nextSec').innerHTML = i<secs.length-1 ? btn2(`Volgende: ${secs[i+1][1]}`,`التالي: ${secs[i+1][3]}`) : (d.id<lastId() ? btn2(`Klaar · naar dag ${dn(d)+1}`,`انتهيت · إلى اليوم ${dn(d)+1}`) : btn2('Naar het proefexamen','إلى الامتحان التجريبي'));
   renderSection(d); }
 function instr(nl,en,ar){ return `<div class="tip"><span class="nl">${esc(nl)}</span>${help(en,ar)}</div>`; }
 const sayBox=(inner,mood='happy',size=68,cls='')=>`<div class="say">${mascot(mood,size)}<div class="bub2 ${cls}">${inner}</div></div>`;
@@ -807,6 +851,8 @@ function renderSection(d){
     body.innerHTML=h; wireQuiz('rq',R.qs,()=>markDone(d.id,'lezen'));
   }
   else if(sec==='schrijven'){ body.innerHTML=writeHTML(d.write,'w'+d.id); wireWrite(d.write,'w'+d.id,()=>markDone(d.id,'schrijven')); }
+  else if(sec==='missie'){ renderMissie(d,body); }
+  else if(sec==='spreken'&&d.id>100){ renderSpreekA2(d,body); }
   else if(sec==='spreken'){ body.innerHTML=`${instr('Luister naar de vraag en antwoord hardop.','Net als bij het A2-examen Spreken hebt u ongeveer 1 minuut per antwoord. Neem uzelf op, luister terug en vergelijk met het voorbeeldantwoord.','مثل امتحان التحدث A2 لديك حوالي دقيقة لكل إجابة. سجّل صوتك واستمع إليه ثم قارنه بالإجابة النموذجية.')}${voiceNote()}${d.speak.map((s,i)=>speakHTML(s,i,d.speak.length)).join('')}${doneBtn('spreken','Alles geoefend','تدرّبت على كل شيء')}`; d.speak.forEach((s,i)=>wireSpeak(s,i)); }
   else if(sec==='toets'){ body.innerHTML=`${instr('Quiz van vandaag','5 of 6 goed? Ga door naar de volgende dag. Minder? Herhaal eerst de woorden en de grammatica.','إذا حصلت على 5 أو 6 من 6 انتقل لليوم التالي. أقل من ذلك؟ راجع الكلمات والقواعد أولًا.')}${quizHTML(d.quiz,'tq')}`;
     wireQuiz('tq',d.quiz,(ok,n)=>{ S.scores[d.id]=[ok,n]; save(); markDone(d.id,'toets'); toast('Opgeslagen','تم الحفظ'); }); }
@@ -875,21 +921,21 @@ function wireSpeak(s,i){ const root=$('#sp'+i);
 
 /* ---------- EXAM ---------- */
 const EXPARTS=[['lezen','Lezen',0,'القراءة','book'],['luisteren','Luisteren',0,'الاستماع','headphones'],['schrijven','Schrijven',0,'الكتابة','pencil'],['spreken','Spreken',0,'التحدّث','mic']];
-function examResults(){ const E=C.EXAM, X=S.exam; if(!X.lezen&&!X.luisteren&&!X.schrijven&&!X.spreken) return '';
+function examResults(){ const E=C.EXAM, X=XS(); if(!X.lezen&&!X.luisteren&&!X.schrijven&&!X.spreken) return '';
   const tag=(ok,txt)=>`<span class="score-tag" style="background:var(${ok?'--leaf-soft':'--sun-soft'});color:var(${ok?'--leaf-ink':'--sun-ink'})">${txt}</span>`;
   const row=(nl,s,pass)=>`<div class="sk"><span class="h" style="flex:1;font-size:18px">${nl}</span>${s?tag(s[0]>=pass,s[0]>=pass?'Goed genoeg':'Nog oefenen'):'<span class="mut small">Nog niet gedaan</span>'}<span class="h" style="width:56px;text-align:right;font-size:18px;font-variant-numeric:tabular-nums">${s?s.join('/'):'–'}</span></div>`;
   return `<section class="card" style="padding:14px 16px"><div class="gh" style="padding-bottom:6px"><h2 class="h" style="font-size:22px">Uw resultaten</h2>${arH('نتائجك','font-size:18px')}</div>
     ${row('Lezen',X.lezen,E.lezen.pass)}${row('Luisteren',X.luisteren,E.luisteren.pass)}
     <div class="sk"><span class="h" style="flex:1;font-size:18px">Schrijven</span>${X.schrijven?tag(true,'Gedaan'):'<span class="mut small">Nog niet gedaan</span>'}<span style="width:56px"></span></div>
-    ${row('Spreken',X.spreken,11)}
-    <p class="mut small" style="padding-top:8px">Richtlijn: Lezen ${E.lezen.pass}, Luisteren ${E.luisteren.pass}, Spreken 11 van 16 punten.</p></section>`; }
+    ${row('Spreken',X.spreken,X.spreken?Math.ceil(X.spreken[1]*(S.level==='a2'?0.65:11/16)):0)}
+    <p class="mut small" style="padding-top:8px">Richtlijn: Lezen ${E.lezen.pass}, Luisteren ${E.luisteren.pass}, Spreken ${S.level==='a2'?'65% van de punten':'11 van 16 punten'}.</p></section>`; }
 function renderExam(){ const E=C.EXAM; const part=view.part; const pi=EXPARTS.findIndex(p=>p[0]===part);
-  const mins={lezen:`${E.lezen.minutes} min`,luisteren:'± 20 min',schrijven:`${E.schrijven.minutes} min`,spreken:'± 15 min'};
+  const mins={lezen:`${E.lezen.minutes} min`,luisteren:E.luisteren.minutes?`${E.luisteren.minutes} min`:'± 20 min',schrijven:`${E.schrijven.minutes} min`,spreken:E.spreken.minutes?`${E.spreken.minutes} min`:'± 15 min'};
   app.innerHTML=`<header class="band" style="background:var(--sun);color:var(--on-sun)"><div class="wrap">
     <div class="row between"><button class="bb" data-nav="home" style="box-shadow:0 4px 0 var(--sun-deep)">${ic('x')}Stoppen</button></div>
     <div class="row nowrap" style="gap:14px"><div class="scn" style="color:var(--sun-ink);box-shadow:0 4px 0 var(--sun-deep)">${ic('trophy','l')}</div><div style="flex:1;min-width:0"><p class="kick">Dag 21</p><h1 class="h" style="font-size:28px">Proefexamen</h1>${arH('الامتحان التجريبي','font-size:21px')}</div></div>
     <div class="stack" style="gap:4px;font-size:16px">${help(E.note,E.noteAr)}</div></div></header>
-   <nav class="sw" aria-label="Onderdelen van het examen"><div class="wrap"><div class="nodes">${EXPARTS.map((p,i)=>nodeHTML(p,i,part===p[0]?'now':(S.exam[p[0]]?'done':'next'))).join('')}</div></div></nav>
+   <nav class="sw" aria-label="Onderdelen van het examen"><div class="wrap"><div class="nodes">${EXPARTS.map((p,i)=>nodeHTML(p,i,part===p[0]?'now':(XS()[p[0]]?'done':'next'))).join('')}</div></div></nav>
    <div class="wrap daymain"><article class="lesson"><div class="lh"><div class="lic" style="background:var(--sun-soft);color:var(--sun-ink)">${ic(EXPARTS[pi][4])}</div><div style="flex:1;min-width:0"><p class="kick" style="color:var(--delft)">Proefexamen · ${EXPARTS[pi][1]}</p>${arH(EXPARTS[pi][3],'font-size:18px')}</div><span class="step">${mins[part]}</span></div>
      <div class="lb" id="exBody"></div>
      ${pi<3?`<div class="lf"><button class="btn btn-p btn-2" id="exNext">${btn2(`Volgende: ${EXPARTS[pi+1][1]}`,`التالي: ${EXPARTS[pi+1][3]}`)}</button></div>`:''}</article>${examResults()}</div>`;
@@ -898,11 +944,11 @@ function renderExam(){ const E=C.EXAM; const part=view.part; const pi=EXPARTS.fi
   const body=$('#exBody');
   const timerRow=min=>`<div class="row"><button class="btn btn-p" id="xt">${ic('clock')}Start ${min} min</button><span class="timer" id="xtm" role="timer">${min}:00</span></div>`;
   if(part==='lezen'){ const all=[]; E.lezen.texts.forEach(t=>t.qs.forEach(q=>all.push(q)));
-    body.innerHTML=`${instr(`Lezen — ${all.length} vragen, ${E.lezen.minutes} minuten`,`Start de timer. Richtlijn: ${E.lezen.pass} van ${all.length} of meer goed = klaar voor A2.`,`شغّل المؤقت. الإرشاد: ${E.lezen.pass}/${all.length} أو أكثر = جاهز لمواد A2.`)}
+    body.innerHTML=`${instr(`Lezen — ${all.length} vragen, ${E.lezen.minutes} minuten`,`Start de timer. Richtlijn: ${E.lezen.pass} van ${all.length} of meer goed = ${S.level==='a2'?'goed voorbereid':'klaar voor A2'}.`,`شغّل المؤقت. الإرشاد: ${E.lezen.pass}/${all.length} أو أكثر = جاهز لمواد A2.`)}
      ${timerRow(E.lezen.minutes)}
      ${E.lezen.texts.map(t=>`<div class="sign"><div class="sh">${ic('book')}${esc(t.title)}</div><div class="sbody">${esc(t.text)}</div></div>`).join('')}
      ${quizAllHTML(all,'xl')}`;
-    examTimer(E.lezen.minutes); wireQuizAll('xl',all,(ok,n)=>{ practised(); S.exam.lezen=[ok,n]; save(); toast(ok>=E.lezen.pass?'Goed gedaan!':'Nog even oefenen'); });
+    examTimer(E.lezen.minutes); wireQuizAll('xl',all,(ok,n)=>{ practised(); XS().lezen=[ok,n]; save(); toast(ok>=E.lezen.pass?'Goed gedaan!':'Nog even oefenen'); });
     // place each text above its questions
     let qi=0; const box=$('#xl'); const cards=[...body.querySelectorAll('.sign')]; E.lezen.texts.forEach((t,ti)=>{ const first=box.querySelector(`.q[data-qi="${qi}"]`); box.insertBefore(cards[ti],first); qi+=t.qs.length; });
   }
@@ -912,37 +958,157 @@ function renderExam(){ const E=C.EXAM; const part=view.part; const pi=EXPARTS.fi
      ${quizAllHTML(all,'xq')}`;
     let qi=0; const box=$('#xq'); E.luisteren.frags.forEach((f,fi)=>{ const blk=$('#xs'+fi).parentElement; box.insertBefore(blk, box.querySelector(`.q[data-qi="${qi}"]`)); qi+=f.qs.length; });
     const plays={}; body.querySelectorAll('[data-xp]').forEach(b=>b.onclick=()=>{ const fi=+b.dataset.xp, f=E.luisteren.frags[fi]; plays[fi]=(plays[fi]||0)+1; $('#xpc'+fi).textContent=`${plays[fi]}× afgespeeld`; if(stopFn) stopFn(); stopFn=playScene('xs'+fi,f.lines,f.who,()=>false); });
-    wireQuizAll('xq',all,(ok,n)=>{ practised(); S.exam.luisteren=[ok,n]; save(); toast(ok>=E.luisteren.pass?'Goed gedaan!':'Nog even oefenen'); });
+    wireQuizAll('xq',all,(ok,n)=>{ practised(); XS().luisteren=[ok,n]; save(); toast(ok>=E.luisteren.pass?'Goed gedaan!':'Nog even oefenen'); });
   }
   if(part==='schrijven'){
     body.innerHTML=`${instr(`Schrijven — 3 opdrachten, ${E.schrijven.minutes} minuten`,'Bij het echte A2-examen schrijft u op papier. Oefen ook op papier en vergelijk daarna met het voorbeeld. Geef antwoord op alle punten.','في امتحان A2 الحقيقي تكتب على الورق. تدرّب على الورق أيضًا ثم قارن بالنموذج. أجب عن كل نقطة.')}
      ${timerRow(E.schrijven.minutes)}
      ${E.schrijven.tasks.map((t,i)=>writeHTML(t,'xw'+i)).join('')}`;
-    examTimer(E.schrijven.minutes); E.schrijven.tasks.forEach((t,i)=>wireWrite(t,'xw'+i,()=>{ practised(); S.exam.schrijven=1; save(); }));
+    examTimer(E.schrijven.minutes); E.schrijven.tasks.forEach((t,i)=>wireWrite(t,'xw'+i,()=>{ practised(); XS().schrijven=1; save(); }));
   }
-  if(part==='spreken'){
+  if(part==='spreken'&&S.level==='a2'){ renderExamSpreekA2(E,body); }
+  else if(part==='spreken'){
     body.innerHTML=`${instr('Spreken — 8 opdrachten','Bij elke opdracht: luister, denk 10 seconden na en antwoord maximaal 1 minuut. Geef uzelf punten: 2 = antwoord in hele zinnen, 1 = gedeeltelijk, 0 = geen antwoord. Richtlijn: 11 van 16 punten.','لكل مهمة: استمع، فكّر 10 ثوانٍ، أجب حتى دقيقة. قيّم نفسك: 2 = أجبت بجمل كاملة، 1 = جزئيًا، 0 = لا إجابة. الإرشاد: 11 من 16 نقطة.')}${voiceNote()}
      ${E.spreken.tasks.map((t,i)=>`<section class="task" id="xsp${i}"><p class="kick" style="color:var(--tulip-ink)">${esc(t.part)}</p>
        ${t.scene? stageHTML(t.scene,{A:t.who},'xst'+i) : `<div class="stage"><div class="pic" aria-hidden="true">${esc(t.pic)}</div></div>`}
        <div class="bub2"><div class="row nowrap" style="gap:10px"><p class="pq" lang="nl" style="flex:1;font-size:21px">${esc(t.q)}</p><button class="btn btn-p round" data-xq="${i}" aria-label="Luister" style="width:52px;height:52px">${ic('speaker2')}</button></div>${arP(t.ar,'font-size:19px')}</div>
        <div class="row"><button class="btn btn-s btn-sm" data-xt="${i}">${ic('clock')}1 minuut</button><span class="timer" id="xtm${i}">1:00</span></div>
        ${recHTML('x'+i, `data-xf="${i}"`)}<audio id="xau${i}" controls hidden></audio>
-       <div class="stack" style="gap:6px"><span class="h" style="font-size:18px">Mijn score</span><div class="g3" role="group" aria-label="Mijn score">${[0,1,2].map(v=>`<button class="sb" data-ss="${i}:${v}" aria-pressed="${(S.exam.sp||{})[i]===v}"><span style="font-size:22px">${v}</span></button>`).join('')}</div></div>
+       <div class="stack" style="gap:6px"><span class="h" style="font-size:18px">Mijn score</span><div class="g3" role="group" aria-label="Mijn score">${[0,1,2].map(v=>`<button class="sb" data-ss="${i}:${v}" aria-pressed="${(XS().sp||{})[i]===v}"><span style="font-size:22px">${v}</span></button>`).join('')}</div></div>
        <details class="more"><summary>Voorbeeldantwoord</summary><p style="margin-top:6px">${esc(t.model)}</p></details></section>`).join('')}
      <p class="h" style="font-size:24px" id="sptot"></p>`;
-    const tot=()=>{ const sp=S.exam.sp||{}; const sum=Object.values(sp).reduce((a,b)=>a+b,0); const n=Object.keys(sp).length; const el=$('#sptot'); el.textContent = n? `${sum} / 16 punten (${n}/8 gescoord)`:''; el.style.color=sum>=11?'var(--leaf-ink)':''; if(n===8){S.exam.spreken=[sum,16]; save();} };
+    const tot=()=>{ const sp=XS().sp||{}; const sum=Object.values(sp).reduce((a,b)=>a+b,0); const n=Object.keys(sp).length; const el=$('#sptot'); el.textContent = n? `${sum} / 16 punten (${n}/8 gescoord)`:''; el.style.color=sum>=11?'var(--leaf-ink)':''; if(n===8){XS().spreken=[sum,16]; save();} };
     E.spreken.tasks.forEach((t,i)=>{
       body.querySelector(`[data-xq="${i}"]`).onclick=()=>{ if(stopFn) stopFn(); if(t.scene){ stopFn=playScene('xst'+i,[['A',t.q]],{A:t.who},()=>true); } else { stopSpeech(); speak(t.q,'f'); } };
       body.querySelector(`[data-xt="${i}"]`).onclick=()=>startTimer($('#xtm'+i),60,10,'Tijd!');
       wireFile(body.querySelector(`[data-xf="${i}"]`), $('#xau'+i)); wireRec(body.querySelector(`[data-rec="x${i}"]`), $('#xau'+i));
     });
-    body.querySelectorAll('[data-ss]').forEach(b=>b.onclick=()=>{ const [i,v]=b.dataset.ss.split(':').map(Number); practised(); S.exam.sp=S.exam.sp||{}; S.exam.sp[i]=v; save(); b.parentElement.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); tot(); });
+    body.querySelectorAll('[data-ss]').forEach(b=>b.onclick=()=>{ const [i,v]=b.dataset.ss.split(':').map(Number); practised(); XS().sp=XS().sp||{}; XS().sp[i]=v; save(); b.parentElement.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); tot(); });
     tot();
   }
 }
 function examTimer(min){ const b=$('#xt'); if(!b) return; b.onclick=()=>startTimer($('#xtm'),min*60,300,'Tijd is om!'); }
 
-const hash0=(location.hash||'').slice(1); if(/^dag\d+$/.test(hash0)){ const id=+hash0.slice(3); if(id>=1&&id<=20) view={name:'day',id,sec:firstOpen(id)}; } else if(hash0==='examen') view={name:'exam',part:'lezen'}; else if(['instellingen','settings'].includes(hash0)) view={name:'settings'}; else if(hash0==='stickers') view={name:'stickers'};
+/* ---------- A2: level switch and the mystery of the secret neighbour ---------- */
+Object.assign(STICKERS,{101:['Verhuis-held','بطل الانتقال','home'],102:['Post-ster','نجم البريد','sticker'],103:['Balie-baas','بطل المكتب','gov'],104:['Gezond-genie','عبقري الصحة','cross'],105:['Feest-vriend','صديق الحفلات','family'],106:['Baan-jager','صائد الوظائف','work'],107:['Rooster-ruiler','خبير الجدول','cal'],108:['Geld-wijs','حكيم المال','hash'],109:['Klacht-kampioen','بطل الشكاوى','chat'],110:['Klus-held','بطل الإصلاح','bolt'],111:['School-ster','نجم المدرسة','school'],112:['Trein-held','بطل القطار','sign'],113:['Club-lid','عضو النادي','user'],114:['Goede buur','الجار الطيب','home'],115:['Feest-meester','خبير الأعياد','sun'],116:['Brief-lezer','قارئ الرسائل','book'],117:['Leesrace-winnaar','بطل سباق القراءة','eye'],118:['Oor-kampioen','بطل الاستماع','headphones'],119:['Examen-klaar','جاهز للامتحان','pencil'],120:['Speurneus','المحقق البارع','trophy']});
+function levelChip(){ return `<span class="lvl" role="group" aria-label="Kies uw niveau">${['a1','a2'].map(l=>`<button data-level="${l}" aria-pressed="${(S.level||'a1')===l}">${l.toUpperCase()}</button>`).join('')}</span>`; }
+app.addEventListener('click',e=>{ const b=e.target.closest('[data-level]'); if(b&&b.dataset.level!==(S.level||'a1')){ S.level=b.dataset.level; save(); C=S.level==='a2'?A2C:A1C; go({name:'home'}); } });
+const cluesGot=()=>C.DAYS.filter(d=>d.clue&&dayDone(d)).length;
+function a2Card(){ if(S.level!=='a2') return ''; const n=cluesGot();
+  return `<section class="card" style="padding:14px 16px;margin-top:14px;display:flex;flex-direction:column;gap:10px"><div class="row nowrap" style="gap:12px">${mascot('think',56)}<div style="flex:1;min-width:0"><p class="kick" style="color:var(--delft)">Het mysterie</p><h2 class="h" style="font-size:22px">De geheime buur</h2>${arH('الجار السري','font-size:18px')}</div><span class="chip" aria-label="${n} van 20 sporen gevonden">${ic('eye','s')}${n}/20</span></div>
+    ${help('Iemand in uw nieuwe straat laat briefjes achter. Elke afgeronde dag geeft u een spoor. Wie is het?','شخص ما في شارعك الجديد يترك رسائل. كل يوم تنهيه يعطيك خيطًا. من هو؟')}
+    <button class="btn btn-s btn-sm btn-w" data-nav="stickers">${ic('book')}Open het dossier</button></section>`; }
+function clueCard(d,inDossier){ const done=d.id===120; return `<div class="clue"><p class="kick" style="color:var(--delft)">${done?'Mysterie opgelost!':`${inDossier?'Spoor':'Nieuw spoor'} · dag ${dn(d)}`}</p>${help(d.clue[0],d.clue[1])}</div>`; }
+function dossierHTML(){ if(S.level!=='a2') return ''; const got=C.DAYS.filter(d=>d.clue&&dayDone(d));
+  return `<section class="stack" style="gap:10px"><div class="gh"><h2 class="h">Dossier: de geheime buur</h2>${arH('ملف الجار السري','font-size:18px')}</div>
+    ${got.length?got.map(d=>clueCard(d,true)).join(''):`<p class="mut">Nog geen sporen. Maak dag 1 af!</p>`}
+    ${got.length<20?`<p class="mut small" style="font-weight:700">Nog ${20-got.length} sporen te vinden.</p>`:''}</section>`; }
+
+/* ---------- A2: speaking check (built in) and the Claude button ---------- */
+const NSR = NATIVE && Capacitor.Plugins && Capacitor.Plugins.SpeechRecognition;
+function spkHTML(id){ return `<div class="spkw" id="${id}">
+  ${NSR?`<div class="recwrap"><button class="recbtn" data-sr aria-label="Neem op">${ic('mic','xl')}</button><p class="reclbl" aria-live="polite">${recIdle()}</p></div>`:''}
+  <label class="fl">${NSR?'Dit heeft de telefoon verstaan. Klopt het niet? Verbeter het.':'Typ wat u zou zeggen.'}<textarea class="field" data-tx lang="nl" dir="ltr" style="min-height:96px" placeholder="${NSR?'Uw antwoord komt hier…':'Schrijf uw antwoord hier…'}"></textarea></label>
+  <button class="btn btn-g btn-w" data-ck>${ic('check')}Controleer mijn antwoord</button>
+  <div data-res class="stack" hidden></div></div>`; }
+function normNL(s){ return ' '+String(s).toLowerCase().replace(/[.,!?;:"()]/g,' ').replace(/\s+/g,' ').trim()+' '; }
+function checkSpoken(text,t){ const n=normNL(text), words=(text.trim().match(/\S+/g)||[]).length, min=t.min||5;
+  const pts=(t.keys||[]).map(k=>({nl:k[0],ar:k[1],ok:k[2].some(w=>n.includes(w.toLowerCase()))}));
+  return {pts,hit:pts.filter(p=>p.ok).length,total:pts.length,words,min,enough:words>=min}; }
+function claudePrompt(t,text){ const lang=S.help==='nl'?'very simple Dutch (CEFR A2)':(S.help==='ar'?'simple Arabic':'simple Arabic, followed by the same feedback in very simple Dutch (CEFR A2)');
+  const points=(t.keys||[]).map(k=>k[0]).join('; ');
+  return `You are a kind, precise NT2 teacher. A native Arabic speaker is practising the speaking part of the Dutch A2 civic integration exam.\n\nEXAM QUESTION (Dutch): ${t.q}\n${points?`POINTS THE ANSWER SHOULD COVER: ${points}\n`:''}${t.model?`EXAMPLE ANSWER (reference only): ${t.model}\n`:''}\nWHAT THE LEARNER SAID:\n${text}\n\nThis text comes from phone speech recognition, so it may have no punctuation and may contain recognition mistakes. Do not mark those as errors, and do not judge pronunciation, because you only see text; say so once, briefly.\n\nReply in ${lang}. Format:\n1) Did the learner answer the question? Check each point.\n2) Up to 4 corrections: wrong -> right, with a very short reason.\n3) A better version of the answer, in the learner's own words at A2 level.\n4) One tip for the exam.\n5) A score out of 5.\nKeep it short and encouraging. Do not invent errors.`; }
+function copyText(s){ try{ if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(s).catch(()=>fallbackCopy(s)); return; } }catch(e){} fallbackCopy(s); }
+function fallbackCopy(s){ try{ const a=document.createElement('textarea'); a.value=s; a.style.position='fixed'; a.style.opacity='0'; document.body.appendChild(a); a.select(); document.execCommand('copy'); a.remove(); }catch(e){} }
+function openClaude(prompt){ copyText(prompt); const a=document.createElement('a'); a.href='https://claude.ai/new?q='+encodeURIComponent(prompt); a.target='_blank'; a.rel='noopener'; document.body.appendChild(a); a.click(); a.remove(); toast('Tekst gekopieerd','تم نسخ النص'); }
+const claudeBtn=()=>`<button class="btn btn-t btn-2" data-claude>${btn2('Laat Claude nakijken','دع Claude يصحّح','')}</button><p class="mut small">Opent de Claude-app of website met uw eigen account. Uw antwoord gaat dan naar Claude. Staat de tekst er niet? Plak hem: hij is al gekopieerd.</p>${AR()?`<p class="ar mut small" lang="ar">يفتح تطبيق Claude أو موقعه بحسابك الخاص، ويُرسل جوابك إلى Claude. إن لم يظهر النص فالصقه، فقد نُسخ بالفعل.</p>`:''}`;
+function resultCard(r,t,opts){ const all=r.hit===r.total&&r.enough, none=!r.hit;
+  return `<div class="say">${mascot(all?'cheer':(none?'think':'happy'),68)}<div class="bub2"><p class="h" style="font-size:24px;color:var(${all?'--leaf-ink':'--sun-ink'})">${all?'Goed gedaan!':(none?'Probeer het nog eens':'Bijna!')}</p>${arH(all?'أحسنت!':(none?'حاول مرة أخرى':'تقريبًا!'),'font-size:18px')}<p style="font-weight:700">${r.hit} van ${r.total} punten · ${r.words} woorden</p></div></div>
+   <ul class="pts">${r.pts.map(p=>`<li class="${p.ok?'ok':'no'}"><span class="pi">${ic(p.ok?'check':'x','s')}</span><div><span>${esc(p.nl)}</span>${arP(p.ar,'font-size:16px')}</div></li>`).join('')}</ul>
+   ${r.enough?'':help(`Zeg iets meer: probeer minstens ${r.min} woorden, in hele zinnen.`,`قل المزيد: حاول ${r.min} كلمات على الأقل بجمل كاملة.`)}
+   <details class="more" open><summary>Voorbeeldantwoord</summary><div class="row nowrap" style="align-items:center;margin-top:6px"><button class="btn btn-t round" data-mdl aria-label="Luister naar het voorbeeld">${ic('speaker')}</button><p>${esc(t.model)}</p></div></details>
+   <p class="mut small">Deze snelle controle zoekt naar de belangrijkste woorden. Grammatica en uitspraak kan hij niet beoordelen.</p>
+   ${opts.claude===false?'':claudeBtn()}`; }
+function wireSpk(root,t,opts){ opts=opts||{}; const tx=root.querySelector('[data-tx]'), res=root.querySelector('[data-res]'), btn=root.querySelector('[data-sr]'); let on=false, base='', cur='', h1=null, h2=null, t0=0, lbl=btn&&btn.parentElement.querySelector('.reclbl');
+  const idle=()=>{ btn.classList.remove('rec-on'); btn.innerHTML=ic('mic','xl'); btn.setAttribute('aria-label','Neem op'); lbl.innerHTML=tx.value.trim()?`<b>Opnieuw of verder praten</b>`:recIdle(); };
+  function endSR(){ on=false; if(activeRec===btn) activeRec=null; try{ NSR.stop().catch(()=>{}); }catch(e){} if(h1){ h1.remove(); h1=null; } if(h2){ h2.remove(); h2=null; } tx.value=(base+cur).trim(); base=tx.value; cur=''; idle(); }
+  function listen(){ if(!on) return; if(Date.now()-t0>120000){ endSR(); return; } NSR.start({language:'nl-NL',maxResults:1,partialResults:true,popup:false}).catch(()=>{ if(on) setTimeout(listen,400); }); }
+  if(btn) btn.onclick=async()=>{ if(on){ endSR(); return; } if(activeRec&&activeRec!==btn){ toast('Stop eerst de andere opname','أوقف التسجيل الآخر أولًا'); return; }
+    if(stopFn){ stopFn(); stopFn=null; } stopSpeech();
+    try{ const av=await NSR.available(); if(!av.available){ toast('Spraakherkenning werkt niet op deze telefoon. Typ uw antwoord.'); tx.focus(); return; }
+      const p=await NSR.requestPermissions(); if(p.speechRecognition!=='granted'){ toast('Geen toegang tot de microfoon','لا يوجد إذن للميكروفون'); return; }
+      base=tx.value.trim(); base=base?base+' ':''; cur=''; on=true; t0=Date.now(); activeRec=btn; btn.classList.add('rec-on'); btn.innerHTML=`<svg width="44" height="44" viewBox="0 0 24 24" aria-hidden="true">${I.stopF}</svg>`; btn.setAttribute('aria-label','Stop opname');
+      lbl.innerHTML=`<b><span class="dot" aria-hidden="true"></span>Ik luister…</b><span class="mut">Tik op het vierkant als u klaar bent.</span>${arB('أستمع إليك… اضغط على المربّع عند الانتهاء.')}`;
+      h1=await NSR.addListener('partialResults',d=>{ cur=(d.matches&&d.matches[0])||cur; tx.value=(base+cur).trim(); });
+      h2=await NSR.addListener('listeningState',d=>{ if(d.status==='stopped'&&on){ base=(base+cur).trim(); base=base?base+' ':''; cur=''; setTimeout(listen,250); } });
+      listen();
+    }catch(e){ on=false; activeRec=null; idle(); toast('Spraakherkenning lukt niet. Typ uw antwoord.'); } };
+  root.querySelector('[data-ck]').onclick=()=>{ if(on) endSR(); const text=tx.value.trim(); if(!text){ toast('Zeg of schrijf eerst uw antwoord','قل جوابك أو اكتبه أولًا'); return; }
+    const r=checkSpoken(text,t); res.innerHTML=resultCard(r,t,opts); res.hidden=false; practised();
+    res.querySelector('[data-mdl]').onclick=()=>{ stopSpeech(); speak(t.model.replace(/…/g,'')); };
+    const cb=res.querySelector('[data-claude]'); if(cb) cb.onclick=()=>openClaude(claudePrompt(t,tx.value.trim()));
+    opts.onResult&&opts.onResult(r,tx.value.trim()); res.scrollIntoView({block:'nearest',behavior:'smooth'}); };
+  stopHooks.push(()=>{ if(on) endSR(); }); }
+function spreekTask(t,i,pre,total){ const sid=pre+'st'+i, hasStage=!!t.scene;
+  return `<section class="task" id="${pre}t${i}"><p class="kick" style="color:var(--tulip-ink)">${t.part?esc(t.part):`Opdracht ${i+1} van ${total}`}</p>
+   ${hasStage?stageHTML(t.scene,{A:t.who},sid):(t.pic?`<div class="stage"><div class="pic" aria-hidden="true">${esc(t.pic)}</div></div>`:'')}
+   ${sayBox(`<div class="row nowrap" style="gap:10px"><p class="pq" lang="nl" style="flex:1;font-size:21px">${esc(t.q)}</p><button class="btn btn-p round" data-q aria-label="Luister naar de vraag" style="width:52px;height:52px">${ic('speaker2')}</button></div>${arP(t.ar,'font-size:19px')}`,'happy',64)}
+   ${spkHTML(pre+'w'+i)}</section>`; }
+function wireTask(t,i,pre,opts){ const root=$('#'+pre+'t'+i), sid=pre+'st'+i;
+  root.querySelector('[data-q]').onclick=()=>{ if(stopFn){ stopFn(); stopFn=null; } if(t.scene){ stopFn=playScene(sid,[['A',t.q]],{A:t.who},()=>false); } else { stopSpeech(); speak(t.q); } };
+  wireSpk($('#'+pre+'w'+i),t,opts); }
+function renderSpreekA2(d,body){ body.innerHTML=`${instr('Spreken: net als op het examen','Op het examen neemt de computer uw antwoord op, na een filmpje of plaatje. Luister, tik op de microfoon en antwoord in hele zinnen.','في الامتحان يسجّل الحاسوب جوابك بعد مقطع مصوّر أو صورة. استمع، اضغط على الميكروفون، وأجب بجمل كاملة.')}${voiceNote()}${d.speak.map((t,i)=>spreekTask(t,i,'sp',d.speak.length)).join('')}${doneBtn('spreken','Alles geoefend','تدرّبت على كل شيء')}`;
+  d.speak.forEach((t,i)=>wireTask(t,i,'sp',{})); }
+function renderExamSpreekA2(E,body){ const X=XS(); X.sp=X.sp||{}; const max=E.spreken.tasks.reduce((a,t)=>a+t.keys.length,0);
+  body.innerHTML=`${instr(`Spreken: ${E.spreken.tasks.length} opdrachten, ${E.spreken.minutes} minuten`,'Het echte examen duurt 35 minuten en u neemt al uw antwoorden op. Daar kijken een computer en beoordelaars naar. Hier geeft de snelle controle u punten. Richtlijn: 65% van de punten.','يستغرق الامتحان الحقيقي 35 دقيقة وتسجّل فيه كل إجاباتك، ويقيّمها حاسوب ومصححون. هنا تعطيك المراجعة السريعة نقاطًا. الإرشاد: 65% من النقاط.')}${voiceNote()}
+   <div class="row"><button class="btn btn-p" id="xt">${ic('clock')}Start ${E.spreken.minutes} min</button><span class="timer" id="xtm" role="timer">${E.spreken.minutes}:00</span></div>
+   ${E.spreken.tasks.map((t,i)=>spreekTask(t,i,'xs',E.spreken.tasks.length)).join('')}<p class="h" style="font-size:24px" id="sptot"></p>`;
+  examTimer(E.spreken.minutes);
+  const tot=()=>{ const sum=Object.values(X.sp).reduce((a,b)=>a+b,0), n=Object.keys(X.sp).length; const el=$('#sptot'); el.textContent=n?`${sum} / ${max} punten (${n}/${E.spreken.tasks.length} opdrachten)`:''; if(n===E.spreken.tasks.length){ X.spreken=[sum,max]; } save(); };
+  E.spreken.tasks.forEach((t,i)=>wireTask(t,i,'xs',{onResult:r=>{ X.sp[i]=r.hit; tot(); }})); tot(); }
+
+/* ---------- A2: daily missions ---------- */
+function renderMissie(d,body){ const m=d.missie; const head=`<div class="stack" style="gap:6px"><h3 class="h" style="font-size:23px">${esc(m.title)}</h3>${arH(m.ar,'font-size:18px')}</div>${sayBox(help(m.intro,m.introAr),'wave',64,'sun')}`;
+  const fin=()=>{ markDone(d.id,'missie'); };
+  ({bouw:missieBouw,fout:missieFout,race:missieRace,gat:missieGat,beller:missieBeller}[m.type])(d,m,body,head,fin); }
+function missieBouw(d,m,body,head,fin){ let i=0,good=0; body.innerHTML=head+`<div id="mBox" class="stack"></div>`; const box=$('#mBox');
+  function show(){ const it=m.items[i]; const words=it[0].split(' '); words[0]=words[0].charAt(0).toLowerCase()+words[0].slice(1); let pool=words.map((w,k)=>({w,k})); do{ pool=pool.sort(()=>Math.random()-.5); }while(pool.length>1&&pool.map(p=>p.w).join(' ')===words.join(' ')); const ans=[];
+    const draw=()=>{ box.innerHTML=`<div class="qhead"><div class="prog"><i style="width:${Math.round(100*i/m.items.length)}%"></i></div><span class="h">${i+1}/${m.items.length}</span></div>${arP(it[1],'font-size:20px')}
+      <div class="wline" aria-label="Uw zin">${ans.length?ans.map((a,x)=>`<button class="wc on" data-a="${x}">${esc(a.w)}</button>`).join(''):`<span class="mut">Tik op de woorden hieronder</span>`}</div>
+      <div class="wpool">${pool.map((p,x)=>ans.includes(p)?'':`<button class="wc" data-p="${x}">${esc(p.w)}</button>`).join('')}</div>
+      <button class="btn btn-p btn-w" id="mCk" ${ans.length<pool.length?'disabled':''}>${ic('check')}Controleer</button>`;
+      box.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{ ans.push(pool[+b.dataset.p]); draw(); });
+      box.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{ ans.splice(+b.dataset.a,1); draw(); });
+      const ck=$('#mCk'); if(ck) ck.onclick=()=>{ const right=ans.map(a=>a.w).join(' ').toLowerCase()===it[0].toLowerCase(); if(right) good++; box.querySelector('.wline').classList.add(right?'good':'bad');
+        ck.outerHTML=`<div class="fbline ${right?'good':'bad'}"><span class="fbi">${ic(right?'check':'x','s')}</span><div style="flex:1"><p class="h" style="font-size:20px">${right?'Goed zo!':'Bijna! Zo is het goed:'}</p><p style="font-weight:700">${esc(it[0])}.</p></div></div><button class="btn btn-p btn-w" id="mNx">${i<m.items.length-1?'Volgende zin':'Klaar'}${ic('next')}</button>`;
+        if(right){ stopSpeech(); speak(it[0]); }
+        $('#mNx').onclick=()=>{ i++; if(i<m.items.length) show(); else done(); }; }; };
+    draw(); }
+  function done(){ fin(); box.innerHTML=`<div class="result">${mascot(good===m.items.length?'cheer':'happy',96)}<h3 class="h" style="font-size:28px">${good} van ${m.items.length} goed!</h3>${arH('انتهت المهمة!','font-size:20px')}</div><button class="btn btn-s btn-w" id="mAg">${ic('retry')}Nog een keer</button>`; $('#mAg').onclick=()=>{ i=0; good=0; show(); }; }
+  show(); }
+function missieFout(d,m,body,head,fin){ const parts=m.text.split(/(\[[^\]]+\])/); let total=0,found=0,misses=0; const html=parts.map(p=>{ const hit=p.match(/^\[([^|]+)\|([^\]]+)\]$/); if(hit){ total++; return `<button class="tk" data-w="${esc(hit[2])}">${esc(hit[1])}</button>`; } return p.split(/(\s+)/).map(w=>/^\s*$/.test(w)?esc(w):`<button class="tk" data-dec>${esc(w)}</button>`).join(''); }).join('');
+  body.innerHTML=head+`<div class="qhead"><div class="prog"><i id="fBarM" style="width:0"></i></div><span class="h" id="fCnt">0/${total}</span></div><div class="fouttext" lang="nl">${html}</div><div id="fEnd" class="stack"></div>`;
+  const end=()=>{ fin(); $('#fEnd').innerHTML=`<div class="fbline good"><span class="fbi">${ic('check','s')}</span><div style="flex:1"><p class="h" style="font-size:20px">Alle fouten gevonden!</p>${help(m.done,m.doneAr)}</div></div>`; };
+  body.querySelectorAll('.tk').forEach(b=>b.onclick=()=>{ if(b.classList.contains('hit')) return; if(b.dataset.w){ found++; b.classList.add('hit'); b.innerHTML=`<s>${b.innerHTML}</s> <b>${esc(b.dataset.w)}</b>`; $('#fCnt').textContent=`${found}/${total}`; $('#fBarM').style.width=`${Math.round(100*found/total)}%`; if(found===total) end(); }
+    else { misses++; b.classList.add('miss'); setTimeout(()=>b.classList.remove('miss'),500); if(misses===4&&found<total){ $('#fEnd').innerHTML=`<button class="btn btn-s btn-w" id="fShow">${ic('eye')}Toon de fouten</button>`; $('#fShow').onclick=()=>{ body.querySelectorAll('.tk[data-w]:not(.hit)').forEach(x=>x.click()); }; } } }); }
+function missieRace(d,m,body,head,fin){ body.innerHTML=head+`<button class="btn btn-y btn-2" id="rGo">${btn2(`Start: ${m.secs} seconden`,'ابدأ','clock')}</button><div id="rBox" class="stack" hidden></div>`;
+  $('#rGo').onclick=()=>{ $('#rGo').remove(); const box=$('#rBox'); box.hidden=false; box.innerHTML=`<div class="row between"><span class="kick mut">Tijdrace</span><span class="timer" id="rT" role="timer">${m.secs}s</span></div><div class="sign"><div class="sh">${ic('book')}${esc(m.doc.title)}</div><div class="sbody">${esc(m.doc.text)}</div></div>${quizHTML(m.qs,'rq2')}`;
+    let t=m.secs, left=null; const iv=setInterval(()=>{ t--; const el=$('#rT'); if(!el){ clearInterval(iv); return; } el.textContent=`${Math.max(t,0)}s`; if(t<=15) el.classList.add('low'); if(t===0){ toast('Tijd is om! Maak de vragen rustig af.','انتهى الوقت! أكمل الأسئلة بهدوء.'); clearInterval(iv); } },1000);
+    stopHooks.push(()=>clearInterval(iv));
+    wireQuiz('rq2',m.qs,(ok,n)=>{ clearInterval(iv); left=Math.max(t,0); fin(); const r=box.querySelector('.result'); if(r) r.insertAdjacentHTML('beforeend',`<p class="h" style="font-size:20px;color:var(--leaf-ink)">${left?`Binnen de tijd: nog ${left} seconden over!`:'De tijd was om. Oefen nog een keer!'}</p>`); }); }; }
+function missieGat(d,m,body,head,fin){ body.innerHTML=head+quizHTML(m.qs,'gq'); wireQuiz('gq',m.qs,()=>fin()); }
+function missieBeller(d,m,body,head,fin){ let i=0; const log=[]; const who={A:m.who}; body.innerHTML=head+stageHTML(m.scene,who,'bst')+`<div id="bTurn" class="stack"></div>`; const box=$('#bTurn');
+  function show(){ const t=m.turns[i]; let plays=0; const task={q:t.say,ar:t.ar,model:t.model,keys:t.keys,min:t.min||4};
+    box.innerHTML=`<div class="qhead"><div class="prog"><i style="width:${Math.round(100*i/m.turns.length)}%"></i></div><span class="h">${i+1}/${m.turns.length}</span></div>
+     <div class="bub2"><div class="row nowrap" style="gap:10px"><p class="pq" id="bSay" lang="nl" style="flex:1;font-size:21px">${m.hide?'<span class="mut">Luister goed. U ziet de tekst pas na uw antwoord.</span>':esc(t.say)}</p><button class="btn btn-p round" id="bPl" aria-label="Luister" style="width:52px;height:52px">${ic('speaker2')}</button></div>${arP(t.ar,'font-size:18px')}</div>${spkHTML('bw')}<div id="bNx"></div>`;
+    const pl=$('#bPl'); pl.onclick=()=>{ plays++; if(stopFn){ stopFn(); stopFn=null; } stopFn=playScene('bst',[['A',t.say]],who,()=>!m.hide); if(m.hide&&plays>=2) pl.disabled=true; }; pl.click();
+    wireSpk($('#bw'),task,{claude:false,onResult:(r,text)=>{ log[i]={say:t.say,text,hit:r.hit,total:r.total}; if(m.hide) $('#bSay').textContent=t.say; $('#bNx').innerHTML=`<button class="btn btn-p btn-w" id="bGo">${i<m.turns.length-1?'De beller gaat verder':'Gesprek afronden'}${ic('next')}</button>`; $('#bGo').onclick=()=>{ i++; if(i<m.turns.length){ show(); } else done(); }; }}); }
+  function done(){ fin(); const hit=log.reduce((a,l)=>a+l.hit,0), tot=log.reduce((a,l)=>a+l.total,0); const convo={q:`Phone conversation role-play: ${m.title}`,keys:[],model:''}; const text=log.map(l=>`Other person: ${l.say}\nLearner: ${l.text}`).join('\n\n');
+    box.innerHTML=`<div class="result">${mascot(hit===tot?'cheer':'happy',96)}<h3 class="h" style="font-size:28px">Gesprek voltooid!</h3>${arH('انتهت المكالمة!','font-size:20px')}<p style="font-weight:700">${hit} van ${tot} punten</p></div>${claudeBtn()}<button class="btn btn-s btn-w" id="bAg">${ic('retry')}Nog een keer bellen</button>`;
+    box.querySelector('[data-claude]').onclick=()=>openClaude(claudePrompt(convo,text)); $('#bAg').onclick=()=>{ i=0; log.length=0; show(); }; }
+  show(); }
+
+const hash0=(location.hash||'').slice(1); if(/^dag\d+$/.test(hash0)){ const id=+hash0.slice(3)+(S.level==='a2'?100:0); if(C.DAYS.find(x=>x.id===id)) view={name:'day',id,sec:firstOpen(id)}; } else if(hash0==='examen') view={name:'exam',part:'lezen'}; else if(['instellingen','settings'].includes(hash0)) view={name:'settings'}; else if(hash0==='stickers') view={name:'stickers'};
 render();
 })();
 </script>

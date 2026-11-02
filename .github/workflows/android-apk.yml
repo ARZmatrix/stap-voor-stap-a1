@@ -61,7 +61,7 @@ jobs:
           target_commitish: ${{ github.sha }}
           make_latest: false
           body: |
-            Android-app Stap voor Stap A1 (Nederlands, NT2).
+            Android-app Stap voor Stap: Nederlands (NT2), niveau A1 en A2.
             Download StapVoorStap-A1.apk op je Android-telefoon en installeer.
             حمّل الملف StapVoorStap-A1.apk على هاتف أندرويد وثبّته.
           files: out/StapVoorStap-A1.apk
