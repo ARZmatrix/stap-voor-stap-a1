@@ -48,10 +48,24 @@ jobs:
           cp android/app/build/outputs/apk/release/app-release.apk "out/StapVoorStap-A1-v1.0.${{ github.run_number }}.apk"
           cp android/app/build/outputs/apk/release/app-release.apk "out/StapVoorStap-A1.apk"
 
+      # Second app from the same code: the basisexamen practice app, with its own app id so both can be installed.
+      - name: Build Basisexamen Oefenen APK
+        run: |
+          sed -i "s/window.APP_MODE = 'course';/window.APP_MODE = 'exam';/" www/config.js
+          grep -q "APP_MODE = 'exam'" www/config.js
+          npx cap sync android
+          sed -i 's/applicationId "nl.arzmatrix.stapvoorstap"/applicationId "nl.arzmatrix.basisexamen"/' android/app/build.gradle
+          grep -q 'applicationId "nl.arzmatrix.basisexamen"' android/app/build.gradle
+          sed -i 's|<string name="app_name">Stap voor Stap</string>|<string name="app_name">Basisexamen Oefenen</string>|; s|<string name="title_activity_main">Stap voor Stap</string>|<string name="title_activity_main">Basisexamen Oefenen</string>|' android/app/src/main/res/values/strings.xml
+          cd android && ./gradlew --no-daemon assembleRelease
+          cp app/build/outputs/apk/release/app-release.apk ../out/Basisexamen-Oefenen.apk
+
       - uses: actions/upload-artifact@v4
         with:
           name: StapVoorStap-A1-apk
-          path: out/StapVoorStap-A1-v1.0.${{ github.run_number }}.apk
+          path: |
+            out/StapVoorStap-A1-v1.0.${{ github.run_number }}.apk
+            out/Basisexamen-Oefenen.apk
 
       - name: Publish release (direct APK download on the phone)
         uses: softprops/action-gh-release@v2
@@ -61,7 +75,11 @@ jobs:
           target_commitish: ${{ github.sha }}
           make_latest: false
           body: |
-            Android-app Stap voor Stap: Nederlands (NT2), niveau A1 en A2.
-            Download StapVoorStap-A1.apk op je Android-telefoon en installeer.
-            حمّل الملف StapVoorStap-A1.apk على هاتف أندرويد وثبّته.
-          files: out/StapVoorStap-A1.apk
+            Twee Android-apps (Nederlands, NT2):
+            - StapVoorStap-A1.apk: de cursus, niveau A0, A1 en A2.
+            - Basisexamen-Oefenen.apk: oefenen voor het basisexamen inburgering buitenland (KNS, Lezen, Spreken).
+            Download het bestand op je Android-telefoon en installeer.
+            حمّل الملف على هاتف أندرويد وثبّته: StapVoorStap-A1.apk للمنهاج، و Basisexamen-Oefenen.apk للتدرب على الامتحان الأساسي.
+          files: |
+            out/StapVoorStap-A1.apk
+            out/Basisexamen-Oefenen.apk

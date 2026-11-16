@@ -1,4 +1,4 @@
-# Stap voor Stap — Android-app (A1 en A2)
+# Stap voor Stap — Android-apps (A0, A1, A2 en Basisexamen Oefenen)
 
 Nederlands leren (NT2), niveau A1 en A2, met uitleg in het Nederlands en Arabisch.
 Deze branch (`nt2-a1-app`) staat los van de rest van deze repository.
