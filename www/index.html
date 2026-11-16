@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14306b">
+<title>Basisexamen Buitenland A1</title>
+<style>
+:root{
+  --bg:#f4f1ea; --card:#fff; --ink:#1b2333; --muted:#5f6b7d; --line:#e2ddd2;
+  --blue:#14306b; --blue2:#21479a; --orange:#e8731a; --green:#1f8a4c; --red:#c2372e; --soft:#eef2fa;
+  --r:14px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Noto Sans Arabic",Tahoma,sans-serif}
+body{padding-bottom:env(safe-area-inset-bottom)}
+header.top{position:sticky;top:0;z-index:5;background:var(--blue);color:#fff;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;display:flex;align-items:center;gap:10px}
+header.top button{background:rgba(255,255,255,.14);border:0;color:#fff;width:38px;height:38px;border-radius:10px;font-size:18px}
+header.top .tt{flex:1;min-width:0}
+header.top .tt b{display:block;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+header.top .tt small{opacity:.8;font-size:13px}
+header.top .timer{font-variant-numeric:tabular-nums;background:var(--orange);padding:6px 10px;border-radius:10px;font-weight:700}
+main{max-width:720px;margin:0 auto;padding:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin:0 0 12px}
+.ar{direction:rtl;text-align:right;font-family:"Noto Naskh Arabic","Noto Sans Arabic",Tahoma,sans-serif;color:var(--muted);font-size:15px}
+.ar.big{font-size:17px;color:var(--ink)}
+h1{font-size:22px;margin:4px 0 2px} h2{font-size:18px;margin:0 0 6px} h3{font-size:16px;margin:12px 0 4px}
+.muted{color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;font:inherit;color:inherit;cursor:pointer}
+.tile .ic{font-size:26px} .tile b{display:block;margin-top:4px} .tile .ar{font-size:13px}
+.tile.wide{grid-column:1/-1}
+.tile.hero{background:var(--blue);color:#fff;border-color:var(--blue)} .tile.hero .ar,.tile.hero .muted{color:#d6def0}
+.bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin-top:8px} .bar i{display:block;height:100%;background:var(--orange)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:12px;padding:12px 16px;font:inherit;font-weight:600;cursor:pointer;background:var(--blue);color:#fff}
+.btn.sec{background:var(--soft);color:var(--blue)} .btn.or{background:var(--orange)} .btn.ghost{background:transparent;color:var(--blue);border:1px solid var(--line)}
+.btn.block{width:100%} .btn:disabled{opacity:.45}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row .btn{flex:1}
+.list{display:flex;flex-direction:column;gap:8px}
+.photo{display:flex;align-items:center;gap:12px;background:var(--soft);border-radius:12px;padding:12px;margin-bottom:12px;color:var(--blue2)}
+.photo .ic{font-size:34px}
+.q{font-size:20px;font-weight:600;margin:4px 0 10px}
+.opt{display:flex;gap:12px;align-items:center;width:100%;text-align:left;padding:14px;border:2px solid var(--line);background:#fff;border-radius:12px;font:inherit;margin-bottom:8px;cursor:pointer;color:inherit}
+.opt .k{flex:none;width:32px;height:32px;border-radius:50%;background:var(--soft);color:var(--blue);display:grid;place-items:center;font-weight:700}
+.opt .ar{font-size:13px;margin-top:2px}
+.opt.sel{border-color:var(--blue2);background:var(--soft)}
+.opt.ok{border-color:var(--green);background:#e8f5ed} .opt.ok .k{background:var(--green);color:#fff}
+.opt.no{border-color:var(--red);background:#fbeceb} .opt.no .k{background:var(--red);color:#fff}
+.fb{border-radius:12px;padding:12px;margin-top:6px} .fb.ok{background:#e8f5ed} .fb.no{background:#fbeceb}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 8px;border-radius:20px;background:var(--soft);color:var(--blue)}
+.pill.or{background:#fdebdc;color:#a24c09}
+.text{white-space:pre-wrap;background:#fffdf7;border:1px dashed #d9cfb7;border-radius:12px;padding:14px;font-size:17px}
+.dots{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.dots button{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:#fff;font:inherit;font-size:13px}
+.dots button.done{background:var(--soft);border-color:var(--blue2)} .dots button.cur{outline:2px solid var(--orange)}
+.dots button.ok{background:#e8f5ed;border-color:var(--green)} .dots button.no{background:#fbeceb;border-color:var(--red)}
+.rec{width:84px;height:84px;border-radius:50%;border:0;background:var(--red);color:#fff;font-size:30px;cursor:pointer}
+.rec.on{animation:pulse 1s infinite} @keyframes pulse{50%{box-shadow:0 0 0 12px rgba(194,55,46,.2)}}
+.score{display:flex;gap:6px} .score button{flex:1;padding:10px;border-radius:10px;border:1px solid var(--line);background:#fff;font:inherit}
+.score button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.big-num{font-size:44px;font-weight:800;color:var(--blue);line-height:1}
+.warn{background:#fff6e6;border:1px solid #f1d39b;border-radius:12px;padding:12px;font-size:14px}
+a{color:var(--blue2)}
+table{width:100%;border-collapse:collapse;font-size:14px} td,th{padding:6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.toggle{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+input[type=range]{width:140px}
+.hide{display:none!important}
+.btn[data-say]{flex:none;width:52px;height:48px;padding:0;font-size:20px}
+.tag-src{font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="top"><button id="back" aria-label="Terug">←</button><div class="tt"><b id="title">Basisexamen A1</b><small id="subtitle"></small></div><span id="timer" class="timer hide"></span></header>
+<main id="app"></main>
+<script>
+// KNS — 100 examenvragen + 2 voorbeeldvragen uit "Naar Nederland – Fotoboek" (herziene editie 2014,
+// © Ministerie van SZW). Vraagtekst, opties en correct antwoord letterlijk overgenomen.
+// Arabische vertaling/uitleg en neutrale fotobeschrijving: eigen toevoeging.
+const KNS_THEMES = [
+  {id:0, nl:"Voorbeeldvragen", ar:"أسئلة تجريبية", icon:"⭐"},
+  {id:1, nl:"Nederland: geografie, vervoer en wonen", ar:"هولندا: الجغرافيا والمواصلات والسكن", icon:"🗺️"},
+  {id:2, nl:"Geschiedenis", ar:"التاريخ", icon:"🏛️"},
+  {id:3, nl:"Staatsinrichting, politiek en grondwet", ar:"نظام الدولة والسياسة والدستور", icon:"⚖️"},
+  {id:4, nl:"Nederlandse taal", ar:"اللغة الهولندية", icon:"🗣️"},
+  {id:5, nl:"Opvoeding en onderwijs", ar:"التربية والتعليم", icon:"🎒"},
+  {id:6, nl:"Gezondheidszorg", ar:"الرعاية الصحية", icon:"🏥"},
+  {id:7, nl:"Werk en inkomen", ar:"العمل والدخل", icon:"💼"}
+];
+const KNS = [
+{id:"vb01",t:0,q:"U ziet de Nederlandse vlag. Wat zijn de kleuren van de Nederlandse vlag?",a:"rood, wit, blauw",b:"rood, wit, oranje",c:"A",f:"een vlag",qa:"ترى العلم الهولندي. ما هي ألوان العلم الهولندي؟",aa:"أحمر، أبيض، أزرق",ab:"أحمر، أبيض، برتقالي",x:"العلم الهولندي أحمر وأبيض وأزرق. البرتقالي هو لون العائلة المالكة (عائلة أورانيا)، وليس لون العلم."},
+{id:"vb02",t:0,q:"U ziet een foto. Wie is dit?",a:"Koningin Maxima",b:"Willem van Oranje",c:"B",f:"een oud schilderij van een man",qa:"ترى صورة. من هذا؟",aa:"الملكة ماكسيما",ab:"فيليم فان أورانيا",x:"الصورة لوحة قديمة لرجل: فيليم فان أورانيا (ويليام الأورانجي)، يُعتبر «أب الوطن»."},
+// 1 — Geografie, vervoer en wonen
+{id:"1",t:1,q:"In welk deel van de wereld ligt Nederland?",a:"Europa",b:"Zuid-Amerika",c:"A",qa:"في أي جزء من العالم تقع هولندا؟",aa:"أوروبا",ab:"أمريكا الجنوبية",x:"هولندا دولة في غرب أوروبا."},
+{id:"2",t:1,q:"Welk land ligt ten zuiden van Nederland?",a:"België",b:"Duitsland",c:"A",qa:"أي دولة تقع جنوب هولندا؟",aa:"بلجيكا",ab:"ألمانيا",x:"بلجيكا في الجنوب، وألمانيا في الشرق."},
+{id:"3",t:1,q:"Welk land ligt ten oosten van Nederland?",a:"België",b:"Duitsland",c:"B",qa:"أي دولة تقع شرق هولندا؟",aa:"بلجيكا",ab:"ألمانيا",x:"ألمانيا في الشرق (oosten = الشرق)."},
+{id:"4",t:1,q:"Welk land is groter?",a:"Marokko",b:"Nederland",c:"A",qa:"أي دولة أكبر؟",aa:"المغرب",ab:"هولندا",x:"هولندا دولة صغيرة جداً، المغرب أكبر منها بكثير."},
+{id:"5",t:1,q:"Welk land is kleiner?",a:"Nederland",b:"Turkije",c:"A",qa:"أي دولة أصغر؟",aa:"هولندا",ab:"تركيا",x:"هولندا أصغر من تركيا بكثير."},
+{id:"6",t:1,q:"Wat betekent Nederland?",a:"laag land",b:"waterland",c:"A",qa:"ماذا تعني كلمة «Nederland»؟",aa:"أرض منخفضة",ab:"أرض الماء",x:"Neder = منخفض، land = أرض. جزء كبير من هولندا تحت مستوى سطح البحر."},
+{id:"7",t:1,q:"Kijk naar de foto. Wat is dit?",a:"een dijk",b:"een haven",c:"A",f:"een lange hoge wal van aarde langs het water",qa:"انظر إلى الصورة. ما هذا؟",aa:"سدّ (dijk)",ab:"ميناء",x:"الـ dijk هو سدّ ترابي طويل يحمي الأرض من مياه البحر والأنهار."},
+{id:"8",t:1,q:"Wat gebeurt er met Nederland als er geen dijken zijn?",a:"Nederland krijgt meer regen",b:"Nederland staat onder water",c:"B",qa:"ماذا يحدث لهولندا إذا لم تكن هناك سدود؟",aa:"تحصل هولندا على مطر أكثر",ab:"تغرق هولندا تحت الماء",x:"بدون السدود يغمر الماء جزءاً كبيراً من البلد لأنه منخفض."},
+{id:"9",t:1,q:"Welke stad ligt in de Randstad?",a:"Eindhoven",b:"Utrecht",c:"B",qa:"أي مدينة تقع في «الراندستاد»؟",aa:"آيندهوفن",ab:"أوتريخت",x:"الراندستاد هي منطقة المدن الكبرى في الغرب: أمستردام، روتردام، لاهاي، أوتريخت."},
+{id:"10",t:1,q:"In Nederland, wonen daar veel mensen of weinig mensen?",a:"veel mensen",b:"weinig mensen",c:"A",qa:"في هولندا، هل يسكن فيها ناس كثيرون أم قليلون؟",aa:"ناس كثيرون",ab:"ناس قليلون",x:"هولندا من أكثر دول العالم كثافة سكانية."},
+{id:"11",t:1,q:"Wat is de hoofdstad van Nederland?",a:"Amsterdam",b:"Den Haag",c:"A",qa:"ما هي عاصمة هولندا؟",aa:"أمستردام",ab:"لاهاي",x:"العاصمة هي أمستردام، أما الحكومة والبرلمان ففي لاهاي (Den Haag)."},
+{id:"12",t:1,q:"In welke stad zit de regering van Nederland?",a:"Den Haag",b:"Rotterdam",c:"A",qa:"في أي مدينة توجد حكومة هولندا؟",aa:"لاهاي",ab:"روتردام",x:"الحكومة في لاهاي (Den Haag)."},
+{id:"13",t:1,q:"Waar woont de koning van Nederland?",a:"Groningen",b:"Zuid-Holland",c:"B",qa:"أين يسكن ملك هولندا؟",aa:"خرونينغن",ab:"جنوب هولندا (زاود-هولاند)",x:"الملك يسكن في لاهاي، وهي في مقاطعة Zuid-Holland."},
+{id:"14",t:1,q:"Waar ligt de grootste zeehaven van Nederland?",a:"Amsterdam",b:"Rotterdam",c:"B",qa:"أين يقع أكبر ميناء بحري في هولندا؟",aa:"أمستردام",ab:"روتردام",x:"ميناء روتردام هو الأكبر في هولندا وأوروبا."},
+{id:"15",t:1,q:"Hoe heet de nationale luchthaven van Nederland?",a:"Europoort",b:"Schiphol",c:"B",qa:"ما اسم المطار الوطني لهولندا؟",aa:"يوروبورت",ab:"سخيبهول",x:"المطار الوطني هو Schiphol. أما Europoort فهو جزء من ميناء روتردام."},
+{id:"16",t:1,q:"Waar ligt Schiphol?",a:"Amsterdam",b:"Rotterdam",c:"A",qa:"أين يقع مطار سخيبهول؟",aa:"أمستردام",ab:"روتردام",x:"مطار سخيبهول قرب أمستردام."},
+{id:"17",t:1,q:"Wie helpt u als u in Nederland aankomt?",a:"de regering",b:"mijn partner",c:"B",qa:"من يساعدك عندما تصل إلى هولندا؟",aa:"الحكومة",ab:"شريكي/شريكتي",x:"شريك حياتك (الكفيل) هو من يساعدك عند الوصول، وليس الحكومة."},
+{id:"18",t:1,q:"Is Nederland vaak droog of nat?",a:"droog",b:"nat",c:"B",qa:"هل هولندا غالباً جافة أم ممطرة (رطبة)؟",aa:"جافة",ab:"رطبة/ممطرة",x:"الطقس في هولندا ممطر كثيراً."},
+{id:"19",t:1,q:"Als u naar Nederland komt, moet u dan opnieuw uw rijbewijs halen?",a:"ja",b:"nee",c:"A",qa:"عندما تأتي إلى هولندا، هل يجب أن تحصل على رخصة القيادة من جديد؟",aa:"نعم",ab:"لا",x:"الجواب الرسمي في الامتحان: نعم."},
+{id:"20",t:1,q:"In Nederland, zijn de wegen daar druk of rustig?",a:"druk",b:"rustig",c:"A",qa:"في هولندا، هل الطرق مزدحمة أم هادئة؟",aa:"مزدحمة",ab:"هادئة",x:"الطرق في هولندا مزدحمة."},
+{id:"21",t:1,q:"In Nederland, zijn daar veel fietsen of weinig fietsen?",a:"veel",b:"weinig",c:"A",qa:"في هولندا، هل توجد دراجات كثيرة أم قليلة؟",aa:"كثيرة",ab:"قليلة",x:"في هولندا دراجات كثيرة جداً."},
+{id:"22",t:1,q:"Wat is typisch Nederlands in het verkeer?",a:"boten",b:"fietsen",c:"B",qa:"ما الشيء الهولندي النموذجي في حركة المرور؟",aa:"القوارب",ab:"الدراجات",x:"الدراجة (fiets) رمز هولندي في المرور."},
+{id:"23",t:1,q:"Leven Nederlanders veel binnen of buiten?",a:"binnen",b:"buiten",c:"A",qa:"هل يعيش الهولنديون كثيراً داخل البيت أم خارجه؟",aa:"داخل البيت",ab:"خارج البيت",x:"بسبب الطقس يقضي الهولنديون وقتاً كثيراً داخل البيت."},
+// 2 — Geschiedenis
+{id:"24",t:2,q:"Wie ziet u op het plaatje?",a:"de Koning van Spanje",b:"Willem van Oranje",c:"B",f:"een oud schilderij van een man",qa:"من ترى في الصورة؟",aa:"ملك إسبانيا",ab:"فيليم فان أورانيا",x:"فيليم فان أورانيا قاد التمرد ضد ملك إسبانيا."},
+{id:"25",t:2,q:"Was de koning van Spanje katholiek of protestants?",a:"katholiek",b:"protestants",c:"A",qa:"هل كان ملك إسبانيا كاثوليكياً أم بروتستانتياً؟",aa:"كاثوليكي",ab:"بروتستانتي",x:"ملك إسبانيا كان كاثوليكياً."},
+{id:"26",t:2,q:"Hoe lang duurde de oorlog met Spanje?",a:"8 jaar",b:"80 jaar",c:"B",qa:"كم استمرت الحرب مع إسبانيا؟",aa:"8 سنوات",ab:"80 سنة",x:"اسمها «حرب الثمانين عاماً» (Tachtigjarige Oorlog)."},
+{id:"27",t:2,q:"Hoe lang bestaat de Nederlandse staat ongeveer?",a:"vijftig jaar",b:"vierhonderd jaar",c:"B",qa:"منذ كم سنة تقريباً توجد الدولة الهولندية؟",aa:"خمسين سنة",ab:"أربعمئة سنة",x:"الدولة الهولندية موجودة منذ حوالي 400 سنة."},
+{id:"28",t:2,q:"Waren de VOC-schepen voor de handel of voor de visvangst?",a:"voor de handel",b:"voor de visvangst",c:"A",qa:"هل كانت سفن شركة VOC للتجارة أم لصيد السمك؟",aa:"للتجارة",ab:"لصيد السمك",x:"VOC = شركة الهند الشرقية الهولندية، شركة تجارية."},
+{id:"29",t:2,q:"Wie schilderde dit schilderij?",a:"Rembrandt van Rijn",b:"Willem van Oranje",c:"A",f:"een beroemd oud schilderij",qa:"من رسم هذه اللوحة؟",aa:"رامبرانت فان راين",ab:"فيليم فان أورانيا",x:"رامبرانت رسّام هولندي مشهور. فيليم فان أورانيا لم يكن رساماً."},
+{id:"30",t:2,q:"Is er in Nederland scheiding van kerk en staat?",a:"ja",b:"nee",c:"A",qa:"هل يوجد في هولندا فصل بين الكنيسة (الدين) والدولة؟",aa:"نعم",ab:"لا",x:"نعم، الدين والدولة منفصلان."},
+{id:"31",t:2,q:"Door welk land is Nederland bezet tijdens de Tweede Wereldoorlog?",a:"Duitsland",b:"Engeland",c:"A",qa:"من أي دولة احتُلّت هولندا خلال الحرب العالمية الثانية؟",aa:"ألمانيا",ab:"إنجلترا",x:"ألمانيا احتلت هولندا من 1940 إلى 1945."},
+{id:"32",t:2,q:"Welke grote Nederlandse stad is in 1940 gebombardeerd?",a:"Amsterdam",b:"Rotterdam",c:"B",qa:"أي مدينة هولندية كبيرة قُصفت عام 1940؟",aa:"أمستردام",ab:"روتردام",x:"روتردام قُصفت عام 1940."},
+{id:"33",t:2,q:"Waarom is Anne Frank beroemd?",a:"Ze schreef een dagboek",b:"Ze was baas van een museum",c:"A",qa:"لماذا آنا فرانك مشهورة؟",aa:"كتبت مذكرات (يوميات)",ab:"كانت مديرة متحف",x:"آنا فرانك فتاة يهودية كتبت يوميات خلال الحرب."},
+{id:"34",t:2,q:"Welke kolonie van Nederland werd onafhankelijk vlak na de Tweede Wereldoorlog?",a:"Indonesië",b:"Suriname",c:"A",qa:"أي مستعمرة هولندية استقلت بعد الحرب العالمية الثانية مباشرة؟",aa:"إندونيسيا",ab:"سورينام",x:"إندونيسيا بعد الحرب مباشرة، وسورينام عام 1975."},
+{id:"35",t:2,q:"Uit welk land kwamen veel gastarbeiders?",a:"uit Engeland",b:"uit Turkije",c:"B",qa:"من أي بلد جاء كثير من العمال الضيوف؟",aa:"من إنجلترا",ab:"من تركيا",x:"جاء عمال كثيرون من تركيا (والمغرب)."},
+{id:"36",t:2,q:"Welke kolonie van Nederland werd in 1975 onafhankelijk?",a:"Nederlandse Antillen",b:"Suriname",c:"B",qa:"أي مستعمرة هولندية استقلت عام 1975؟",aa:"جزر الأنتيل الهولندية",ab:"سورينام",x:"سورينام استقلت عام 1975."},
+// 3 — Staatsinrichting, politiek en grondwet
+{id:"37",t:3,q:"Wie zijn dit?",a:"koning Willem-Alexander en koningin Maxima",b:"prinses Beatrix en haar man Claus",c:"A",f:"een koning en een koningin van nu",qa:"من هؤلاء؟",aa:"الملك فيليم-ألكسندر والملكة ماكسيما",ab:"الأميرة بياتريكس وزوجها كلاوس",x:"الملك الحالي فيليم-ألكسندر وزوجته الملكة ماكسيما."},
+{id:"38",t:3,q:"Uit welk land komt koningin Maxima?",a:"Argentinië",b:"Duitsland",c:"A",qa:"من أي بلد الملكة ماكسيما؟",aa:"الأرجنتين",ab:"ألمانيا",x:"الملكة ماكسيما من الأرجنتين."},
+{id:"39",t:3,q:"Hoe heet de kroonprinses?",a:"Amalia",b:"Beatrix",c:"A",qa:"ما اسم وليّة العهد؟",aa:"أماليا",ab:"بياتريكس",x:"وليّة العهد هي الأميرة أماليا. بياتريكس كانت الملكة سابقاً."},
+{id:"40",t:3,q:"Is Nederland een democratie?",a:"ja",b:"nee",c:"A",qa:"هل هولندا دولة ديمقراطية؟",aa:"نعم",ab:"لا",x:"نعم، هولندا ديمقراطية (ومملكة دستورية)."},
+{id:"41",t:3,q:"In welke stad zit het parlement van Nederland?",a:"Amsterdam",b:"Den Haag",c:"B",qa:"في أي مدينة يوجد البرلمان الهولندي؟",aa:"أمستردام",ab:"لاهاي",x:"البرلمان والحكومة في لاهاي."},
+{id:"42",t:3,q:"Wat is de belangrijkste wet in Nederland?",a:"de grondwet",b:"het parlement",c:"A",qa:"ما هو أهم قانون في هولندا؟",aa:"الدستور",ab:"البرلمان",x:"الدستور (grondwet) هو أهم قانون. البرلمان ليس قانوناً."},
+{id:"43",t:3,q:"Wie is de voorzitter van de raad van ministers?",a:"de koning",b:"de minister-president",c:"B",qa:"من هو رئيس مجلس الوزراء؟",aa:"الملك",ab:"رئيس الوزراء",x:"رئيس الوزراء (minister-president) يرأس مجلس الوزراء."},
+{id:"44",t:3,q:"Wie vergaderen in deze zaal?",a:"de Eerste Kamer",b:"de Tweede Kamer",c:"B",f:"een grote zaal met veel stoelen in een halve cirkel",qa:"من يجتمع في هذه القاعة؟",aa:"المجلس الأول",ab:"المجلس الثاني",x:"الجواب الرسمي: المجلس الثاني (Tweede Kamer)."},
+{id:"45",t:3,q:"Hoe vaak zijn er verkiezingen in Nederland?",a:"elke vier jaar",b:"elke zes jaar",c:"A",qa:"كم مرة تُجرى الانتخابات في هولندا؟",aa:"كل أربع سنوات",ab:"كل ست سنوات",x:"كل أربع سنوات."},
+{id:"46",t:3,q:"Hoe oud moet u zijn om te mogen stemmen in Nederland?",a:"18 jaar",b:"21 jaar",c:"A",qa:"كم يجب أن يكون عمرك لتصوّت في هولندا؟",aa:"18 سنة",ab:"21 سنة",x:"من عمر 18 سنة."},
+{id:"47",t:3,q:"Heeft Nederland één politieke partij of meer politieke partijen?",a:"één politieke partij",b:"meer politieke partijen",c:"B",qa:"هل في هولندا حزب سياسي واحد أم أحزاب عديدة؟",aa:"حزب واحد",ab:"أحزاب عديدة",x:"توجد أحزاب سياسية كثيرة."},
+{id:"48",t:3,q:"Wat is de functie van deze man?",a:"burgemeester",b:"minister-president",c:"A",f:"een man met een grote ketting om zijn nek",qa:"ما هي وظيفة هذا الرجل؟",aa:"رئيس البلدية",ab:"رئيس الوزراء",x:"رئيس البلدية (burgemeester) يلبس سلسلة كبيرة في المناسبات الرسمية."},
+{id:"49",t:3,q:"Is discriminatie toegestaan in Nederland?",a:"ja",b:"nee",c:"B",qa:"هل التمييز مسموح في هولندا؟",aa:"نعم",ab:"لا",x:"التمييز ممنوع."},
+{id:"50",t:3,q:"Hebben vrouwen in Nederland méér rechten dan mannen of dezelfde rechten?",a:"dezelfde rechten als mannen",b:"meer rechten dan mannen",c:"A",qa:"هل للنساء في هولندا حقوق أكثر من الرجال أم نفس الحقوق؟",aa:"نفس حقوق الرجال",ab:"حقوق أكثر من الرجال",x:"النساء والرجال لهم نفس الحقوق."},
+{id:"51",t:3,q:"Mogen vrouwen in Nederland zelf kiezen met wie ze willen trouwen?",a:"ja",b:"nee",c:"A",qa:"هل يحق للنساء في هولندا أن يخترن بأنفسهن من يتزوجن؟",aa:"نعم",ab:"لا",x:"نعم، كل شخص يختار شريكه بنفسه."},
+{id:"52",t:3,q:"Is het discrimineren van homoseksuelen strafbaar of toegestaan in Nederland?",a:"strafbaar",b:"toegestaan",c:"A",qa:"هل التمييز ضد المثليين يعاقب عليه القانون أم مسموح في هولندا؟",aa:"يعاقب عليه القانون",ab:"مسموح",x:"التمييز ضد المثليين يعاقب عليه القانون."},
+{id:"53",t:3,q:"Heeft Nederland één staatsgodsdienst of zijn er veel godsdiensten?",a:"Er is één staatsgodsdienst",b:"Er zijn veel godsdiensten",c:"B",qa:"هل لهولندا دين رسمي واحد أم توجد أديان كثيرة؟",aa:"يوجد دين رسمي واحد",ab:"توجد أديان كثيرة",x:"لا يوجد دين رسمي للدولة، توجد أديان كثيرة."},
+{id:"54",t:3,q:"Zijn de kranten, radio en televisie vrij in hun mening in Nederland?",a:"ja",b:"nee",c:"A",qa:"هل الصحف والإذاعة والتلفزيون أحرار في آرائهم في هولندا؟",aa:"نعم",ab:"لا",x:"نعم، توجد حرية الصحافة."},
+{id:"55",t:3,q:"Heeft Nederland veel televisiekanalen of is er één staatstelevisie?",a:"Er is één staatstelevisie",b:"Er zijn veel televisiekanalen",c:"B",qa:"هل في هولندا قنوات تلفزيونية كثيرة أم تلفزيون حكومي واحد؟",aa:"يوجد تلفزيون حكومي واحد",ab:"توجد قنوات تلفزيونية كثيرة",x:"توجد قنوات كثيرة."},
+{id:"56",t:3,q:"Is homoseksualiteit toegestaan of strafbaar in Nederland?",a:"strafbaar",b:"toegestaan",c:"B",qa:"هل المثلية الجنسية مسموحة أم يعاقب عليها في هولندا؟",aa:"يعاقب عليها",ab:"مسموحة",x:"مسموحة قانونياً. انتبه: في السؤال 52 الجواب «strafbaar» لأن السؤال عن التمييز."},
+{id:"57",t:3,q:"Is wapenbezit zonder vergunning toegestaan of strafbaar in Nederland?",a:"strafbaar",b:"toegestaan",c:"A",qa:"هل حيازة سلاح بدون ترخيص مسموحة أم يعاقب عليها في هولندا؟",aa:"يعاقب عليها",ab:"مسموحة",x:"حيازة السلاح بدون ترخيص يعاقب عليها القانون."},
+{id:"58",t:3,q:"Is vrouwenbesnijdenis toegestaan of strafbaar in Nederland?",a:"strafbaar",b:"toegestaan",c:"A",qa:"هل ختان الإناث مسموح أم يعاقب عليه في هولندا؟",aa:"يعاقب عليه",ab:"مسموح",x:"ختان الإناث جريمة يعاقب عليها القانون."},
+{id:"59",t:3,q:"Is het slaan van vrouwen toegestaan of strafbaar in Nederland?",a:"strafbaar",b:"toegestaan",c:"A",qa:"هل ضرب النساء مسموح أم يعاقب عليه في هولندا؟",aa:"يعاقب عليه",ab:"مسموح",x:"العنف ضد المرأة يعاقب عليه القانون."},
+{id:"60",t:3,q:"Hebben alle mensen in Nederland hetzelfde geloof?",a:"ja",b:"nee",c:"B",qa:"هل لكل الناس في هولندا نفس الدين؟",aa:"نعم",ab:"لا",x:"لا، الناس لهم أديان مختلفة أو بلا دين."},
+// 4 — Nederlandse taal
+{id:"61",t:4,q:"Welke taal spreken de mensen in Nederland?",a:"Duits",b:"Nederlands",c:"B",qa:"أي لغة يتكلمها الناس في هولندا؟",aa:"الألمانية",ab:"الهولندية",x:"اللغة الهولندية (Nederlands)."},
+{id:"62",t:4,q:"Is het belangrijk om snel Nederlands te leren?",a:"ja",b:"nee",c:"A",qa:"هل من المهم أن تتعلم الهولندية بسرعة؟",aa:"نعم",ab:"لا",x:"نعم، مهم جداً."},
+{id:"63",t:4,q:"Wat leert u in de Nederlandse taalles?",a:"alle Europese talen",b:"de Nederlandse taal",c:"B",qa:"ماذا تتعلم في درس اللغة الهولندية؟",aa:"كل اللغات الأوروبية",ab:"اللغة الهولندية",x:"تتعلم اللغة الهولندية."},
+{id:"64",t:4,q:"Moet u voor een taalcursus betalen?",a:"ja",b:"nee",c:"A",qa:"هل يجب أن تدفع مقابل دورة اللغة؟",aa:"نعم",ab:"لا",x:"الجواب الرسمي في الامتحان: نعم."},
+{id:"65",t:4,q:"Wie betaalt de taalcursus?",a:"De school betaalt",b:"Ik betaal zelf",c:"B",qa:"من يدفع ثمن دورة اللغة؟",aa:"المدرسة تدفع",ab:"أنا أدفع بنفسي",x:"الجواب الرسمي في الامتحان: أنا أدفع بنفسي."},
+{id:"66",t:4,q:"Gaan in Nederland alleen kinderen naar school of ook volwassenen?",a:"alleen kinderen",b:"kinderen en volwassenen",c:"B",qa:"في هولندا، هل الأطفال فقط يذهبون إلى المدرسة أم الكبار أيضاً؟",aa:"الأطفال فقط",ab:"الأطفال والكبار",x:"الكبار أيضاً يتعلمون (مثل دورات اللغة)."},
+// 5 — Opvoeding en onderwijs
+{id:"67",t:5,q:"Worden verjaardagen in Nederland gevierd?",a:"ja",b:"nee",c:"A",qa:"هل يُحتفل بأعياد الميلاد في هولندا؟",aa:"نعم",ab:"لا",x:"نعم، أعياد الميلاد مهمة جداً في هولندا."},
+{id:"68",t:5,q:"Wat doen Nederlanders meestal als ze bij iemand op bezoek gaan?",a:"Ze gaan zomaar naar binnen",b:"Ze maken meestal een afspraak",c:"B",qa:"ماذا يفعل الهولنديون عادةً عندما يزورون شخصاً؟",aa:"يدخلون فجأة بدون موعد",ab:"يأخذون موعداً عادةً",x:"الهولنديون يحددون موعداً (afspraak) قبل الزيارة."},
+{id:"69",t:5,q:"Opa’s en oma’s in Nederland, wonen die bij hun kinderen of wonen ze apart?",a:"Ze wonen apart",b:"Ze wonen bij hun kinderen",c:"A",qa:"الأجداد في هولندا، هل يسكنون مع أولادهم أم وحدهم؟",aa:"يسكنون وحدهم",ab:"يسكنون مع أولادهم",x:"عادةً يسكن الأجداد في بيت مستقل."},
+{id:"70",t:5,q:"Is het voor het leren van de taal goed om met kinderen naar de Nederlandse televisie te kijken?",a:"ja",b:"nee",c:"A",qa:"هل من الجيد لتعلم اللغة أن تشاهد التلفزيون الهولندي مع الأطفال؟",aa:"نعم",ab:"لا",x:"نعم، يساعد على تعلم اللغة."},
+{id:"71",t:5,q:"Wie is in Nederland verantwoordelijk voor wat kinderen doen?",a:"de ouders",b:"de school",c:"A",qa:"من المسؤول في هولندا عما يفعله الأطفال؟",aa:"الوالدان",ab:"المدرسة",x:"الوالدان هما المسؤولان."},
+{id:"72",t:5,q:"Hoe oud zijn de meeste kinderen in Nederland als ze naar school gaan?",a:"vier jaar",b:"vijf jaar",c:"A",qa:"كم عمر معظم الأطفال في هولندا عندما يبدؤون المدرسة؟",aa:"أربع سنوات",ab:"خمس سنوات",x:"معظم الأطفال يبدؤون في عمر 4 سنوات. انتبه للسؤال التالي!"},
+{id:"73",t:5,q:"Vanaf welke leeftijd is onderwijs verplicht in Nederland?",a:"vier jaar",b:"vijf jaar",c:"B",qa:"من أي عمر يكون التعليم إلزامياً في هولندا؟",aa:"أربع سنوات",ab:"خمس سنوات",x:"إلزامي من عمر 5 سنوات (لكن معظمهم يبدأ في 4)."},
+{id:"74",t:5,q:"Tot welke leeftijd is onderwijs verplicht in Nederland?",a:"twaalf jaar",b:"achttien jaar",c:"B",qa:"حتى أي عمر يكون التعليم إلزامياً في هولندا؟",aa:"اثنتا عشرة سنة",ab:"ثماني عشرة سنة",x:"حتى 18 سنة."},
+{id:"75",t:5,q:"Leren kinderen als ze spelen?",a:"ja",b:"nee",c:"A",qa:"هل يتعلم الأطفال عندما يلعبون؟",aa:"نعم",ab:"لا",x:"نعم، اللعب جزء من التعلم."},
+{id:"76",t:5,q:"Wie kiest in Nederland de school voor het kind?",a:"de gemeente",b:"de ouders",c:"B",qa:"من يختار المدرسة للطفل في هولندا؟",aa:"البلدية",ab:"الوالدان",x:"الوالدان يختاران المدرسة."},
+{id:"77",t:5,q:"Zijn er in Nederland op school aparte klassen voor jongens en voor meisjes?",a:"ja",b:"nee",c:"B",qa:"هل توجد في المدارس الهولندية صفوف منفصلة للأولاد والبنات؟",aa:"نعم",ab:"لا",x:"لا، الأولاد والبنات في نفس الصف."},
+{id:"78",t:5,q:"Dragen kinderen in Nederland op school een uniform?",a:"ja",b:"nee",c:"B",qa:"هل يلبس الأطفال في هولندا زياً موحداً في المدرسة؟",aa:"نعم",ab:"لا",x:"لا، لا يوجد زي مدرسي."},
+{id:"79",t:5,q:"Wat kan deze jongen doen met een computer?",a:"alleen spelen",b:"spelen en leren",c:"B",f:"een jongen achter een computer",qa:"ماذا يستطيع هذا الولد أن يفعل بالحاسوب؟",aa:"اللعب فقط",ab:"اللعب والتعلم",x:"الحاسوب للعب وللتعلم."},
+{id:"80",t:5,q:"Voortgezet onderwijs, is dat voor kinderen vanaf vier jaar of vanaf twaalf jaar?",a:"vanaf vier jaar",b:"vanaf twaalf jaar",c:"B",qa:"التعليم الثانوي، هل هو للأطفال من عمر 4 أم من عمر 12؟",aa:"من عمر 4 سنوات",ab:"من عمر 12 سنة",x:"التعليم الثانوي من عمر 12 سنة."},
+{id:"81",t:5,q:"Gaan alle kinderen vanaf twaalf jaar naar hetzelfde soort onderwijs, of zijn er twee richtingen?",a:"Er is één soort",b:"Er zijn twee richtingen",c:"B",qa:"هل يذهب كل الأطفال من عمر 12 إلى نفس نوع التعليم أم يوجد اتجاهان؟",aa:"يوجد نوع واحد",ab:"يوجد اتجاهان",x:"يوجد اتجاهان: تعليم مهني وتعليم نظري."},
+{id:"82",t:5,q:"Tot welke leeftijd moeten kinderen in Nederland naar school?",a:"zestien jaar",b:"achttien jaar",c:"B",qa:"حتى أي عمر يجب على الأطفال في هولندا الذهاب إلى المدرسة؟",aa:"ست عشرة سنة",ab:"ثماني عشرة سنة",x:"حتى 18 سنة."},
+{id:"83",t:5,q:"Vanaf welke leeftijd mogen jongeren hun eigen keuzes maken?",a:"vanaf zestien jaar",b:"vanaf achttien jaar",c:"B",qa:"من أي عمر يحق للشباب اتخاذ قراراتهم بأنفسهم؟",aa:"من 16 سنة",ab:"من 18 سنة",x:"من عمر 18 سنة."},
+// 6 — Gezondheidszorg
+{id:"84",t:6,q:"Is het verplicht om uzelf te verzekeren tegen ziektekosten?",a:"ja",b:"nee",c:"A",qa:"هل التأمين ضد تكاليف المرض إلزامي؟",aa:"نعم",ab:"لا",x:"نعم، التأمين الصحي إلزامي."},
+{id:"85",t:6,q:"Wie betaalt in Nederland uw verzekering tegen ziektekosten?",a:"de gemeente",b:"mijn partner",c:"B",qa:"من يدفع تأمينك الصحي في هولندا؟",aa:"البلدية",ab:"شريكي/شريكتي",x:"الجواب الرسمي في الامتحان: الشريك (الكفيل)، وليس البلدية."},
+{id:"86",t:6,q:"Als u ziek wordt, waar kan u in Nederland dan het beste eerst naartoe gaan?",a:"naar de huisarts",b:"naar het ziekenhuis",c:"A",qa:"إذا مرضت، إلى أين من الأفضل أن تذهب أولاً في هولندا؟",aa:"إلى طبيب العائلة",ab:"إلى المستشفى",x:"أولاً إلى طبيب العائلة (huisarts)."},
+{id:"87",t:6,q:"Waar haalt men in Nederland medicijnen op recept?",a:"bij de apotheek",b:"bij de drogist",c:"A",qa:"أين يأخذ الناس الأدوية بوصفة طبية في هولندا؟",aa:"من الصيدلية",ab:"من محل الأدوية العادي (drogist)",x:"الأدوية بوصفة من الصيدلية (apotheek). الـ drogist يبيع أدوية بدون وصفة."},
+{id:"88",t:6,q:"Waar gaat u in Nederland in een noodgeval naartoe?",a:"naar de drogist",b:"naar het ziekenhuis",c:"B",qa:"إلى أين تذهب في حالة طوارئ في هولندا؟",aa:"إلى الـ drogist",ab:"إلى المستشفى",x:"في الطوارئ إلى المستشفى."},
+{id:"89",t:6,q:"Waar werken de meeste specialisten?",a:"bij de huisartsenpost",b:"in het ziekenhuis",c:"B",qa:"أين يعمل معظم الأطباء الأخصائيين؟",aa:"في مركز أطباء العائلة",ab:"في المستشفى",x:"الأخصائيون يعملون في المستشفى."},
+{id:"90",t:6,q:"Voor wie is het consultatiebureau?",a:"voor grote kinderen",b:"voor kleine kinderen",c:"B",qa:"لمن مركز رعاية الطفل (consultatiebureau)؟",aa:"للأطفال الكبار",ab:"للأطفال الصغار",x:"للأطفال الصغار (الرضع والأطفال حتى 4 سنوات)."},
+// 7 — Werk en inkomen
+{id:"91",t:7,q:"Wie werken er in Nederland?",a:"alleen mannen",b:"mannen en vrouwen",c:"B",qa:"من يعمل في هولندا؟",aa:"الرجال فقط",ab:"الرجال والنساء",x:"الرجال والنساء يعملون."},
+{id:"92",t:7,q:"Wanneer moet u werk gaan zoeken, zo snel mogelijk of later?",a:"zo snel mogelijk",b:"later",c:"A",qa:"متى يجب أن تبحث عن عمل، بأسرع وقت ممكن أم لاحقاً؟",aa:"بأسرع وقت ممكن",ab:"لاحقاً",x:"بأسرع وقت ممكن."},
+{id:"93",t:7,q:"Waar is in Nederland steeds minder werk te vinden?",a:"in de industrie",b:"in de zorg",c:"A",qa:"أين يوجد عمل أقل فأقل في هولندا؟",aa:"في الصناعة",ab:"في الرعاية الصحية",x:"العمل في الصناعة يقل."},
+{id:"94",t:7,q:"Waar is in Nederland veel werk te vinden?",a:"in de landbouw",b:"in de zorg",c:"B",qa:"أين يوجد عمل كثير في هولندا؟",aa:"في الزراعة",ab:"في الرعاية الصحية",x:"يوجد عمل كثير في الرعاية (zorg)."},
+{id:"95",t:7,q:"Waar is het in Nederland gemakkelijker om werk te vinden?",a:"in de beveiliging",b:"in de landbouw",c:"A",qa:"أين من الأسهل إيجاد عمل في هولندا؟",aa:"في الحراسة والأمن",ab:"في الزراعة",x:"الجواب الرسمي: في الحراسة (beveiliging)."},
+{id:"96",t:7,q:"Hoe vindt u in Nederland gemakkelijker werk, via de krant of via familie?",a:"via de krant",b:"via familie",c:"B",qa:"كيف تجد عملاً بسهولة أكبر في هولندا، عبر الجريدة أم عبر العائلة؟",aa:"عبر الجريدة",ab:"عبر العائلة",x:"الجواب الرسمي: عبر العائلة (المعارف)."},
+{id:"97",t:7,q:"Waar kunt u zich in Nederland inschrijven als u werk zoekt?",a:"bij een school",b:"bij een uitzendbureau",c:"B",qa:"أين يمكنك التسجيل في هولندا إذا كنت تبحث عن عمل؟",aa:"في مدرسة",ab:"في مكتب توظيف مؤقت",x:"في مكتب التوظيف (uitzendbureau)."},
+{id:"98",t:7,q:"Geeft men elkaar in Nederland bij een sollicitatiegesprek eerst een hand of gaat men direct zitten?",a:"Men gaat direct zitten",b:"Men geeft elkaar eerst een hand",c:"B",qa:"في مقابلة العمل في هولندا، هل يتصافح الناس أولاً أم يجلسون مباشرة؟",aa:"يجلسون مباشرة",ab:"يتصافحون أولاً",x:"أولاً المصافحة، ثم الجلوس."},
+{id:"99",t:7,q:"Krijgt u in Nederland een uitkering of moet uw partner voor u zorgen?",a:"Ik krijg een uitkering",b:"Mijn partner moet voor mij zorgen",c:"B",qa:"هل تحصل في هولندا على إعانة مالية أم يجب أن يعيلك شريكك؟",aa:"أحصل على إعانة",ab:"شريكي يجب أن يعيلني",x:"الشريك (الكفيل) مسؤول عنك مالياً."},
+{id:"100",t:7,q:"Is het leven in Nederland duur of goedkoop?",a:"duur",b:"goedkoop",c:"A",qa:"هل الحياة في هولندا غالية أم رخيصة؟",aa:"غالية",ab:"رخيصة",x:"الحياة في هولندا غالية."}
+];
+
+// Lezen A1 — EIGEN oefenteksten in het format van het basisexamen (9 teksten, 19 meerkeuzevragen, 35 min).
+// Geen officiële examenteksten. c = index van het goede antwoord.
+const LEZEN_SETS = [
+{ id:1, naam:"Oefenexamen Lezen 1", teksten:[
+ {soort:"Bord", tekst:"BIBLIOTHEEK\nOpen:\nmaandag t/m vrijdag 10.00 – 18.00 uur\nzaterdag 10.00 – 14.00 uur\nzondag gesloten\n\nBoeken lenen is gratis voor kinderen.",
+  ar:"المكتبة. مفتوحة: من الاثنين إلى الجمعة 10:00–18:00، السبت 10:00–14:00، الأحد مغلقة. استعارة الكتب مجانية للأطفال.",
+  vragen:[
+   {q:"Wanneer is de bibliotheek dicht?",o:["Op zaterdag.","Op zondag.","Op maandag."],c:1,x:"zondag gesloten = الأحد مغلقة."},
+   {q:"Wie hoeft niet te betalen voor boeken?",o:["Kinderen.","Ouders.","Iedereen."],c:0,x:"gratis voor kinderen = مجاني للأطفال."}]},
+ {soort:"Sms", tekst:"Hoi Sara,\nIk ben ziek. Ik kan vandaag niet naar de les komen.\nWil jij het huiswerk voor mij opschrijven?\nDank je! Groetjes, Mina",
+  ar:"مرحباً سارة، أنا مريضة. لا أستطيع المجيء إلى الدرس اليوم. هل تكتبين الواجب لي؟ شكراً! تحياتي، مينا.",
+  vragen:[
+   {q:"Waarom gaat Mina niet naar de les?",o:["Ze heeft geen tijd.","Ze is ziek.","Ze moet werken."],c:1,x:"Ik ben ziek = أنا مريضة."},
+   {q:"Wat vraagt Mina aan Sara?",o:["Het huiswerk opschrijven.","Naar de dokter gaan.","Mina bellen."],c:0,x:"het huiswerk opschrijven = كتابة الواجب."}]},
+ {soort:"Advertentie", tekst:"TE KOOP\nEen blauwe fiets, 3 jaar oud.\nDe fiets is goed. Het licht is nieuw.\nPrijs: € 75,-\nBel Peter: 06-12345678 (na 18.00 uur)",
+  ar:"للبيع: دراجة زرقاء عمرها 3 سنوات. الدراجة جيدة. الضوء جديد. السعر 75 يورو. اتصل ببيتر بعد الساعة 18:00.",
+  vragen:[
+   {q:"Wat is nieuw aan de fiets?",o:["Het licht.","De kleur.","Het wiel."],c:0,x:"Het licht is nieuw = الضوء جديد."},
+   {q:"Wanneer kunt u Peter bellen?",o:["Om 10.00 uur.","Om 15.00 uur.","Om 19.00 uur."],c:2,x:"na 18.00 uur = بعد الساعة 18:00، أي 19:00 صحيح."}]},
+ {soort:"Briefje op de deur", tekst:"Beste buren,\nZaterdag geef ik een feest. Het wordt misschien laat.\nSorry voor de muziek!\nU bent ook welkom. Het feest begint om 20.00 uur.\nGroeten, Ahmed (nummer 12)",
+  ar:"أعزائي الجيران، يوم السبت أقيم حفلة. ربما تتأخر. آسف على الموسيقى! أنتم مرحَّب بكم أيضاً. تبدأ الحفلة الساعة 20:00. تحياتي، أحمد (رقم 12).",
+  vragen:[
+   {q:"Waarom schrijft Ahmed dit briefje?",o:["Hij gaat verhuizen.","Hij geeft een feest.","Hij zoekt zijn kat."],c:1,x:"Zaterdag geef ik een feest = يوم السبت أقيم حفلة."},
+   {q:"Wat is waar?",o:["De buren mogen ook komen.","Het feest is op vrijdag.","Het feest begint om 22.00 uur."],c:0,x:"U bent ook welkom = أنتم مرحَّب بكم أيضاً."}]},
+ {soort:"Bord in de winkel", tekst:"SUPERMARKT DE HOEK\nDeze week:\nAppels 1 kilo € 1,99\nBrood 2 voor € 3,-\nMelk 1 liter € 1,15\n\nWij zijn er ook op zondag: 12.00 – 17.00 uur",
+  ar:"سوبرماركت دي هوك. هذا الأسبوع: تفاح كيلو 1.99، خبز 2 بـ 3 يورو، حليب لتر 1.15. نحن مفتوحون الأحد أيضاً 12:00–17:00.",
+  vragen:[
+   {q:"Wat kost één kilo appels?",o:["€ 1,15","€ 1,99","€ 3,-"],c:1,x:"Appels 1 kilo € 1,99."},
+   {q:"Is de supermarkt open op zondag?",o:["Ja, de hele dag.","Ja, vanaf 12.00 uur.","Nee."],c:1,x:"zondag 12.00 – 17.00 uur."}]},
+ {soort:"Brief van school", tekst:"Beste ouders,\nOp vrijdag 14 juni gaan alle kinderen naar de dierentuin.\nDe bus vertrekt om 8.30 uur bij school.\nGeef uw kind eten en drinken mee.\nDe kinderen zijn om 15.00 uur weer terug.\nDe leerkrachten",
+  ar:"أعزائي الأهل، يوم الجمعة 14 يونيو يذهب كل الأطفال إلى حديقة الحيوان. تنطلق الحافلة الساعة 8:30 من المدرسة. أعطوا طفلكم طعاماً وشراباً. يعود الأطفال الساعة 15:00. المعلمون.",
+  vragen:[
+   {q:"Waar gaan de kinderen naartoe?",o:["Naar het strand.","Naar de dierentuin.","Naar het museum."],c:1,x:"naar de dierentuin = إلى حديقة الحيوان."},
+   {q:"Wat moeten de ouders doen?",o:["Eten en drinken meegeven.","Om 8.30 uur bellen.","Geld betalen."],c:0,x:"Geef uw kind eten en drinken mee."}]},
+ {soort:"Afspraakkaart", tekst:"Huisartsenpraktijk Het Plein\nU hebt een afspraak met dokter Visser.\nDatum: dinsdag 3 maart\nTijd: 9.15 uur\nKunt u niet komen? Bel ons 24 uur van tevoren.\nNeem uw verzekeringspas mee.",
+  ar:"عيادة طبيب العائلة هيت بلاين. لديك موعد مع الدكتور فيسر. التاريخ: الثلاثاء 3 مارس. الوقت: 9:15. لا تستطيع الحضور؟ اتصل بنا قبل 24 ساعة. أحضر بطاقة التأمين.",
+  vragen:[
+   {q:"Wat moet u meenemen?",o:["Uw paspoort.","Uw verzekeringspas.","Geld."],c:1,x:"Neem uw verzekeringspas mee = أحضر بطاقة التأمين."},
+   {q:"U kunt niet komen. Wat doet u?",o:["Op tijd bellen.","Een e-mail sturen.","Niets."],c:0,x:"Bel ons 24 uur van tevoren = اتصل قبل 24 ساعة."}]},
+ {soort:"Kort verhaal", tekst:"Fatima woont in Utrecht. Ze werkt in een bakkerij.\nZe begint elke dag om zes uur. Dat is vroeg!\nNa het werk haalt ze haar zoon van school.\nIn het weekend werkt ze niet. Dan gaat ze met haar familie naar het park.",
+  ar:"فاطمة تسكن في أوتريخت. تعمل في مخبز. تبدأ كل يوم في الساعة السادسة. هذا مبكر! بعد العمل تأخذ ابنها من المدرسة. في عطلة نهاية الأسبوع لا تعمل. تذهب مع عائلتها إلى الحديقة.",
+  vragen:[
+   {q:"Waar werkt Fatima?",o:["In een school.","In een bakkerij.","In een park."],c:1,x:"Ze werkt in een bakkerij = تعمل في مخبز."},
+   {q:"Wat doet Fatima na het werk?",o:["Ze haalt haar zoon.","Ze gaat slapen.","Ze gaat naar het park."],c:0,x:"Na het werk haalt ze haar zoon van school."},
+   {q:"Wanneer werkt Fatima niet?",o:["Op maandag.","In het weekend.","'s Ochtends."],c:1,x:"In het weekend werkt ze niet."}]},
+ {soort:"Bord bij het station", tekst:"LET OP!\nVandaag rijden er geen treinen tussen Utrecht en Amersfoort.\nEr rijden bussen.\nDe bus vertrekt bij uitgang B.\nDe reis duurt 30 minuten langer.",
+  ar:"انتبه! اليوم لا توجد قطارات بين أوتريخت وأمرسفورت. توجد حافلات. الحافلة تنطلق من المخرج B. الرحلة تستغرق 30 دقيقة أطول.",
+  vragen:[
+   {q:"Hoe reist u vandaag van Utrecht naar Amersfoort?",o:["Met de trein.","Met de bus.","Met de fiets."],c:1,x:"geen treinen ... Er rijden bussen."},
+   {q:"Waar vertrekt de bus?",o:["Bij uitgang B.","Bij spoor 5.","Bij de kassa."],c:0,x:"De bus vertrekt bij uitgang B."}]}
+]},
+{ id:2, naam:"Oefenexamen Lezen 2", teksten:[
+ {soort:"Bord bij het zwembad", tekst:"ZWEMBAD DE WATERLELIE\nKinderen onder 8 jaar: alleen zwemmen met een volwassene.\nEten en drinken in het zwembad: niet toegestaan.\nDouchen voor het zwemmen: verplicht.",
+  ar:"مسبح دي فاترليلي. الأطفال تحت 8 سنوات: السباحة فقط مع شخص بالغ. الأكل والشرب في المسبح: ممنوع. الاستحمام قبل السباحة: إلزامي.",
+  vragen:[
+   {q:"Een kind van 6 jaar wil zwemmen. Wat moet?",o:["Er moet een volwassene mee.","Het kind moet betalen.","Het kind moet eten."],c:0,x:"onder 8 jaar: alleen met een volwassene."},
+   {q:"Wat moet u doen voor het zwemmen?",o:["Eten.","Douchen.","Bellen."],c:1,x:"Douchen voor het zwemmen: verplicht."}]},
+ {soort:"E-mail", tekst:"Van: Tom\nAan: Lisa\nOnderwerp: Morgen\n\nHoi Lisa,\nMorgen kan ik niet om 10 uur komen. Mijn auto is kapot.\nIk kom om 12 uur met de trein. Is dat goed?\nTot morgen, Tom",
+  ar:"من توم إلى ليزا، الموضوع: غداً. مرحباً ليزا، غداً لا أستطيع المجيء الساعة 10. سيارتي معطلة. سآتي الساعة 12 بالقطار. هل هذا مناسب؟ إلى الغد، توم.",
+  vragen:[
+   {q:"Waarom komt Tom later?",o:["Hij is ziek.","Zijn auto is kapot.","Hij moet werken."],c:1,x:"Mijn auto is kapot = سيارتي معطلة."},
+   {q:"Hoe laat komt Tom?",o:["Om 10 uur.","Om 11 uur.","Om 12 uur."],c:2,x:"Ik kom om 12 uur."}]},
+ {soort:"Recept", tekst:"Tomatensoep (voor 4 personen)\n1. Snijd 1 ui en 6 tomaten.\n2. Bak de ui 5 minuten.\n3. Doe de tomaten en 1 liter water erbij.\n4. Kook de soep 20 minuten.\nEet de soep met brood.",
+  ar:"شوربة الطماطم (لـ4 أشخاص). 1. قطّع بصلة و6 حبات طماطم. 2. اقلِ البصل 5 دقائق. 3. أضف الطماطم ولتر ماء. 4. اطبخ الشوربة 20 دقيقة. كُلها مع الخبز.",
+  vragen:[
+   {q:"Wat doet u eerst?",o:["De soep koken.","Ui en tomaten snijden.","Water erbij doen."],c:1,x:"1. Snijd 1 ui en 6 tomaten."},
+   {q:"Hoe lang kookt de soep?",o:["5 minuten.","20 minuten.","4 minuten."],c:1,x:"Kook de soep 20 minuten."}]},
+ {soort:"Bord op straat", tekst:"GEMEENTE\nOp donderdag halen wij het afval op.\nZet de container voor 7.30 uur aan de straat.\nPapier: elke eerste maandag van de maand.",
+  ar:"البلدية. يوم الخميس نجمع النفايات. ضع الحاوية في الشارع قبل الساعة 7:30. الورق: كل أول اثنين من الشهر.",
+  vragen:[
+   {q:"Wanneer haalt de gemeente het afval op?",o:["Op maandag.","Op donderdag.","Elke dag."],c:1,x:"Op donderdag halen wij het afval op."},
+   {q:"Wanneer zet u de container aan de straat?",o:["Voor 7.30 uur.","Om 12.00 uur.","'s Avonds laat."],c:0,x:"voor 7.30 uur = قبل 7:30."}]},
+ {soort:"Advertentie", tekst:"GEZOCHT\nSchoonmaker voor ons kantoor.\n3 avonden per week, van 18.00 tot 21.00 uur.\nU spreekt een beetje Nederlands.\nMail naar: werk@schoonbv.nl",
+  ar:"مطلوب: عامل تنظيف لمكتبنا. 3 أمسيات في الأسبوع، من 18:00 إلى 21:00. تتكلم قليلاً من الهولندية. راسلنا على البريد.",
+  vragen:[
+   {q:"Wat voor werk is dit?",o:["Koken.","Schoonmaken.","Rijden."],c:1,x:"Schoonmaker = عامل تنظيف."},
+   {q:"Hoe vaak werkt u?",o:["Elke dag.","3 avonden per week.","Alleen in het weekend."],c:1,x:"3 avonden per week."}]},
+ {soort:"Kaart", tekst:"Lieve Oma,\nGefeliciteerd met je verjaardag!\nWe komen zondag op bezoek met de kinderen.\nWij nemen een taart mee.\nVeel liefs,\nAnna en Karim",
+  ar:"جدتي العزيزة، عيد ميلاد سعيد! سنزورك يوم الأحد مع الأطفال. سنحضر معنا كعكة. مع الحب، آنا وكريم.",
+  vragen:[
+   {q:"Waarom schrijven Anna en Karim deze kaart?",o:["Oma is jarig.","Oma is ziek.","Oma gaat verhuizen."],c:0,x:"Gefeliciteerd met je verjaardag = عيد ميلاد سعيد."},
+   {q:"Wat nemen ze mee?",o:["Bloemen.","Een taart.","Een cadeau voor de kinderen."],c:1,x:"Wij nemen een taart mee."}]},
+ {soort:"Informatie", tekst:"Taalcafé in de bibliotheek\nWilt u Nederlands praten? Kom naar het taalcafé!\nElke woensdag van 14.00 tot 16.00 uur.\nKoffie en thee zijn gratis.\nU hoeft zich niet aan te melden.",
+  ar:"مقهى اللغة في المكتبة. تريد أن تتكلم الهولندية؟ تعال إلى مقهى اللغة! كل أربعاء من 14:00 إلى 16:00. القهوة والشاي مجاناً. لا تحتاج إلى تسجيل.",
+  vragen:[
+   {q:"Wat doet u in het taalcafé?",o:["Nederlands praten.","Boeken kopen.","Koken."],c:0,x:"Wilt u Nederlands praten?"},
+   {q:"Wat is waar?",o:["U moet zich eerst aanmelden.","Koffie kost geld.","U kunt zomaar komen."],c:2,x:"U hoeft zich niet aan te melden = لا تحتاج إلى تسجيل."}]},
+ {soort:"Kort verhaal", tekst:"Yusuf is nieuw in Nederland. Hij woont in een klein huis in Almere.\nElke ochtend gaat hij met de fiets naar zijn taalles.\nDe les is leuk, maar de grammatica is moeilijk.\nOp vrijdag eet hij bij zijn buren. Zij zijn heel aardig.",
+  ar:"يوسف جديد في هولندا. يسكن في بيت صغير في ألميره. كل صباح يذهب بالدراجة إلى درس اللغة. الدرس ممتع، لكن القواعد صعبة. يوم الجمعة يأكل عند جيرانه. هم لطفاء جداً.",
+  vragen:[
+   {q:"Hoe gaat Yusuf naar de les?",o:["Met de bus.","Met de fiets.","Lopend."],c:1,x:"met de fiets = بالدراجة."},
+   {q:"Wat vindt Yusuf moeilijk?",o:["De grammatica.","Fietsen.","Zijn buren."],c:0,x:"de grammatica is moeilijk."},
+   {q:"Wat doet Yusuf op vrijdag?",o:["Hij gaat naar les.","Hij eet bij de buren.","Hij werkt."],c:1,x:"Op vrijdag eet hij bij zijn buren."}]},
+ {soort:"Bord in de bus", tekst:"In deze bus:\n• Niet eten.\n• Niet roken.\n• Betaal met uw bankpas. Contant geld kan niet.\n• Stoelen voor ouderen: voorin.",
+  ar:"في هذه الحافلة: ممنوع الأكل. ممنوع التدخين. ادفع ببطاقتك البنكية. لا يمكن الدفع نقداً. مقاعد كبار السن: في المقدمة.",
+  vragen:[
+   {q:"Hoe betaalt u in de bus?",o:["Met contant geld.","Met uw bankpas.","U betaalt niet."],c:1,x:"Betaal met uw bankpas."},
+   {q:"Waar zitten de ouderen?",o:["Achterin.","Voorin.","Boven."],c:1,x:"Stoelen voor ouderen: voorin."}]}
+]}
+];
+
+// Spreken A1 — vragen en aanvulzinnen uit de officiële lijst 'Spreken A1 – maart 2024' (© Ministerie van SZW).
+// Voorbeeldantwoorden en Arabische vertaling: eigen toevoeging.
+const SPR_VRAGEN=[{"q": "Bij wie gaat u wonen in Nederland?", "qa": "مع من ستسكن في هولندا؟", "m": "Ik ga bij mijn man wonen.", "ma": "سأسكن مع زوجي."}, {"q": "Hoe bent u hier gekomen?", "qa": "كيف أتيت إلى هنا؟", "m": "Ik ben met de bus gekomen.", "ma": "أتيت بالحافلة."}, {"q": "Hoe gaat het met u?", "qa": "كيف حالك؟", "m": "Goed, dank u wel.", "ma": "بخير، شكراً جزيلاً."}, {"q": "Hoe gaat u naar uw werk?", "qa": "كيف تذهب إلى عملك؟", "m": "Ik ga met de fiets naar mijn werk.", "ma": "أذهب إلى عملي بالدراجة."}, {"q": "Hoe laat begint u met werken?", "qa": "متى تبدأ العمل؟", "m": "Ik begin om acht uur.", "ma": "أبدأ في الساعة الثامنة."}, {"q": "Hoe laat gaat u 's avonds naar bed?", "qa": "متى تنام في المساء؟", "m": "Ik ga om tien uur naar bed.", "ma": "أنام في الساعة العاشرة."}, {"q": "Hoe laat is het nu?", "qa": "كم الساعة الآن؟", "m": "Het is tien uur.", "ma": "الساعة العاشرة."}, {"q": "Hoe laat stopt u met werken?", "qa": "متى تنتهي من العمل؟", "m": "Ik stop om vijf uur.", "ma": "أنتهي في الساعة الخامسة."}, {"q": "Hoe laat wordt u 's ochtends wakker?", "qa": "متى تستيقظ في الصباح؟", "m": "Ik word om zeven uur wakker.", "ma": "أستيقظ في الساعة السابعة."}, {"q": "Hoe reist u meestal?", "qa": "كيف تسافر عادةً؟", "m": "Meestal met de bus.", "ma": "عادةً بالحافلة."}, {"q": "Hoe vaak bent u al in Nederland geweest?", "qa": "كم مرة زرت هولندا؟", "m": "Ik ben nog nooit in Nederland geweest.", "ma": "لم أزر هولندا أبداً."}, {"q": "Hoe vaak eet u op een dag?", "qa": "كم مرة تأكل في اليوم؟", "m": "Ik eet drie keer per dag.", "ma": "آكل ثلاث مرات في اليوم."}, {"q": "Hoe vaak kijkt u tv?", "qa": "كم مرة تشاهد التلفزيون؟", "m": "Ik kijk elke avond tv.", "ma": "أشاهد التلفزيون كل مساء."}, {"q": "Hoe vaak luistert u naar de radio?", "qa": "كم مرة تستمع إلى الراديو؟", "m": "Ik luister elke ochtend naar de radio.", "ma": "أستمع إلى الراديو كل صباح."}, {"q": "Hoeveel broers en zussen hebt u?", "qa": "كم أخاً وأختاً عندك؟", "m": "Ik heb twee broers en een zus.", "ma": "عندي أخوان وأخت."}, {"q": "Hoeveel dagen in de week werkt u?", "qa": "كم يوماً في الأسبوع تعمل؟", "m": "Ik werk vijf dagen in de week.", "ma": "أعمل خمسة أيام في الأسبوع."}, {"q": "Hoeveel jaar school hebt u gehad?", "qa": "كم سنة درست في المدرسة؟", "m": "Ik heb twaalf jaar school gehad.", "ma": "درست اثنتي عشرة سنة."}, {"q": "Hoeveel kinderen hebt u?", "qa": "كم طفلاً عندك؟", "m": "Ik heb twee kinderen.", "ma": "عندي طفلان."}, {"q": "Hoeveel talen spreekt u?", "qa": "كم لغة تتكلم؟", "m": "Ik spreek twee talen.", "ma": "أتكلم لغتين."}, {"q": "In wat voor huis gaat u wonen in Nederland?", "qa": "في أي نوع من البيوت ستسكن في هولندا؟", "m": "In een appartement.", "ma": "في شقة."}, {"q": "In welk land bent u geboren?", "qa": "في أي بلد وُلدت؟", "m": "Ik ben in Syrië geboren.", "ma": "وُلدت في سوريا."}, {"q": "In welke plaats gaat u wonen in Nederland?", "qa": "في أي مدينة ستسكن في هولندا؟", "m": "Ik ga in Eindhoven wonen.", "ma": "سأسكن في آيندهوفن."}, {"q": "Met hoeveel mensen werkt u?", "qa": "مع كم شخصاً تعمل؟", "m": "Ik werk met tien mensen.", "ma": "أعمل مع عشرة أشخاص."}, {"q": "Naar welke muziek luistert u graag?", "qa": "أي موسيقى تحب أن تسمع؟", "m": "Ik luister graag naar Arabische muziek.", "ma": "أحب أن أستمع إلى الموسيقى العربية."}, {"q": "Op welke dagen werkt u?", "qa": "في أي أيام تعمل؟", "m": "Ik werk van maandag tot vrijdag.", "ma": "أعمل من الاثنين إلى الجمعة."}, {"q": "Van welke muziek houdt u?", "qa": "أي موسيقى تحب؟", "m": "Ik houd van rustige muziek.", "ma": "أحب الموسيقى الهادئة."}, {"q": "Waar bent u geboren?", "qa": "أين وُلدت؟", "m": "Ik ben in Damascus geboren.", "ma": "وُلدت في دمشق."}, {"q": "Waar doet u boodschappen?", "qa": "أين تتسوق؟", "m": "Ik doe boodschappen in de supermarkt.", "ma": "أتسوق في السوبرماركت."}, {"q": "Waar heeft u Nederlands geleerd?", "qa": "أين تعلمت الهولندية؟", "m": "Thuis, met een boek en de computer.", "ma": "في البيت، بكتاب وبالحاسوب."}, {"q": "Waar woont u?", "qa": "أين تسكن؟", "m": "Ik woon in Ankara.", "ma": "أسكن في أنقرة."}, {"q": "Waar woont uw familie?", "qa": "أين تسكن عائلتك؟", "m": "Mijn familie woont in Syrië.", "ma": "عائلتي تسكن في سوريا."}, {"q": "Waarom leert u Nederlands?", "qa": "لماذا تتعلم الهولندية؟", "m": "Ik wil in Nederland wonen.", "ma": "أريد أن أسكن في هولندا."}, {"q": "Waarom wilt u naar Nederland?", "qa": "لماذا تريد الذهاب إلى هولندا؟", "m": "Mijn man woont in Nederland.", "ma": "زوجي يسكن في هولندا."}, {"q": "Wanneer bent u blij?", "qa": "متى تكون سعيداً؟", "m": "Ik ben blij als mijn familie bij mij is.", "ma": "أكون سعيداً عندما تكون عائلتي معي."}, {"q": "Wanneer bent u geboren?", "qa": "متى وُلدت؟", "m": "Ik ben in 1995 geboren.", "ma": "وُلدت عام 1995."}, {"q": "Wanneer doet u boodschappen?", "qa": "متى تتسوق؟", "m": "Ik doe op zaterdag boodschappen.", "ma": "أتسوق يوم السبت."}, {"q": "Wanneer geeft u een feest?", "qa": "متى تقيم حفلة؟", "m": "Als mijn kind jarig is.", "ma": "عندما يكون عيد ميلاد طفلي."}, {"q": "Wanneer wilt u naar Nederland gaan?", "qa": "متى تريد الذهاب إلى هولندا؟", "m": "Ik wil volgend jaar naar Nederland gaan.", "ma": "أريد الذهاب إلى هولندا السنة القادمة."}, {"q": "Wat doet u graag buiten?", "qa": "ماذا تحب أن تفعل في الخارج؟", "m": "Ik wandel graag in het park.", "ma": "أحب المشي في الحديقة."}, {"q": "Wat doet u graag met uw familie?", "qa": "ماذا تحب أن تفعل مع عائلتك؟", "m": "Ik eet graag samen met mijn familie.", "ma": "أحب أن آكل مع عائلتي."}, {"q": "Wat doet u graag met uw vrienden?", "qa": "ماذا تحب أن تفعل مع أصدقائك؟", "m": "Ik drink graag koffie met mijn vrienden.", "ma": "أحب أن أشرب القهوة مع أصدقائي."}, {"q": "Wat doet u in het weekend?", "qa": "ماذا تفعل في عطلة نهاية الأسبوع؟", "m": "In het weekend bezoek ik mijn familie.", "ma": "في عطلة نهاية الأسبوع أزور عائلتي."}, {"q": "Wat doet u in uw vrije tijd?", "qa": "ماذا تفعل في وقت فراغك؟", "m": "Ik lees een boek.", "ma": "أقرأ كتاباً."}, {"q": "Wat doet u op een feestdag?", "qa": "ماذا تفعل في يوم العيد؟", "m": "Ik ga naar mijn familie.", "ma": "أذهب إلى عائلتي."}, {"q": "Wat drinkt u graag?", "qa": "ماذا تحب أن تشرب؟", "m": "Ik drink graag thee.", "ma": "أحب أن أشرب الشاي."}, {"q": "Wat eet u op een feest?", "qa": "ماذا تأكل في الحفلة؟", "m": "Ik eet taart.", "ma": "آكل الكعك."}, {"q": "Wat eet u 's avonds?", "qa": "ماذا تأكل في المساء؟", "m": "Ik eet rijst met kip.", "ma": "آكل الأرز مع الدجاج."}, {"q": "Wat eet u 's ochtends?", "qa": "ماذا تأكل في الصباح؟", "m": "Ik eet brood met kaas.", "ma": "آكل الخبز مع الجبن."}, {"q": "Wat gaat u morgen doen?", "qa": "ماذا ستفعل غداً؟", "m": "Morgen ga ik naar mijn werk.", "ma": "غداً سأذهب إلى عملي."}, {"q": "Wat gaat u vandaag eten?", "qa": "ماذا ستأكل اليوم؟", "m": "Vandaag eet ik soep.", "ma": "اليوم سآكل الشوربة."}, {"q": "Wat hebt u geleerd op school?", "qa": "ماذا تعلمت في المدرسة؟", "m": "Ik heb lezen en rekenen geleerd.", "ma": "تعلمت القراءة والحساب."}, {"q": "Wat hebt u gisteren gedaan?", "qa": "ماذا فعلت أمس؟", "m": "Gisteren heb ik gewerkt.", "ma": "أمس عملت."}, {"q": "Wat hebt u gisteren gegeten?", "qa": "ماذا أكلت أمس؟", "m": "Gisteren heb ik vis gegeten.", "ma": "أمس أكلت السمك."}, {"q": "Wat is uw adres?", "qa": "ما هو عنوانك؟", "m": "Mijn adres is Atatürkstraat 10.", "ma": "عنواني شارع أتاتورك رقم 10."}, {"q": "Wat is uw telefoonnummer?", "qa": "ما هو رقم هاتفك؟", "m": "Mijn nummer is 0 6 1 2 3 4 5 6 7 8.", "ma": "رقمي 0612345678."}, {"q": "Wat kookt u graag?", "qa": "ماذا تحب أن تطبخ؟", "m": "Ik kook graag rijst met groente.", "ma": "أحب أن أطبخ الأرز مع الخضار."}, {"q": "Wat vindt u van de Nederlandse taal?", "qa": "ما رأيك في اللغة الهولندية؟", "m": "Ik vind Nederlands moeilijk, maar leuk.", "ma": "أجد الهولندية صعبة لكنها ممتعة."}, {"q": "Wat vindt u van Nederland?", "qa": "ما رأيك في هولندا؟", "m": "Ik vind Nederland mooi.", "ma": "أجد هولندا جميلة."}, {"q": "Wat vindt u van Nederlandse mensen?", "qa": "ما رأيك في الناس الهولنديين؟", "m": "Ik vind Nederlanders aardig.", "ma": "أجد الهولنديين لطفاء."}, {"q": "Wat vindt u van uw huis?", "qa": "ما رأيك في بيتك؟", "m": "Ik vind mijn huis klein, maar gezellig.", "ma": "بيتي صغير لكنه مريح."}, {"q": "Wat voor kleren draagt u vaak?", "qa": "ما نوع الملابس التي تلبسها غالباً؟", "m": "Ik draag vaak een broek en een trui.", "ma": "ألبس غالباً بنطالاً وكنزة."}, {"q": "Wat voor kleren vindt u mooi?", "qa": "ما نوع الملابس التي تراها جميلة؟", "m": "Ik vind een jurk mooi.", "ma": "أجد الفستان جميلاً."}, {"q": "Wat voor weer is het vandaag?", "qa": "كيف الطقس اليوم؟", "m": "Het is koud en het regent.", "ma": "الجو بارد وتمطر."}, {"q": "Wat voor werk wilt u doen?", "qa": "أي عمل تريد أن تعمل؟", "m": "Ik wil in een winkel werken.", "ma": "أريد أن أعمل في متجر."}, {"q": "Wat wilt u graag leren in Nederland?", "qa": "ماذا تريد أن تتعلم في هولندا؟", "m": "Ik wil goed Nederlands leren.", "ma": "أريد أن أتعلم الهولندية جيداً."}, {"q": "Welk cadeau geeft u graag aan iemand?", "qa": "أي هدية تحب أن تعطيها لشخص ما؟", "m": "Ik geef graag bloemen.", "ma": "أحب أن أهدي الزهور."}, {"q": "Welk eten koopt u vaak?", "qa": "أي طعام تشتري غالباً؟", "m": "Ik koop vaak brood en melk.", "ma": "أشتري غالباً الخبز والحليب."}, {"q": "Welk feest vindt u leuk?", "qa": "أي عيد/حفلة تحب؟", "m": "Ik vind het Suikerfeest leuk.", "ma": "أحب عيد الفطر."}, {"q": "Welk fruit eet u graag?", "qa": "أي فاكهة تحب أن تأكل؟", "m": "Ik eet graag appels.", "ma": "أحب أن آكل التفاح."}, {"q": "Welke dag is het vandaag?", "qa": "أي يوم هو اليوم؟", "m": "Vandaag is het maandag.", "ma": "اليوم هو الاثنين."}, {"q": "Welke dieren vindt u leuk?", "qa": "أي حيوانات تحب؟", "m": "Ik vind katten leuk.", "ma": "أحب القطط."}, {"q": "Welke groente eet u vaak?", "qa": "أي خضار تأكل غالباً؟", "m": "Ik eet vaak tomaten.", "ma": "آكل الطماطم غالباً."}, {"q": "Welke kleur vindt u mooi?", "qa": "أي لون تراه جميلاً؟", "m": "Ik vind blauw mooi.", "ma": "أجد اللون الأزرق جميلاً."}, {"q": "Welke maand is het nu?", "qa": "أي شهر نحن الآن؟", "m": "Het is nu november.", "ma": "نحن الآن في نوفمبر."}, {"q": "Welke sport doet u?", "qa": "أي رياضة تمارس؟", "m": "Ik loop elke dag hard.", "ma": "أركض كل يوم."}, {"q": "Welke talen spreekt u?", "qa": "أي لغات تتكلم؟", "m": "Ik spreek Arabisch en een beetje Engels.", "ma": "أتكلم العربية وقليلاً من الإنجليزية."}, {"q": "Wie helpt u met Nederlands leren?", "qa": "من يساعدك في تعلم الهولندية؟", "m": "Mijn man helpt mij.", "ma": "زوجي يساعدني."}, {"q": "Wie wonen bij u in huis?", "qa": "من يسكن معك في البيت؟", "m": "Mijn ouders en mijn broer.", "ma": "والداي وأخي."}];
+const SPR_AANVUL=[{"z": "’s Avonds doe ik mijn ring af. Ik leg mijn ring altijd...", "m": "op de tafel."}, {"z": "Aaliyah pakt eerst een kopje koffie. Daarna gaat ze...", "m": "werken."}, {"z": "Aaron gaat donderdag op reis. Hij vindt dat...", "m": "leuk."}, {"z": "Aaron is dokter. Hij werkt...", "m": "in het ziekenhuis."}, {"z": "Aaron is schilder. Hij schildert meestal...", "m": "huizen."}, {"z": "Abdul stuurt zijn familie elke week een e-mail. Hij schrijft dan over...", "m": "zijn werk."}, {"z": "Abel is op school. Hij heeft...", "m": "les."}, {"z": "Achmed is klaar met school. Hij gaat...", "m": "werken."}, {"z": "Adam is aan het koken. Hij maakt...", "m": "soep."}, {"z": "Ahmed brengt zijn zoon naar het vliegveld. Zijn zoon gaat...", "m": "naar Spanje."}, {"z": "Aiden is bij de bakker. Hij wil...", "m": "brood kopen."}, {"z": "Alec gaat naar school. Hij wil graag...", "m": "leren."}, {"z": "Alex gaat altijd met de trein. Ik ga graag met...", "m": "de bus."}, {"z": "Alex is ziek. Hij heeft pijn aan...", "m": "zijn buik."}, {"z": "Alex wil nieuwe schoenen. Hij gaat naar...", "m": "de winkel."}, {"z": "Ali kan niet goed lopen. Hij heeft pijn aan zijn...", "m": "been."}, {"z": "Ali werkt in een fabriek. Hij wil...", "m": "meer geld."}, {"z": "Alice werkt in een ziekenhuis. Zij is daar...", "m": "verpleegster."}, {"z": "Amel sport graag. Sporten is...", "m": "gezond."}, {"z": "Ana is niet blij met haar huis. Ze vindt haar huis...", "m": "te klein."}, {"z": "Ananda is aan het koken. Ze maakt...", "m": "rijst met kip."}, {"z": "Andres werkt op het land. Het werk is...", "m": "zwaar."}, {"z": "Anisa maakt huiswerk op de computer. Ze doet dat...", "m": "thuis."}, {"z": "Anna is bij de dokter. Ze krijgt...", "m": "medicijnen."}, {"z": "Anna’s huis is te klein. Ze wil snel...", "m": "verhuizen."}, {"z": "Anna wast de paprika. Ze gaat...", "m": "koken."}, {"z": "Arif wacht op de bus. De bus komt...", "m": "te laat."}, {"z": "Arjun moet elke dag reizen naar zijn werk. Hij werkt in...", "m": "de stad."}, {"z": "Arnold is schoonmaker. Hij werkt in...", "m": "een kantoor."}, {"z": "Ayla eet haar ontbijt snel op. Ze heeft...", "m": "haast."}, {"z": "Aziz loopt elke dag. Hij loopt naar...", "m": "zijn werk."}, {"z": "Barry is geslaagd voor zijn examen. Hij krijgt...", "m": "een diploma."}, {"z": "Bart gaat bijna elke dag met de auto. Hij rijdt dan naar...", "m": "zijn werk."}, {"z": "Berat geeft les. Hij vertelt over...", "m": "Nederland."}, {"z": "Bilal gaat naar de bioscoop. Hij gaat met zijn...", "m": "vrienden."}, {"z": "Bob houdt niet van zwemmen. Hij gaat liever...", "m": "fietsen."}, {"z": "Brenda doet een opleiding. Ze moet iedere avond...", "m": "leren."}, {"z": "Brian fietst naar zijn werk. Hij gaat liever niet...", "m": "met de bus."}, {"z": "Cai werkt met hout. Hij maakt...", "m": "een tafel."}, {"z": "Carla drinkt een glas water. Ze doet dat...", "m": "elke ochtend."}, {"z": "Carlos gaat vroeg slapen. Hij is...", "m": "moe."}, {"z": "Carlos is vrij. Hij gaat...", "m": "wandelen."}, {"z": "Carlos maakt muziek. Hij doet dat...", "m": "elke dag."}, {"z": "Carmen eet elke dag een banaan. Soms eet ze ook...", "m": "een appel."}, {"z": "Caro eet vaak appels. Zij houdt ook van...", "m": "bananen."}, {"z": "Caro gaat vaak met de bus naar school. Soms gaat ze...", "m": "lopen."}, {"z": "Chen verkoopt bloemen. Ze doet dat...", "m": "op de markt."}, {"z": "Chris heeft een computer. Hij gebruikt de computer om te...", "m": "mailen."}, {"z": "Chris neemt zijn pillen. Hij heeft pijn in zijn...", "m": "hoofd."}, {"z": "Christina belt met haar moeder. Ze praten over...", "m": "de familie."}, {"z": "Christo heeft dorst. Hij drinkt een glas...", "m": "water."}, {"z": "Claire kijk uit het raam. Ze kijkt naar...", "m": "de tuin."}, {"z": "Claire leert Nederlands. Ze vindt Nederlands...", "m": "moeilijk."}, {"z": "Dael heeft veel geld. Hij werkt...", "m": "veel."}, {"z": "Dafne kan goed zingen. Ze kan ook goed...", "m": "dansen."}, {"z": "Daniël heeft pijn aan zijn kies. Hij gaat naar...", "m": "de tandarts."}, {"z": "Daniëlle gaat studeren. Ze pakt haar...", "m": "boeken."}, {"z": "Dany heeft hoofdpijn. Ze wil...", "m": "slapen."}, {"z": "Dario zit op school. Hij maakt een...", "m": "toets."}, {"z": "Dave is niet blij met zijn haar. Zijn haar is...", "m": "te lang."}, {"z": "Dave lust geen koffie. Hij drinkt liever...", "m": "thee."}, {"z": "Dave werkt in een café. Hij moet daar...", "m": "koffie maken."}, {"z": "David en Maria rijden naar de stad. Ze zoeken...", "m": "een parkeerplaats."}, {"z": "David heeft een boot. Hij gebruikt de boot om te...", "m": "te vissen."}, {"z": "David is dik. Hij eet elke dag...", "m": "patat."}, {"z": "David werkt in een ziekenhuis. Hij is...", "m": "dokter."}, {"z": "De auto van Leah is kapot. Ze brengt de auto naar...", "m": "de garage."}, {"z": "De baas van Patrick is boos. Patrick vindt dat...", "m": "niet leuk."}, {"z": "De broer van Souad heeft een baby gekregen. Souad is...", "m": "blij."}, {"z": "De bus is vaak te laat. Paul vindt dat...", "m": "niet goed."}, {"z": "De bus rijdt langzaam. Lia wil...", "m": "uitstappen."}, {"z": "De dochter van Sophia kijkt veel tv. Ze kan beter gaan...", "m": "buiten spelen."}, {"z": "De dokter praat met Sofia. De dokter geeft Sofia...", "m": "medicijnen."}, {"z": "De familie Wang woont in een leuke straat. Zij wonen naast...", "m": "de school."}, {"z": "De kinderen lezen samen. In het boek staat...", "m": "een verhaal."}, {"z": "De klas is leeg. Iedereen is...", "m": "naar huis."}, {"z": "De koning is op het nieuws. Hij vertelt over...", "m": "het land."}, {"z": "De les begint om 11 uur. Hetty gaat...", "m": "om tien uur weg."}, {"z": "De les is afgelopen. We willen nu...", "m": "naar huis."}, {"z": "De man belt in de auto. Dat is...", "m": "gevaarlijk."}, {"z": "De stoel is kapot. Jaimy gaat de stoel...", "m": "maken."}, {"z": "De trein is vol. Hanna moet...", "m": "staan."}, {"z": "De zoon van Samira gaat naar school. Samira vindt dat...", "m": "goed."}, {"z": "Debra zit op school. Ze maakt veel...", "m": "fouten."}, {"z": "Die sinaasappel is oud. Je moet de sinaasappel...", "m": "weggooien."}, {"z": "Diego houdt van koken. Hij kookt graag voor...", "m": "zijn familie."}, {"z": "Dimitri werkt in een garage. Hij maakt...", "m": "auto's."}, {"z": "Dina wast haar handen. Haar handen zijn...", "m": "schoon."}, {"z": "Dunya gaat naar een feest. Het feest is van haar...", "m": "vriendin."}, {"z": "Dylan is bij de tandarts. Dat is...", "m": "niet leuk."}, {"z": "Edgar en Joko koken samen. Ze doen dat...", "m": "elke zaterdag."}, {"z": "Een mug heeft mij geprikt. Nu krijg ik...", "m": "jeuk."}, {"z": "Eliza is morgen jarig. Haar vader...", "m": "maakt een taart."}, {"z": "Ella bakt koekjes. Ze bakt de koekjes voor...", "m": "haar kinderen."}, {"z": "Emma doet een opleiding. Dat is...", "m": "moeilijk."}, {"z": "Emma schrijft alles op. Daarna gaat ze...", "m": "leren."}, {"z": "Emma wast haar handen. Ze gaat...", "m": "eten."}, {"z": "Er is ingebroken bij Ben. Hij belt naar...", "m": "de politie."}, {"z": "Er komen nieuwe huizen in onze buurt. Ik vind dat...", "m": "goed."}, {"z": "Er ligt rommel op straat. Dat is...", "m": "vies."}, {"z": "Esma wil lerares worden. Zij gaat...", "m": "studeren."}, {"z": "Esra is ziek. Ze vindt dat...", "m": "niet leuk."}, {"z": "Fanya is op de markt. Ze zoekt...", "m": "appels."}, {"z": "Farid is zanger. Hij moet vandaag...", "m": "zingen."}, {"z": "Fatima koopt een fiets. Ze gaat met de fiets naar...", "m": "haar werk."}, {"z": "Fausia stapt uit de boot. Ze loopt naar...", "m": "huis."}, {"z": "Felipe houdt van lezen. Hij koopt elke maand...", "m": "een boek."}, {"z": "Felix gaat elke dag zwemmen. Soms gaat hij ook...", "m": "fietsen."}, {"z": "Fico woont ver van zijn werk. Hij moet elke dag...", "m": "lang reizen."}, {"z": "Filip maakt de badkamer schoon. Hij vindt dat...", "m": "niet leuk."}, {"z": "Filiz koopt een nieuwe jas. Ze koopt ook...", "m": "een broek."}, {"z": "Finn kijkt nu televisie. Hij gaat straks...", "m": "slapen."}, {"z": "Franco gaat verhuizen. Zijn nieuwe huis heeft een...", "m": "tuin."}, {"z": "Frank leest de krant. Hij leest over..", "m": "het weer."}, {"z": "Fred gaat naar school. Hij heeft les tot...", "m": "drie uur."}, {"z": "Gabriel maakt een opdracht. Hij doet dat...", "m": "op de computer."}, {"z": "Gary leest zijn dochter voor. Lezen is...", "m": "leuk."}, {"z": "Gary woont bij het strand. Hij wil het liefst...", "m": "zwemmen."}, {"z": "Gina kijkt vaak televisie. Ze houdt van programma's over...", "m": "dieren."}, {"z": "Grace houdt niet van groente. Ze vindt dat...", "m": "niet lekker."}, {"z": "Halil rijdt in een vrachtwagen. Hij vindt dat...", "m": "leuk werk."}, {"z": "Han heeft zijn diploma gehaald. Hij gaat nu...", "m": "werken."}, {"z": "Hannah eet graag vis. Ze haalt die vis...", "m": "op de markt."}, {"z": "Hannah leert Nederlands. Ze leert ook...", "m": "Engels."}, {"z": "Hannah maakt haar huis schoon. Ze doet dat...", "m": "elke week."}, {"z": "Harold is niet alleen. Hij heeft...", "m": "een vrouw."}, {"z": "Harry is gevallen. Hij heeft...", "m": "pijn."}, {"z": "Hassan maakt zijn brommer. Het wiel is...", "m": "kapot."}, {"z": "Hassan werkt in een restaurant. Hij leert daar...", "m": "koken."}, {"z": "Het bord van Sahid is gevallen. Sahid is...", "m": "boos."}, {"z": "Het eten is heel warm! Je moet...", "m": "wachten."}, {"z": "Het fruit is op. Ik ga nu naar...", "m": "de winkel."}, {"z": "Het huis van Tania is heel groot. Haar huis heeft...", "m": "vijf kamers."}, {"z": "Het is donker. Ik reis dan liever niet met...", "m": "de fiets."}, {"z": "Het is druk in de stad. Er zijn veel...", "m": "mensen."}, {"z": "Het is druk op de weg. Emir vindt dat...", "m": "niet leuk."}, {"z": "Het is druk op het station. Er zijn veel...", "m": "mensen."}, {"z": "Het is koud in het huis van Faiz. Hij wil...", "m": "de verwarming aan doen."}, {"z": "Het is slecht weer. Gaan we met de...?", "m": "auto?"}, {"z": "Het is stil in de klas. De leerlingen...", "m": "lezen."}, {"z": "Het is warm vandaag. Ana wil...", "m": "zwemmen."}, {"z": "Het is zondag. Eva gaat op zondag altijd naar...", "m": "de kerk."}, {"z": "Het regent al de hele dag. William wil...", "m": "thuisblijven."}, {"z": "Het regent onderweg. Marta wil...", "m": "een paraplu."}, {"z": "Het vliegveld is ver weg. We gaan naar het vliegveld met...", "m": "de trein."}, {"z": "Hetty is klaar met koken. Ze roept...", "m": "de kinderen."}, {"z": "Hiba houdt van katten. Ze houdt niet van...", "m": "honden."}, {"z": "Hue wil naar de markt. Ze gaat...", "m": "met de fiets."}, {"z": "Ibrahim heeft een kar met spullen. Hij brengt de spullen...", "m": "naar huis."}, {"z": "Iedereen is blij. Het is...", "m": "feest."}, {"z": "Ik ben op zoek naar het treinstation. Kunt u mij...", "m": "helpen?"}, {"z": "Ik ben ziek. Ik ga morgen niet...", "m": "werken."}, {"z": "Ik drink geen alcohol. Ik drink wel graag...", "m": "thee."}, {"z": "Ik eet graag brood. Ik houd niet van...", "m": "rijst."}, {"z": "Ik eet nooit druiven. Ik vind druiven...", "m": "vies."}, {"z": "Ik eet nooit kip. Dat vind ik...", "m": "niet lekker."}, {"z": "Ik ga een taart maken. Wil jij...?", "m": "helpen?"}, {"z": "Ik ga morgen brood kopen. Brood koop ik meestal...", "m": "bij de bakker."}, {"z": "Ik ga naar de huisarts. Hij geeft mij...", "m": "medicijnen."}, {"z": "Ik ga naar mijn zus. Mijn zus woont...", "m": "in Utrecht."}, {"z": "Ik ga straks naar Hamza. Hij is...", "m": "mijn vriend."}, {"z": "Ik ga vaak met de bus. Ik ga dan naar...", "m": "de stad."}, {"z": "Ik heb deze krant gelezen. Wil jij de krant nu..?", "m": "lezen?"}, {"z": "Ik heb een computer met internet. Die gebruik ik...", "m": "elke dag."}, {"z": "Ik heb een nieuwe tafel gekocht. Wil jij mijn oude tafel...?", "m": "hebben?"}, {"z": "Ik heb geen auto. Een auto is...", "m": "duur."}, {"z": "Ik heb soep gemaakt. Wil jij mijn soep...?", "m": "proeven?"}, {"z": "Ik heb wortels gekocht. Ik koop de wortels voor...", "m": "de soep."}, {"z": "Ik houd van tekenen. Ik teken...", "m": "bloemen."}, {"z": "Ik lees het nieuws op mijn telefoon. Mijn man leest het nieuws...", "m": "in de krant."}, {"z": "Ik lees vaak. Ik lees graag...", "m": "boeken."}, {"z": "Ik wil zieke mensen helpen. Ik vind dat...", "m": "belangrijk."}, {"z": "Imani vindt school leuk. Zij houdt van...", "m": "lezen."}, {"z": "In de stad rijden veel brommers. Ik vind dat...", "m": "gevaarlijk."}, {"z": "In een grote stad wonen veel mensen. Ik vind dat...", "m": "druk."}, {"z": "In het eten zitten pepers. Ik vind dat...", "m": "lekker."}, {"z": "Inez en Luis bouwen een huis. Het huis heeft nog geen...", "m": "dak."}, {"z": "Inez gaat naar een concert. Ze gaat...", "m": "met haar vriendin."}, {"z": "Is dat boek leuk? Ik wil het boek ook graag...", "m": "lezen."}, {"z": "Isa heeft pauze. Ze belt met haar...", "m": "moeder."}, {"z": "Isabel speelt graag met haar pop. Soms speelt ze ook met...", "m": "een bal."}, {"z": "Ismet heeft groenten in zijn tuin. Hij gaat de groenten...", "m": "eten."}, {"z": "Ivan is niet blij met zijn werk. Hij vindt zijn werk te...", "m": "zwaar."}, {"z": "Iwan wil gezond zijn. Hij drinkt geen...", "m": "alcohol."}, {"z": "Jack koopt tomaten. Hij koopt ook...", "m": "komkommers."}, {"z": "Jack wil de muziek niet horen. Hij vindt de muziek...", "m": "te hard."}, {"z": "Jacques is leraar. Hij geeft...", "m": "les."}, {"z": "Jada maakt pannenkoeken voor haar familie. Zij doet dat...", "m": "elke zondag."}, {"z": "Jafar houdt niet van dansen. Hij vindt dansen...", "m": "niet leuk."}, {"z": "Jakob zoekt een taxi. Hij wil...", "m": "naar huis."}, {"z": "Jamal heeft een nieuwe scooter. Hij kan nu...", "m": "snel naar zijn werk."}, {"z": "Jamal woont in een flatgebouw. Hij wil graag...", "m": "een huis met een tuin."}, {"z": "Jamila maakt kleding. Die kleding is voor...", "m": "kinderen."}, {"z": "Jan heeft zijn arm gebroken. Hij moet nu...", "m": "rusten."}, {"z": "Janek heeft koorts. Zijn moeder geeft hem...", "m": "een pil."}, {"z": "Janine leert Nederlands. Ze praat met de lerares over...", "m": "het huiswerk."}, {"z": "Jara is zwanger. Ze krijgt...", "m": "een baby."}, {"z": "Jasmine gaat naar het ziekenhuis. In het ziekenhuis zijn...", "m": "veel dokters."}, {"z": "Jason gaat graag naar school. Hij kan goed...", "m": "rekenen."}, {"z": "Jessie houdt van muziek. Ze speelt graag...", "m": "piano."}, {"z": "Jessie moet langer werken vandaag. Ze mag pas om acht uur...", "m": "naar huis."}, {"z": "Jessy koopt een kaartje. Ze gaat...", "m": "met de trein."}, {"z": "Jie is op de markt. Hij ziet...", "m": "veel fruit."}, {"z": "Jim gaat naar het strand. Het is daar...", "m": "warm."}, {"z": "Jim heeft haast. Hij moet snel naar...", "m": "huis."}, {"z": "Jim staat voor de school. Hij wacht op...", "m": "zijn zoon."}, {"z": "Jing maakt de borden schoon. Daarna gaat ze...", "m": "slapen."}, {"z": "Joel heeft een vieze keuken. Hij moet...", "m": "schoonmaken."}, {"z": "Johan heeft veel boeken. Hij houdt van...", "m": "lezen."}, {"z": "Johanna doet suiker in haar koffie. Suiker is...", "m": "zoet."}, {"z": "John en zijn dochter bakken samen taart. Ze vinden dat...", "m": "leuk."}, {"z": "John houdt van paarden. Hij vindt paarden...", "m": "mooi."}, {"z": "John woont bij een bos. Hij gaat daar elk weekend...", "m": "wandelen."}, {"z": "Johnny is moe. Hij wil...", "m": "slapen."}, {"z": "Johnny is vrij op zaterdag. Hij gaat...", "m": "voetballen."}, {"z": "Jonas werkt altijd buiten. Dat is...", "m": "leuk."}, {"z": "Josh heeft de hele dag gelopen. Hij wil nu...", "m": "zitten."}, {"z": "Josh koopt een krant in de winkel. Hij koopt ook...", "m": "een tijdschrift."}, {"z": "Judy leest een tijdschrift. Soms leest ze ook...", "m": "een boek."}, {"z": "Julio gaat verhuizen. Hij moet...", "m": "dozen inpakken."}, {"z": "Karim heeft pijn in zijn rug. Hij moet...", "m": "naar de dokter."}, {"z": "Karim leest het weerbericht. Het weer wordt...", "m": "mooi."}, {"z": "Karima gaat naar de dokter. Ze voelt zich...", "m": "ziek."}, {"z": "Karin kijkt naar het journaal. Ze doet dat...", "m": "elke avond."}, {"z": "Karl gaat met zijn dochter naar de dierentuin. Ze kijken naar...", "m": "de olifanten."}, {"z": "Katya volgt een opleiding. Ze wil...", "m": "verpleegkundige worden."}, {"z": "Kay zoekt een nieuw huis. Hij vindt zijn oude huis...", "m": "te klein."}, {"z": "Kei eet 's avonds met zijn familie. Dat vindt hij...", "m": "gezellig."}, {"z": "Kenji rookt al twintig jaar sigaretten. Dat is...", "m": "ongezond."}, {"z": "Kenny zoekt op internet. Hij zoekt naar...", "m": "werk."}, {"z": "Kevin eet een salade met paprika. In de salade zit ook...", "m": "tomaat."}, {"z": "Kevin heeft huiswerk. Hij moet veel...", "m": "lezen."}, {"z": "Kevin werkt in een restaurant. Hij maakt vandaag...", "m": "pizza."}, {"z": "Kevin zit in de klas. Hij heeft een vraag over...", "m": "het huiswerk."}, {"z": "Khalid is visser. Na het werk is hij vaak...", "m": "moe."}, {"z": "Kris werkt in de tuin. Hij doet dat...", "m": "elke week."}, {"z": "Kun je mij een lepel geven? Ik wil...", "m": "soep eten."}, {"z": "Kun je mij naar het station brengen. Ik moet op tijd...", "m": "zijn."}, {"z": "Kwasi is chauffeur. Hij rijdt...", "m": "in een bus."}, {"z": "Laila moet elke dag vroeg opstaan. Soms is ze...", "m": "moe."}, {"z": "Laiqa werkt elke dag buiten. Ze houdt van...", "m": "de zon."}, {"z": "Laura heeft veel collega's. Ze gaan samen...", "m": "lunchen."}, {"z": "Lea eet graag in een restaurant. Ze vindt dat...", "m": "lekker."}, {"z": "Lea gaat naar haar kleinzoon. Ze geeft hem...", "m": "een cadeau."}, {"z": "Lea is in het ziekenhuis. Ze wil...", "m": "naar huis."}, {"z": "Lei speelt op straat. Dat is...", "m": "leuk."}, {"z": "Leon is verkouden. Hij moet...", "m": "thuisblijven."}, {"z": "Leon speelt gitaar. Hij doet dat...", "m": "elke avond."}, {"z": "Leyla slaapt samen met haar zus in een kamer. Zij vinden dat...", "m": "gezellig."}, {"z": "Li en Chen gaan iets drinken. Ze drinken...", "m": "thee."}, {"z": "Lia wil meer geld voor haar werk. Dan kan ze...", "m": "meer kopen."}, {"z": "Liam kan niet goed zien. Hij moet...", "m": "een bril kopen."}, {"z": "Lily gaat elke dinsdag sporten. Ze eet daarna altijd...", "m": "een appel."}, {"z": "Lin zoekt werk. Ze gaat naar...", "m": "het uitzendbureau."}, {"z": "Ling wil iets eten. Ze eet liever geen...", "m": "vlees."}, {"z": "Linn heeft niet goed geslapen. Ze blijft...", "m": "in bed."}, {"z": "Liyen gaat vanavond koken. Ze gaat eerst...", "m": "boodschappen doen."}, {"z": "Lizzie en haar moeder gaan met het vliegtuig. Lizzie vindt dat...", "m": "leuk."}, {"z": "Loes is ziek. Zij gaat vandaag...", "m": "niet naar haar werk."}, {"z": "Louis gaat op de scooter naar zijn werk. Hij doet dat...", "m": "elke dag."}, {"z": "Louis gebruikt de computer. Hij wil...", "m": "een e-mail sturen."}, {"z": "Lucia heeft haar been gebroken. Nu kan ze niet...", "m": "lopen."}, {"z": "Lucia wil nieuw werk. Ze vindt haar oude werk...", "m": "saai."}, {"z": "Madee heeft een auto. Ze gaat met de auto naar...", "m": "haar werk."}, {"z": "Mae heeft een nieuwe auto. Ze kan nu...", "m": "naar haar werk rijden."}, {"z": "Mag ik jouw brommer lenen? Mijn brommer is...", "m": "kapot."}, {"z": "Mai kijkt niet naar het nieuws. Ze vindt het nieuws...", "m": "saai."}, {"z": "Maja maakt soep. De soep is...", "m": "warm."}, {"z": "Malik gaat vandaag niet sporten. Hij heeft geen...", "m": "tijd."}, {"z": "Malik heeft een nieuwe bank gekocht. De oude bank was...", "m": "oud."}, {"z": "Mandy eet vaak chips als ze een film kijkt. Ze eet soms ook...", "m": "popcorn."}, {"z": "Manuel is buschauffeur. Hij rijdt...", "m": "in de stad."}, {"z": "Marco heeft zin in koffie. Hij wil ook...", "m": "een koekje."}, {"z": "Marco is ziek. Hij belt...", "m": "zijn baas."}, {"z": "Maria heeft griep. Ze moet...", "m": "in bed blijven."}, {"z": "Maria kan goed koken. Ze kookt meestal...", "m": "rijst."}, {"z": "Maria leest een boek. Ze vindt het...", "m": "leuk."}, {"z": "Maria leest op zondag de krant. Ze leest soms...", "m": "een tijdschrift."}, {"z": "Mariam praat met de leraar. Mariam praat ook met haar...", "m": "vriendin."}, {"z": "Martin eet elke ochtend een ei. Zijn vrouw eet meestal...", "m": "brood."}, {"z": "Martin stelt een vraag aan de docent. De vraag gaat over...", "m": "de les."}, {"z": "Maryam kookt voor Dina. Maryam maakt...", "m": "soep."}, {"z": "Masha kan vandaag zitten in de bus. Soms moet ze...", "m": "staan."}, {"z": "Max draagt een helm op zijn werk. Dat moet van zijn...", "m": "baas."}, {"z": "Max voetbalt graag. Voetballen is...", "m": "leuk."}, {"z": "Maya doet de gordijnen dicht. Ze gaat...", "m": "slapen."}, {"z": "Megan gaat vandaag verhuizen. Ze woont straks...", "m": "in Rotterdam."}, {"z": "Melissa wacht op het station. Ze wacht op haar...", "m": "moeder."}, {"z": "Mevrouw Perez heeft geen auto meer. Nu moet ze...", "m": "met de bus."}, {"z": "Mia maakt zelf kleren. Vandaag maakt ze een...", "m": "jurk."}, {"z": "Mia moet snel naar huis. Ze gaat met de...", "m": "fiets."}, {"z": "Michael houdt niet van tennis. Hij houdt meer van...", "m": "voetbal."}, {"z": "Michelle kijkt vaak films. Ze houdt van films over...", "m": "dieren."}, {"z": "Michelle maakt huiswerk. Ze vindt het huiswerk...", "m": "moeilijk."}, {"z": "Miguel stopt met werken. Hij is...", "m": "oud."}, {"z": "Mijn auto is kapot. Nu moet ik...", "m": "met de bus."}, {"z": "Mijn baas fietst elke dag. Ik doe dat...", "m": "ook."}, {"z": "Mijn benzine is op. Nu moet ik...", "m": "tanken."}, {"z": "Mijn broer houdt niet van varen. Hij wordt altijd ziek op...", "m": "een boot."}, {"z": "Mijn broer zingt veel. Hij is...", "m": "zanger."}, {"z": "Mijn buurman maakt graag muziek. Dat vind ik...", "m": "leuk."}, {"z": "Mijn opa gaat elke dag wandelen. Dat is...", "m": "gezond."}, {"z": "Mijn opa zit op de bank. Hij kijkt naar...", "m": "de televisie."}, {"z": "Mijn telefoon is kapot. Nu kan ik niet...", "m": "bellen."}, {"z": "Mijn trein vertrekt over een half uur. Ik ga nu...", "m": "naar het station."}, {"z": "Mijn vader heeft een paard. Hij gaat...", "m": "rijden."}, {"z": "Mijn vader loopt met een stok. Mijn vader is...", "m": "oud."}, {"z": "Mijn vader luistert graag naar het nieuws. Hij luistert ook naar...", "m": "de radio."}, {"z": "Mijn zus rijdt altijd hard. Ik vind dat...", "m": "gevaarlijk."}, {"z": "Mike heeft pijn aan zijn been. Hij heeft ook pijn aan zijn...", "m": "arm."}, {"z": "Mina werkt bij de supermarkt. Ze werkt daar...", "m": "elke dag."}, {"z": "Ming rijdt vaak op zijn scooter. Hij wil niet...", "m": "lopen."}, {"z": "Mira heeft zin in koffie. Ze drinkt koffie met...", "m": "melk."}, {"z": "Mo en zijn familie spelen een spel. Daarna gaan ze...", "m": "eten."}, {"z": "Mo zit aan tafel. Hij schrijft een brief aan zijn...", "m": "moeder."}, {"z": "Mohammed maakt auto’s. Dat vindt hij...", "m": "leuk."}, {"z": "Monica maakt graag foto's. Ze maakt het liefst foto's van...", "m": "bloemen."}, {"z": "Monica wil graag een huis met een tuin. Ze vindt dat...", "m": "fijn."}, {"z": "Myra en Liz gaan naar een café. Ze willen graag...", "m": "koffie drinken."}, {"z": "Nadia heeft kip gekocht. Ze gaat de kip eerst...", "m": "wassen."}, {"z": "Naima wil kapper worden. Ze leert...", "m": "haar knippen."}, {"z": "Nancy en Oscar zitten in de bioscoop. Ze vinden de film...", "m": "leuk."}, {"z": "Nasir zoekt een nieuw huis. Hij wil een huis met...", "m": "een tuin."}, {"z": "Nasira woont bij de supermarkt. Ze woont ook bij...", "m": "het station."}, {"z": "Nick wil naar zijn familie. Hij reist met...", "m": "de trein."}, {"z": "Nick zoekt werk. Hij wil graag werken bij...", "m": "een winkel."}, {"z": "Nicole gaat naar de tandarts. Ze heeft pijn aan haar...", "m": "tand."}, {"z": "Nikki zoekt een nieuw huis. Ze wil graag...", "m": "een groot huis."}, {"z": "Nina speelt in de tuin. Ze speelt met...", "m": "de hond."}, {"z": "Noah leest een bericht in de krant. Het bericht gaat over...", "m": "het weer."}, {"z": "Noor werkt in een winkel. Ze verkoopt broeken en ook...", "m": "jassen."}, {"z": "Nora en Souffian wonen in een dorp. Ze wonen liever...", "m": "in de stad."}, {"z": "Odara ruimt het huis op. Ze legt de kleren...", "m": "in de kast."}, {"z": "Olga is ziek. Ze moet...", "m": "naar de dokter."}, {"z": "Omar koopt vis. Hij koopt ook...", "m": "brood."}, {"z": "Omid leest 's ochtends altijd eerst de krant. Daarna gaat hij...", "m": "werken."}, {"z": "Ons dak is kapot. Wij moeten...", "m": "het dak maken."}, {"z": "Orma heeft leuke buren. Ze gaat met haar buren...", "m": "wandelen."}, {"z": "Pablo gaat vaak met de trein. Hij gaat dan naar...", "m": "Amsterdam."}, {"z": "Pablo speelt gitaar. Hij oefent...", "m": "elke dag."}, {"z": "Pari gaat elke dag met de bus. Vandaag gaat ze...", "m": "met de fiets."}, {"z": "Pascal vindt zijn werk moeilijk. Hij wil...", "m": "ander werk."}, {"z": "Paul gaat vroeg naar bed. Hij moet morgen...", "m": "vroeg werken."}, {"z": "Paul heeft honger. Zijn moeder geeft hem...", "m": "een boterham."}, {"z": "Paul viert zijn verjaardag. Hij is...", "m": "blij."}, {"z": "Paula heeft een brief gekregen. De brief is van...", "m": "de gemeente."}, {"z": "Pedro doet de lamp aan. Het is...", "m": "donker."}, {"z": "Pedro woont op een boerderij. Hij heeft daar...", "m": "koeien."}, {"z": "Peter maakt machines. Hij werkt vaak...", "m": "in een fabriek."}, {"z": "Peter speelt met zijn zoon. Ze zijn...", "m": "blij."}, {"z": "Philip fietst op de weg. De weg is...", "m": "druk."}, {"z": "Philippa zit in de tuin. Ze zit ook vaak...", "m": "in de kamer."}, {"z": "Pia woont naast een park. Ze gaat daar...", "m": "wandelen."}, {"z": "Priya doet een opleiding. Later wordt ze...", "m": "verpleegster."}, {"z": "Priya maakt saus. Haar dochters willen...", "m": "proeven."}, {"z": "Quito eet vandaag niet thuis. Hij eet...", "m": "in een restaurant."}, {"z": "Rachel zingt vaak alleen. Soms zingt ze ook...", "m": "met haar vriendin."}, {"z": "Rafael heeft een telefoon. Hij belt elke dag met zijn...", "m": "moeder."}, {"z": "Raheem heeft een fijn huis. Hij woont daar met...", "m": "zijn vrouw."}, {"z": "Rahime heeft Nederlandse les. Ze vindt haar docent...", "m": "aardig."}, {"z": "Rasha werkt op een kantoor. Het kantoor is...", "m": "groot."}, {"z": "Remi werkt op de markt. Hij verkoopt...", "m": "groente."}, {"z": "Rhonda is haar sleutel kwijt. Nu moet ze...", "m": "de buurvrouw bellen."}, {"z": "Rico eet vaak snoep. Snoep is slecht voor...", "m": "je tanden."}, {"z": "Rico krijgt een prik. Hij is...", "m": "bang."}, {"z": "Rima en haar dochter zijn in de keuken. Haar dochter wil...", "m": "helpen."}, {"z": "Robin loopt snel naar school. Hij is...", "m": "te laat."}, {"z": "Romeo werkt op een school. Hij geeft les aan...", "m": "kinderen."}, {"z": "Roy wil zijn vriend spreken. Hij gaat...", "m": "bellen."}, {"z": "Ryan heeft weinig geld. Hij werkt...", "m": "veel."}, {"z": "Ryan wil een film zien. Hij gaat naar...", "m": "de bioscoop."}, {"z": "Sabir heeft een nieuwe baan. Hij werkt bij...", "m": "een bank."}, {"z": "Saïd heeft vakantie. Hij gaat...", "m": "naar Turkije."}, {"z": "Saïd is te laat op zijn werk. Zijn baas is...", "m": "boos."}, {"z": "Salih is bakker. Hij werkt meestal...", "m": "'s nachts."}, {"z": "Salim snijdt de uien. Zijn vrouw gaat...", "m": "koken."}, {"z": "Sam is vandaag op school. Hij gaat straks naar...", "m": "huis."}, {"z": "Sam loopt het lokaal uit. Hij gaat...", "m": "naar huis."}, {"z": "Samir is te laat voor de trein. Hij moet nu...", "m": "wachten."}, {"z": "Samira heeft een gesprek met haar baas. Ze praten over...", "m": "haar werk."}, {"z": "Samira gaat naar haar ouders. Ze gaan samen...", "m": "eten."}, {"z": "Samira heeft pijn aan haar rug. Ze kan niet goed...", "m": "lopen."}, {"z": "Samuel heeft vandaag les. Hij gaat morgen...", "m": "werken."}, {"z": "Samuel praat met zijn baas. Hij vraagt...", "m": "meer geld."}, {"z": "Samuel vindt de pauze leuk. Hij gaat dan...", "m": "koffie drinken."}, {"z": "Sandra moet vandaag veel doen. Ze moet...", "m": "boodschappen doen."}, {"z": "Sanne kan niet goed koken. Het eten is...", "m": "niet lekker."}, {"z": "Sara lacht. Zij is...", "m": "blij."}, {"z": "Sara praat met haar buurvrouw. Ze praten over...", "m": "de kinderen."}, {"z": "Sarah is nooit ziek. Zij voelt zich altijd...", "m": "goed."}, {"z": "Sari zoekt een cursusboek. Ze gaat naar...", "m": "de bibliotheek."}, {"z": "Sarina reist met de bus. Zij gaat naar...", "m": "haar werk."}, {"z": "Sasha eet niet altijd thuis. Ze gaat vaak naar...", "m": "een restaurant."}, {"z": "Sasha gaat naar de bioscoop. Ze kijkt...", "m": "een film."}, {"z": "Sasha heeft een hond. Ze heeft ook...", "m": "een kat."}, {"z": "Savita gaat solliciteren. Ze wil...", "m": "werken."}, {"z": "Scott doet een opleiding. Hij vindt leren...", "m": "leuk."}, {"z": "Selim kan zijn broer niet bellen. Hij stuurt zijn broer een...", "m": "bericht."}, {"z": "Shaila draagt een rugzak naar school. In de rugzak zit...", "m": "een boek."}, {"z": "Shanna heeft haar diploma. Ze is...", "m": "blij."}, {"z": "Shing heeft zijn arm gebroken. Hij mag niet...", "m": "werken."}, {"z": "Shun wil niet eten. Hij wil liever...", "m": "slapen."}, {"z": "Siham volgt een cursus. Ze leert...", "m": "Nederlands."}, {"z": "Simon bouwt een huis. Het huis wordt..", "m": "groot."}, {"z": "Simon wil leraar worden. Hij moet veel...", "m": "leren."}, {"z": "Simone leest graag een krant. Ze koopt hem...", "m": "in de winkel."}, {"z": "Sita bakt een taart. Haar kinderen vinden...", "m": "lekker."}, {"z": "Sita geeft taart aan haar opa. Hij vindt dat...", "m": "lekker."}, {"z": "Sjaak werkt in een fabriek. Daar werkt hij...", "m": "elke dag."}, {"z": "Sonia zit in de bus. Ze gaat naar...", "m": "haar werk."}, {"z": "Sonya houdt van muziek. Ze luistert...", "m": "naar de radio."}, {"z": "Sophia houdt van rijst. Ze kookt dat...", "m": "elke dag."}, {"z": "Sophie is vaak in het bos. Ze kijkt graag naar...", "m": "de bomen."}, {"z": "Sou eet graag maïs. Ze eet maïs meestal met...", "m": "boter."}, {"z": "Souad koopt bananen op de markt. Ze koopt ook...", "m": "appels."}, {"z": "Stanley wil een groter huis. Hij wil ook...", "m": "een tuin."}, {"z": "Stefan belt met zijn zus. Zijn zus is...", "m": "ziek."}, {"z": "Stefana vindt wandelen leuk. Ze doet dat...", "m": "elke zondag."}, {"z": "Stephan moet sporten van de dokter. Hij gaat...", "m": "zwemmen."}, {"z": "Steven is in het ziekenhuis. Hij gaat morgen...", "m": "naar huis."}, {"z": "Sven komt uit het ziekenhuis. Hij is...", "m": "weer beter."}, {"z": "Sylvia is kapper. Ze moet vandaag veel...", "m": "knippen."}, {"z": "Tamal moet remmen. Hij ziet een...", "m": "kat."}, {"z": "Tanya is bakker. Ze verkoopt...", "m": "brood."}, {"z": "Tara wil een motor kopen. Een motor is...", "m": "duur."}, {"z": "Tara zoekt werk. Ze kijkt in...", "m": "de krant."}, {"z": "Tariq eet alleen. Hij vindt dat...", "m": "niet leuk."}, {"z": "Tess eet veel fruit. Fruit is...", "m": "gezond."}, {"z": "Thirza wil later in het ziekenhuis werken. Ze moet eerst...", "m": "leren."}, {"z": "Thomas ligt in het ziekenhuis. Hij vindt dat...", "m": "niet leuk."}, {"z": "Tim drinkt graag koffie. Hij drinkt liever koffie dan...", "m": "thee."}, {"z": "Tim is jarig. Zijn zus geeft hem een...", "m": "cadeau."}, {"z": "Tirza koopt een nieuw bed. Ze koopt ook...", "m": "een kussen."}, {"z": "Tony eet brood. Hij eet het brood met...", "m": "kaas."}, {"z": "Tuan zit op school. Hij heeft volgende week...", "m": "een toets."}, {"z": "Veel mensen praten in de les. Nena vindt dat...", "m": "niet leuk."}, {"z": "Vera doet suiker in haar thee. Haar thee wordt zo...", "m": "zoet."}, {"z": "Victor heeft een nieuw huis. Hij gaat morgen...", "m": "verhuizen."}, {"z": "Wayan drinkt koffie met zijn buurman. Hij vindt dat...", "m": "gezellig."}, {"z": "We gaan mijn broer ophalen. Hij heeft geen...", "m": "auto."}, {"z": "Wij willen wat leuks doen. We gaan...", "m": "zwemmen."}, {"z": "Wil je mijn huis zien? Ik woon hier...", "m": "al vijf jaar."}, {"z": "Wil jij op mijn kinderen passen? Ik ga vanavond...", "m": "uit eten."}, {"z": "William neemt een drankje. Dat helpt tegen...", "m": "de hoofdpijn."}, {"z": "Xuan is in de supermarkt. Ze wil...", "m": "melk kopen."}, {"z": "Yaira werkt bij een apotheek. Ze werkt daar...", "m": "elke dag."}, {"z": "Younes heeft veel vrienden. Hij gaat vaak met ze naar...", "m": "de stad."}, {"z": "Yun eet 's ochtends niet veel. Ze eet dan alleen...", "m": "een boterham."}, {"z": "Yvonne doet haar spullen in dozen. Zij gaat morgen...", "m": "verhuizen."}, {"z": "Zarina moet de vis eerst schoonmaken. Daarna gaat ze hem...", "m": "bakken."}, {"z": "Zina kookt met veel kruiden. Zo wordt haar eten...", "m": "lekker."}, {"z": "Zola maakt het huis schoon. Ze doet dat...", "m": "elke week."}];
+
+</script>
+<script>
+"use strict";
+// ---------- state ----------
+const KEY = "bib_a1_v1";
+const DEF = {kns:{}, knsExams:[], lezen:{}, spreken:{vr:{}, az:{}}, sprExams:[], set:{rate:0.8, ar:true}};
+let S;
+try { S = Object.assign(structuredClone(DEF), JSON.parse(localStorage.getItem(KEY) || "{}")); } catch(e) { S = structuredClone(DEF); }
+S.set = Object.assign({}, DEF.set, S.set || {}); S.spreken = Object.assign({vr:{},az:{}}, S.spreken||{});
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {} }
+
+// ---------- helpers ----------
+const $ = s => document.querySelector(s);
+const app = $("#app");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ar = (t, cls="") => S.set.ar && t ? `<div class="ar ${cls}">${esc(t)}</div>` : "";
+const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+const pick = (a,n) => shuffle(a).slice(0,n);
+const fmt = s => `${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`;
+let stack = [], timerId = null, cleanup = null;
+
+function setHead(t, sub){ $("#title").textContent = t; $("#subtitle").textContent = sub || ""; }
+function go(fn, ...args){ stack.push([fn,args]); run(); }
+function run(){
+  stopTimer(); if (cleanup){ try{cleanup();}catch(e){} cleanup=null; }
+  speechStop();
+  const [fn,args] = stack[stack.length-1]; window.scrollTo(0,0); fn(...args);
+  $("#back").style.visibility = stack.length>1 ? "visible" : "hidden";
+}
+function back(confirmMsg){
+  if (stack.length<=1) return;
+  if (confirmMsg && !confirm(confirmMsg)) return;
+  stack.pop(); run();
+}
+$("#back").onclick = () => back(app.dataset.guard || null);
+window.addEventListener("popstate", ()=>{});
+
+function startTimer(sec, onEnd){
+  const el = $("#timer"); el.classList.remove("hide"); let left = sec; el.textContent = fmt(left);
+  timerId = setInterval(()=>{ left--; el.textContent = fmt(Math.max(0,left)); if (left<=0){ stopTimer(); onEnd(); } }, 1000);
+  return () => left;
+}
+function stopTimer(){ if (timerId){ clearInterval(timerId); timerId=null; } $("#timer").classList.add("hide"); app.dataset.guard=""; }
+
+// ---------- speech (TTS) ----------
+// Android-WebView heeft geen speechSynthesis → native plugin (Capacitor) gebruiken als die er is.
+const NTTS = (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform() && window.Capacitor.Plugins && window.Capacitor.Plugins.TextToSpeech) || null;
+let nlVoice = null, ttsOK = !!NTTS || ("speechSynthesis" in window), nativeNL = null;
+function loadVoices(){ if (NTTS || !("speechSynthesis" in window)) return; const v = speechSynthesis.getVoices(); nlVoice = v.find(x=>/^nl[-_]NL/i.test(x.lang)) || v.find(x=>/^nl/i.test(x.lang)) || null; }
+if (!NTTS && "speechSynthesis" in window){ loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
+if (NTTS){ NTTS.getSupportedLanguages().then(r=>{ nativeNL = (r.languages||[]).some(l=>/^nl/i.test(l)); }).catch(()=>{ nativeNL = null; }); }
+function say(text, rate){
+  const t = text.replace(/\.\.\.|…/g, " ... ");
+  if (NTTS){ NTTS.stop().catch(()=>{}).finally(()=>NTTS.speak({text:t, lang:"nl-NL", rate:(rate||S.set.rate), pitch:1.0, volume:1.0, category:"playback"}).catch(()=>{})); return; }
+  if (!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(t);
+  u.lang = "nl-NL"; if (nlVoice) u.voice = nlVoice; u.rate = rate || S.set.rate;
+  speechSynthesis.speak(u);
+}
+function speechStop(){ try{ if (NTTS) NTTS.stop().catch(()=>{}); else speechSynthesis.cancel(); }catch(e){} }
+function noDutchVoice(){ if (NTTS) return nativeNL===false; return !("speechSynthesis" in window) || (speechSynthesis.getVoices().length>0 && !nlVoice); }
+const spk = (t) => `<button class="btn sec" data-say="${esc(t)}" aria-label="Voorlezen">🔊</button>`;
+app.addEventListener("click", e => { const b = e.target.closest("[data-say]"); if (b) say(b.dataset.say); });
+
+// ---------- home ----------
+function home(){
+  setHead("Basisexamen Buitenland A1", "تحضير امتحان الاندماج في الخارج");
+  const knsKnown = KNS.filter(q => (S.kns[q.id]||{}).s >= 2).length;
+  const lz = Object.values(S.lezen).map(r=>r.best||0); const lzBest = lz.length? Math.max(...lz):0;
+  const spN = Object.keys(S.spreken.vr).length + Object.keys(S.spreken.az).length;
+  app.innerHTML = `
+  <div class="card"><h1>Welkom 👋</h1>${ar("مرحباً! هذا التطبيق يحضّرك لامتحان الاندماج الأساسي في الخارج (مستوى A1) المطلوب لتأشيرة MVV.","big")}
+   <p class="muted">Het examen heeft 3 onderdelen. U moet alle 3 halen.</p></div>
+  <div class="grid">
+   <button class="tile hero wide" id="t-kns"><span class="ic">🇳🇱</span><b>KNS – Kennis van de Nederlandse Samenleving</b>${ar("معرفة المجتمع الهولندي")}<div class="muted">${knsKnown} / ${KNS.length} vragen gekend</div><div class="bar"><i style="width:${Math.round(knsKnown/KNS.length*100)}%"></i></div></button>
+   <button class="tile" id="t-lez"><span class="ic">📖</span><b>Lezen</b>${ar("القراءة")}<div class="muted">Beste: ${lzBest}/19</div></button>
+   <button class="tile" id="t-spr"><span class="ic">🎙️</span><b>Spreken</b>${ar("المحادثة")}<div class="muted">${spN} geoefend</div></button>
+   <button class="tile" id="t-info"><span class="ic">ℹ️</span><b>Over het examen</b>${ar("معلومات رسمية عن الامتحان")}</button>
+   <button class="tile" id="t-set"><span class="ic">⚙️</span><b>Instellingen</b>${ar("الإعدادات")}</button>
+  </div>
+  ${noDutchVoice() ? `<div class="warn" style="margin-top:12px">🔊 Geen Nederlandse stem gevonden. Installeer “Nederlands” in de spraakinstellingen (Google Text-to-Speech) van uw telefoon.${ar("لا يوجد صوت هولندي. ثبّت اللغة الهولندية في إعدادات تحويل النص إلى كلام في هاتفك.")}</div>`:""}`;
+  $("#t-kns").onclick=()=>go(knsMenu); $("#t-lez").onclick=()=>go(lezenMenu); $("#t-spr").onclick=()=>go(sprMenu);
+  $("#t-info").onclick=()=>go(info); $("#t-set").onclick=()=>go(settings);
+}
+
+// ================= KNS =================
+const themeOf = id => KNS_THEMES.find(t=>t.id===id);
+function knsMenu(){
+  setHead("KNS", "معرفة المجتمع الهولندي");
+  const wrong = KNS.filter(q => (S.kns[q.id]||{}).w > 0 && (S.kns[q.id]||{}).s < 2);
+  app.innerHTML = `
+  <div class="card"><h2>Hoe werkt KNS?</h2>
+   <p>Echt examen: <b>30 vragen, 30 minuten</b>. U ziet een foto en hoort een vraag. Elke vraag heeft <b>2 antwoorden</b>. U klikt het goede antwoord aan.</p>
+   <p>De 30 vragen komen uit de <b>100 vragen</b> van het fotoboek. Leer dus alle 100!</p>
+   ${ar("الامتحان الحقيقي: 30 سؤالاً في 30 دقيقة. ترى صورة وتسمع سؤالاً، ولكل سؤال جوابان. الأسئلة الـ30 مختارة من الأسئلة المئة في كتاب الصور، لذلك احفظ الأسئلة المئة كلها.")}</div>
+  <div class="list">
+   <button class="tile hero" id="k-exam"><span class="ic">⏱️</span><b>Proefexamen (30 vragen / 30 min)</b>${ar("امتحان تجريبي")}</button>
+   <button class="tile" id="k-rand"><span class="ic">🔀</span><b>Alle 100 door elkaar oefenen</b>${ar("تمرين على كل الأسئلة بترتيب عشوائي")}</button>
+   ${wrong.length?`<button class="tile" id="k-wrong"><span class="ic">🔁</span><b>Mijn foute vragen (${wrong.length})</b>${ar("الأسئلة التي أخطأت فيها")}</button>`:""}
+   <h3>Leren per thema ${S.set.ar?'<span class="ar" style="display:inline">· حسب الموضوع</span>':""}</h3>
+   ${KNS_THEMES.map(t=>{ const qs=KNS.filter(q=>q.t===t.id); const k=qs.filter(q=>(S.kns[q.id]||{}).s>=2).length;
+     return `<button class="tile" data-th="${t.id}"><span class="ic">${t.icon}</span><b>${t.id?t.id+". ":""}${esc(t.nl)}</b>${ar(t.ar)}<div class="muted">${k}/${qs.length} gekend</div><div class="bar"><i style="width:${Math.round(k/qs.length*100)}%"></i></div></button>`;}).join("")}
+  </div>`;
+  $("#k-exam").onclick=()=>go(knsExam);
+  $("#k-rand").onclick=()=>go(knsPractice, shuffle(KNS), "Alle vragen");
+  if (wrong.length) $("#k-wrong").onclick=()=>go(knsPractice, shuffle(wrong), "Foute vragen");
+  app.querySelectorAll("[data-th]").forEach(b=>b.onclick=()=>{ const t=+b.dataset.th; go(knsPractice, KNS.filter(q=>q.t===t), themeOf(t).nl); });
+}
+function photoBox(q){
+  const t = themeOf(q.t);
+  return `<div class="photo"><span class="ic">${t.icon}</span><div><b>📷 Foto ${q.id.startsWith("vb")?"voorbeeld":q.id}</b><div class="muted">${q.f?esc("Op de foto: "+q.f):"Foto uit de film ‘Naar Nederland’"}</div></div></div>`;
+}
+function knsRecord(q, ok){ const r = S.kns[q.id] || {s:0,w:0}; if (ok) r.s = (r.s||0)+1; else { r.w=(r.w||0)+1; r.s=0; } S.kns[q.id]=r; save(); }
+function knsPractice(list, label){
+  let i = 0;
+  const draw = () => {
+    const q = list[i]; setHead(label, `Vraag ${i+1} / ${list.length}`);
+    app.innerHTML = `<div class="card">${photoBox(q)}
+      <div class="row" style="align-items:flex-start"><div style="flex:1"><div class="q">${esc(q.q)}</div>${ar(q.qa,"big")}</div>${spk(q.q)}</div>
+      <div style="margin-top:12px">
+       ${["A","B"].map(k=>`<button class="opt" data-k="${k}"><span class="k">${k}</span><span><span>${esc(k==="A"?q.a:q.b)}</span>${ar(k==="A"?q.aa:q.ab)}</span></button>`).join("")}
+      </div><div id="fb"></div></div>
+      <div class="row"><button class="btn ghost" id="prev" ${i===0?"disabled":""}>← Vorige</button><button class="btn" id="next">${i===list.length-1?"Klaar ✓":"Volgende →"}</button></div>`;
+    say(q.q);
+    let answered = false;
+    app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+      if (answered) return; answered = true; const ok = b.dataset.k===q.c;
+      app.querySelectorAll(".opt").forEach(o=>{ if (o.dataset.k===q.c) o.classList.add("ok"); else if (o===b) o.classList.add("no"); });
+      knsRecord(q, ok);
+      $("#fb").innerHTML = `<div class="fb ${ok?"ok":"no"}"><b>${ok?"Goed! ✅":"Fout ❌ – het goede antwoord is "+q.c}</b>${q.x?`<div class="ar big" style="margin-top:6px">${esc(q.x)}</div>`:""}</div>`;
+      say((q.c==="A"?q.a:q.b));
+    });
+    $("#prev").onclick=()=>{ if(i>0){i--;draw();} };
+    $("#next").onclick=()=>{ if(i<list.length-1){i++;draw();} else back(); };
+  };
+  draw();
+}
+function knsExam(){
+  const qs = pick(KNS.filter(q=>q.t!==0), 30); const ans = {}; let i = 0;
+  app.dataset.guard = "Examen stoppen?";
+  const finish = () => { stopTimer(); go(knsResult, qs, ans); stack.splice(stack.length-2,1); };
+  const intro = () => {
+    setHead("KNS proefexamen", "30 vragen · 30 minuten");
+    app.innerHTML = `<div class="card"><h2>Instructie</h2><p>U krijgt 30 vragen. Elke vraag wordt voorgelezen. Klik op A of B. U hebt 30 minuten.</p>${ar("ستحصل على 30 سؤالاً. كل سؤال يُقرأ بصوت عالٍ. اضغط على A أو B. لديك 30 دقيقة. لن ترى النتيجة إلا في النهاية.")}</div><button class="btn or block" id="go">Start examen ▶</button>`;
+    $("#go").onclick = () => { startTimer(30*60, finish); app.dataset.guard="Examen stoppen?"; draw(); };
+  };
+  const draw = () => {
+    const q = qs[i]; setHead("KNS proefexamen", `Vraag ${i+1} / 30`);
+    app.innerHTML = `<div class="card">${photoBox(q)}<div class="row" style="align-items:flex-start"><div class="q" style="flex:1">${esc(q.q)}</div>${spk(q.q)}</div>
+      ${["A","B"].map(k=>`<button class="opt ${ans[i]===k?"sel":""}" data-k="${k}"><span class="k">${k}</span><span>${esc(k==="A"?q.a:q.b)}</span></button>`).join("")}</div>
+      <div class="dots">${qs.map((_,j)=>`<button data-j="${j}" class="${ans[j]?"done":""} ${j===i?"cur":""}">${j+1}</button>`).join("")}</div>
+      <div class="row"><button class="btn ghost" id="prev" ${i===0?"disabled":""}>←</button><button class="btn" id="next">${i===29?"Inleveren":"Volgende →"}</button></div>`;
+    say(q.q);
+    app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{ ans[i]=b.dataset.k; app.querySelectorAll(".opt").forEach(o=>o.classList.toggle("sel",o===b)); app.querySelector(`.dots [data-j="${i}"]`).classList.add("done"); });
+    app.querySelectorAll(".dots button").forEach(b=>b.onclick=()=>{ i=+b.dataset.j; draw(); });
+    $("#prev").onclick=()=>{ i--; draw(); };
+    $("#next").onclick=()=>{ if (i<29){ i++; draw(); } else { const open = 30-Object.keys(ans).length; if (!open || confirm(`${open} vragen zonder antwoord. Toch inleveren?`)) finish(); } };
+  };
+  intro();
+}
+function knsResult(qs, ans){
+  let n = 0; qs.forEach((q,j)=>{ const ok = ans[j]===q.c; if (ok) n++; knsRecord(q, ok); });
+  S.knsExams.push({d:Date.now(), n}); save();
+  setHead("Uitslag KNS", "النتيجة");
+  const wrong = qs.map((q,j)=>({q,a:ans[j]})).filter(o=>o.a!==o.q.c);
+  app.innerHTML = `<div class="card" style="text-align:center"><div class="big-num">${n} / 30</div><p class="muted">goede antwoorden</p>
+    <p>${n===30?"Perfect! 🎉":"Alle antwoorden staan in het fotoboek. Oefen de foute vragen tot u 30/30 haalt."}</p>
+    ${ar(n===30?"ممتاز!":"كل الأجوبة موجودة في كتاب الصور. تمرّن على الأسئلة الخاطئة حتى تحصل على 30/30.")}
+    <p class="tag-src">DUO maakt de officiële uitslag; de cesuur staat niet in de openbare bronnen.</p></div>
+    ${wrong.length?`<div class="card"><h2>Fout (${wrong.length})</h2>${wrong.map(o=>`<div style="padding:8px 0;border-bottom:1px solid var(--line)"><b>${esc(o.q.q)}</b><div>✅ ${esc(o.q.c==="A"?o.q.a:o.q.b)} ${o.a?`<span class="muted">· uw antwoord: ${esc(o.a==="A"?o.q.a:o.q.b)}</span>`:'<span class="muted">· geen antwoord</span>'}</div>${ar(o.q.x)}</div>`).join("")}</div>
+     <button class="btn block" id="pw">Oefen deze vragen</button>`:""}
+    <button class="btn ghost block" style="margin-top:8px" id="home">Terug</button>`;
+  if (wrong.length) $("#pw").onclick=()=>go(knsPractice, wrong.map(o=>o.q), "Foute vragen");
+  $("#home").onclick=()=>back();
+}
+
+// ================= LEZEN =================
+function lezenMenu(){
+  setHead("Lezen", "القراءة");
+  app.innerHTML = `
+  <div class="card"><h2>Hoe werkt Lezen?</h2><p>Echt examen: <b>19 vragen, 35 minuten</b>. U leest korte teksten en beantwoordt vragen. Niveau A1.</p>
+   ${ar("الامتحان الحقيقي: 19 سؤالاً في 35 دقيقة. تقرأ نصوصاً قصيرة وتجيب عن أسئلة. المستوى A1.")}
+   <p class="tag-src">⚠️ De teksten in deze app zijn eigen oefenteksten in hetzelfde format, géén echte examenteksten. Maak ook het officiële oefenexamen op naarnederland.nl.</p></div>
+  <div class="card"><h2>Tips</h2>
+   <ol><li>Lees eerst de vraag.</li><li>Zoek het woord uit de vraag in de tekst.</li><li>Let op tijden, dagen, prijzen en woorden als <i>niet, geen, gesloten, gratis</i>.</li><li>Weet u het niet? Kies toch een antwoord en ga door.</li></ol>
+   ${ar("١. اقرأ السؤال أولاً. ٢. ابحث عن كلمة السؤال في النص. ٣. انتبه للأوقات والأيام والأسعار وكلمات مثل: niet / geen (لا)، gesloten (مغلق)، gratis (مجاني). ٤. إذا لم تعرف الجواب، اختر جواباً وتابع.")}</div>
+  <div class="list">${LEZEN_SETS.map(s=>{ const r=S.lezen[s.id]||{};
+    return `<div class="card"><h2>${esc(s.naam)}</h2><div class="muted">9 teksten · 19 vragen ${r.best!=null?`· beste score ${r.best}/19`:""}</div>
+     <div class="row" style="margin-top:10px"><button class="btn sec" data-p="${s.id}">Oefenen</button><button class="btn or" data-e="${s.id}">Examen ⏱️ 35 min</button></div>${ar("تمرين (مع تصحيح فوري وترجمة) أو امتحان بالوقت")}</div>`; }).join("")}</div>`;
+  app.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>go(lezenRun, LEZEN_SETS.find(s=>s.id==b.dataset.p), false));
+  app.querySelectorAll("[data-e]").forEach(b=>b.onclick=()=>go(lezenRun, LEZEN_SETS.find(s=>s.id==b.dataset.e), true));
+}
+function lezenRun(set, exam){
+  const items = []; set.teksten.forEach((t,ti)=>t.vragen.forEach(v=>items.push({t,ti,v})));
+  const ans = {}; let i = 0;
+  const finish = () => { stopTimer(); go(lezenResult, set, items, ans); stack.splice(stack.length-2,1); };
+  const draw = () => {
+    const it = items[i]; setHead(set.naam, `Vraag ${i+1} / ${items.length} · tekst ${it.ti+1}`);
+    const answered = ans[i]!=null && !exam;
+    app.innerHTML = `<div class="card"><span class="pill">Tekst ${it.ti+1} · ${esc(it.t.soort)}</span><div class="text" style="margin-top:8px">${esc(it.t.tekst)}</div>
+      ${!exam?`<details style="margin-top:8px"><summary class="muted">Vertaling tonen · عرض الترجمة</summary><div class="ar big">${esc(it.t.ar)}</div></details>`:""}</div>
+      <div class="card"><div class="q">${esc(it.v.q)}</div>
+      ${it.v.o.map((o,k)=>{ let c=""; if (answered){ if (k===it.v.c) c="ok"; else if (k===ans[i]) c="no"; } else if (ans[i]===k) c="sel";
+        return `<button class="opt ${c}" data-k="${k}"><span class="k">${"ABC"[k]}</span><span>${esc(o)}</span></button>`; }).join("")}
+      ${answered?`<div class="fb ${ans[i]===it.v.c?"ok":"no"}"><b>${ans[i]===it.v.c?"Goed! ✅":"Fout ❌"}</b><div class="ar big">${esc(it.v.x)}</div></div>`:""}</div>
+      <div class="dots">${items.map((_,j)=>`<button data-j="${j}" class="${ans[j]!=null?(exam?"done":(ans[j]===items[j].v.c?"ok":"no")):""} ${j===i?"cur":""}">${j+1}</button>`).join("")}</div>
+      <div class="row"><button class="btn ghost" id="prev" ${i===0?"disabled":""}>←</button><button class="btn" id="next">${i===items.length-1?(exam?"Inleveren":"Uitslag"):"Volgende →"}</button></div>`;
+    app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{ if (!exam && ans[i]!=null) return; ans[i]=+b.dataset.k; draw(); });
+    app.querySelectorAll(".dots button").forEach(b=>b.onclick=()=>{ i=+b.dataset.j; draw(); });
+    $("#prev").onclick=()=>{ i--; draw(); };
+    $("#next").onclick=()=>{ if (i<items.length-1){ i++; draw(); } else { const open=items.length-Object.keys(ans).length; if (!open || confirm(`${open} vragen zonder antwoord. Toch afronden?`)) finish(); } };
+  };
+  if (exam){
+    setHead(set.naam, "Examen");
+    app.innerHTML = `<div class="card"><h2>Instructie</h2><p>U krijgt 9 teksten en 19 vragen. U hebt 35 minuten. U ziet de uitslag aan het einde.</p>${ar("ستحصل على 9 نصوص و19 سؤالاً. لديك 35 دقيقة. ترى النتيجة في النهاية.")}</div><button class="btn or block" id="go">Start examen ▶</button>`;
+    $("#go").onclick=()=>{ startTimer(35*60, finish); app.dataset.guard="Examen stoppen?"; draw(); };
+  } else draw();
+}
+function lezenResult(set, items, ans){
+  const n = items.filter((it,j)=>ans[j]===it.v.c).length;
+  const r = S.lezen[set.id] || {}; r.best = Math.max(r.best||0, n); r.last = n; S.lezen[set.id]=r; save();
+  setHead("Uitslag Lezen", set.naam);
+  app.innerHTML = `<div class="card" style="text-align:center"><div class="big-num">${n} / ${items.length}</div><p class="muted">goede antwoorden</p>
+   <p class="tag-src">Oefenscore van deze app. DUO maakt de officiële uitslag; de cesuur staat niet in de openbare bronnen.</p></div>
+   <div class="card">${items.map((it,j)=>`<div style="padding:8px 0;border-bottom:1px solid var(--line)"><b>${j+1}. ${esc(it.v.q)}</b><div>${ans[j]===it.v.c?"✅":"❌"} ${esc(it.v.o[it.v.c])}</div>${ans[j]!==it.v.c?ar(it.v.x):""}</div>`).join("")}</div>
+   <button class="btn block" id="again">Opnieuw (oefenen)</button>`;
+  $("#again").onclick=()=>{ stack.pop(); go(lezenRun, set, false); };
+}
+
+// ================= SPREKEN =================
+function sprMenu(){
+  setHead("Spreken", "المحادثة");
+  const nv = Object.keys(S.spreken.vr).length, na = Object.keys(S.spreken.az).length;
+  app.innerHTML = `
+  <div class="card"><h2>Hoe werkt Spreken?</h2><p>Echt examen: <b>22 opdrachten, 30 minuten</b>:</p>
+   <ul><li><b>10 vragen</b> – u hoort een vraag en geeft antwoord.</li><li><b>12 aanvulzinnen</b> – u maakt een zin af.</li></ul>
+   <p>U spreekt in een microfoon. Een getraind beoordelaar luistert later.</p>
+   ${ar("الامتحان الحقيقي: 22 مهمة في 30 دقيقة: 10 أسئلة تجيب عنها، و12 جملة ناقصة تكملها. تتكلم في الميكروفون ويستمع مقيّم مدرَّب لاحقاً.")}</div>
+  <div class="card"><h2>Beoordelingsmodel (officieel)</h2>
+   <table><tr><th></th><th>0 punten</th><th>1 punt</th></tr>
+    <tr><td><b>Adequaatheid</b></td><td>Antwoord ontbreekt, is niet verstaanbaar of past niet bij de vraag/zin.</td><td>Antwoord is denkbaar en/of passend.</td></tr>
+    <tr><td><b>Uitspraak</b></td><td>Alleen met veel moeite te verstaan.</td><td>Met enige moeite te verstaan.</td></tr></table>
+   <p class="muted">Adequaatheid 0 → uitspraak ook 0. Eén woord mag. Grammatica hoeft niet goed te zijn.</p>
+   ${ar("لكل جواب نقطتان: الملاءمة (هل الجواب مناسب للسؤال؟) والنطق (هل يمكن فهمه؟). إذا لم يكن الجواب مناسباً فالنطق أيضاً صفر. كلمة واحدة مقبولة، والقواعد لا يجب أن تكون صحيحة. الأهم: لا تسكت!")}
+   <p class="tag-src">Bron: Beoordelingsmodel Spreken A1, Naar Nederland (versie 10-08-2026).</p></div>
+  <div class="list">
+   <button class="tile hero" id="s-exam"><span class="ic">⏱️</span><b>Proefexamen (10 + 12 / 30 min)</b>${ar("امتحان تجريبي مع تسجيل صوتك")}</button>
+   <button class="tile" id="s-vr"><span class="ic">💬</span><b>Vraag – antwoord (${SPR_VRAGEN.length})</b>${ar("أسئلة وأجوبة")}<div class="muted">${nv} geoefend</div></button>
+   <button class="tile" id="s-az"><span class="ic">✍️</span><b>Aanvulzinnen (${SPR_AANVUL.length})</b>${ar("إكمال الجمل")}<div class="muted">${na} geoefend</div></button>
+  </div>
+  <p class="tag-src">De vragen en zinnen komen uit de officiële lijst “Spreken A1 – maart 2024” (© Ministerie van SZW). De voorbeeldantwoorden zijn van deze app: zeg uw eigen informatie!</p>`;
+  $("#s-exam").onclick=()=>go(sprExam);
+  $("#s-vr").onclick=()=>go(sprPractice, "vr");
+  $("#s-az").onclick=()=>go(sprPractice, "az");
+}
+// recorder
+const Rec = {
+  stream:null, mr:null, chunks:[], tmax:null,
+  async start(onStop, maxSec){
+    if (!navigator.mediaDevices || !window.MediaRecorder) { alert("Opnemen wordt niet ondersteund op dit toestel."); return false; }
+    try { this.stream = this.stream || await navigator.mediaDevices.getUserMedia({audio:true}); }
+    catch(e){ alert("Geen toegang tot de microfoon. Geef toestemming in de instellingen.\nلا يوجد إذن للميكروفون."); return false; }
+    this.chunks=[]; this.mr = new MediaRecorder(this.stream);
+    this.mr.ondataavailable = e => e.data.size && this.chunks.push(e.data);
+    this.mr.onstop = () => { clearTimeout(this.tmax); onStop(URL.createObjectURL(new Blob(this.chunks, {type:this.mr.mimeType||"audio/webm"}))); };
+    this.mr.start(); if (maxSec) this.tmax = setTimeout(()=>this.stop(), maxSec*1000); return true;
+  },
+  stop(){ if (this.mr && this.mr.state==="recording") this.mr.stop(); },
+  release(){ this.stop(); if (this.stream){ this.stream.getTracks().forEach(t=>t.stop()); this.stream=null; } }
+};
+function scoreWidget(id, val, onChange){
+  // val: {a:0|1|null, u:0|1|null}
+  const w = document.getElementById(id);
+  const draw = () => { w.innerHTML = `
+    <div class="muted" style="margin:8px 0 4px">Adequaatheid – past het antwoord? <span class="ar" style="display:inline">· هل الجواب مناسب؟</span></div>
+    <div class="score">${[0,1].map(v=>`<button data-c="a" data-v="${v}" class="${val.a===v?"on":""}">${v}</button>`).join("")}</div>
+    <div class="muted" style="margin:8px 0 4px">Uitspraak – is het verstaanbaar? <span class="ar" style="display:inline">· هل النطق مفهوم؟</span></div>
+    <div class="score">${[0,1].map(v=>`<button data-c="u" data-v="${v}" class="${val.u===v?"on":""}" ${val.a===0?"disabled":""}>${v}</button>`).join("")}</div>`;
+    w.querySelectorAll("button").forEach(b=>b.onclick=()=>{ val[b.dataset.c]=+b.dataset.v; if (val.a===0) val.u=0; draw(); onChange && onChange(val); }); };
+  draw();
+}
+function sprTask(kind, idx){
+  if (kind==="vr"){ const v = SPR_VRAGEN[idx]; return {prompt:v.q, ar:v.qa, model:v.m, modelAr:v.ma, say:v.q}; }
+  const z = SPR_AANVUL[idx]; return {prompt:z.z, ar:"", model:z.z.replace(/\s*(\.\.\.|…|\.\.)\s*\??$/,"")+" "+z.m, modelAr:"", say:z.z};
+}
+function sprPractice(kind){
+  const all = (kind==="vr"?SPR_VRAGEN:SPR_AANVUL).map((_,i)=>i); let order = shuffle(all); let i = 0;
+  cleanup = () => Rec.release();
+  const draw = () => {
+    const idx = order[i], t = sprTask(kind, idx); setHead(kind==="vr"?"Vraag – antwoord":"Aanvulzinnen", `${i+1} / ${order.length}`);
+    const val = {a:null,u:null};
+    app.innerHTML = `<div class="card"><span class="pill">${kind==="vr"?"Vraag":"Maak de zin af"}</span>
+      <div class="row" style="align-items:flex-start;margin-top:8px"><div class="q" style="flex:1">${esc(t.prompt)}</div>${spk(t.say)}</div>${ar(t.ar,"big")}
+      <div style="text-align:center;margin:16px 0"><button class="rec" id="rec">🎙️</button><div class="muted" id="rs">Druk en spreek · اضغط وتكلّم</div><audio id="pl" controls class="hide" style="width:100%;margin-top:10px"></audio></div>
+      <details id="md"><summary><b>Voorbeeldantwoord</b> · مثال على جواب</summary><div class="row" style="margin-top:6px"><div class="q" style="flex:1;font-size:18px">${esc(t.model)}</div>${spk(t.model)}</div>${ar(t.modelAr,"big")}</details>
+      <div id="sc"></div></div>
+      <div class="row"><button class="btn ghost" id="prev" ${i===0?"disabled":""}>←</button><button class="btn" id="next">Volgende →</button></div>`;
+    say(t.say);
+    const rec = $("#rec"); let on = false;
+    rec.onclick = async () => {
+      if (!on){ speechStop(); const okk = await Rec.start(url=>{ on=false; rec.classList.remove("on"); rec.textContent="🎙️"; $("#rs").textContent="Luister en geef uzelf punten · استمع وقيّم نفسك"; const p=$("#pl"); p.src=url; p.classList.remove("hide"); $("#md").open=true;
+          scoreWidget("sc", val, v=>{ if (v.a!=null && v.u!=null){ S.spreken[kind][idx]={a:v.a,u:v.u}; save(); } }); }, 60);
+        if (okk){ on=true; rec.classList.add("on"); rec.textContent="⏹"; $("#rs").textContent="Opnemen… druk om te stoppen · جارٍ التسجيل"; } }
+      else Rec.stop();
+    };
+    $("#prev").onclick=()=>{ Rec.stop(); i--; draw(); };
+    $("#next").onclick=()=>{ Rec.stop(); if (i<order.length-1){ i++; draw(); } else back(); };
+  };
+  draw();
+}
+function sprExam(){
+  const tasks = pick(SPR_VRAGEN.map((_,i)=>i),10).map(i=>({kind:"vr",idx:i})).concat(pick(SPR_AANVUL.map((_,i)=>i),12).map(i=>({kind:"az",idx:i})));
+  const recs = {}; let i = 0;
+  cleanup = () => Rec.release();
+  const finish = () => { Rec.stop(); stopTimer(); setTimeout(()=>{ go(sprReview, tasks, recs); stack.splice(stack.length-2,1); }, 300); };
+  const draw = () => {
+    const tk = tasks[i], t = sprTask(tk.kind, tk.idx);
+    setHead("Spreken proefexamen", `Opdracht ${i+1} / 22 · ${tk.kind==="vr"?"vraag":"aanvulzin"}`);
+    app.innerHTML = `<div class="card"><span class="pill ${tk.kind==="az"?"or":""}">${i<10?"Deel 1 · Vraag en antwoord":"Deel 2 · Maak de zin af"}</span>
+      <div class="row" style="align-items:flex-start;margin-top:8px"><div class="q" style="flex:1">${esc(t.prompt)}</div>${spk(t.say)}</div>
+      <div style="text-align:center;margin:16px 0"><button class="rec" id="rec">🎙️</button><div class="muted" id="rs">${recs[i]?"Opgenomen ✓ (opnieuw = overschrijven)":"Druk en spreek"}</div></div></div>
+      <div class="row"><button class="btn" id="next">${i===21?"Klaar → beoordelen":"Volgende →"}</button></div>`;
+    say(t.say);
+    const rec=$("#rec"); let on=false;
+    rec.onclick = async () => {
+      if (!on){ speechStop(); const okk = await Rec.start(url=>{ on=false; recs[i]=url; rec.classList.remove("on"); rec.textContent="🎙️"; $("#rs").textContent="Opgenomen ✓"; }, 60);
+        if (okk){ on=true; rec.classList.add("on"); rec.textContent="⏹"; $("#rs").textContent="Opnemen…"; } }
+      else Rec.stop();
+    };
+    $("#next").onclick=()=>{ Rec.stop(); setTimeout(()=>{ if (i<21){ i++; draw(); } else finish(); }, 200); };
+  };
+  setHead("Spreken proefexamen", "22 opdrachten · 30 minuten");
+  app.innerHTML = `<div class="card"><h2>Instructie</h2><p>Deel 1: 10 vragen. Deel 2: 12 zinnen afmaken. Druk op 🎙️, spreek, druk op ⏹. U hebt 30 minuten. Daarna luistert u naar uw opnames en geeft u uzelf punten met het officiële beoordelingsmodel.</p>
+   ${ar("الجزء 1: عشرة أسئلة. الجزء 2: إكمال 12 جملة. اضغط 🎙️ وتكلّم ثم اضغط ⏹. لديك 30 دقيقة. بعدها تستمع إلى تسجيلاتك وتقيّم نفسك حسب نموذج التقييم الرسمي. نصيحة: اطلب من شريكك أو صديق يتكلم الهولندية أن يقيّمك.")}
+   <p class="tag-src">Maximaal 60 seconden per opname (instelling van deze app).</p></div><button class="btn or block" id="go">Start examen ▶</button>`;
+  $("#go").onclick=()=>{ startTimer(30*60, finish); app.dataset.guard="Examen stoppen?"; draw(); };
+}
+function sprReview(tasks, recs){
+  setHead("Spreken – beoordelen", "قيّم تسجيلاتك");
+  const vals = tasks.map(()=>({a:null,u:null}));
+  cleanup = () => Rec.release();
+  app.innerHTML = `<div class="card"><p>Luister naar elke opname. Geef 0 of 1 punt voor <b>adequaatheid</b> en <b>uitspraak</b>. Maximaal 44 punten.</p>${ar("استمع إلى كل تسجيل وأعطِ 0 أو 1 للملاءمة و0 أو 1 للنطق. المجموع الأقصى 44 نقطة.")}</div>
+   ${tasks.map((tk,j)=>{ const t=sprTask(tk.kind,tk.idx); return `<div class="card"><span class="pill">${j+1}</span> <b>${esc(t.prompt)}</b>
+     ${recs[j]?`<audio controls src="${recs[j]}" style="width:100%;margin-top:8px"></audio>`:`<div class="warn" style="margin-top:8px">Geen opname → 0 punten</div>`}
+     <div class="muted" style="margin-top:6px">Voorbeeld: ${esc(t.model)}</div><div id="sw${j}"></div></div>`; }).join("")}
+   <div class="card" style="text-align:center"><div class="big-num" id="tot">0 / 44</div><p class="muted" id="todo"></p><button class="btn block" id="save">Opslaan</button>
+   <p class="tag-src">Oefenscore. DUO maakt de officiële uitslag; de cesuur staat niet in de openbare bronnen.</p></div>`;
+  const upd = () => { const tot = vals.reduce((s,v)=>s+(v.a||0)+(v.u||0),0); $("#tot").textContent = `${tot} / 44`; const open = vals.filter((v,j)=>recs[j] && (v.a==null||v.u==null)).length; $("#todo").textContent = open?`Nog ${open} opdrachten beoordelen`:"Alles beoordeeld"; return tot; };
+  tasks.forEach((tk,j)=>{ if (recs[j]) scoreWidget("sw"+j, vals[j], upd); else { vals[j].a=0; vals[j].u=0; } });
+  upd();
+  $("#save").onclick=()=>{ const tot=upd(); S.sprExams.push({d:Date.now(), n:tot}); tasks.forEach((tk,j)=>{ if (vals[j].a!=null && vals[j].u!=null) S.spreken[tk.kind][tk.idx]={a:vals[j].a,u:vals[j].u}; }); save(); alert(`Opgeslagen: ${tot}/44`); back(); };
+}
+
+// ================= INFO =================
+function info(){
+  setHead("Over het examen", "معلومات رسمية");
+  app.innerHTML = `
+  <div class="card"><h2>Wat is het basisexamen?</h2>
+   <p>Hebt u een <b>mvv</b> nodig om bij uw partner in Nederland te wonen? Dan moet u eerst slagen voor het <b>basisexamen inburgering in het buitenland</b>. U doet het examen bij een Nederlandse ambassade of consulaat (of externe dienstverlener).</p>
+   ${ar("إذا كنت تحتاج تأشيرة MVV لتعيش مع شريكك في هولندا، يجب أن تنجح أولاً في امتحان الاندماج الأساسي في الخارج. تقدّم الامتحان في سفارة أو قنصلية هولندية.")}</div>
+  <div class="card"><h2>De 3 onderdelen</h2>
+   <table><tr><th>Onderdeel</th><th>Vragen</th><th>Tijd</th></tr>
+    <tr><td>KNS (Kennis van de Nederlandse Samenleving)</td><td>30 (2 antwoorden per vraag)</td><td>30 min</td></tr>
+    <tr><td>Lezen (A1)</td><td>19</td><td>35 min</td></tr>
+    <tr><td>Spreken (A1)</td><td>22 (10 vragen + 12 aanvulzinnen)</td><td>30 min</td></tr></table>
+   <p class="muted">Haalt u één onderdeel niet? Dan doet u alleen dat onderdeel opnieuw.</p>
+   ${ar("إذا رسبت في جزء واحد، تعيد هذا الجزء فقط.")}</div>
+  <div class="card"><h2>Aanmelden en kosten</h2>
+   <ol><li>Meld u eerst aan bij <b>DUO</b> (via naarnederland.nl).</li><li>Het volledige examen kost <b>€ 150</b>.</li><li>Na betaling krijgt u een bevestiging. Daarna maakt u een afspraak bij de ambassade.</li><li>Neem mee: geldig paspoort, de afspraakbevestiging, en een verblijfsbewijs als u het examen niet in uw eigen land doet.</li><li>De uitslag komt binnen <b>8 weken</b> per e-mail.</li><li>Geslaagd? De uitslag is <b>1 jaar geldig</b>. In dat jaar vraagt uw partner (referent) de mvv aan bij de IND.</li></ol>
+   ${ar("١. سجّل أولاً لدى DUO. ٢. تكلفة الامتحان الكامل 150 يورو. ٣. بعد الدفع يصلك تأكيد، ثم تحجز موعداً في السفارة. ٤. أحضر جواز سفر ساري المفعول وتأكيد الموعد، وإقامة إذا لم تكن في بلد جنسيتك. ٥. النتيجة خلال 8 أسابيع بالبريد الإلكتروني. ٦. النتيجة صالحة سنة واحدة، يقدّم شريكك خلالها طلب الـMVV لدى IND.")}
+   <div class="warn" style="margin-top:8px"><b>Turkije:</b> examen bij de ambassade in Ankara. Afspraak maken: e-mail naar <b>ank-inburgering@minbuza.nl</b> met uw kandidaatnummer (na bevestiging van DUO).<br>Ander land? Kijk op nederlandwereldwijd.nl/basisexamen-inburgering.</div></div>
+  <div class="card"><h2>Officieel gratis materiaal</h2>
+   <ul><li>Zelfstudiepakket “Naar Nederland” (film, fotoboek, werkboek, handleiding in veel talen) – gratis download</li><li>Officiële oefenexamens KNS, Lezen en Spreken</li><li>Vragenlijst + beoordelingsmodel Spreken</li></ul>
+   <p><a href="https://www.naarnederland.nl/leren-voor-het-examen" target="_blank" rel="noopener">naarnederland.nl/leren-voor-het-examen</a><br>
+   <a href="https://www.naarnederland.nl/oefenexamens-maken" target="_blank" rel="noopener">naarnederland.nl/oefenexamens-maken</a></p>
+   ${ar("شاهد فيلم «Naar Nederland» بالعربية أولاً ثم بالهولندية. هذا ما تنصح به الجهة الرسمية.")}</div>
+  <div class="card"><h2>Bronnen</h2><ul class="muted">
+   <li>IND – Basisexamen inburgering in het buitenland (ind.nl)</li>
+   <li>Naar Nederland – Oefenexamens maken; Leren voor het examen (naarnederland.nl)</li>
+   <li>NederlandWereldwijd – Basisexamen inburgering Turkije</li>
+   <li>Handleiding Naar Nederland (zelfstudiepakket, 2014)</li>
+   <li>Fotoboek Naar Nederland – 100 examenvragen KNS (2014)</li>
+   <li>Spreken A1 – vragen en aanvulzinnen (maart 2024); Beoordelingsmodel Spreken A1 (10-08-2026)</li></ul>
+   <p class="tag-src">Informatie gecontroleerd op 16 november 2026. Regels kunnen veranderen: controleer altijd ind.nl en naarnederland.nl.<br>Dit is géén officiële app van DUO, IND of het Ministerie van SZW.</p></div>`;
+}
+function settings(){
+  setHead("Instellingen", "الإعدادات");
+  app.innerHTML = `<div class="card">
+   <div class="toggle"><span>Arabische uitleg tonen<br><span class="ar">عرض الشرح بالعربية</span></span><input type="checkbox" id="ar" ${S.set.ar?"checked":""}></div>
+   <div class="toggle"><span>Spreeksnelheid<br><span class="muted" id="rv">${S.set.rate.toFixed(2)}×</span></span><input type="range" id="rate" min="0.5" max="1.2" step="0.05" value="${S.set.rate}"></div>
+   <div class="toggle"><span>Test de stem</span>${spk("Welkom in Nederland. Wat is de hoofdstad van Nederland?")}</div>
+   <div class="toggle"><span>Stem: <span class="muted">${NTTS?(nativeNL===false?"Nederlands niet geïnstalleerd in de spraakengine":"spraakengine van de telefoon"):(nlVoice?esc(nlVoice.name):"geen Nederlandse stem gevonden")}</span></span></div>
+  </div><button class="btn ghost block" id="reset">Voortgang wissen · مسح التقدم</button>`;
+  $("#ar").onchange=e=>{ S.set.ar=e.target.checked; save(); };
+  $("#rate").oninput=e=>{ S.set.rate=+e.target.value; $("#rv").textContent=S.set.rate.toFixed(2)+"×"; save(); };
+  $("#reset").onclick=()=>{ if (confirm("Alle voortgang wissen?")){ const st=S.set; S=structuredClone(DEF); S.set=st; save(); alert("Gewist."); } };
+}
+
+// Android back button (Capacitor) + start
+document.addEventListener("backbutton", ()=>back(app.dataset.guard||null));
+try { const CapApp = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.App;
+  if (CapApp) CapApp.addListener("backButton", ()=>{ if (stack.length>1) back(app.dataset.guard||null); else CapApp.exitApp(); }); } catch(e) {}
+stack=[[home,[]]]; run();
+
+</script>
+</body>
+</html>
